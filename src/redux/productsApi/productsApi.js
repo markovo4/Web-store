@@ -23,6 +23,16 @@ export const productsApi = createApi({
         getUserById: builder.query({
             query: (userId = 1) => `users/${userId}`,
         }),
+        createUser: builder.mutation({
+            query: (user) => ({
+                url: `users/`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: user,
+            })
+        }),
         isRegisteredEmail: builder.mutation({
             query: (email) => ({
                 url: 'users/is-available',
@@ -33,6 +43,22 @@ export const productsApi = createApi({
                 body: {email}
             })
         })
-
     })
 })
+console.log(productsApi)
+export const {
+    useGetAllProductsQuery,
+    useLazyGetAllProductsQuery,
+    useGetProductByIdQuery,
+    useLazyGetProductByIdQuery,
+    useGetAllCategoriesQuery,
+    useLazyGetAllCategoriesQuery,
+    useGetCategoryByIdQuery,
+    useLazyGetCategoryByIdQuery,
+    useGetAllUsersQuery,
+    useLazyGetAllUsersQuery,
+    useGetUserByIdQuery,
+    useLazyGetUserByIdQuery,
+    useCreateUserMutation,
+    useIsRegisteredEmailMutation
+} = productsApi;

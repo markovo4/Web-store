@@ -1,4 +1,4 @@
-import routerConfig from "./RouterConfig";
+import routerConfig from "./routerConfig";
 import {Route, Routes} from "react-router-dom";
 
 const RouterDisplayPage = () => {
