@@ -7,11 +7,14 @@ const HeaderTop = () => {
     return (
         <header style={styles.header}>
             <Container sx={styles.container}>
-                <Logo/>
-                <CountrySelect/>
                 <div style={styles.wrapper}>
-                    <Button sx={styles.button}>Log in</Button>
-                    <Button sx={styles.button}>Sign up</Button>
+                    <Logo/>
+                    <CountrySelect
+                        styles={styles.selector}/>
+                </div>
+                <div style={styles.wrapper}>
+                    <Button sx={styles.button} variant="contained">Log in</Button>
+                    <Button sx={styles.button} variant="contained">Sign up</Button>
                 </div>
             </Container>
         </header>
