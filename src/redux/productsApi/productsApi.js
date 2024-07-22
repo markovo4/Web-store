@@ -23,6 +23,16 @@ export const productsApi = createApi({
         getUserById: builder.query({
             query: (userId = 1) => `users/${userId}`,
         }),
+        isRegisteredEmail: builder.mutation({
+            query: (email) => ({
+                url: 'users/is-available',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: {email}
+            })
+        })
 
     })
 })

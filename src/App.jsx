@@ -1,9 +1,10 @@
 import './index.css';
+import RouterDisplayPage from "./router/router/index.js";
 
 function App() {
 
     return (
-        <div>Hello World</div>
+        <RouterDisplayPage/>
     )
 }
 
