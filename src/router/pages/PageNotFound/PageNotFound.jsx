@@ -1,6 +1,10 @@
+import TemplateBasePage from "../../../templates/TemplateBasePage";
+
 const PageNotFound = () => {
     return (
-        <div>PageNotFound</div>
+        <TemplateBasePage>
+            <div>PageNotFound</div>
+        </TemplateBasePage>
     )
 }
 export default PageNotFound;

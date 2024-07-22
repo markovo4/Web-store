@@ -1,6 +1,10 @@
+import TemplateBasePage from "../../../templates/TemplateBasePage";
+
 const PageMain = () => {
     return (
-        <div>PageMain</div>
+        <TemplateBasePage>
+            <div>PageMain</div>
+        </TemplateBasePage>
     )
 }
 export default PageMain;

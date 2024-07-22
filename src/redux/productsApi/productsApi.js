@@ -45,7 +45,6 @@ export const productsApi = createApi({
         })
     })
 })
-console.log(productsApi)
 export const {
     useGetAllProductsQuery,
     useLazyGetAllProductsQuery,

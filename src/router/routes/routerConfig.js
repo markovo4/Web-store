@@ -1,9 +1,9 @@
-import PageMain from "../pages/PageMain/index.js";
-import PageNotFound from "../pages/PageNotFound/index.js";
-import PageCart from "../pages/PageCart/index.js";
-import PageProduct from "../pages/PageProduct/index.js";
-import PagePlaceOrder from "../pages/PagePlaceOrder/index.js";
-import routerNames from "./routerNames.js";
+import PageMain from "../pages/PageMain";
+import PageNotFound from "../pages/PageNotFound";
+import PageCart from "../pages/PageCart";
+import PageProduct from "../pages/PageProduct";
+import PagePlaceOrder from "../pages/PagePlaceOrder";
+import routerNames from "./routerNames";
 
 
 const routerConfig = () => {

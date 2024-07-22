@@ -1,6 +1,10 @@
+import TemplateCartPage from "../../../templates/TemplateCartPage";
+
 const PageCart = () => {
     return (
-        <div>PageCart</div>
+        <TemplateCartPage>
+            <div>PageCart</div>
+        </TemplateCartPage>
     )
 }
 export default PageCart;

@@ -1,6 +1,10 @@
+import TemplateBasePage from "../../../templates/TemplateBasePage";
+
 const PageProduct = () => {
     return (
-        <div>PageProduct</div>
+        <TemplateBasePage>
+            <div>PageProduct</div>
+        </TemplateBasePage>
     )
 }
 export default PageProduct;

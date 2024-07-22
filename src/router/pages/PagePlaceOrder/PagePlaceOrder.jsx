@@ -1,6 +1,10 @@
+import TemplateCartPage from "../../../templates/TemplateCartPage/index.js";
+
 const PagePlaceOrder = () => {
     return (
-        <div>PagePlaceOrder</div>
+        <TemplateCartPage>
+            <div>PagePlaceOrder</div>
+        </TemplateCartPage>
     )
 }
 export default PagePlaceOrder;
