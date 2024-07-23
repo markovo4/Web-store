@@ -7,11 +7,17 @@ import FooterBottom from "../../components/Footer/FooterBottom";
 const TemplateCartPage = ({className = null, children}) => {
     return (
         <React.Fragment>
-            <HeaderTop/>
+            <header>
+                <HeaderTop/>
+            </header>
+            
             <main className={className}>
                 {children}
             </main>
-            <FooterBottom/>
+
+            <footer>
+                <FooterBottom/>
+            </footer>
         </React.Fragment>
     )
 }

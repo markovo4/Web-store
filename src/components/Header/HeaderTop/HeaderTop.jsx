@@ -5,7 +5,7 @@ import Logo from "../../../assets/icons/Logo";
 
 const HeaderTop = () => {
     return (
-        <header style={styles.header}>
+        <section style={styles.header}>
             <Container sx={styles.container}>
                 <div style={styles.wrapper}>
                     <Logo/>
@@ -17,7 +17,7 @@ const HeaderTop = () => {
                     <Button sx={styles.button} variant="contained">Sign up</Button>
                 </div>
             </Container>
-        </header>
+        </section>
     );
 }
 

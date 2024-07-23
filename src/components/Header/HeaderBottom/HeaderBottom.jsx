@@ -6,7 +6,7 @@ import ProductsSelect from "../../UI/inputs/ProductsSelect";
 
 const HeaderBottom = () => {
     return (
-        <header style={styles.header}>
+        <section style={styles.header}>
             <Container sx={styles.container}>
                 <div style={styles.wrapper}>
                     <ProductsSelect
@@ -17,7 +17,8 @@ const HeaderBottom = () => {
                     <Button sx={styles.button} variant="contained"><ShoppingCartIcon/></Button>
                 </div>
             </Container>
-        </header>
+        </section>
+
     )
 }
 

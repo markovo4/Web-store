@@ -8,13 +8,20 @@ import FooterBottom from "../../components/Footer/FooterBottom";
 const TemplateBasePage = ({className = null, children}) => {
     return (
         <React.Fragment>
-            <HeaderTop/>
-            <HeaderBottom/>
+            <header>
+                <HeaderTop/>
+                <HeaderBottom/>
+            </header>
+
             <main className={className}>
                 {children}
             </main>
-            <FooterTop/>
-            <FooterBottom/>
+            
+            <footer>
+                <FooterTop/>
+                <FooterBottom/>
+            </footer>
+
         </React.Fragment>
     )
 
