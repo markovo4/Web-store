@@ -65,10 +65,11 @@ export const styles = {
         },
         '& .MuiInputLabel-shrink': {
             transform: 'translate(0, 0px) scale(0.75)',
-            color: 'transparent',
+
         },
         '& .MuiOutlinedInput-root.Mui-focused .MuiInputLabel-root': {
             transform: 'translate(0, 0px) scale(0.75)',
+            color: 'transparent',
         },
         '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
             borderColor: '#c2c2c2', // Set border color to white on hover
