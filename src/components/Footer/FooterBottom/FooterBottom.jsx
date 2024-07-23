@@ -9,15 +9,24 @@ import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 const FooterBottom = () => {
     return (
         <section style={styles.footerBottom}>
-            <Container>
-                <Typography>© All Rights Reserved 2024</Typography>
-                <ul style={styles.socials}>
-                    <li><a href="#"><FacebookIcon style={styles.icon}/></a></li>
-                    <li><a href="#"><YouTubeIcon style={styles.icon}/></a></li>
-                    <li><a href="#"><InstagramIcon style={styles.icon}/></a></li>
-                    <li><a href="#"><TelegramIcon style={styles.icon}/></a></li>
-                    <li><a href="#"><PhoneInTalkIcon style={styles.icon}/></a></li>
-                </ul>
+            <Container style={styles.container}>
+
+                <Typography
+                    variant={'body1'}
+                    component={'p'}>
+                    © All Rights Reserved 2024
+                </Typography>
+
+                <div style={styles.wrapper}>
+                    <ul style={styles.socials}>
+                        <li><a href="#"><FacebookIcon style={styles.icon}/></a></li>
+                        <li><a href="#"><YouTubeIcon style={styles.icon}/></a></li>
+                        <li><a href="#"><InstagramIcon style={styles.icon}/></a></li>
+                        <li><a href="#"><TelegramIcon style={styles.icon}/></a></li>
+                        <li><a href="#"><PhoneInTalkIcon style={styles.icon}/></a></li>
+                    </ul>
+                </div>
+
             </Container>
         </section>
     )

@@ -1,11 +1,21 @@
 export const styles = {
-    footerBottom: {},
-    socials: {},
+    footerBottom: {
+        display: 'flex',
+        alignItems: 'center',
+        height: '50px'
+    },
+    socials: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '250px'
+    },
     icon: {
         color: 'grey',
-        transition: 'color 0.3s',
-        '&:hover': {
-            color: 'black',
-        },
     },
+    container: {
+        display: 'flex',
+        justifyContent: 'space-between'
+
+    },
+    wrapper: {}
 }
