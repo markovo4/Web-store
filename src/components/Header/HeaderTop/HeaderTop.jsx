@@ -1,6 +1,6 @@
 import {styles} from "./styles.js";
 import {Button, Container} from "@mui/material";
-import CountrySelect from "../../UI/inputs/CountrySelect";
+import CitiesSelect from "../../UI/inputs/CitiesSelect";
 import Logo from "../../../assets/icons/Logo";
 
 const HeaderTop = () => {
@@ -9,7 +9,7 @@ const HeaderTop = () => {
             <Container sx={styles.container}>
                 <div style={styles.wrapper}>
                     <Logo/>
-                    <CountrySelect
+                    <CitiesSelect
                         styles={styles.selector}/>
                 </div>
                 <div style={styles.wrapper}>

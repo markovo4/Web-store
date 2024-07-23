@@ -1,6 +1,7 @@
 export const styles = {
     header: {
-        height: '75px'
+        height: '56px',
+        backgroundColor: '#42af2a'
     },
     container: {
         display: 'flex',
@@ -18,7 +19,7 @@ export const styles = {
     button: {
         // Base styles for all button variants
         '&.MuiButton-root': {
-            padding: '2px 16px',
+            padding: '10px 5px',
             borderRadius: '4px',
             textTransform: 'none',
             fontSize: '16px',
@@ -29,14 +30,14 @@ export const styles = {
         },
         // Styles for contained buttons
         '&.MuiButton-contained': {
-            backgroundColor: '#42af2a',
+            backgroundColor: '#318620',
             color: '#fff',
             '&:hover': {
-                backgroundColor: '#fd661f',
+                backgroundColor: '#3aa127',
             },
             '&:active': {
                 boxShadow: 'none',
-                backgroundColor: '#fd661f',
+                backgroundColor: 'rgba(225,92,31,0.73)',
             },
             '&.Mui-disabled': {
                 backgroundColor: '#bdbdbd',
@@ -49,7 +50,8 @@ export const styles = {
         '& .MuiInputBase-root': {
             height: '30px',
             backgroundColor: '#fff',
-            borderColor: '#fff'
+            borderColor: '#fff',
+
         },
         '& .MuiOutlinedInput-input': {
             height: '30px',
@@ -57,9 +59,9 @@ export const styles = {
             boxSizing: 'border-box',
         },
         '& .MuiInputLabel-root': {
-            top: '-12px',
+            top: '-8px',
             left: '14px',
-            transform: 'translate(0, 16px) scale(1)',
+            transform: 'translate(0, 12px) scale(1)',
         },
         '& .MuiInputLabel-shrink': {
             transform: 'translate(0, 0px) scale(0.75)',

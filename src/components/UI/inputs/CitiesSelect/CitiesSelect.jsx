@@ -1,23 +1,23 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import cities from "../../../../assets/cities/cities";
+import cities from "../../../../assets/cities/cities.js";
 import PropTypes from "prop-types";
 
-const CountrySelect = ({styles}) => {
+const CitiesSelect = ({styles}) => {
     return (
         <Autocomplete
             disablePortal
             id="city-select"
+            sx={{width: 600}}
             options={cities}
             getOptionLabel={(option) => option.city}
-            sx={{width: 600}}
             renderInput={(params) => <TextField {...params} sx={styles} label="City"/>}
         />
     );
 }
 
-CountrySelect.propTypes = {
+CitiesSelect.propTypes = {
     styles: PropTypes.object
 }
 
-export default CountrySelect;
+export default CitiesSelect;
