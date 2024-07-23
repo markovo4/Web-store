@@ -63,6 +63,7 @@ export const styles = {
         },
         '& .MuiInputLabel-shrink': {
             transform: 'translate(0, 0px) scale(0.75)',
+            color: '#40ab29'
         },
         '& .MuiOutlinedInput-root.Mui-focused .MuiInputLabel-root': {
             transform: 'translate(0, 0px) scale(0.75)',
