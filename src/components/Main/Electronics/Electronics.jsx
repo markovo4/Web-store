@@ -1,13 +1,19 @@
 import {Container, Typography} from "@mui/material";
 import Product from "../../UI/cards/Product";
 import {useGetAllProductsByCategoryQuery} from "../../../redux/productsApi/productsApi.js";
+import {styles} from "./style.js";
 
 const Electronics = () => {
-    const electronics = useGetAllProductsByCategoryQuery('electronics');
+    const electronics = useGetAllProductsByCategoryQuery({category: 'electronics', limit: 4});
     return (
-        <section>
+        <section style={styles.section}>
             <Container>
-                <Typography variant={'h4'} component={'h4'}>Electronics</Typography>
+                <Typography
+                    variant={'h4'}
+                    component={'h4'}
+                    sx={styles.title}>
+                    Electronics</Typography>
+
                 <div style={{display: 'flex'}}>
                     {electronics.data && electronics.data.map((product, index) => {
                         return (
@@ -15,10 +21,11 @@ const Electronics = () => {
                                 image={product.image}
                                 price={product.price}
                                 title={product.title}
-                                body={product.description}
                                 itemId={product.id}
                                 key={index}
-                                rate={product.rating.rate}/>
+                                rate={product.rating.rate}
+                                count={product.rating.count}
+                            />
                         )
                     })}
                 </div>
