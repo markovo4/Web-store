@@ -2,7 +2,7 @@ import {Typography} from "@mui/material";
 import {styles} from "./styles.js";
 import PropTypes from "prop-types";
 
-const Benefits = ({title, body, children}) => {
+const Benefit = ({title, body, children}) => {
     return (
         <li style={styles.block}>
             <Typography
@@ -22,11 +22,11 @@ const Benefits = ({title, body, children}) => {
     )
 }
 
-Benefits.propTypes = {
+Benefit.propTypes = {
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     children: PropTypes.object.isRequired,
 
 }
 
-export default Benefits;
+export default Benefit;

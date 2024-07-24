@@ -14,24 +14,27 @@ const Carousel = () => {
     };
 
     return (
-        <div style={{
-            width: '1200px',
-            margin: '0 auto',
-            padding: '0 24px',
-        }}>
-            <Slider {...settings}>
-                {data.map((banner, index) => (
-                    <div key={index} style={'slick-slide-custom'}>
-                        <div>
-                            <a href={'#'}>
-                                <img src={BannerHero} alt={banner.title} className='banner-image'/>
-                            </a>
+        <section style={{backgroundColor: 'rgba(0,0,0,0.06)', height: '600px', display: 'flex', alignItems: 'center'}}>
+            <div style={{
+                width: '1200px',
+                margin: '0 auto',
+                padding: '0 24px',
 
+            }}>
+                <Slider {...settings}>
+                    {data.map((banner, index) => (
+                        <div key={index} style={'slick-slide-custom'}>
+                            <div>
+                                <a href={'#'}>
+                                    <img src={BannerHero} alt={banner.title} className='banner-image'/>
+                                </a>
+
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </Slider>
-        </div>
+                    ))}
+                </Slider>
+            </div>
+        </section>
     );
 };
 
