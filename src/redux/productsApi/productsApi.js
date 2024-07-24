@@ -12,7 +12,10 @@ export const productsApi = createApi({
             query: (productId = 1) => `products/${productId}`,
         }),
         getAllCategories: builder.query({
-            query: () => `categories`,
+            query: () => `products/categories`,
+        }),
+        getAllProductsByCategory: builder.query({
+            query: ({category, limit = 1}) => `/products/category/${category}?limit=${limit}`
         }),
         getCategoryById: builder.query({
             query: (categoryId = 1) => `categories/${categoryId}`,
@@ -51,6 +54,8 @@ export const {
     useGetProductByIdQuery,
     useLazyGetProductByIdQuery,
     useGetAllCategoriesQuery,
+    useGetAllProductsByCategoryQuery,
+    useLazyGetAllProductsByCategoryQuery,
     useLazyGetAllCategoriesQuery,
     useGetCategoryByIdQuery,
     useLazyGetCategoryByIdQuery,
