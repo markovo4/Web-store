@@ -26,28 +26,29 @@ const Product = ({title, image, price, rate, count, itemId}) => {
                         {title}
                     </Typography>
                 </div>
+                <div style={styles.purchase}>
 
-                <div style={styles.wrapper}>
-                    <Rate allowHalf disabled defaultValue={rate}/>
-                    <Typography variant="h6" sx={styles.count}>
-                        <CommentIcon/> {count}
-                    </Typography>
+                    <div style={styles.wrapper}>
+                        <Rate allowHalf disabled defaultValue={rate}/>
+                        <Typography variant="h6" sx={styles.count}>
+                            <CommentIcon/> {count}
+                        </Typography>
+                    </div>
+
+                    <div style={styles.wrapper}>
+                        <Typography variant="h6" sx={styles.price}>
+                            $ {price}
+                        </Typography>
+                        {!click ?
+                            (<Button sx={styles.button} variant={'contained'} onClick={handleButtonClick}>
+                                    <ShoppingCartIcon fontSize={'medium'}/>
+                                </Button>
+                            ) : (
+                                <Button sx={styles.button} variant={'outlined'} onClick={handleButtonClick}>
+                                    <AddShoppingCartIcon fontSize={'medium'} color={"success"}/>
+                                </Button>)}
+                    </div>
                 </div>
-
-                <div style={styles.wrapper}>
-                    <Typography variant="h6" sx={styles.price}>
-                        $ {price}
-                    </Typography>
-                    {!click ?
-                        (<Button sx={styles.button} variant={'contained'} onClick={handleButtonClick}>
-                                <ShoppingCartIcon fontSize={'medium'}/>
-                            </Button>
-                        ) : (
-                            <Button sx={styles.button} variant={'outlined'} onClick={handleButtonClick}>
-                                <AddShoppingCartIcon fontSize={'medium'} color={"success"}/>
-                            </Button>)}
-                </div>
-
             </Card>
         </Link>
     );

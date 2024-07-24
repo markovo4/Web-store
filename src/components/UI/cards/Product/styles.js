@@ -8,7 +8,6 @@ export const styles = {
         flexDirection: 'column',
         width: '290px',
         height: '570px',
-        alignItems: 'center',
         justifyContent: 'space-between',
         boxShadow: 'none',
         '&:hover': {
@@ -22,7 +21,8 @@ export const styles = {
         marginTop: '40px',
         width: '200px',
         height: '200px',
-        objectFit: 'cover'
+        objectFit: 'cover',
+        alignSelf: 'center'
     },
     title: {
         marginTop: '8px',
@@ -58,6 +58,11 @@ export const styles = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
+    },
+    purchase: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px'
     },
     button: {
         '&.MuiButton-root': {
