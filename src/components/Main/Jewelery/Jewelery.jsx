@@ -1,5 +1,5 @@
 import {Container, Typography} from "@mui/material";
-import Product from "../../UI/cards/Product";
+import ProductInList from "../../UI/cards/ProductInList";
 import {useGetAllProductsByCategoryQuery} from "../../../redux/productsApi/productsApi.js";
 import {styles} from "./style.js";
 
@@ -17,7 +17,7 @@ const Jewelery = () => {
                 <div style={{display: 'flex'}}>
                     {jewelery.data && jewelery.data.map((product, index) => {
                         return (
-                            <Product
+                            <ProductInList
                                 image={product.image}
                                 price={product.price}
                                 title={product.title}

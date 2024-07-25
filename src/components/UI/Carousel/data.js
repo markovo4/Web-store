@@ -1,42 +1,42 @@
 export const data = [
     {
-        title: 'Product Banner 1',
+        title: 'ProductInList Banner 1',
         img: 'Banner-Hero.jpeg'
     },
     {
-        title: 'Product Banner 2',
+        title: 'ProductInList Banner 2',
         img: 'Banner-Hero.jpeg'
     },
     {
-        title: 'Product Banner 3',
+        title: 'ProductInList Banner 3',
         img: 'Banner-Hero.jpeg'
     },
     {
-        title: 'Product Banner 4',
+        title: 'ProductInList Banner 4',
         img: 'Banner-Hero.jpeg'
     },
     {
-        title: 'Product Banner 5',
+        title: 'ProductInList Banner 5',
         img: 'Banner-Hero.jpeg'
     },
     {
-        title: 'Product Banner 6',
+        title: 'ProductInList Banner 6',
         img: 'Banner-Hero.jpeg'
     },
     {
-        title: 'Product Banner 7',
+        title: 'ProductInList Banner 7',
         img: './Banner-Hero.jpeg'
     },
     {
-        title: 'Product Banner 8',
+        title: 'ProductInList Banner 8',
         img: './Banner-Hero.jpeg'
     },
     {
-        title: 'Product Banner 9',
+        title: 'ProductInList Banner 9',
         img: './Banner-Hero.jpeg'
     },
     {
-        title: 'Product Banner 10',
+        title: 'ProductInList Banner 10',
         img: './Banner-Hero.jpeg'
     }
 ]

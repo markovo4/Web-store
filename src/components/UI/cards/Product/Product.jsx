@@ -1,67 +1,95 @@
+import {Box, Button, Container, Typography} from "@mui/material";
 import PropTypes from "prop-types";
-import {Button, Card, Typography} from "@mui/material";
-import {Link} from "react-router-dom";
-import {styles} from "./styles.js";
+import {styles} from "./style.js";
+import {Rate} from "antd";
+import CommentIcon from '@mui/icons-material/Comment';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import CommentIcon from '@mui/icons-material/Comment';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import {useState} from "react";
-import {Rate} from "antd";
 
+const Product = ({
+                     id,
+                     title,
+                     description,
+                     image,
+                     price,
+                     rating,
+                     count
+                 }) => {
 
-const Product = ({title, image, price, rate, count, itemId}) => {
-    const [click, setClick] = useState(false);
-    const handleButtonClick = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        setClick(!click)
+    const [addToCart, setAddToCart] = useState(false);
+    const [addToFav, setAddToFav] = useState(false);
+    const handleCartClick = () => {
+        setAddToCart(!addToCart)
     };
-
+    const handleFavClick = () => {
+        setAddToFav(!addToFav)
+    };
     return (
-        <Link to={`/products/${itemId}`} style={styles.link}>
-            <Card sx={styles.card}>
-                <div style={styles.groupedText}>
-                    <img src={image} alt={title} style={styles.image}/>
-                    <Typography variant="h6" sx={styles.title}>
-                        {title}
-                    </Typography>
-                </div>
-                <div style={styles.purchase}>
+        <Container sx={{display: "flex", flexDirection: 'row'}}>
+            <Box sx={styles.imageWrapper}>
+                <img alt={title} src={image} style={styles.image}/>
+            </Box>
+            <Box sx={styles.info}>
 
-                    <div style={styles.wrapper}>
-                        <Rate allowHalf disabled defaultValue={rate}/>
+                <Box sx={styles.wrapper}>
+                    <div>
+                        <Typography variant="h3" component={'h3'} sx={styles.price}>
+                            {title}
+                        </Typography>
+                    </div>
+
+                    <div style={styles.rating}>
+                        <Rate allowHalf disabled defaultValue={rating}/>
                         <Typography variant="h6" sx={styles.count}>
                             <CommentIcon/> {count}
                         </Typography>
                     </div>
+                </Box>
 
-                    <div style={styles.wrapper}>
-                        <Typography variant="h6" sx={styles.price}>
-                            $ {price}
-                        </Typography>
-                        {!click ?
-                            (<Button sx={styles.button} variant={'contained'} onClick={handleButtonClick}>
+                <Box sx={styles.wrapperPurchase}>
+                    <Typography variant="h6" sx={styles.price}>
+                        $ {price}
+                    </Typography>
+                    <div style={styles.buttonGroup}>
+                        {!addToCart ?
+                            (<Button sx={styles.button} variant={'contained'} onClick={handleCartClick}>
                                     <ShoppingCartIcon fontSize={'medium'}/>
                                 </Button>
                             ) : (
-                                <Button sx={styles.button} variant={'outlined'} onClick={handleButtonClick}>
+                                <Button sx={styles.button} variant={'outlined'} onClick={handleCartClick}>
                                     <AddShoppingCartIcon fontSize={'medium'} color={"success"}/>
                                 </Button>)}
+                        <Button sx={styles.button} variant={'outlined'} onClick={handleFavClick}>
+                            {!addToFav ? (<FavoriteBorderIcon color={'success'}/>
+                            ) : (
+                                <FavoriteIcon color={'error'}/>)}
+                        </Button>
                     </div>
-                </div>
-            </Card>
-        </Link>
-    );
-};
-
+                </Box>
+                <Box sx={styles.wrapperDescription}>
+                    <Typography variant="h5">
+                        Description
+                    </Typography>
+                    <Typography variant="h6">
+                        {description}
+                    </Typography>
+                </Box>
+            </Box>
+        </Container>
+    )
+}
 Product.propTypes = {
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    rate: PropTypes.number.isRequired,
-    count: PropTypes.number.isRequired,
-    itemId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+    rating: PropTypes.number.isRequired,
+    count: PropTypes.number.isRequired
+}
 
-};
 
 export default Product;
