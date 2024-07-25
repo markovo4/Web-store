@@ -55,14 +55,14 @@ const Product = ({
                     </Typography>
                     <div style={styles.buttonGroup}>
                         {!addToCart ?
-                            (<Button sx={styles.button} variant={'contained'} onClick={handleCartClick}>
+                            (<Button id={id} sx={styles.button} variant={'contained'} onClick={handleCartClick}>
                                     <ShoppingCartIcon fontSize={'medium'}/>
                                 </Button>
                             ) : (
-                                <Button sx={styles.button} variant={'outlined'} onClick={handleCartClick}>
+                                <Button id={id} sx={styles.button} variant={'outlined'} onClick={handleCartClick}>
                                     <AddShoppingCartIcon fontSize={'medium'} color={"success"}/>
                                 </Button>)}
-                        <Button sx={styles.button} variant={'outlined'} onClick={handleFavClick}>
+                        <Button id={id} sx={styles.button} variant={'outlined'} onClick={handleFavClick}>
                             {!addToFav ? (<FavoriteBorderIcon color={'success'}/>
                             ) : (
                                 <FavoriteIcon color={'error'}/>)}

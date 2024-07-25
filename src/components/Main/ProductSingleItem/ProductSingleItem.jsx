@@ -1,12 +1,11 @@
 import Product from "../../UI/cards/Product";
 import {useLocation} from "react-router-dom";
-import {useState} from "react";
 import {useGetProductByIdQuery} from "../../../redux/productsApi/productsApi.js";
 
 const ProductSingleItem = () => {
     const location = useLocation();
     const pathComponents = location.pathname.split('/');
-    const [productId, setProductId] = useState(pathComponents.at(-1))
+    const productId = pathComponents.at(-1);
     const product = useGetProductByIdQuery(productId);
 
     return (
