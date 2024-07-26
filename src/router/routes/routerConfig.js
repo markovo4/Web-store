@@ -3,11 +3,12 @@ import PageNotFound from "../pages/PageNotFound";
 import PageCart from "../pages/PageCart";
 import PageProduct from "../pages/PageProduct";
 import PagePlaceOrder from "../pages/PagePlaceOrder";
+import PageCategories from "../pages/PageCategories/index.js";
 import routerNames from "./routerNames";
 
 
 const routerConfig = () => {
-    const pageComponents = [PageMain, PageNotFound, PageCart, PageProduct, PagePlaceOrder];
+    const pageComponents = [PageMain, PageNotFound, PageCart, PageProduct, PagePlaceOrder, PageCategories];
     const routeKeys = Object.keys(routerNames);
 
     if (pageComponents.length !== routeKeys.length) {

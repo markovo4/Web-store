@@ -2,11 +2,15 @@ export const styles = {
     link: {
         textDecoration: 'none',
     },
+    cardContainer: {
+        display: 'flex',
+        marginBottom: '20px'
+    },
     card: {
         padding: '16px',
         display: 'flex',
         flexDirection: 'column',
-        width: '290px',
+        width: '288px',
         height: '570px',
         justifyContent: 'space-between',
         boxShadow: 'none',

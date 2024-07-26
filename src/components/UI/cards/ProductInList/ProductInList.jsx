@@ -19,37 +19,39 @@ const ProductInList = ({title, image, price, rate, count, itemId}) => {
 
     return (
         <Link to={`/products/${itemId}`} style={styles.link}>
-            <Card sx={styles.card}>
-                <div style={styles.groupedText}>
-                    <img src={image} alt={title} style={styles.image}/>
-                    <Typography variant="h6" sx={styles.title}>
-                        {title}
-                    </Typography>
-                </div>
-                <div style={styles.purchase}>
-
-                    <div style={styles.wrapper}>
-                        <Rate allowHalf disabled defaultValue={rate}/>
-                        <Typography variant="h6" sx={styles.count}>
-                            <CommentIcon/> {count}
+            <div style={styles.cardContainer}>
+                <Card sx={styles.card}>
+                    <div style={styles.groupedText}>
+                        <img src={image} alt={title} style={styles.image}/>
+                        <Typography variant="h6" sx={styles.title}>
+                            {title}
                         </Typography>
                     </div>
+                    <div style={styles.purchase}>
 
-                    <div style={styles.wrapper}>
-                        <Typography variant="h6" sx={styles.price}>
-                            $ {price}
-                        </Typography>
-                        {!click ?
-                            (<Button sx={styles.button} variant={'contained'} onClick={handleButtonClick}>
-                                    <ShoppingCartIcon fontSize={'medium'}/>
-                                </Button>
-                            ) : (
-                                <Button sx={styles.button} variant={'outlined'} onClick={handleButtonClick}>
-                                    <AddShoppingCartIcon fontSize={'medium'} color={"success"}/>
-                                </Button>)}
+                        <div style={styles.wrapper}>
+                            <Rate allowHalf disabled defaultValue={rate}/>
+                            <Typography variant="h6" sx={styles.count}>
+                                <CommentIcon/> {count}
+                            </Typography>
+                        </div>
+
+                        <div style={styles.wrapper}>
+                            <Typography variant="h6" sx={styles.price}>
+                                $ {price}
+                            </Typography>
+                            {!click ?
+                                (<Button sx={styles.button} variant={'contained'} onClick={handleButtonClick}>
+                                        <ShoppingCartIcon fontSize={'medium'}/>
+                                    </Button>
+                                ) : (
+                                    <Button sx={styles.button} variant={'outlined'} onClick={handleButtonClick}>
+                                        <AddShoppingCartIcon fontSize={'medium'} color={"success"}/>
+                                    </Button>)}
+                        </div>
                     </div>
-                </div>
-            </Card>
+                </Card>
+            </div>
         </Link>
     );
 };

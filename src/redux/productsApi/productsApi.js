@@ -15,7 +15,7 @@ export const productsApi = createApi({
             query: () => `products/categories`,
         }),
         getAllProductsByCategory: builder.query({
-            query: ({category, limit = 1}) => `/products/category/${category}?limit=${limit}`
+            query: ({category, limit}) => `/products/category/${category}?limit=${limit}`
         }),
         getCategoryById: builder.query({
             query: (categoryId = 1) => `categories/${categoryId}`,
