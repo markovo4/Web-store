@@ -3,6 +3,7 @@ import {Button, Container} from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ProductsSelect from "../../UI/inputs/ProductsSelect";
+import {Link} from "react-router-dom";
 
 const HeaderBottom = () => {
     return (
@@ -14,7 +15,8 @@ const HeaderBottom = () => {
                 </div>
                 <div style={styles.wrapper}>
                     <Button sx={styles.button} variant="contained"><FavoriteBorderIcon/></Button>
-                    <Button sx={styles.button} variant="contained"><ShoppingCartIcon/></Button>
+                    <Link to={'cart'}><Button sx={styles.button} variant="contained"><ShoppingCartIcon/></Button></Link>
+
                 </div>
             </Container>
         </section>

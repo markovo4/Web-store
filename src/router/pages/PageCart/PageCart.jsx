@@ -1,9 +1,10 @@
 import TemplateCartPage from "../../../templates/TemplateCartPage";
+import CartList from "../../../components/Main/CartList";
 
 const PageCart = () => {
     return (
         <TemplateCartPage>
-            <div>PageCart</div>
+            <CartList/>
         </TemplateCartPage>
     )
 }

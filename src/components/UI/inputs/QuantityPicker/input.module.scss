@@ -1,0 +1,19 @@
+.input {
+  -webkit-appearance: none;
+  -moz-appearance: textfield; // This is for Firefox
+
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type='number'] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield; // This is for Firefox
+  }
+}
