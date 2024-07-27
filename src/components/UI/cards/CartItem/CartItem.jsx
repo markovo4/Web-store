@@ -2,6 +2,9 @@ import {Avatar, Box, Button, ListItem, ListItemAvatar, ListItemText} from "@mui/
 import PropTypes from "prop-types";
 import {styles} from "./styles.js";
 import QuantityPickier from "../../inputs/QuantityPicker";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import {useState} from "react";
 
 const CartItem = ({
                       title,
@@ -9,6 +12,12 @@ const CartItem = ({
                       price,
                       id
                   }) => {
+
+    const [favourite, setFavourite] = useState(false);
+
+    const handleFavClick = () => {
+        setFavourite(!favourite);
+    }
     return (
         <ListItem
             sx={styles.card}
@@ -24,9 +33,18 @@ const CartItem = ({
                     primaryTypographyProps={{sx: styles.listItemTextTitle.primary}}
                     primary={title}
                 />
-                <div>
-                    <Button>Favourite</Button>
-                    <Button>Delete</Button>
+                <div className={'flex gap-5'}>
+                    <Button
+                        sx={styles.button}
+                        variant={"outlined"}
+                        startIcon={<FavoriteBorderIcon color={`${favourite ? 'error' : 'disabled'}`}/>}
+                        onClick={handleFavClick}
+                    >Favourite</Button>
+                    <Button
+                        sx={styles.button}
+                        variant={"outlined"}
+                        startIcon={<DeleteForeverIcon color={'disabled'}/>}
+                    >Delete</Button>
                 </div>
             </Box>
 

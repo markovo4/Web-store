@@ -9,10 +9,129 @@ export const styles = {
         gap: '50px'
     },
     placeOrder: {
-        backgroundColor: 'white',
-        width: '350px'
+        width: '350px',
+        padding: '0px',
+        position: 'sticky',
+        height: '300px',
+        top: '20px'
     },
     productsList: {
         width: '800px',
-    }
+    },
+    titleBack: {
+        fontWeight: 'bold',
+        color: 'rgba(0,0,0,0.79)'
+    },
+    titleCount: {
+        color: 'rgba(0,0,0,0.58)'
+    },
+    deleteButton: {
+        // Base styles for all button variants
+        '&.MuiButton-root': {
+            padding: '5px 5px',
+            borderRadius: '8px',
+            textTransform: 'none',
+            fontSize: '16px',
+            fontWeight: '500',
+            boxShadow: 'none',
+            transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
+            minWidth: '64px', // Ensure buttons have a minimum width
+        },
+        // Styles for contained buttons
+        '&.MuiButton-outlined': {
+            backgroundColor: '#ffffff',
+            color: 'rgba(0,0,0,0.63)',
+            border: 'unset',
+            fontWeight: 'bold',
+            '&:hover': {
+                backgroundColor: 'rgba(0,0,0,0.06)',
+            },
+            '&:active': {
+                boxShadow: 'none',
+                backgroundColor: 'rgba(0,0,0,0.12)',
+            },
+            '&.Mui-disabled': {
+                backgroundColor: '#bdbdbd',
+                color: '#fff',
+                boxShadow: 'none',
+            }
+        }
+    },
+    totalPrice: {
+        padding: 'unset',
+        width: '300px',
+        display: 'flex',
+        justifyContent: 'space-between'
+    },
+    loginButton: {
+        '&.MuiButton-root': {
+            padding: '2px 5px',
+            borderRadius: '8px',
+            textTransform: 'none',
+            fontSize: '16px',
+            fontWeight: '500',
+            boxShadow: 'none',
+            transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
+            minWidth: '64px', // Ensure buttons have a minimum width
+        },
+        // Styles for contained buttons
+        '&.MuiButton-outlined': {
+            backgroundColor: '#ffffff',
+            color: 'rgb(46,124,50)',
+            border: 'unset',
+            fontWeight: 'bold',
+            '&:hover': {
+                backgroundColor: 'rgba(46,124,50,0.09)',
+            },
+            '&:active': {
+                boxShadow: 'none',
+                backgroundColor: 'rgba(0,0,0,0.12)',
+            },
+            '&.Mui-disabled': {
+                backgroundColor: '#bdbdbd',
+                color: '#fff',
+                boxShadow: 'none',
+            }
+        }
+    },
+    sideBar: {
+        backgroundColor: 'white',
+        marginBottom: ' 5px'
+    },
+    buttonPlaceOrder: {
+        '&.MuiButton-root': {
+            padding: '8px 5px',
+            margin: '20px 0',
+            borderRadius: '8px',
+            textTransform: 'none',
+            fontSize: '16px',
+            fontWeight: '500',
+            boxShadow: 'none',
+            transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
+            minWidth: '300px', // Ensure buttons have a minimum width
+        },
+        // Styles for contained buttons
+        '&.MuiButton-outlined': {
+            backgroundColor: '#41ae2a',
+            color: 'rgb(255,255,255)',
+            border: 'unset',
+            fontWeight: 'bold',
+            '&:hover': {
+                backgroundColor: 'rgb(253,102,31)',
+            },
+            '&:active': {
+                boxShadow: 'none',
+                backgroundColor: 'rgb(208,84,25)',
+            },
+            '&.Mui-disabled': {
+                backgroundColor: '#bdbdbd',
+                color: '#fff',
+                boxShadow: 'none',
+            }
+        }
+    },
+    totalPriceSub: {
+        fontWeight: 'bold',
+        color: 'rgba(0,0,0,0.8)',
+    },
 }

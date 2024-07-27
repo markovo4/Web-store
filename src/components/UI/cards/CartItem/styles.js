@@ -50,6 +50,37 @@ export const styles = {
         display: 'flex',
         flexDirection: 'column',
         gap: '20px'
-
-    }
+    },
+    button: {
+        // Base styles for all button variants
+        '&.MuiButton-root': {
+            padding: '5px 10px',
+            borderRadius: '8px',
+            textTransform: 'none',
+            fontSize: '16px',
+            fontWeight: '500',
+            boxShadow: 'none',
+            transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
+            minWidth: '64px', // Ensure buttons have a minimum width
+        },
+        // Styles for contained buttons
+        '&.MuiButton-outlined': {
+            backgroundColor: '#ffffff',
+            color: 'rgba(0,0,0,0.63)',
+            border: 'unset',
+            fontWeight: 'bold',
+            '&:hover': {
+                backgroundColor: 'rgba(0,0,0,0.06)',
+            },
+            '&:active': {
+                boxShadow: 'none',
+                backgroundColor: 'rgba(0,0,0,0.12)',
+            },
+            '&.Mui-disabled': {
+                backgroundColor: '#bdbdbd',
+                color: '#fff',
+                boxShadow: 'none',
+            }
+        }
+    },
 }
