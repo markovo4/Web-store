@@ -1,14 +1,15 @@
 import './index.css';
 import RouterDisplayPage from "./router/routes/index.js";
-// import NavTest from "./components/NavTest/index.js";
 import React from "react";
+import Auth from "./components/Auth/Auth.jsx";
 
 function App() {
 
     return (
         <React.Fragment>
-            {/*<NavTest/>*/}
-            <RouterDisplayPage/>
+            <Auth>
+                <RouterDisplayPage/>
+            </Auth>
         </React.Fragment>
 
     )

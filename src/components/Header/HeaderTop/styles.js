@@ -74,5 +74,35 @@ export const styles = {
         '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: '#40ab29', // Set border color to white on focus
         }
+    },
+    buttonLogOut: {
+        // Base styles for all button variants
+        '&.MuiButton-root': {
+            padding: '2px 16px',
+            borderRadius: '4px',
+            textTransform: 'none',
+            fontSize: '16px',
+            fontWeight: '500',
+            boxShadow: 'none',
+            transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
+            minWidth: '64px', // Ensure buttons have a minimum width
+        },
+        // Styles for contained buttons
+        '&.MuiButton-contained': {
+            backgroundColor: '#fd661f',
+            color: '#fff',
+            '&:hover': {
+                backgroundColor: '#fd661f',
+            },
+            '&:active': {
+                boxShadow: 'none',
+                backgroundColor: '#fd661f',
+            },
+            '&.Mui-disabled': {
+                backgroundColor: '#bdbdbd',
+                color: '#fff',
+                boxShadow: 'none',
+            }
+        }
     }
 }

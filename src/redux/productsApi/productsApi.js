@@ -26,26 +26,6 @@ export const productsApi = createApi({
         getUserById: builder.query({
             query: (userId = 1) => `users/${userId}`,
         }),
-        createUser: builder.mutation({
-            query: (user) => ({
-                url: `users/`,
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: user,
-            })
-        }),
-        isRegisteredEmail: builder.mutation({
-            query: (email) => ({
-                url: 'users/is-available',
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: {email}
-            })
-        })
     })
 })
 export const {
