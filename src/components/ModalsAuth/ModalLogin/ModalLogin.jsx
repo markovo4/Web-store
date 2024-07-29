@@ -20,7 +20,9 @@ const ModalLogin = ({button}) => {
     const dispatch = useDispatch();
 
     const handleOpen = () => dispatch(setModalLoginOpen());
-    const handleClose = () => dispatch(setModalLoginOpen());
+    const handleClose = () => {
+        dispatch(setModalLoginOpen())
+    };
 
     const buttonWithOnClick = cloneElement(button, {
         onClick: handleOpen,
@@ -33,6 +35,7 @@ const ModalLogin = ({button}) => {
             Cookies.set('LoggedIn', 'true');
             resetForm();
             handleClose();
+            window.location.reload()
         }
     });
 

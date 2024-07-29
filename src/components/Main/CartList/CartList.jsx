@@ -97,7 +97,10 @@ const CartList = () => {
                                 }/>
                             </ListItem>)}
                             <ListItem className={'flex flex-col'} sx={styles.sideBar}>
-                                <Button sx={styles.buttonPlaceOrder} variant={'outlined'}>
+                                <Button
+                                    sx={styles.buttonPlaceOrder}
+                                    variant={'outlined'}
+                                >
                                     Place order
                                 </Button>
                                 <List className={'flex flex-col gap-5'}>

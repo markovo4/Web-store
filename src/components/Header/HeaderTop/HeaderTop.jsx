@@ -7,7 +7,7 @@ import ModalLogin from "../../ModalsAuth/ModalLogin";
 import {useSelector} from "react-redux";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LogoutIcon from '@mui/icons-material/Logout';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 
 const HeaderTop = () => {
@@ -21,8 +21,8 @@ const HeaderTop = () => {
     const handleLogOut = () => {
         Cookies.remove('LoggedIn');
         setIsLoggedIn(false);
+        window.location.reload();
     };
-
     return (
         <section style={styles.header}>
             <Container sx={styles.container}>
@@ -30,34 +30,38 @@ const HeaderTop = () => {
                     <Logo/>
                     <CitiesSelect styles={styles.selector}/>
                 </div>
-                {!isLoggedIn ? (
-                    <div style={styles.wrapper}>
-                        <ModalRegister button={<Button sx={styles.button} variant="contained">Sign up</Button>}/>
-                        <div className="w-[1px] h-16 bg-gray-300"/>
-                        <ModalLogin button={<Button sx={styles.button} variant="contained">Log in</Button>}/>
-                    </div>
-                ) : (
-                    <div style={styles.wrapper}>
-                        <Button
-                            sx={styles.button}
-                            variant="contained"
-                            endIcon={<ArrowForwardIcon/>}
-                        >
-                            Your Cabinet
-                        </Button>
-                        <div className="w-[1px] h-16 bg-gray-300"/>
-                        <Avatar/>
-                        <div className="w-[1px] h-16 bg-gray-300"/>
-                        <Button
-                            sx={styles.buttonLogOut}
-                            onClick={handleLogOut}
-                            variant="contained"
-                            endIcon={<LogoutIcon/>}
-                        >
-                            Log Out
-                        </Button>
-                    </div>
-                )}
+                {window.location.pathname !== '/cart' &&
+                    <React.Fragment>
+                        {!isLoggedIn ? (
+                            <div style={styles.wrapper}>
+                                <ModalRegister
+                                    button={<Button sx={styles.button} variant="contained">Sign up</Button>}/>
+                                <div className="w-[1px] h-12 bg-gray-300"/>
+                                <ModalLogin button={<Button sx={styles.button} variant="contained">Log in</Button>}/>
+                            </div>
+                        ) : (
+                            <div style={styles.wrapper}>
+                                <Button
+                                    sx={styles.button}
+                                    variant="contained"
+                                    endIcon={<ArrowForwardIcon/>}
+                                >
+                                    Your Cabinet
+                                </Button>
+                                <div className="w-[1px] h-12 bg-gray-300"/>
+                                <Avatar/>
+                                <div className="w-[1px] h-12 bg-gray-300"/>
+                                <Button
+                                    sx={styles.buttonLogOut}
+                                    onClick={handleLogOut}
+                                    variant="contained"
+                                    endIcon={<LogoutIcon/>}
+                                >
+                                    Log Out
+                                </Button>
+                            </div>
+                        )}
+                    </React.Fragment>}
             </Container>
         </section>
     );

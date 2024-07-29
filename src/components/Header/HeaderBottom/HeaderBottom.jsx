@@ -7,7 +7,6 @@ import {Link} from "react-router-dom";
 import routerNames from "../../../router/routes/routerNames.js";
 
 const HeaderBottom = () => {
-    // const navigate = useNavigate();
     return (
         <section style={styles.header}>
             <Container sx={styles.container}>
@@ -17,7 +16,7 @@ const HeaderBottom = () => {
                 </div>
                 <div style={styles.wrapper}>
                     <Button sx={styles.button} variant="contained"><FavoriteBorderIcon/></Button>
-                    <div className="w-[1px] h-11 bg-gray-500"/>
+                    <div className="w-[1px] h-9" style={styles.separator}/>
                     <Link to={routerNames.pageCart}><Button sx={styles.button}
                                                             variant="contained"><ShoppingCartIcon/></Button></Link>
 
