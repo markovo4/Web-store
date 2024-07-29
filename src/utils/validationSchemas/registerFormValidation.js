@@ -12,7 +12,7 @@ const registerFormValidation = Yup.object({
         .min(5, 'At least 5 characters')
         .required('Required'),
     phoneNumber: Yup.string()
-        .matches(phoneRegExp, 'Phone number is not valid')
+        .matches(phoneRegExp, 'Please use the following format: +38(XXX) XXX XX XX')
         .required('Required'),
     email: Yup.string()
         .trim()
