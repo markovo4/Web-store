@@ -8,12 +8,20 @@ const FormCard = ({
                       formTitleStyles = styles.formTitle,
                       formSubtitle,
                       formSubtitleStyles = styles.formSubtitle,
-                      children
+                      children,
+                      onSubmit
                   }) => {
 
     const [formOpen, setFormOpen] = useState(false);
     const handleOpenForm = () => {
         setFormOpen(!formOpen);
+    }
+
+    const handleSubmit = () => {
+        if (onSubmit) {
+            onSubmit();
+        }
+        handleOpenForm();
     }
 
     return (
@@ -31,10 +39,11 @@ const FormCard = ({
                         <Button variant={'outlined'} sx={styles.buttonEdit} onClick={handleOpenForm}>Edit</Button>
                     </Box>
                 ) : (
-                    <Box>
+                    <Box className={'mb-8'}>
                         {children}
                         <Box sx={styles.buttonContainer}>
-                            <Button variant={'outlined'} sx={styles.buttonSubmit} onClick={handleOpenForm}>Continue
+                            <Button type={'button'} variant={'outlined'} sx={styles.buttonSubmit}
+                                    onClick={handleSubmit}>Continue
                                 Checkout</Button>
                         </Box>
 
@@ -49,6 +58,7 @@ FormCard.propTypes = {
     formSubtitle: PropTypes.string,
     formSubtitleStyles: PropTypes.object,
     children: PropTypes.any.isRequired,
+    onSubmit: PropTypes.func,
 }
 
 export default FormCard;

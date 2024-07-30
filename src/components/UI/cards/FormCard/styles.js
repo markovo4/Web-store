@@ -52,7 +52,7 @@ export const styles = {
         display: 'flex',
         alignItems: 'center',
         width: '800px',
-        height: '160px',
+        height: '100px',
         justifyContent: 'space-between',
         borderRadius: '8px',
         marginBottom: '20px',

@@ -98,4 +98,13 @@ export const styles = {
         display: 'flex',
         justifyContent: 'space-between'
     },
+    contactInfo: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '800px',
+        backgroundColor: 'white',
+        padding: '40px',
+        gap: '20px',
+        borderRadius: '8px 8px 0 0'
+    }
 }
