@@ -1,0 +1,182 @@
+import {useEffect, useRef, useState} from "react";
+import {useFormik} from "formik";
+import checkoutValidation from "../../../utils/validationSchemas/checkoutValidation.js";
+import {Box, Button, FormControlLabel, FormGroup, Typography} from "@mui/material";
+import {styles} from "../CheckoutForm/styles.js";
+import FormInput from "../../UI/inputs/FormInput/index.js";
+import {Checkbox} from "antd";
+import FormCard from "../../UI/cards/FormCard/index.js";
+
+const formInitValues = {
+    firstName: '',
+    receiverName: '',
+    lastName: '',
+    phoneNumber: '+38(0',
+    otherReceiverPhoneNumber: '+38(0',
+    email: '',
+}
+
+const ContactInfoForm = () => {
+
+    const [openForm, setOpenForm] = useState(false);
+
+    const handleClickContinue = () => {
+        setOpenForm(!openForm);
+    }
+
+    const [otherReceiver, setOtherReceiver] = useState(false);
+    const [forGift, setForGift] = useState(false);
+    const isMounted = useRef(false);
+
+    const handleCheckboxChange = (event) => {
+        const {name, checked} = event.target;
+        if (name === "otherReceiver") {
+            setOtherReceiver(checked);
+        } else if (name === "forGift") {
+            setForGift(checked);
+        }
+    }
+
+    const formik = useFormik({
+        initialValues: {...formInitValues},
+        validationSchema: checkoutValidation(otherReceiver),
+        onSubmit: (values, {resetForm}) => {
+
+            const filteredValues = {
+                ...values,
+                otherReceiverPhoneNumber: otherReceiver ? values.otherReceiverPhoneNumber : '',
+                receiverName: otherReceiver ? values.receiverName : '',
+                lastName: otherReceiver ? values.lastName : '',
+            };
+            console.log(filteredValues);
+            handleClickContinue()
+            resetForm();
+        }
+    });
+
+    useEffect(() => {
+        if (isMounted.current) {
+            if (!otherReceiver) {
+                formik.setFieldValue('otherReceiverPhoneNumber', '');
+                formik.setFieldValue('receiverName', '');
+                formik.setFieldValue('lastName', '');
+            }
+        } else {
+            isMounted.current = true;
+        }
+    }, [otherReceiver]);
+    return (
+        <form onSubmit={formik.handleSubmit}>
+            <FormCard formTitle={'1. Contact Information'} open={openForm} openForm={handleClickContinue}>
+                <Box sx={styles.contactInfo}>
+                    <Typography variant={'h6'} component={'span'}>1. Contact Information</Typography>
+                    <div className={'grid grid-cols-2 gap-10'}>
+                        <FormInput
+                            onChange={formik.handleChange}
+                            value={formik.values.phoneNumber.trim()}
+                            touched={formik.touched.phoneNumber}
+                            error={formik.errors.phoneNumber}
+                            label={'Phone Number:'}
+                            name={'phoneNumber'}
+                            id={'phoneNumber'}
+                            type={'tel'}
+                            required={true}
+                        />
+
+                        <FormInput
+                            onChange={formik.handleChange}
+                            value={formik.values.firstName.trim()}
+                            touched={formik.touched.firstName}
+                            error={formik.errors.firstName}
+                            label={'First Name:'}
+                            name={'firstName'}
+                            id={'firstName'}
+                            type={'text'}
+                            required={true}
+                        />
+                    </div>
+
+                    <FormGroup className={'w-[215px] flex gap-5'}>
+                        <FormInput
+                            onChange={formik.handleChange}
+                            value={formik.values.email.trim()}
+                            touched={formik.touched.email}
+                            error={formik.errors.email}
+                            label={'Email:'}
+                            name={'email'}
+                            id={'email'}
+                            type={'text'}
+                            required={true}
+                        />
+                        <FormControlLabel
+                            className={'pl-3'}
+                            control={<Checkbox
+                                color={'success'}
+                                checked={otherReceiver}
+                                onChange={handleCheckboxChange}
+                                name="otherReceiver"
+                            />}
+                            label="Other Receiver"
+                        />
+                        <FormControlLabel
+                            className={'pl-3'}
+                            control={<Checkbox
+                                color={'success'}
+                                checked={forGift}
+                                onChange={handleCheckboxChange}
+                                name="forGift"
+                            />}
+                            label="For a Gift"
+                        />
+                    </FormGroup>
+
+                    {otherReceiver && (
+                        <div className={'grid grid-cols-2 gap-10'}>
+                            <FormInput
+                                onChange={formik.handleChange}
+                                value={formik.values.otherReceiverPhoneNumber.trim()}
+                                touched={formik.touched.otherReceiverPhoneNumber}
+                                error={formik.errors.otherReceiverPhoneNumber}
+                                disabled={!otherReceiver}
+                                label={'Receiver Phone Number:'}
+                                name={'otherReceiverPhoneNumber'}
+                                id={'otherReceiverPhoneNumber'}
+                                type={'tel'}
+                                required={otherReceiver}
+                            />
+
+                            <FormInput
+                                onChange={formik.handleChange}
+                                value={formik.values.lastName.trim()}
+                                touched={formik.touched.lastName}
+                                error={formik.errors.lastName}
+                                disabled={!otherReceiver}
+                                label={'Last Name:'}
+                                name={'lastName'}
+                                id={'lastName'}
+                                type={'text'}
+                                required={otherReceiver}
+                            />
+
+                            <FormInput
+                                onChange={formik.handleChange}
+                                value={formik.values.receiverName.trim()}
+                                touched={formik.touched.receiverName}
+                                error={formik.errors.receiverName}
+                                disabled={!otherReceiver}
+                                label={'Receiver Name:'}
+                                name={'receiverName'}
+                                id={'receiverName'}
+                                type={'text'}
+                                required={otherReceiver}
+                            />
+                        </div>
+                    )}
+                    <Button type="submit" variant={'outlined'} sx={styles.buttonSubmit}>Continue
+                        Checkout</Button>
+                </Box>
+            </FormCard>
+        </form>
+    )
+}
+export default ContactInfoForm;

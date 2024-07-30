@@ -2,10 +2,10 @@ import {FormControl, Input, InputLabel} from "@mui/material";
 import PropTypes from "prop-types";
 import {styles} from "./styles.js";
 
-const FormInput = ({id, name, type, touched, error, label, onChange, value}) => {
+const FormInput = ({id, name, type, touched, error, label, onChange, value, disabled}) => {
     return (
         <FormControl>
-            <InputLabel htmlFor="login" sx={styles.inputLabel}>{label}</InputLabel>
+            <InputLabel htmlFor={id} sx={styles.inputLabel}>{label}</InputLabel>
             <Input
                 sx={styles.formInput}
                 id={id}
@@ -14,12 +14,13 @@ const FormInput = ({id, name, type, touched, error, label, onChange, value}) => 
                 autoComplete={'off'}
                 onChange={onChange}
                 value={value}
+                disabled={disabled}
             />
             {touched && error ? (
                 <div style={styles.errorText}>{error}</div>
             ) : null}
         </FormControl>
-    )
+    );
 }
 
 FormInput.propTypes = {
@@ -31,6 +32,7 @@ FormInput.propTypes = {
     id: PropTypes.string,
     type: PropTypes.string.isRequired,
     label: PropTypes.string,
+    disabled: PropTypes.bool,
 }
 
 export default FormInput;
