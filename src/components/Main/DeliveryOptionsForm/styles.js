@@ -2,12 +2,13 @@ export const styles = {
     radioButton: {
         border: '1px solid rgba(0,0,0,0.11)',
         borderRadius: '8px',
+        color: 'rgba(0,0,0,0.61)',
+        padding: '10px'
     },
     radioGroup: {
         display: 'flex',
         gap: '10px',
-        width: '718px',
-        paddingLeft: '10px'
+        width: '700px',
     },
     contactInfo: {
         display: 'flex',
