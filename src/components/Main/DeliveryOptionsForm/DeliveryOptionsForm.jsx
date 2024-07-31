@@ -15,13 +15,14 @@ const initialValues = {
 
 const DeliveryOptionsForm = () => {
     const [openForm, setOpenForm] = useState(false);
+    const [city, setCity] = useState('');
 
     const handleClickContinue = () => {
         setOpenForm(!openForm);
     }
 
     useEffect(() => {
-        formik.city()
+        formik.setFieldValue('city', city)
     })
 
     const formik = useFormik({
@@ -32,6 +33,10 @@ const DeliveryOptionsForm = () => {
             resetForm();
         }
     });
+
+    useEffect(() => {
+        formik.setFieldValue('city', city);
+    }, [city]);
 
     return (
         <form onSubmit={formik.handleSubmit}>
