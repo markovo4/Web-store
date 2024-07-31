@@ -1,6 +1,6 @@
 import {Box, Button, FormControlLabel, Radio, RadioGroup, Typography} from "@mui/material";
 import {styles} from "./styles.js";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useFormik} from "formik";
 import CitiesSelect from "../../UI/inputs/CitiesSelect";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
@@ -10,20 +10,15 @@ import FormCard from "../../UI/cards/FormCard/index.js";
 
 const initialValues = {
     deliveryOption: 'store',
-    city: '', // Add city to initial values
+    city: null,
 }
 
 const DeliveryOptionsForm = () => {
     const [openForm, setOpenForm] = useState(false);
-    const [city, setCity] = useState('');
 
     const handleClickContinue = () => {
         setOpenForm(!openForm);
     }
-
-    useEffect(() => {
-        formik.setFieldValue('city', city)
-    })
 
     const formik = useFormik({
         initialValues,
@@ -33,10 +28,6 @@ const DeliveryOptionsForm = () => {
             resetForm();
         }
     });
-
-    useEffect(() => {
-        formik.setFieldValue('city', city);
-    }, [city]);
 
     return (
         <form onSubmit={formik.handleSubmit}>
@@ -49,7 +40,6 @@ const DeliveryOptionsForm = () => {
                         styles={styles.selector}
                         value={formik.values.city}
                         onChange={formik.handleChange}
-                        name="city"
                     />
 
                     <RadioGroup
