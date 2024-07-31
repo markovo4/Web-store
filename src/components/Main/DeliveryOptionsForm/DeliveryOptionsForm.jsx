@@ -1,6 +1,6 @@
 import {Box, Button, FormControlLabel, Radio, RadioGroup, Typography} from "@mui/material";
 import {styles} from "./styles.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useFormik} from "formik";
 import CitiesSelect from "../../UI/inputs/CitiesSelect";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
@@ -19,6 +19,10 @@ const DeliveryOptionsForm = () => {
     const handleClickContinue = () => {
         setOpenForm(!openForm);
     }
+
+    useEffect(() => {
+        formik.city()
+    })
 
     const formik = useFormik({
         initialValues,
