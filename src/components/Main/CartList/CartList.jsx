@@ -5,10 +5,11 @@ import {useGetAllProductsQuery} from "../../../redux/productsApi/productsApi.js"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import ModalLogin from "../../ModalsAuth/ModalLogin/index.js";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
+import routerNames from "../../../router/routes/routerNames.js";
 
 const CartList = () => {
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
@@ -97,12 +98,14 @@ const CartList = () => {
                                 }/>
                             </ListItem>)}
                             <ListItem className={'flex flex-col'} sx={styles.sideBar}>
-                                <Button
-                                    sx={styles.buttonPlaceOrder}
-                                    variant={'outlined'}
-                                >
-                                    Place order
-                                </Button>
+                                <Link to={routerNames.pageCheckout}>
+                                    <Button
+                                        sx={styles.buttonPlaceOrder}
+                                        variant={'outlined'}
+                                    >
+                                        Place order
+                                    </Button>
+                                </Link>
                                 <List className={'flex flex-col gap-5'}>
                                     <ListItem sx={styles.totalPrice}>
                                         {productsTEST.data && (

@@ -3,7 +3,7 @@ const routerNames = {
     pageNotFound: '*',
     pageCart: '/cart',
     pageProduct: '/products/:productId',
-    pagePlaceOrder: '/order',
+    pageCheckout: '/order',
     pageCategories: '/:categoryName'
 };
 

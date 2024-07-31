@@ -13,7 +13,7 @@ import {setModalRegOpen} from "../../../redux/slices/modalsAuthSlice.js";
 const formInitValues = {
     firstName: '',
     lastName: '',
-    phoneNumber: '',
+    phoneNumber: '+38(0',
     email: '',
     password: '',
     confirmPassword: '',
@@ -37,6 +37,7 @@ const ModalRegister = ({button}) => {
             Cookies.set('LoggedIn', 'true');
             resetForm();
             handleClose();
+            window.location.reload()
         }
     });
 
@@ -77,7 +78,7 @@ const ModalRegister = ({button}) => {
                         label={'Phone Number:'}
                         name={'phoneNumber'}
                         id={'phoneNumber'}
-                        type={'text'}
+                        type={'tel'}
                     />
                     <FormInput
                         onChange={formik.handleChange}
