@@ -12,6 +12,15 @@ import ContactInfoForm from "../ContactInfoForm";
 import {useState} from "react";
 import DeliveryOptionsForm from "../DeliveryOptionsForm";
 import PaymentOptionsForm from "../PaymentOptionsForm";
+import InputWithButton from "../../UI/inputs/InputWithButton";
+import {Checkbox} from "antd";
+import {useFormik} from "formik";
+
+const initialValues = {
+    promoCode: null,
+    bonusCard: null,
+    termConditions: false,
+}
 
 const CheckoutForm = () => {
     const productsTEST = useGetAllProductsQuery();
@@ -21,6 +30,23 @@ const CheckoutForm = () => {
     const handleClickContinue = () => {
         setOpenForm(!openForm);
     }
+
+    const getTotalPrice = (products) => {
+        const priceTotal = products.reduce((totalPrice, product) => {
+            return totalPrice + product.price;
+        }, 0);
+        return parseFloat(priceTotal.toFixed(2));
+    }
+
+    const handlePromoClick = () => {
+    }
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit: (values, {resetForm}) => {
+            resetForm();
+        }
+    })
 
     return (
         <section style={styles.sectionForm}>
@@ -73,6 +99,62 @@ const CheckoutForm = () => {
                         <ContactInfoForm/>
                         <DeliveryOptionsForm/>
                         <PaymentOptionsForm/>
+                    </div>
+                    <div>
+                        <Box sx={styles.sidebar}>
+                            <Typography variant={'h6'} component={'span'} sx={styles.summary}>Summary:</Typography>
+                            <form onSubmit={formik.handleSubmit}>
+                                <InputWithButton
+                                    placeHolder={'Discount code'}
+                                    labelInput={'Promo code'}
+                                    buttonText={'apply'}
+                                    onButtonClick={handlePromoClick}
+                                    onChange={formik.handleChange}
+                                />
+                                <InputWithButton
+                                    placeHolder={'293'}
+                                    labelInput={'You bonus card Number'}
+                                    buttonText={'ok'}
+                                    onButtonClick={handlePromoClick}
+                                    onChange={formik.handleChange}
+                                />
+                                {productsTEST.data && <div style={styles.itemsPrice}>
+                                    <Typography sx={styles.itemsCount}>
+                                        {`${productsTEST.data.length}
+                                            ${productsTEST.data.length < 2 ?
+                                            productsTEST.data.length === 1 ? 'item' : 'items' : 'items'} `}
+                                    </Typography>
+                                    <Typography sx={styles.totalPriceSub}>
+                                        $ {getTotalPrice(productsTEST.data)}
+                                    </Typography>
+                                </div>}
+
+                                {productsTEST.data && <div className={'flex items-center justify-between mb-3'}>
+                                    <Typography
+                                        variant={'h6'}
+                                        component={'span'}
+                                    >
+                                        Total:
+                                    </Typography>
+
+                                    <Typography
+                                        sx={styles.totalPriceMain}
+                                        variant={'h6'}
+                                        component={'span'}
+                                    >
+                                        $ {getTotalPrice(productsTEST.data)}
+                                    </Typography>
+
+                                </div>}
+                                <div className={'flex flex-col gap-5'}>
+                                    <Button variant={"contained"} type={"submit"}
+                                            disabled={!formik.values.termConditions}
+                                            sx={styles.checkoutButton}>Checkout</Button>
+                                    <Checkbox name="termConditions" onChange={formik.handleChange}>I Accept terms and
+                                        conditions</Checkbox>
+                                </div>
+                            </form>
+                        </Box>
                     </div>
                 </div>
             </Container>

@@ -1,8 +1,13 @@
 export const styles = {
     sectionForm: {
         backgroundColor: '#eeeeee',
+        minHeight: '850px',
+        maxHeight: '100%'
     },
-    wrapper: {},
+    wrapper: {
+        display: 'flex',
+        gap: '50px'
+    },
     buttonBack: {
         '&.MuiButton-root': {
             padding: '5px 5px',
@@ -92,7 +97,7 @@ export const styles = {
         flexDirection: 'column',
         backgroundColor: 'white',
         padding: '40px',
-        borderRadius: '8px 8px 0 0'
+        borderRadius: '8px'
     },
     titleList: {
         display: 'flex',
@@ -105,7 +110,7 @@ export const styles = {
         backgroundColor: 'white',
         padding: '40px',
         gap: '20px',
-        borderRadius: '8px 8px 0 0'
+        borderRadius: '8px'
     },
     buttonSubmit: {
         '&.MuiButton-root': {
@@ -125,6 +130,73 @@ export const styles = {
             padding: '5px 20px',
             color: 'white',
             border: '1px solid rgb(253,102,31)',
+            fontWeight: 'bold',
+            '&:hover': {
+                backgroundColor: 'rgb(253,102,31)',
+                color: 'white'
+            },
+            '&:active': {
+                boxShadow: 'none',
+                backgroundColor: 'transparent',
+            },
+            '&.Mui-disabled': {
+                backgroundColor: '#bdbdbd',
+                color: '#fff',
+                boxShadow: 'none',
+            }
+        }
+    },
+    sidebar: {
+        backgroundColor: 'white',
+        width: '300px',
+        borderRadius: '8px',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '28px',
+        position: 'sticky',
+        top: '20px'
+    },
+    summary: {
+        marginBottom: '20px',
+    },
+    itemsPrice: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderBottom: '1px solid rgb(110,110,110, 0.5)',
+        paddingBottom: '10px',
+        marginBottom: '40px'
+    },
+    totalPriceSub: {
+        fontWeight: 'bold',
+        fontSize: '18px',
+        color: 'rgba(0,0,0,0.8)',
+    },
+    itemsCount: {
+        color: 'rgb(110,110,110)',
+    },
+    totalPriceMain: {
+        fontWeight: 'bold',
+        fontSize: '25px',
+        color: 'rgb(52,52,52)'
+    },
+    checkoutButton: {
+        '&.MuiButton-root': {
+            padding: '5px 5px',
+            borderRadius: '8px',
+            textTransform: 'none',
+            fontSize: '16px',
+            fontWeight: '500',
+            boxShadow: 'none',
+            transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
+            minWidth: '250px',
+            maxHeight: '40px',
+        },
+        // Styles for contained buttons
+        '&.MuiButton-contained': {
+            backgroundColor: 'rgb(65,174,42)',
+            padding: '5px 20px',
+            color: 'white',
             fontWeight: 'bold',
             '&:hover': {
                 backgroundColor: 'rgb(253,102,31)',

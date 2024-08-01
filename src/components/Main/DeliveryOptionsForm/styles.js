@@ -17,7 +17,7 @@ export const styles = {
         backgroundColor: 'white',
         padding: '40px',
         gap: '20px',
-        borderRadius: '8px 8px 0 0'
+        borderRadius: '8px'
     },
     buttonSubmit: {
         '&.MuiButton-root': {
