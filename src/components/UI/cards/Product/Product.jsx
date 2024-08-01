@@ -7,7 +7,9 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getProductList, removeFavProduct, setProductList} from "../../../../redux/slices/localStorageSlice.js";
 
 const Product = ({
                      id,
@@ -18,22 +20,38 @@ const Product = ({
                      rating,
                      count
                  }) => {
-
     const [addToCart, setAddToCart] = useState(false);
-    const [addToFav, setAddToFav] = useState(false);
+
+
+    const dispatch = useDispatch();
+    const orderList = useSelector((state) => state.localStorage.orderList);
+
+    const [addToFav, setAddToFav] = useState(orderList.some((product) => product.id === id));
+
+    useEffect(() => {
+        dispatch(getProductList());
+    }, [dispatch]);
+
     const handleCartClick = () => {
-        setAddToCart(!addToCart)
+        setAddToCart((prevAddToCart) => !prevAddToCart);
     };
+
     const handleFavClick = () => {
-        setAddToFav(!addToFav)
+        setAddToFav((prevAddToFav) => !prevAddToFav);
+        if (!addToFav) {
+            const updatedOrderList = [...orderList, {id, title, description, image, price, rating, count}];
+            dispatch(setProductList(updatedOrderList));
+        } else if (addToFav) {
+            dispatch(removeFavProduct(id))
+        }
     };
+
     return (
         <Container sx={{display: "flex", flexDirection: 'row'}}>
             <Box sx={styles.imageWrapper}>
                 <img alt={title} src={image} style={styles.image}/>
             </Box>
             <Box sx={styles.info}>
-
                 <Box sx={styles.wrapper}>
                     <div>
                         <Typography variant="h3" component={'h3'} sx={styles.price}>
@@ -54,18 +72,21 @@ const Product = ({
                         $ {price}
                     </Typography>
                     <div style={styles.buttonGroup}>
-                        {!addToCart ?
-                            (<Button id={id} sx={styles.button} variant={'contained'} onClick={handleCartClick}>
-                                    <ShoppingCartIcon fontSize={'medium'}/>
-                                </Button>
-                            ) : (
-                                <Button id={id} sx={styles.button} variant={'outlined'} onClick={handleCartClick}>
-                                    <AddShoppingCartIcon fontSize={'medium'} color={"success"}/>
-                                </Button>)}
+                        {!addToCart ? (
+                            <Button id={id} sx={styles.button} variant={'contained'} onClick={handleCartClick}>
+                                <ShoppingCartIcon fontSize={'medium'}/>
+                            </Button>
+                        ) : (
+                            <Button id={id} sx={styles.button} variant={'outlined'} onClick={handleCartClick}>
+                                <AddShoppingCartIcon fontSize={'medium'} color={"success"}/>
+                            </Button>
+                        )}
                         <Button id={id} sx={styles.button} variant={'outlined'} onClick={handleFavClick}>
-                            {!addToFav ? (<FavoriteBorderIcon color={'success'}/>
+                            {!addToFav ? (
+                                <FavoriteBorderIcon color={'success'}/>
                             ) : (
-                                <FavoriteIcon color={'error'}/>)}
+                                <FavoriteIcon color={'error'}/>
+                            )}
                         </Button>
                     </div>
                 </Box>
@@ -79,8 +100,9 @@ const Product = ({
                 </Box>
             </Box>
         </Container>
-    )
+    );
 }
+
 Product.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -89,7 +111,6 @@ Product.propTypes = {
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     count: PropTypes.number.isRequired
-}
-
+};
 
 export default Product;

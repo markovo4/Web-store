@@ -15,7 +15,8 @@ const HeaderBottom = () => {
                         styles={styles.selector}/>
                 </div>
                 <div style={styles.wrapper}>
-                    <Button sx={styles.button} variant="contained"><FavoriteBorderIcon/></Button>
+                    <Link to={routerNames.pageFavProducts}>
+                        <Button sx={styles.button} variant="contained"><FavoriteBorderIcon/></Button></Link>
                     <div className="w-[1px] h-9" style={styles.separator}/>
                     <Link to={routerNames.pageCart}><Button sx={styles.button}
                                                             variant="contained"><ShoppingCartIcon/></Button></Link>
