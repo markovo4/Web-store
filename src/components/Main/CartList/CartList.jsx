@@ -76,9 +76,12 @@ const CartList = () => {
                             <CartItem
                                 key={index}
                                 title={product.title}
+                                description={product.description}
                                 image={product.image}
                                 price={product.price}
                                 id={product.id}
+                                rating={product.rating.rate}
+                                count={product.rating.count}
                             />
                         ))}
                     </List>

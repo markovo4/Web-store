@@ -4,20 +4,38 @@ import {styles} from "./styles.js";
 import QuantityPickier from "../../inputs/QuantityPicker";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {getFavProductList, removeFavProduct, setFavProductList} from "../../../../redux/slices/localStorageSlice.js";
+import {useDispatch, useSelector} from "react-redux";
 
 const CartItem = ({
                       title,
+                      description,
                       image,
                       price,
+                      rating,
+                      count,
                       id
                   }) => {
 
-    const [favourite, setFavourite] = useState(false);
+    const dispatch = useDispatch();
+    const {favouriteList} = useSelector((state) => state.localStorage);
+
+    const [addToFav, setAddToFav] = useState(favouriteList.some((product) => product.id === id));
+
+    useEffect(() => {
+        dispatch(getFavProductList());
+    }, [dispatch]);
 
     const handleFavClick = () => {
-        setFavourite(!favourite);
-    }
+        setAddToFav((prevAddToFav) => !prevAddToFav);
+        if (!addToFav) {
+            const updatedOrderList = [...favouriteList, {id, title, description, image, price, rating, count}];
+            dispatch(setFavProductList(updatedOrderList));
+        } else if (addToFav) {
+            dispatch(removeFavProduct(id))
+        }
+    };
     return (
         <ListItem
             sx={styles.card}
@@ -35,9 +53,10 @@ const CartItem = ({
                 />
                 <div className={'flex gap-5'}>
                     <Button
+                        id={id}
                         sx={styles.button}
                         variant={"outlined"}
-                        startIcon={<FavoriteBorderIcon color={`${favourite ? 'error' : 'disabled'}`}/>}
+                        startIcon={<FavoriteBorderIcon color={`${addToFav ? 'error' : 'disabled'}`}/>}
                         onClick={handleFavClick}
                     >Favourite</Button>
                     <Button
@@ -63,8 +82,11 @@ const CartItem = ({
 
 CartItem.propTypes = {
     title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    count: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired
 }
 

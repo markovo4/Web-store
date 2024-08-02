@@ -8,15 +8,16 @@ export const styles = {
     },
     card: {
         padding: '16px',
+        marginLeft: '2px',
         display: 'flex',
         flexDirection: 'column',
-        width: '288px',
+        width: '280px',
         height: '570px',
         justifyContent: 'space-between',
         boxShadow: 'none',
         '&:hover': {
             transition: '0.3s',
-            backgroundColor: 'rgba(0,0,0,0.03)',
+            backgroundColor: 'rgb(238,238,238)',
             boxShadow: '0px 1px 10px 1px rgba(0,0,0,0.22)',
             zIndex: 10000
         }

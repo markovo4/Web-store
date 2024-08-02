@@ -9,7 +9,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getProductList, removeFavProduct, setProductList} from "../../../../redux/slices/localStorageSlice.js";
+import {getFavProductList, removeFavProduct, setFavProductList} from "../../../../redux/slices/localStorageSlice.js";
 
 const Product = ({
                      id,
@@ -22,14 +22,13 @@ const Product = ({
                  }) => {
     const [addToCart, setAddToCart] = useState(false);
 
-
     const dispatch = useDispatch();
-    const orderList = useSelector((state) => state.localStorage.orderList);
+    const {favouriteList} = useSelector((state) => state.localStorage);
 
-    const [addToFav, setAddToFav] = useState(orderList.some((product) => product.id === id));
+    const [addToFav, setAddToFav] = useState(favouriteList.some((product) => product.id === id));
 
     useEffect(() => {
-        dispatch(getProductList());
+        dispatch(getFavProductList());
     }, [dispatch]);
 
     const handleCartClick = () => {
@@ -39,8 +38,8 @@ const Product = ({
     const handleFavClick = () => {
         setAddToFav((prevAddToFav) => !prevAddToFav);
         if (!addToFav) {
-            const updatedOrderList = [...orderList, {id, title, description, image, price, rating, count}];
-            dispatch(setProductList(updatedOrderList));
+            const updatedOrderList = [...favouriteList, {id, title, description, image, price, rating, count}];
+            dispatch(setFavProductList(updatedOrderList));
         } else if (addToFav) {
             dispatch(removeFavProduct(id))
         }
