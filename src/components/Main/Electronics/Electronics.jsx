@@ -25,6 +25,7 @@ const Electronics = () => {
                                 key={index}
                                 rate={product.rating.rate}
                                 count={product.rating.count}
+                                description={product.description}
                             />
                         )
                     })}
