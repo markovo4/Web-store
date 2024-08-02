@@ -9,7 +9,13 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getFavProductList, removeFavProduct, setFavProductList} from "../../../../redux/slices/localStorageSlice.js";
+import {
+    getFavProductList,
+    getProductList,
+    removeFavProduct,
+    setFavProductList,
+    setProductList
+} from "../../../../redux/slices/localStorageSlice.js";
 
 const Product = ({
                      id,
@@ -20,28 +26,45 @@ const Product = ({
                      rating,
                      count
                  }) => {
-    const [addToCart, setAddToCart] = useState(false);
-
     const dispatch = useDispatch();
+
+    const {orderList} = useSelector(state => state.localStorage);
     const {favouriteList} = useSelector((state) => state.localStorage);
 
-    const [addToFav, setAddToFav] = useState(favouriteList.some((product) => product.id === id));
+    const [addToCart, setAddToCart] = useState(orderList.some(product => product.id === id));
+    const [addToFav, setAddToFav] = useState(favouriteList.some(product => product.id === id));
 
     useEffect(() => {
         dispatch(getFavProductList());
+        dispatch(getProductList());
     }, [dispatch]);
 
-    const handleCartClick = () => {
-        setAddToCart((prevAddToCart) => !prevAddToCart);
+    const handleCartClick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setAddToCart(!addToCart);
+
+        let updatedOrderList;
+        if (addToCart) {
+            // Remove the item from the order list if it's already in it
+            updatedOrderList = orderList.filter(product => product.id !== id);
+        } else {
+            // Add the item to the order list
+            updatedOrderList = [...orderList, {id, title, description, image, price, rating, count}];
+        }
+        dispatch(setProductList(updatedOrderList));
     };
 
     const handleFavClick = () => {
         setAddToFav((prevAddToFav) => !prevAddToFav);
+
         if (!addToFav) {
-            const updatedOrderList = [...favouriteList, {id, title, description, image, price, rating, count}];
-            dispatch(setFavProductList(updatedOrderList));
-        } else if (addToFav) {
-            dispatch(removeFavProduct(id))
+            // Add the item to the favorite list
+            const updatedFavList = [...favouriteList, {id, title, description, image, price, rating, count}];
+            dispatch(setFavProductList(updatedFavList));
+        } else {
+            // Remove the item from the favorite list
+            dispatch(removeFavProduct(id));
         }
     };
 
