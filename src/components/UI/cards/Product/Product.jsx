@@ -14,8 +14,10 @@ import {
     getProductList,
     removeFavProduct,
     setFavProductList,
-    setProductList
+    setProductList,
 } from "../../../../redux/slices/localStorageSlice.js";
+import {Link} from "react-router-dom";
+import routerNames from "../../../../router/routes/routerNames.js";
 
 const Product = ({
                      id,
@@ -24,15 +26,23 @@ const Product = ({
                      image,
                      price,
                      rating,
-                     count
+                     count,
                  }) => {
     const dispatch = useDispatch();
-
-    const {orderList} = useSelector(state => state.localStorage);
+    const {orderList} = useSelector((state) => state.localStorage);
     const {favouriteList} = useSelector((state) => state.localStorage);
 
-    const [addToCart, setAddToCart] = useState(orderList.some(product => product.id === id));
-    const [addToFav, setAddToFav] = useState(favouriteList.some(product => product.id === id));
+    const [isInCart, setIsInCart] = useState(orderList.some(product => product.id === id));
+
+    const [isInFav, setIsInFav] = useState(
+        favouriteList.some((product) => product.id === id)
+    );
+
+    useEffect(() => {
+        setIsInCart(orderList.some(product => product.id === id));
+        setIsInFav(favouriteList.some((product) => product.id === id))
+    }, [orderList, id]);
+
 
     useEffect(() => {
         dispatch(getFavProductList());
@@ -42,45 +52,48 @@ const Product = ({
     const handleCartClick = (event) => {
         event.preventDefault();
         event.stopPropagation();
-        setAddToCart(!addToCart);
+        setIsInCart(!isInCart);
 
         let updatedOrderList;
-        if (addToCart) {
-            // Remove the item from the order list if it's already in it
-            updatedOrderList = orderList.filter(product => product.id !== id);
+        if (isInCart) {
+
+            updatedOrderList = orderList.filter((product) => product.id !== id);
         } else {
-            // Add the item to the order list
-            updatedOrderList = [...orderList, {id, title, description, image, price, rating, count, amount: 1}];
+
+            updatedOrderList = [
+                ...orderList,
+                {id, title, description, image, price, rating, count, amount: 1},
+            ];
         }
         dispatch(setProductList(updatedOrderList));
     };
 
     const handleFavClick = () => {
-        setAddToFav((prevAddToFav) => !prevAddToFav);
+        setIsInFav((prevAddToFav) => !prevAddToFav);
 
-        if (!addToFav) {
-            // Add the item to the favorite list
-            const updatedFavList = [...favouriteList, {id, title, description, image, price, rating, count}];
+        if (!isInFav) {
+
+            const updatedFavList = [
+                ...favouriteList,
+                {id, title, description, image, price, rating, count},
+            ];
             dispatch(setFavProductList(updatedFavList));
         } else {
-            // Remove the item from the favorite list
+
             dispatch(removeFavProduct(id));
         }
     };
 
     return (
-        <Container sx={{display: "flex", flexDirection: 'row'}}>
+        <Container sx={{display: "flex", flexDirection: "row"}}>
             <Box sx={styles.imageWrapper}>
                 <img alt={title} src={image} style={styles.image}/>
             </Box>
             <Box sx={styles.info}>
                 <Box sx={styles.wrapper}>
-                    <div>
-                        <Typography variant="h3" component={'h3'} sx={styles.price}>
-                            {title}
-                        </Typography>
-                    </div>
-
+                    <Typography variant="h3" component="h3" sx={styles.price}>
+                        {title}
+                    </Typography>
                     <div style={styles.rating}>
                         <Rate allowHalf disabled defaultValue={rating}/>
                         <Typography variant="h6" sx={styles.count}>
@@ -91,39 +104,56 @@ const Product = ({
 
                 <Box sx={styles.wrapperPurchase}>
                     <Typography variant="h6" sx={styles.price}>
-                        $ {price}
+                        ${price}
                     </Typography>
                     <div style={styles.buttonGroup}>
-                        {!addToCart ? (
-                            <Button id={id} sx={styles.button} variant={'contained'} onClick={handleCartClick}>
-                                <ShoppingCartIcon fontSize={'medium'}/>
+                        {!isInCart ? (
+
+                            <Button
+                                id={id}
+                                sx={styles.button}
+                                variant={"contained"}
+                                onClick={handleCartClick}
+                            >
+                                <ShoppingCartIcon fontSize="medium"/>
                             </Button>
+
+
                         ) : (
-                            <Button id={id} sx={styles.button} variant={'outlined'} onClick={handleCartClick}>
-                                <AddShoppingCartIcon fontSize={'medium'} color={"success"}/>
-                            </Button>
+                            <Link to={routerNames.pageCart}>
+                                <Button
+                                    id={id}
+                                    sx={styles.button}
+                                    variant={"outlined"}
+                                >
+                                    <AddShoppingCartIcon fontSize="medium" color="success"/>
+                                </Button>
+                            </Link>
                         )}
-                        <Button id={id} sx={styles.button} variant={'outlined'} onClick={handleFavClick}>
-                            {!addToFav ? (
-                                <FavoriteBorderIcon color={'success'}/>
+
+
+                        <Button
+                            id={id}
+                            sx={styles.button}
+                            variant="outlined"
+                            onClick={handleFavClick}
+                        >
+                            {isInFav ? (
+                                <FavoriteIcon color="error"/>
                             ) : (
-                                <FavoriteIcon color={'error'}/>
+                                <FavoriteBorderIcon color="success"/>
                             )}
                         </Button>
                     </div>
                 </Box>
                 <Box sx={styles.wrapperDescription}>
-                    <Typography variant="h5">
-                        Description
-                    </Typography>
-                    <Typography variant="h6">
-                        {description}
-                    </Typography>
+                    <Typography variant="h5">Description</Typography>
+                    <Typography variant="h6">{description}</Typography>
                 </Box>
             </Box>
         </Container>
     );
-}
+};
 
 Product.propTypes = {
     id: PropTypes.number.isRequired,
@@ -132,7 +162,7 @@ Product.propTypes = {
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
-    count: PropTypes.number.isRequired
+    count: PropTypes.number.isRequired,
 };
 
 export default Product;

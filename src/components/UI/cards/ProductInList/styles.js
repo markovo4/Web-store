@@ -24,6 +24,7 @@ export const styles = {
     },
     image: {
         marginTop: '40px',
+        marginBottom: '20px',
         width: '200px',
         height: '200px',
         objectFit: 'cover',

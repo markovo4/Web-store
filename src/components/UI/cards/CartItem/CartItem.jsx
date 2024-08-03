@@ -28,7 +28,15 @@ const CartItem = ({
     const dispatch = useDispatch();
     const {favouriteList} = useSelector((state) => state.localStorage);
     const {orderList} = useSelector(state => state.localStorage);
-    const [addToFav, setAddToFav] = useState(favouriteList.some((product) => product.id === id));
+
+    const [isInFav, setIsInFav] = useState(
+        favouriteList.some((product) => product.id === id)
+    );
+
+    useEffect(() => {
+        setIsInFav(favouriteList.some((product) => product.id === id))
+    }, [favouriteList, id]);
+
 
     const handleDelete = () => {
         dispatch(removeProduct(id)); // Pass id directly
@@ -39,8 +47,8 @@ const CartItem = ({
     }, [dispatch, orderList]);
 
     const handleFavClick = () => {
-        setAddToFav((prevAddToFav) => !prevAddToFav);
-        if (!addToFav) {
+        setIsInFav((prevAddToFav) => !prevAddToFav);
+        if (!isInFav) {
             const updatedFavouriteList = [
                 ...favouriteList,
                 {
@@ -80,7 +88,7 @@ const CartItem = ({
                     <Button
                         sx={styles.button}
                         variant={"outlined"}
-                        startIcon={<FavoriteBorderIcon color={addToFav ? 'error' : 'disabled'}/>}
+                        startIcon={<FavoriteBorderIcon color={isInFav ? 'error' : 'disabled'}/>}
                         onClick={handleFavClick}
                     >
                         Favourite

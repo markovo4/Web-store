@@ -5,6 +5,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import {useState} from "react";
 import {Input} from "antd";
 import stylesInput from './input.module.scss';
+import PropTypes from "prop-types";
 
 const QuantityPicker = ({initialAmount = 1, onChange}) => {
     const [amount, setAmount] = useState(initialAmount);
@@ -63,5 +64,10 @@ const QuantityPicker = ({initialAmount = 1, onChange}) => {
         </div>
     );
 };
+
+QuantityPicker.propTypes = {
+    initialAmount: PropTypes.number.isRequired,
+    onChange: PropTypes.func.isRequired
+}
 
 export default QuantityPicker;

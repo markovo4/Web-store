@@ -74,20 +74,19 @@ export const styles = {
             top: '-12px',
             left: '14px',
             transform: 'translate(0, 16px) scale(1)',
-
         },
         '& .MuiInputLabel-shrink': {
             transform: 'translate(0, 0px) scale(0.75)',
-            color: '#40ab29'
-        },
-        '& .MuiOutlinedInput-root.Mui-focused .MuiInputLabel-root': {
-            transform: 'translate(0, 0px) scale(0.75)',
+            color: '#40ab29',
         },
         '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
             borderColor: '#c2c2c2', // Set border color to white on hover
         },
         '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: '#40ab29', // Set border color to white on focus
-        }
+        },
+        '& .MuiFormHelperText-root-error': {
+            color: 'red', // Set error message color to red
+        },
     },
 }

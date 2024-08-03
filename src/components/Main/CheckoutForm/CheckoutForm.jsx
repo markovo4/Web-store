@@ -5,25 +5,30 @@ import {Link} from "react-router-dom";
 import routerNames from "../../../router/routes/routerNames.js";
 import FormCard from "../../UI/cards/FormCard";
 import CitiesSelect from "../../UI/inputs/CitiesSelect/index.js";
-import {useGetAllProductsQuery} from "../../../redux/productsApi/productsApi.js";
 import ProductCheckout from "../../UI/cards/ProductCheckout";
 import EditIcon from '@mui/icons-material/Edit';
 import ContactInfoForm from "../ContactInfoForm";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import DeliveryOptionsForm from "../DeliveryOptionsForm";
 import PaymentOptionsForm from "../PaymentOptionsForm";
 import InputWithButton from "../../UI/inputs/InputWithButton";
 import {Checkbox} from "antd";
 import {useFormik} from "formik";
+import {useDispatch, useSelector} from "react-redux";
+import {getProductList} from "../../../redux/slices/localStorageSlice.js";
+import deliveryOptionsValidation from "../../../utils/validationSchemas/deliveryOptionsValidation.js";
 
 const initialValues = {
     promoCode: null,
     bonusCard: null,
     termConditions: false,
+    city: null
 }
 
 const CheckoutForm = () => {
-    const productsTEST = useGetAllProductsQuery();
+    const {orderList} = useSelector(state => state.localStorage);
+
+    const dispatch = useDispatch();
 
     const [openForm, setOpenForm] = useState(false);
 
@@ -31,11 +36,19 @@ const CheckoutForm = () => {
         setOpenForm(!openForm);
     }
 
+    useEffect(() => {
+        dispatch(getProductList())
+    }, [dispatch])
+
+
     const getTotalPrice = (products) => {
         const priceTotal = products.reduce((totalPrice, product) => {
-            return totalPrice + product.price;
-        }, 0);
-        return parseFloat(priceTotal.toFixed(2));
+            return {
+                price: totalPrice.price + product.price * product.amount,
+                quantity: totalPrice.quantity + product.amount
+            }
+        }, {price: 0, quantity: 0});
+        return {price: parseFloat(priceTotal.price.toFixed(2)), quantity: priceTotal.quantity};
     }
 
     const handlePromoClick = () => {
@@ -43,6 +56,7 @@ const CheckoutForm = () => {
 
     const formik = useFormik({
         initialValues,
+        validationSchema: deliveryOptionsValidation,
         onSubmit: (values, {resetForm}) => {
             resetForm();
         }
@@ -70,7 +84,16 @@ const CheckoutForm = () => {
                         <FormCard formTitle={'Your order'} open={openForm} openForm={handleClickContinue}>
                             <Box sx={styles.selectorContainer}>
                                 <Typography variant={'span'} sx={styles.selectorTitle}>Your City</Typography>
-                                <CitiesSelect styles={styles.selector}/>
+                                <CitiesSelect
+                                    styles={styles.selector}
+                                    value={formik.values.city}
+                                    onChange={formik.handleChange}
+                                />
+                                {formik.touched.city && formik.errors.city ? (
+                                    <Typography sx={{color: 'red'}}>
+                                        {formik.errors.city.city}
+                                    </Typography>
+                                ) : null}
                             </Box>
                             <List className={'w-[800px]'} sx={styles.checkoutList}>
                                 <ListItem sx={styles.titleList}>
@@ -80,13 +103,13 @@ const CheckoutForm = () => {
                                                 sx={styles.buttonBack}>Edit</Button>
                                     </Link>
                                 </ListItem>
-                                {productsTEST.data && productsTEST.data.map((product, index) => {
+                                {orderList.length > 0 && orderList.map((product, index) => {
                                     return (
                                         <ProductCheckout
                                             key={index}
                                             title={product.title}
                                             image={product.image}
-                                            count={product.id}
+                                            count={product.amount}
                                             price={product.price}
                                         />
                                     )
@@ -118,18 +141,17 @@ const CheckoutForm = () => {
                                     onButtonClick={handlePromoClick}
                                     onChange={formik.handleChange}
                                 />
-                                {productsTEST.data && <div style={styles.itemsPrice}>
+                                {orderList.length > 0 && <div style={styles.itemsPrice}>
                                     <Typography sx={styles.itemsCount}>
-                                        {`${productsTEST.data.length}
-                                            ${productsTEST.data.length < 2 ?
-                                            productsTEST.data.length === 1 ? 'item' : 'items' : 'items'} `}
+                                        {`${getTotalPrice(orderList).quantity} 
+                            ${getTotalPrice(orderList).quantity < 2 ? getTotalPrice(orderList).quantity === 1 ? 'item' : 'items' : 'items'} `}
                                     </Typography>
                                     <Typography sx={styles.totalPriceSub}>
-                                        $ {getTotalPrice(productsTEST.data)}
+                                        $ {getTotalPrice(orderList).price}
                                     </Typography>
                                 </div>}
 
-                                {productsTEST.data && <div className={'flex items-center justify-between mb-3'}>
+                                {orderList.length > 0 && <div className={'flex items-center justify-between mb-3'}>
                                     <Typography
                                         variant={'h6'}
                                         component={'span'}
@@ -142,7 +164,7 @@ const CheckoutForm = () => {
                                         variant={'h6'}
                                         component={'span'}
                                     >
-                                        $ {getTotalPrice(productsTEST.data)}
+                                        $ {getTotalPrice(orderList).price}
                                     </Typography>
 
                                 </div>}

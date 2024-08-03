@@ -9,27 +9,28 @@ import {useEffect, useState} from "react";
 import {Rate} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {getProductList, setProductList} from "../../../../redux/slices/localStorageSlice.js";
+import routerNames from "../../../../router/routes/routerNames.js";
 
 const ProductInList = ({title, image, price, rate, count, itemId, description}) => {
     const {orderList} = useSelector(state => state.localStorage);
-    const [click, setClick] = useState(orderList.some(product => product.id === itemId));
     const dispatch = useDispatch();
+
+    // Synchronize local state with Redux state
+    const [isInCart, setIsInCart] = useState(orderList.some(product => product.id === itemId));
+
+    useEffect(() => {
+        setIsInCart(orderList.some(product => product.id === itemId));
+    }, [orderList, itemId]);
 
     useEffect(() => {
         dispatch(getProductList());
     }, [dispatch]);
 
-    const handleButtonClick = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        setClick(!click);
-
+    const handleButtonClick = () => {
         let updatedList;
-        if (click) {
-
+        if (isInCart) {
             updatedList = orderList.filter(product => product.id !== itemId);
         } else {
-
             updatedList = [
                 ...orderList,
                 {
@@ -44,46 +45,47 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                 }
             ];
         }
-
         dispatch(setProductList(updatedList));
     };
 
     return (
-        <Link to={`/products/${itemId}`} style={styles.link}>
-            <div style={styles.cardContainer}>
-                <Card sx={styles.card}>
+        <div style={styles.cardContainer}>
+            <Card sx={styles.card}>
+                <Link to={`/products/${itemId}`} style={styles.link}>
                     <div style={styles.groupedText}>
                         <img src={image} alt={title} style={styles.image}/>
                         <Typography variant="h6" sx={styles.title}>
                             {title}
                         </Typography>
                     </div>
-                    <div style={styles.purchase}>
-                        <div style={styles.wrapper}>
-                            <Rate allowHalf disabled defaultValue={rate}/>
-                            <Typography variant="h6" sx={styles.count}>
-                                <CommentIcon/> {count}
-                            </Typography>
-                        </div>
+                </Link>
+                <div style={styles.purchase}>
+                    <div style={styles.wrapper}>
+                        <Rate allowHalf disabled defaultValue={rate}/>
+                        <Typography variant="h6" sx={styles.count}>
+                            <CommentIcon/> {count}
+                        </Typography>
+                    </div>
 
-                        <div style={styles.wrapper}>
-                            <Typography variant="h6" sx={styles.price}>
-                                $ {price}
-                            </Typography>
-                            {click ? (
+                    <div style={styles.wrapper}>
+                        <Typography variant="h6" sx={styles.price}>
+                            $ {price}
+                        </Typography>
+                        {isInCart ? (
+                            <Link to={routerNames.pageCart}>
                                 <Button sx={styles.button} variant={'outlined'} onClick={handleButtonClick}>
                                     <AddShoppingCartIcon fontSize={'medium'} color={"success"}/>
                                 </Button>
-                            ) : (
-                                <Button sx={styles.button} variant={'contained'} onClick={handleButtonClick}>
-                                    <ShoppingCartIcon fontSize={'medium'}/>
-                                </Button>
-                            )}
-                        </div>
+                            </Link>
+                        ) : (
+                            <Button sx={styles.button} variant={'contained'} onClick={handleButtonClick}>
+                                <ShoppingCartIcon fontSize={'medium'}/>
+                            </Button>
+                        )}
                     </div>
-                </Card>
-            </div>
-        </Link>
+                </div>
+            </Card>
+        </div>
     );
 };
 

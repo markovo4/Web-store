@@ -9,15 +9,20 @@ import ModalLogin from "../../ModalsAuth/ModalLogin/index.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import routerNames from "../../../router/routes/routerNames.js";
-import {removeAllProducts, setProductQuantity} from "../../../redux/slices/localStorageSlice.js";
+import {getProductList, removeAllProducts, setProductQuantity} from "../../../redux/slices/localStorageSlice.js";
 
 const CartList = () => {
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     const {orderList} = useSelector(state => state.localStorage);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getProductList())
+    }, [dispatch])
 
     useEffect(() => {
         setIsLoggedIn(!!displayAuthButtons);
@@ -61,7 +66,7 @@ const CartList = () => {
                         Cart
                     </Typography>
 
-                    {orderList && (
+                    {orderList.length > 0 && (
                         <Typography
                             variant={'span'}
                             component={'p'}
@@ -86,7 +91,7 @@ const CartList = () => {
                                 Delete All
                             </Button>
                         </ListItem>
-                        {orderList && orderList.map((product, index) => (
+                        {orderList.length > 0 && orderList.map((product, index) => (
                             <CartItem
                                 key={index}
                                 title={product.title}
@@ -127,7 +132,7 @@ const CartList = () => {
                                 </Link>
                                 <List className={'flex flex-col gap-5'}>
                                     <ListItem sx={styles.totalPrice}>
-                                        {orderList && (
+                                        {orderList.length > 0 && (
                                             <>
                                                 <Typography>
                                                     {`${getTotalPrice(orderList).quantity}
@@ -150,7 +155,7 @@ const CartList = () => {
                                         >
                                             Total:
                                         </Typography>
-                                        {orderList && (
+                                        {orderList.length > 0 && (
                                             <Typography
                                                 sx={styles.totalPriceSub}
                                                 variant={'h6'}

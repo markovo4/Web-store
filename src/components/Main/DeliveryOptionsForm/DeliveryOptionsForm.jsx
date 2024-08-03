@@ -7,11 +7,12 @@ import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
 import FormCard from "../../UI/cards/FormCard/index.js";
+import deliveryOptionsValidation from "../../../utils/validationSchemas/deliveryOptionsValidation.js";
 
 const initialValues = {
     deliveryOption: 'store',
     city: null,
-}
+};
 
 const DeliveryOptionsForm = () => {
     const [openForm, setOpenForm] = useState(false);
@@ -22,8 +23,8 @@ const DeliveryOptionsForm = () => {
 
     const formik = useFormik({
         initialValues,
+        validationSchema: deliveryOptionsValidation,
         onSubmit: (values, {resetForm}) => {
-            console.log(values);
             handleClickContinue();
             resetForm();
         }
@@ -41,6 +42,11 @@ const DeliveryOptionsForm = () => {
                         value={formik.values.city}
                         onChange={formik.handleChange}
                     />
+                    {formik.touched.city && formik.errors.city ? (
+                        <Typography sx={{color: 'red'}}>
+                            {formik.errors.city.city}
+                        </Typography>
+                    ) : null}
 
                     <RadioGroup
                         name="deliveryOption"
