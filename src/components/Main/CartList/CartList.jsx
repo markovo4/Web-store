@@ -1,35 +1,48 @@
 import CartItem from "../../UI/cards/CartItem";
 import {Box, Button, Container, IconButton, List, ListItem, Typography} from "@mui/material";
 import {styles} from "./styles.js";
-import {useGetAllProductsQuery} from "../../../redux/productsApi/productsApi.js";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import {Link, useNavigate} from "react-router-dom";
 import ModalLogin from "../../ModalsAuth/ModalLogin/index.js";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import routerNames from "../../../router/routes/routerNames.js";
+import {removeAllProducts, setProductQuantity} from "../../../redux/slices/localStorageSlice.js";
 
 const CartList = () => {
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const productsTEST = useGetAllProductsQuery();
+    const {orderList} = useSelector(state => state.localStorage);
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setIsLoggedIn(!!displayAuthButtons);
-    }, []);
+    }, [displayAuthButtons]);
 
     const getTotalPrice = (products) => {
         const priceTotal = products.reduce((totalPrice, product) => {
-            return totalPrice + product.price;
-        }, 0);
-        return parseFloat(priceTotal.toFixed(2));
+            return {
+                price: totalPrice.price + product.price * product.amount,
+                quantity: totalPrice.quantity + product.amount
+            }
+        }, {price: 0, quantity: 0});
+        return {price: parseFloat(priceTotal.price.toFixed(2)), quantity: priceTotal.quantity};
     }
 
     const handleBackClick = () => {
         navigate(-1);
+    }
+
+    const handleQuantityCount = (id, newAmount) => {
+        dispatch(setProductQuantity({id, amount: newAmount}));
+    }
+
+    const handleDeleteAll = () => {
+        dispatch(removeAllProducts())
     }
 
     return (
@@ -48,15 +61,15 @@ const CartList = () => {
                         Cart
                     </Typography>
 
-                    {productsTEST.data && (
+                    {orderList && (
                         <Typography
                             variant={'span'}
                             component={'p'}
                             className={'pl-7'}
                             sx={styles.titleCount}
                         >
-                            {`${productsTEST.data.length} 
-                            ${productsTEST.data.length < 2 ? productsTEST.data.length === 1 ? 'item' : 'items' : 'items'} `}
+                            {`${getTotalPrice(orderList).quantity} 
+                            ${getTotalPrice(orderList).quantity < 2 ? getTotalPrice(orderList).quantity === 1 ? 'item' : 'items' : 'items'} `}
                         </Typography>
                     )}
                 </Box>
@@ -68,11 +81,12 @@ const CartList = () => {
                                 variant={'outlined'}
                                 startIcon={<DeleteForeverIcon color={'disabled'} fontSize={'large'}/>}
                                 sx={styles.deleteButton}
+                                onClick={handleDeleteAll}
                             >
                                 Delete All
                             </Button>
                         </ListItem>
-                        {productsTEST.data && productsTEST.data.map((product, index) => (
+                        {orderList && orderList.map((product, index) => (
                             <CartItem
                                 key={index}
                                 title={product.title}
@@ -80,8 +94,10 @@ const CartList = () => {
                                 image={product.image}
                                 price={product.price}
                                 id={product.id}
-                                rating={product.rating.rate}
-                                count={product.rating.count}
+                                rating={product.rating}
+                                count={product.count}
+                                amount={product.amount}
+                                onQuantityChange={handleQuantityCount}
                             />
                         ))}
                     </List>
@@ -111,15 +127,14 @@ const CartList = () => {
                                 </Link>
                                 <List className={'flex flex-col gap-5'}>
                                     <ListItem sx={styles.totalPrice}>
-                                        {productsTEST.data && (
+                                        {orderList && (
                                             <>
                                                 <Typography>
-                                                    {`${productsTEST.data.length}
-                                                    ${productsTEST.data.length < 2 ?
-                                                        productsTEST.data.length === 1 ? 'item' : 'items' : 'items'} `}
+                                                    {`${getTotalPrice(orderList).quantity}
+                                                    ${getTotalPrice(orderList).quantity < 2 ? getTotalPrice(orderList).quantity === 1 ? 'item' : 'items' : 'items'} `}
                                                 </Typography>
                                                 <Typography sx={styles.totalPriceSub}>
-                                                    $ {getTotalPrice(productsTEST.data)}
+                                                    $ {getTotalPrice(orderList).price}
                                                 </Typography>
                                             </>
                                         )}
@@ -135,13 +150,13 @@ const CartList = () => {
                                         >
                                             Total:
                                         </Typography>
-                                        {productsTEST.data && (
+                                        {orderList && (
                                             <Typography
                                                 sx={styles.totalPriceSub}
                                                 variant={'h6'}
                                                 component={'span'}
                                             >
-                                                $ {getTotalPrice(productsTEST.data)}
+                                                $ {getTotalPrice(orderList).price}
                                             </Typography>
                                         )}
                                     </ListItem>

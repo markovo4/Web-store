@@ -50,7 +50,7 @@ const Product = ({
             updatedOrderList = orderList.filter(product => product.id !== id);
         } else {
             // Add the item to the order list
-            updatedOrderList = [...orderList, {id, title, description, image, price, rating, count}];
+            updatedOrderList = [...orderList, {id, title, description, image, price, rating, count, amount: 1}];
         }
         dispatch(setProductList(updatedOrderList));
     };

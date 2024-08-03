@@ -26,10 +26,10 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
 
         let updatedList;
         if (click) {
-            // Remove the item from the order list if it is already in the list
+
             updatedList = orderList.filter(product => product.id !== itemId);
         } else {
-            // Add the item to the order list
+
             updatedList = [
                 ...orderList,
                 {
@@ -39,7 +39,8 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                     price: price,
                     rating: rate,
                     count: count,
-                    id: itemId
+                    id: itemId,
+                    amount: 1,
                 }
             ];
         }

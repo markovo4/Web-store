@@ -6,21 +6,27 @@ import {useState} from "react";
 import {Input} from "antd";
 import stylesInput from './input.module.scss';
 
-const QuantityPicker = () => {
-    const [amount, setAmount] = useState(1);
+const QuantityPicker = ({initialAmount = 1, onChange}) => {
+    const [amount, setAmount] = useState(initialAmount);
 
     const handleClick = (e) => {
         const {name} = e.currentTarget;
-        setAmount(prevAmount => {
+        setAmount((prevAmount) => {
             const newAmount = name === 'minus' ? prevAmount - 1 : prevAmount + 1;
-            return Math.min(Math.max(newAmount, 1), 50); // Ensuring value is between 1 and 50
+            const clampedAmount = Math.min(Math.max(newAmount, 1), 50);
+            onChange(clampedAmount);
+            return clampedAmount;
         });
     };
 
     const handleChange = (e) => {
         const {value} = e.target;
-        const newValue = Math.min(Math.max(Number(value), 1), 50); // Ensuring value is between 1 and 50
-        setAmount(newValue);
+        const numericValue = Number(value);
+        if (!isNaN(numericValue)) {
+            const clampedValue = Math.min(Math.max(numericValue, 1), 50);
+            setAmount(clampedValue);
+            onChange(clampedValue);
+        }
     };
 
     return (
@@ -30,8 +36,10 @@ const QuantityPicker = () => {
                 onClick={handleClick}
                 name={'minus'}
                 variant={'contained'}
-                fontSize={'small'}
-            ><RemoveIcon/></Button>
+                disabled={amount <= 1} // Disable minus button if amount is 1
+            >
+                <RemoveIcon fontSize={'small'}/>
+            </Button>
 
             <Input
                 style={styles.input}
@@ -40,14 +48,18 @@ const QuantityPicker = () => {
                 max={50}
                 type={'number'}
                 value={amount}
-                onChange={handleChange}/>
+                onChange={handleChange}
+            />
 
             <Button
                 sx={styles.buttonPlus}
                 onClick={handleClick}
                 name={'plus'}
                 variant={'contained'}
-            ><AddIcon fontSize={'small'}/></Button>
+                disabled={amount >= 50} // Disable plus button if amount is 50
+            >
+                <AddIcon fontSize={'small'}/>
+            </Button>
         </div>
     );
 };

@@ -29,6 +29,7 @@ const FavProductsDisplay = () => {
                             key={index}
                             rate={product.rating}
                             count={product.count}
+                            description={product.description}
                         />
                     ))}
                 </ul>

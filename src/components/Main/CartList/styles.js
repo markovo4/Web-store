@@ -1,6 +1,8 @@
 export const styles = {
     section: {
         backgroundColor: '#eeeeee',
+        minHeight: '100vh',
+        maxHeight: '100%'
     },
     container: {},
     wrapper: {
@@ -26,7 +28,6 @@ export const styles = {
         color: 'rgba(0,0,0,0.58)'
     },
     deleteButton: {
-        // Base styles for all button variants
         '&.MuiButton-root': {
             padding: '5px 5px',
             borderRadius: '8px',
@@ -35,9 +36,8 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '64px', // Ensure buttons have a minimum width
+            minWidth: '64px',
         },
-        // Styles for contained buttons
         '&.MuiButton-outlined': {
             backgroundColor: '#ffffff',
             color: 'rgba(0,0,0,0.63)',
@@ -72,9 +72,9 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '64px', // Ensure buttons have a minimum width
+            minWidth: '64px',
         },
-        // Styles for contained buttons
+
         '&.MuiButton-outlined': {
             backgroundColor: '#ffffff',
             color: 'rgb(46,124,50)',
@@ -108,9 +108,8 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '300px', // Ensure buttons have a minimum width
+            minWidth: '300px',
         },
-        // Styles for contained buttons
         '&.MuiButton-outlined': {
             backgroundColor: '#41ae2a',
             color: 'rgb(255,255,255)',

@@ -68,14 +68,18 @@ export const localStorageSlice = createSlice({
             }
         },
 
-        setCurrentProduct: (state, {payload}) => {
-            state.currentProduct = payload;
+        setProductQuantity: (state, action) => {
+            const {id, amount} = action.payload
+            const targetProduct = state.orderList.find((product) => product.id === id)
+            if (targetProduct) {
+                targetProduct.amount = amount;
+            }
         },
 
         removeProduct: (state, {payload}) => {
-            const updatedOrderList = state.orderList.filter(product => product.id !== payload);
+            const updatedOrderList = state.orderList.filter(product => product.id !== parseInt(payload));
 
-            localStorage.setItem(setProductList, JSON.stringify(updatedOrderList));
+            localStorage.setItem(DATA_KEY, JSON.stringify(updatedOrderList));
 
             state.orderList = updatedOrderList;
         },
@@ -83,10 +87,16 @@ export const localStorageSlice = createSlice({
         removeFavProduct: (state, {payload}) => {
             const updatedOrderList = state.favouriteList.filter(product => product.id !== payload);
 
-            localStorage.setItem(setFavProductList, JSON.stringify(updatedOrderList));
+            localStorage.setItem(FAV_DATA_KEY, JSON.stringify(updatedOrderList));
 
             state.favouriteList = updatedOrderList;
+        },
+
+        removeAllProducts: (state) => {
+            localStorage.removeItem(DATA_KEY)
+            state.orderList = []
         }
+
     }
 });
 
@@ -97,7 +107,8 @@ export const {
     getFavProductList,
     getProductList,
     setProductList,
-    setCurrentProduct,
+    setProductQuantity,
+    removeAllProducts,
     removeFavProduct
 } = localStorageSlice.actions;
 
