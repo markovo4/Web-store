@@ -90,8 +90,8 @@ const CheckoutForm = () => {
                                     onChange={formik.handleChange}
                                 />
                                 {formik.touched.city && formik.errors.city ? (
-                                    <Typography sx={{color: 'red'}}>
-                                        {formik.errors.city.city}
+                                    <Typography>
+                                        {formik.errors.city}
                                     </Typography>
                                 ) : null}
                             </Box>

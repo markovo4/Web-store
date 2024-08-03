@@ -74,7 +74,7 @@ export const styles = {
         },
         '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: '#40ab29', // Set border color to white on focus
-        }
+        },
     },
     selectorContainer: {
         height: '100px',

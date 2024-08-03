@@ -48,7 +48,7 @@ const HeaderTop = () => {
                     />
                     {formik.touched.city && formik.errors.city ? (
                         <Typography sx={{color: 'red'}}>
-                            {formik.errors.city.city}
+                            {formik.errors.city}
                         </Typography>
                     ) : null}
                 </div>
