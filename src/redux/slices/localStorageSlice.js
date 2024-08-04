@@ -100,7 +100,6 @@ export const localStorageSlice = createSlice({
     }
 });
 
-// Export actions and reducer
 export const {
     removeProduct,
     setFavProductList,

@@ -16,7 +16,7 @@ const FormInput = ({id, name, type, touched, error, label, onChange, value, disa
                 value={value}
                 disabled={disabled}
             />
-            {touched && error ? (
+            {touched ? (
                 <div style={styles.errorText}>{error}</div>
             ) : null}
         </FormControl>

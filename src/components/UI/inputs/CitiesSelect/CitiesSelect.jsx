@@ -3,10 +3,14 @@ import Autocomplete from '@mui/material/Autocomplete';
 import cities from "../../../../assets/cities/cities.js";
 import PropTypes from "prop-types";
 
-const CitiesSelect = ({styles, onChange, value}) => {
+const CitiesSelect = ({styles, onChange, value, defaultValue, header}) => {
+
+    const handleChangeCityForm = (event, newValue) => {
+        onChange({target: {name: 'city', value: newValue}});
+    };
 
     const handleChangeCity = (event, newValue) => {
-        onChange({target: {name: 'city', value: newValue}});
+        onChange('city', newValue);
     };
 
     return (
@@ -15,8 +19,10 @@ const CitiesSelect = ({styles, onChange, value}) => {
             id="city-select"
             sx={{width: 600}}
             value={value}
-            onChange={handleChangeCity}
+            defaultValue={defaultValue}
+            onChange={header ? handleChangeCity : handleChangeCityForm}
             options={cities}
+            isOptionEqualToValue={(option, value) => option.city === value.city}
             getOptionLabel={(option) => option.city}
             renderInput={(params) => <TextField {...params} sx={styles} label="City"/>}
         />
@@ -26,7 +32,10 @@ const CitiesSelect = ({styles, onChange, value}) => {
 CitiesSelect.propTypes = {
     styles: PropTypes.object,
     onChange: PropTypes.func,
-    value: PropTypes.object
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
+    header: PropTypes.bool
 }
 
 export default CitiesSelect;
+

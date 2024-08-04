@@ -9,12 +9,13 @@ import SecurityIcon from '@mui/icons-material/Security';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import AppleIcon from '@mui/icons-material/Apple';
 import FormCard from "../../UI/cards/FormCard/index.js";
+import PropTypes from "prop-types";
 
 const initialValues = {
     paymentOption: 'getPay',
 }
 
-const PaymentOptionsForm = () => {
+const PaymentOptionsForm = ({onValidChange}) => {
     const [openForm, setOpenForm] = useState(false);
 
     const handleClickContinue = () => {
@@ -26,6 +27,7 @@ const PaymentOptionsForm = () => {
         onSubmit: (values, {resetForm}) => {
             console.log(values);
             handleClickContinue();
+            onValidChange(!formik.errors.paymentOption && formik.touched.paymentOption)
             resetForm();
         }
     });
@@ -99,6 +101,10 @@ const PaymentOptionsForm = () => {
             </FormCard>
         </form>
     );
+}
+
+PaymentOptionsForm.propTypes = {
+    onValidChange: PropTypes.func.isRequired,
 }
 
 export default PaymentOptionsForm;

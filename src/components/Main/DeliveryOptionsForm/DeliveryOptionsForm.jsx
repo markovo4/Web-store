@@ -8,13 +8,14 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
 import FormCard from "../../UI/cards/FormCard/index.js";
 import deliveryOptionsValidation from "../../../utils/validationSchemas/deliveryOptionsValidation.js";
+import PropTypes from "prop-types";
 
 const initialValues = {
     deliveryOption: 'store',
     city: null,
 };
 
-const DeliveryOptionsForm = () => {
+const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
     const [openForm, setOpenForm] = useState(false);
 
     const handleClickContinue = () => {
@@ -24,9 +25,10 @@ const DeliveryOptionsForm = () => {
     const formik = useFormik({
         initialValues,
         validationSchema: deliveryOptionsValidation,
-        onSubmit: (values, {resetForm}) => {
+        onSubmit: (values) => {
             handleClickContinue();
-            resetForm();
+            console.log(values)
+            onValidChange(!formik.errors.city && !formik.errors.deliveryOption && formik.touched.city && formik.touched.deliveryOption)
         }
     });
 
@@ -42,7 +44,7 @@ const DeliveryOptionsForm = () => {
                         value={formik.values.city}
                         onChange={formik.handleChange}
                     />
-                    {formik.touched.city && formik.errors.city ? (
+                    {formik.touched.city || onTouch ? (
                         <Typography sx={{color: 'red'}}>
                             {formik.errors.city}
                         </Typography>
@@ -90,5 +92,8 @@ const DeliveryOptionsForm = () => {
         </form>
     );
 }
-
+DeliveryOptionsForm.propTypes = {
+    onValidChange: PropTypes.func.isRequired,
+    onTouch: PropTypes.bool.isRequired,
+}
 export default DeliveryOptionsForm;

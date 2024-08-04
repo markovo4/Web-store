@@ -4,7 +4,7 @@ import CitiesSelect from "../../UI/inputs/CitiesSelect";
 import Logo from "../../../assets/icons/Logo";
 import ModalRegister from "../../ModalsAuth/ModalRegister";
 import ModalLogin from "../../ModalsAuth/ModalLogin";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LogoutIcon from '@mui/icons-material/Logout';
 import React, {useEffect, useState} from "react";
@@ -13,27 +13,42 @@ import routerNames from "../../../router/routes/routerNames.js";
 import {Link} from "react-router-dom";
 import {useFormik} from "formik";
 import deliveryOptionsValidation from "../../../utils/validationSchemas/deliveryOptionsValidation.js";
+import {setCity} from "../../../redux/slices/headerCitySlice.js";
+import cities from "../../../assets/cities/cities.js";
 
 const HeaderTop = () => {
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    const dispatch = useDispatch();
+    const {city} = useSelector(state => state.headerCity);
+
+    const defaultCity = cities.find(c => c.city === city) || null;
+
+    const formik = useFormik({
+        initialValues: {city: defaultCity},
+        validationSchema: deliveryOptionsValidation,
+        onSubmit: (values, {resetForm}) => {
+            resetForm();
+        }
+    });
+
+
     useEffect(() => {
         setIsLoggedIn(!!displayAuthButtons);
     }, [displayAuthButtons]);
+
+    useEffect(() => {
+        dispatch(setCity(formik.values.city ? formik.values.city.city : ''))
+    }, [formik.values.city, dispatch])
 
     const handleLogOut = () => {
         Cookies.remove('LoggedIn');
         setIsLoggedIn(false);
         window.location.reload();
     };
-    const formik = useFormik({
-        initialValues: {city: null},
-        validationSchema: deliveryOptionsValidation,
-        onSubmit: (values, {resetForm}) => {
-            resetForm();
-        }
-    })
+
+
     return (
         <section style={styles.header}>
             <Container sx={styles.container}>
@@ -44,7 +59,9 @@ const HeaderTop = () => {
                     <CitiesSelect
                         styles={styles.selector}
                         value={formik.values.city}
-                        onChange={formik.handleChange}
+                        defaultValue={defaultCity}
+                        onChange={formik.setFieldValue}
+                        header={true}
                     />
                     {formik.touched.city && formik.errors.city ? (
                         <Typography sx={{color: 'red'}}>

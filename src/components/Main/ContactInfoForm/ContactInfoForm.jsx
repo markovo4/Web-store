@@ -6,6 +6,7 @@ import {styles} from "../CheckoutForm/styles.js";
 import FormInput from "../../UI/inputs/FormInput/index.js";
 import {Checkbox} from "antd";
 import FormCard from "../../UI/cards/FormCard/index.js";
+import PropTypes from "prop-types";
 
 const formInitValues = {
     firstName: '',
@@ -16,7 +17,7 @@ const formInitValues = {
     email: '',
 }
 
-const ContactInfoForm = () => {
+const ContactInfoForm = ({onValidChange, onTouch}) => {
 
     const [openForm, setOpenForm] = useState(false);
 
@@ -40,7 +41,7 @@ const ContactInfoForm = () => {
     const formik = useFormik({
         initialValues: {...formInitValues},
         validationSchema: checkoutValidation(otherReceiver),
-        onSubmit: (values, {resetForm}) => {
+        onSubmit: (values) => {
 
             const filteredValues = {
                 ...values,
@@ -49,15 +50,28 @@ const ContactInfoForm = () => {
                 lastName: otherReceiver ? values.lastName : '',
             };
             console.log(filteredValues);
-            handleClickContinue()
-            resetForm();
+            handleClickContinue();
+            onValidChange(!formik.errors.firstName && !formik.errors.email && formik.touched.firstName && formik.touched.email)
         }
     });
 
     useEffect(() => {
         if (isMounted.current) {
             if (!otherReceiver) {
-                formik.setFieldValue('otherReceiverPhoneNumber', '');
+                formik.setFieldValue("otherReceiverPhoneNumber", "");
+                formik.setFieldValue("receiverName", "");
+                formik.setFieldValue("lastName", "");
+            }
+            formik.validateForm(); // Trigger validation whenever `otherReceiver` state changes
+        } else {
+            isMounted.current = true;
+        }
+    }, [otherReceiver]);
+
+    useEffect(() => {
+        if (isMounted.current) {
+            if (!otherReceiver) {
+                formik.setFieldValue('otherReceiverPhoneNumber', '+38(0');
                 formik.setFieldValue('receiverName', '');
                 formik.setFieldValue('lastName', '');
             }
@@ -65,6 +79,7 @@ const ContactInfoForm = () => {
             isMounted.current = true;
         }
     }, [otherReceiver]);
+
     return (
         <form onSubmit={formik.handleSubmit}>
             <FormCard formTitle={'1. Contact Information'} open={openForm} openForm={handleClickContinue}>
@@ -74,7 +89,7 @@ const ContactInfoForm = () => {
                         <FormInput
                             onChange={formik.handleChange}
                             value={formik.values.phoneNumber.trim()}
-                            touched={formik.touched.phoneNumber}
+                            touched={formik.touched.phoneNumber || onTouch}
                             error={formik.errors.phoneNumber}
                             label={'Phone Number:'}
                             name={'phoneNumber'}
@@ -86,7 +101,7 @@ const ContactInfoForm = () => {
                         <FormInput
                             onChange={formik.handleChange}
                             value={formik.values.firstName.trim()}
-                            touched={formik.touched.firstName}
+                            touched={formik.touched.firstName || onTouch}
                             error={formik.errors.firstName}
                             label={'First Name:'}
                             name={'firstName'}
@@ -100,7 +115,7 @@ const ContactInfoForm = () => {
                         <FormInput
                             onChange={formik.handleChange}
                             value={formik.values.email.trim()}
-                            touched={formik.touched.email}
+                            touched={formik.touched.email || onTouch}
                             error={formik.errors.email}
                             label={'Email:'}
                             name={'email'}
@@ -135,7 +150,7 @@ const ContactInfoForm = () => {
                             <FormInput
                                 onChange={formik.handleChange}
                                 value={formik.values.otherReceiverPhoneNumber.trim()}
-                                touched={formik.touched.otherReceiverPhoneNumber}
+                                touched={formik.touched.otherReceiverPhoneNumber || onTouch}
                                 error={formik.errors.otherReceiverPhoneNumber}
                                 disabled={!otherReceiver}
                                 label={'Receiver Phone Number:'}
@@ -148,7 +163,7 @@ const ContactInfoForm = () => {
                             <FormInput
                                 onChange={formik.handleChange}
                                 value={formik.values.lastName.trim()}
-                                touched={formik.touched.lastName}
+                                touched={formik.touched.lastName || onTouch}
                                 error={formik.errors.lastName}
                                 disabled={!otherReceiver}
                                 label={'Last Name:'}
@@ -161,7 +176,7 @@ const ContactInfoForm = () => {
                             <FormInput
                                 onChange={formik.handleChange}
                                 value={formik.values.receiverName.trim()}
-                                touched={formik.touched.receiverName}
+                                touched={formik.touched.receiverName || onTouch && otherReceiver}
                                 error={formik.errors.receiverName}
                                 disabled={!otherReceiver}
                                 label={'Receiver Name:'}
@@ -178,5 +193,10 @@ const ContactInfoForm = () => {
             </FormCard>
         </form>
     )
+}
+
+ContactInfoForm.propTypes = {
+    onValidChange: PropTypes.func.isRequired,
+    onTouch: PropTypes.bool.isRequired,
 }
 export default ContactInfoForm;
