@@ -14,8 +14,7 @@ import InputWithButton from "../../UI/inputs/InputWithButton";
 import {Checkbox} from "antd";
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
-import {getProductList} from "../../../redux/slices/localStorageSlice.js";
-import deliveryOptionsValidation from "../../../utils/validationSchemas/deliveryOptionsValidation.js";
+import {getCheckoutInfo, getProductList, setCheckoutInfo} from "../../../redux/slices/localStorageSlice.js";
 
 const initialValues = {
     promoCode: "",
@@ -24,7 +23,7 @@ const initialValues = {
 };
 
 const CheckoutForm = () => {
-    const {orderList} = useSelector((state) => state.localStorage);
+    const {orderList, checkout} = useSelector((state) => state.localStorage);
 
     const dispatch = useDispatch();
 
@@ -41,6 +40,7 @@ const CheckoutForm = () => {
 
     useEffect(() => {
         dispatch(getProductList());
+        dispatch(getCheckoutInfo())
     }, [dispatch]);
 
     const getTotalPrice = (products) => {
@@ -57,20 +57,26 @@ const CheckoutForm = () => {
     };
 
     const handlePromoClick = () => {
-        // Handle promo code logic
     };
 
     const formik = useFormik({
         initialValues,
-        validationSchema: deliveryOptionsValidation,
         onSubmit: (values, {resetForm}) => {
             if (isContactInfoValid && isDeliveryOptionsValid && isPaymentOptionsValid) {
                 console.log("All forms are valid. Proceeding with checkout...", values);
+                const updatedCheckoutInfo = {
+                    ...checkout,
+                    productToOrder: [...orderList],
+                    bonusCard: values.bonusCard,
+                    promoCode: values.promoCode,
+                    termConditions: values.termConditions
+                }
+                dispatch(setCheckoutInfo(updatedCheckoutInfo))
+                resetForm();
             } else {
                 console.log("Please fill all the fields");
                 setTouched(true);
             }
-            resetForm();
         },
     });
 
@@ -82,6 +88,8 @@ const CheckoutForm = () => {
             isPaymentOptionsValid
         );
     };
+
+    console.log(formik.values.termConditions, 'formik.values.termConditions')
     console.log(isContactInfoValid, 'isContactInfoValid')
     console.log(isDeliveryOptionsValid, 'isDeliveryOptionsValid')
     console.log(isPaymentOptionsValid, 'isPaymentOptionsValid')
@@ -155,14 +163,14 @@ const CheckoutForm = () => {
                                     labelInput={"Promo code"}
                                     buttonText={"apply"}
                                     onButtonClick={handlePromoClick}
-                                    onChange={(event) => formik.setFieldValue("promoCode", event.target.value)}
+                                    onChange={formik.handleChange}
                                 />
                                 <InputWithButton
                                     placeHolder={"293"}
                                     labelInput={"Your bonus card Number"}
                                     buttonText={"ok"}
                                     onButtonClick={handlePromoClick}
-                                    onChange={(event) => formik.setFieldValue("bonusCard", event.target.value)}
+                                    onChange={formik.handleChange}
                                 />
                                 {orderList.length > 0 && (
                                     <div style={styles.itemsPrice}>

@@ -7,6 +7,8 @@ import FormInput from "../../UI/inputs/FormInput/index.js";
 import {Checkbox} from "antd";
 import FormCard from "../../UI/cards/FormCard/index.js";
 import PropTypes from "prop-types";
+import {useDispatch, useSelector} from "react-redux";
+import {getCheckoutInfo, setCheckoutInfo} from "../../../redux/slices/localStorageSlice.js";
 
 const formInitValues = {
     firstName: '',
@@ -18,6 +20,10 @@ const formInitValues = {
 }
 
 const ContactInfoForm = ({onValidChange, onTouch}) => {
+
+    const dispatch = useDispatch();
+    const {checkout} = useSelector(state => state.localStorage)
+
 
     const [openForm, setOpenForm] = useState(false);
 
@@ -38,6 +44,10 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
         }
     }
 
+    useEffect(() => {
+        dispatch(getCheckoutInfo())
+    }, [dispatch])
+
     const formik = useFormik({
         initialValues: {...formInitValues},
         validationSchema: checkoutValidation(otherReceiver),
@@ -49,24 +59,21 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
                 receiverName: otherReceiver ? values.receiverName : '',
                 lastName: otherReceiver ? values.lastName : '',
             };
-            console.log(filteredValues);
+            const updatedCheckoutInfo = {
+                ...checkout,
+
+                firstName: filteredValues.firstName,
+                receiverName: filteredValues.receiverName,
+                lastName: filteredValues.lastName,
+                phoneNumber: filteredValues.phoneNumber,
+                otherReceiverPhoneNumber: filteredValues.otherReceiverPhoneNumber,
+                email: filteredValues.email,
+            }
+            dispatch(setCheckoutInfo(updatedCheckoutInfo))
             handleClickContinue();
             onValidChange(!formik.errors.firstName && !formik.errors.email && formik.touched.firstName && formik.touched.email)
         }
     });
-
-    useEffect(() => {
-        if (isMounted.current) {
-            if (!otherReceiver) {
-                formik.setFieldValue("otherReceiverPhoneNumber", "");
-                formik.setFieldValue("receiverName", "");
-                formik.setFieldValue("lastName", "");
-            }
-            formik.validateForm(); // Trigger validation whenever `otherReceiver` state changes
-        } else {
-            isMounted.current = true;
-        }
-    }, [otherReceiver]);
 
     useEffect(() => {
         if (isMounted.current) {

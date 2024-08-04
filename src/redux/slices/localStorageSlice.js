@@ -1,12 +1,29 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {DATA_KEY, FAV_DATA_KEY} from "../../utils/constants/constants.js";
+import {DATA_KEY, FAV_DATA_KEY, FORM_DATA_KEY} from "../../utils/constants/constants.js";
+
+const checkoutInitialData = {
+    productToOrder: [],
+    firstName: '',
+    receiverName: '',
+    lastName: '',
+    phoneNumber: '',
+    otherReceiverPhoneNumber: '',
+    email: '',
+    city: '',
+    deliveryMethod: '',
+    paymentMethod: '',
+    bonusCard: '',
+    promoCode: '',
+    termConditions: false,
+}
 
 export const localStorageSlice = createSlice({
     name: "localStorage",
     initialState: {
         favouriteList: [],
         orderList: [],
-        currentProduct: {}
+        currentProduct: {},
+        checkout: checkoutInitialData
     },
     reducers: {
         getProductList: (state) => {
@@ -42,6 +59,11 @@ export const localStorageSlice = createSlice({
             }
         },
 
+        getCheckoutInfo: (state) => {
+            const storedData = localStorage.getItem(FORM_DATA_KEY);
+            state.checkout = storedData ? JSON.parse(storedData) : {};
+        },
+
         setFavProductList: (state, {payload}) => {
             try {
                 if (Array.isArray(payload)) {
@@ -75,12 +97,14 @@ export const localStorageSlice = createSlice({
                 targetProduct.amount = amount;
             }
         },
+        setCheckoutInfo: (state, {payload}) => {
+            state.checkout = payload;
+            localStorage.setItem(FORM_DATA_KEY, JSON.stringify(payload));
+        },
 
         removeProduct: (state, {payload}) => {
             const updatedOrderList = state.orderList.filter(product => product.id !== parseInt(payload));
-
             localStorage.setItem(DATA_KEY, JSON.stringify(updatedOrderList));
-
             state.orderList = updatedOrderList;
         },
 
@@ -95,8 +119,12 @@ export const localStorageSlice = createSlice({
         removeAllProducts: (state) => {
             localStorage.removeItem(DATA_KEY)
             state.orderList = []
-        }
+        },
 
+        removeCheckoutInfo: (state) => {
+            localStorage.removeItem(FORM_DATA_KEY)
+            state.checkout = checkoutInitialData;
+        },
     }
 });
 
@@ -105,10 +133,13 @@ export const {
     setFavProductList,
     getFavProductList,
     getProductList,
+    getCheckoutInfo,
     setProductList,
     setProductQuantity,
+    setCheckoutInfo,
     removeAllProducts,
-    removeFavProduct
+    removeFavProduct,
+    removeCheckoutInfo
 } = localStorageSlice.actions;
 
 export default localStorageSlice.reducer;

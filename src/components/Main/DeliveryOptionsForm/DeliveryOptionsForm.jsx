@@ -1,6 +1,6 @@
 import {Box, Button, FormControlLabel, Radio, RadioGroup, Typography} from "@mui/material";
 import {styles} from "./styles.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useFormik} from "formik";
 import CitiesSelect from "../../UI/inputs/CitiesSelect";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
@@ -9,6 +9,8 @@ import MarkunreadMailboxIcon from '@mui/icons-material/MarkunreadMailbox';
 import FormCard from "../../UI/cards/FormCard/index.js";
 import deliveryOptionsValidation from "../../../utils/validationSchemas/deliveryOptionsValidation.js";
 import PropTypes from "prop-types";
+import {useDispatch, useSelector} from "react-redux";
+import {getCheckoutInfo, setCheckoutInfo} from "../../../redux/slices/localStorageSlice.js";
 
 const initialValues = {
     deliveryOption: 'store',
@@ -16,7 +18,9 @@ const initialValues = {
 };
 
 const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
+    const dispatch = useDispatch();
     const [openForm, setOpenForm] = useState(false);
+    const {checkout} = useSelector(state => state.localStorage)
 
     const handleClickContinue = () => {
         setOpenForm(!openForm);
@@ -27,10 +31,20 @@ const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
         validationSchema: deliveryOptionsValidation,
         onSubmit: (values) => {
             handleClickContinue();
-            console.log(values)
+
+            const updatedCheckoutInfo = {
+                ...checkout,
+                deliveryMethod: values.deliveryOption,
+                city: values.city
+            }
+            dispatch(setCheckoutInfo(updatedCheckoutInfo))
             onValidChange(!formik.errors.city && !formik.errors.deliveryOption && formik.touched.city && formik.touched.deliveryOption)
         }
     });
+
+    useEffect(() => {
+        dispatch(getCheckoutInfo())
+    }, [dispatch])
 
     return (
         <form onSubmit={formik.handleSubmit}>
