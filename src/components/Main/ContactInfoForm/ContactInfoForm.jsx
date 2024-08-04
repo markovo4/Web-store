@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import {useFormik} from "formik";
 import checkoutValidation from "../../../utils/validationSchemas/checkoutValidation.js";
 import {Box, Button, FormControlLabel, FormGroup, Typography} from "@mui/material";
@@ -33,7 +33,6 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
 
     const [otherReceiver, setOtherReceiver] = useState(false);
     const [forGift, setForGift] = useState(false);
-    const isMounted = useRef(false);
 
     const handleCheckboxChange = (event) => {
         const {name, checked} = event.target;
@@ -74,18 +73,6 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
             onValidChange(!formik.errors.firstName && !formik.errors.email && formik.touched.firstName && formik.touched.email)
         }
     });
-
-    useEffect(() => {
-        if (isMounted.current) {
-            if (!otherReceiver) {
-                formik.setFieldValue('otherReceiverPhoneNumber', '+38(0');
-                formik.setFieldValue('receiverName', '');
-                formik.setFieldValue('lastName', '');
-            }
-        } else {
-            isMounted.current = true;
-        }
-    }, [otherReceiver]);
 
     return (
         <form onSubmit={formik.handleSubmit}>
