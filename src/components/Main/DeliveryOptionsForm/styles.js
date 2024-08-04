@@ -3,7 +3,6 @@ export const styles = {
         border: '1px solid rgba(0,0,0,0.11)',
         borderRadius: '8px',
         color: 'rgba(0,0,0,0.61)',
-        padding: '10px'
     },
     radioGroup: {
         display: 'flex',
@@ -61,6 +60,7 @@ export const styles = {
     selector: {
         '& .MuiInputBase-root': {
             height: '30px',
+            marginBottom: '10px',
             backgroundColor: '#fff',
             borderColor: '#fff',
             width: '700px',
@@ -85,8 +85,10 @@ export const styles = {
         '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: '#40ab29', // Set border color to white on focus
         },
-        '& .MuiFormHelperText-root-error': {
-            color: 'red', // Set error message color to red
-        },
     },
+    selectorError: {
+        color: 'red',
+        fontSize: 'small',
+        margin: '0 0 0 5px'
+    }
 }

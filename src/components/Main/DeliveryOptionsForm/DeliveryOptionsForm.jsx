@@ -39,16 +39,18 @@ const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
                     <Typography variant={'h6'} component={'span'}>2. Delivery options</Typography>
 
                     <Typography variant={'span'} sx={styles.selectorTitle}>Your City</Typography>
-                    <CitiesSelect
-                        styles={styles.selector}
-                        value={formik.values.city}
-                        onChange={formik.handleChange}
-                    />
-                    {formik.touched.city || onTouch ? (
-                        <Typography sx={{color: 'red'}}>
-                            {formik.errors.city}
-                        </Typography>
-                    ) : null}
+                    <div>
+                        <CitiesSelect
+                            styles={styles.selector}
+                            value={formik.values.city}
+                            onChange={formik.handleChange}
+                        />
+                        {formik.touched.city || onTouch ? (
+                            <Typography sx={styles.selectorError}>
+                                {formik.errors.city}
+                            </Typography>
+                        ) : null}
+                    </div>
 
                     <RadioGroup
                         name="deliveryOption"

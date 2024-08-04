@@ -77,7 +77,7 @@ export const styles = {
     },
     errorText: {
         color: 'red',
-        fontSize: '16px',
-        marginTop: '5px',
+        fontSize: 'small',
+        margin: '0 0 0 5px'
     }
 }
