@@ -78,7 +78,7 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
         <form onSubmit={formik.handleSubmit}>
             <FormCard formTitle={'1. Contact Information'} open={openForm} openForm={handleClickContinue}>
                 <Box sx={styles.contactInfo}>
-                    <Typography variant={'h6'} component={'span'}>1. Contact Information</Typography>
+                    <Typography variant='h6' component={'span'}>1. Contact Information</Typography>
                     <div className={'grid grid-cols-2 gap-10'}>
                         <FormInput
                             onChange={formik.handleChange}
@@ -181,7 +181,7 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
                             />
                         </div>
                     )}
-                    <Button type="submit" variant={'outlined'} sx={styles.buttonSubmit}>Continue
+                    <Button type="submit" variant='outlined' sx={styles.buttonSubmit}>Continue
                         Checkout</Button>
                 </Box>
             </FormCard>

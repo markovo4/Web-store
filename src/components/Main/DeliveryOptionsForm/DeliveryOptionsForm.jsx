@@ -50,9 +50,9 @@ const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
         <form onSubmit={formik.handleSubmit}>
             <FormCard formTitle={'2. Delivery options'} open={openForm} openForm={handleClickContinue}>
                 <Box sx={styles.contactInfo}>
-                    <Typography variant={'h6'} component={'span'}>2. Delivery options</Typography>
+                    <Typography variant='h6' component={'span'}>2. Delivery options</Typography>
 
-                    <Typography variant={'span'} sx={styles.selectorTitle}>Your City</Typography>
+                    <Typography variant='span' sx={styles.selectorTitle}>Your City</Typography>
                     <div>
                         <CitiesSelect
                             styles={styles.selector}
@@ -100,7 +100,7 @@ const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
                         </div>
                     </RadioGroup>
 
-                    <Button type="submit" variant={'outlined'} sx={styles.buttonSubmit}>
+                    <Button type="submit" variant='outlined' sx={styles.buttonSubmit}>
                         Continue Checkout
                     </Button>
                 </Box>

@@ -98,12 +98,12 @@ const CheckoutForm = () => {
         <section style={styles.sectionForm}>
             <Container>
                 <div className={"flex items-center justify-between pt-4 pb-4"}>
-                    <Typography variant={"h5"} component={"p"} sx={styles.checkoutTitle}>
+                    <Typography variant="h5" component={"p"} sx={styles.checkoutTitle}>
                         Checkout
                     </Typography>
                     <Link to={routerNames.pageMain}>
                         <Button
-                            variant={"outlined"}
+                            variant="outlined"
                             startIcon={<ArrowBackIcon/>}
                             sx={styles.buttonBack}
                         >
@@ -116,10 +116,10 @@ const CheckoutForm = () => {
                         <FormCard formTitle={"Your order"} open={openForm} openForm={handleClickContinue}>
                             <List className={"w-[800px]"} sx={styles.checkoutList}>
                                 <ListItem sx={styles.titleList}>
-                                    <Typography variant={"h6"}>Your order</Typography>
+                                    <Typography variant="h6">Your order</Typography>
                                     <Link to={routerNames.pageCart}>
                                         <Button
-                                            variant={"outlined"}
+                                            variant="outlined"
                                             startIcon={<EditIcon/>}
                                             sx={styles.buttonBack}
                                         >
@@ -141,7 +141,7 @@ const CheckoutForm = () => {
                                     })}
                                 <Button
                                     onClick={handleClickContinue}
-                                    variant={"outlined"}
+                                    variant="outlined"
                                     sx={styles.buttonSubmit}
                                 >
                                     Continue Checkout
@@ -154,7 +154,7 @@ const CheckoutForm = () => {
                     </div>
                     <div>
                         <Box sx={styles.sidebar}>
-                            <Typography variant={"h6"} component={"span"} sx={styles.summary}>
+                            <Typography variant="h6" component={"span"} sx={styles.summary}>
                                 Summary:
                             </Typography>
                             <form onSubmit={formik.handleSubmit}>
@@ -191,18 +191,18 @@ const CheckoutForm = () => {
 
                                 {orderList.length > 0 && (
                                     <div className={"flex items-center justify-between mb-3"}>
-                                        <Typography variant={"h6"} component={"span"}>
+                                        <Typography variant="h6" component={"span"}>
                                             Total:
                                         </Typography>
 
-                                        <Typography sx={styles.totalPriceMain} variant={"h6"} component={"span"}>
+                                        <Typography sx={styles.totalPriceMain} variant="h6" component={"span"}>
                                             $ {getTotalPrice(orderList).price}
                                         </Typography>
                                     </div>
                                 )}
                                 <div className={"flex flex-col gap-5"}>
                                     <Button
-                                        variant={"contained"}
+                                        variant="contained"
                                         type={"submit"}
                                         disabled={!isFormValid()}
                                         sx={styles.checkoutButton}

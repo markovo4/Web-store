@@ -51,7 +51,7 @@ const PaymentOptionsForm = ({onValidChange}) => {
         <form onSubmit={formik.handleSubmit}>
             <FormCard formTitle={'3. Payment options'} open={openForm} openForm={handleClickContinue}>
                 <Box sx={styles.contactInfo}>
-                    <Typography variant={'h6'} component={'span'}>3. Payment options</Typography>
+                    <Typography variant='h6' component={'span'}>3. Payment options</Typography>
 
                     <RadioGroup
                         name="paymentOption"
@@ -109,7 +109,7 @@ const PaymentOptionsForm = ({onValidChange}) => {
                         </div>
                     </RadioGroup>
 
-                    <Button type="submit" variant={'outlined'} sx={styles.buttonSubmit}>
+                    <Button type="submit" variant='outlined' sx={styles.buttonSubmit}>
                         Continue Checkout
                     </Button>
                 </Box>
