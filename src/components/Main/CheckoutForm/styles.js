@@ -17,9 +17,9 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '64px', // Ensure buttons have a minimum width
+            minWidth: '64px',
         },
-        // Styles for contained buttons
+
         '&.MuiButton-outlined': {
             backgroundColor: 'transparent',
             color: 'rgb(66,175,42)',

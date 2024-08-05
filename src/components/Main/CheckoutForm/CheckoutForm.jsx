@@ -89,11 +89,6 @@ const CheckoutForm = () => {
         );
     };
 
-    console.log(formik.values.termConditions, 'formik.values.termConditions')
-    console.log(isContactInfoValid, 'isContactInfoValid')
-    console.log(isDeliveryOptionsValid, 'isDeliveryOptionsValid')
-    console.log(isPaymentOptionsValid, 'isPaymentOptionsValid')
-
     return (
         <section style={styles.sectionForm}>
             <Container>
