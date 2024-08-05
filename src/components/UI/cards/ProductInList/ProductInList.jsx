@@ -8,15 +8,26 @@ import CommentIcon from '@mui/icons-material/Comment';
 import {useEffect, useState} from "react";
 import {Rate} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {getProductList, setProductList} from "../../../../redux/slices/localStorageSlice.js";
+import {getProductList, setProductList, setProductQuantity} from "../../../../redux/slices/localStorageSlice.js";
+import CartSide from "../../../Main/CartSide/index.js";
 import routerNames from "../../../../router/routes/routerNames.js";
 
 const ProductInList = ({title, image, price, rate, count, itemId, description}) => {
     const {orderList} = useSelector(state => state.localStorage);
     const dispatch = useDispatch();
 
-    // Synchronize local state with Redux state
+    const [openModal, setOpenModal] = useState(false);
+
+    const handleOpenCartSide = () => {
+        setOpenModal(!openModal)
+    };
+
+
     const [isInCart, setIsInCart] = useState(orderList.some(product => product.id === itemId));
+
+    const handleQuantityCount = (id, newAmount) => {
+        dispatch(setProductQuantity({id, amount: newAmount}));
+    }
 
     useEffect(() => {
         setIsInCart(orderList.some(product => product.id === itemId));
@@ -26,10 +37,10 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
         dispatch(getProductList());
     }, [dispatch]);
 
-    const handleButtonClick = () => {
+    const handleButtonClick = (id) => {
         let updatedList;
         if (isInCart) {
-            updatedList = orderList.filter(product => product.id !== itemId);
+            updatedList = orderList.filter(product => product.id !== id);
         } else {
             updatedList = [
                 ...orderList,
@@ -46,6 +57,7 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
             ];
         }
         dispatch(setProductList(updatedList));
+        handleOpenCartSide();
     };
 
     return (
@@ -72,15 +84,29 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                             $ {price}
                         </Typography>
                         {isInCart ? (
-                            <Link to={routerNames.pageCart}>
-                                <Button sx={styles.button} variant={'outlined'} onClick={handleButtonClick}>
-                                    <AddShoppingCartIcon fontSize={'medium'} color={"success"}/>
-                                </Button>
-                            </Link>
+
+                            <CartSide
+                                button={<Link to={routerNames.pageCart}>
+                                    <Button sx={styles.button} variant='outlined'>
+                                        <AddShoppingCartIcon fontSize='medium' color="success"/>
+                                    </Button>
+                                </Link>
+                                }
+                                onQuantityChange={handleQuantityCount}
+                                image={image}
+                                price={price}
+                                rating={rate}
+                                count={count}
+                                id={itemId}
+                                title={title}
+                                open={openModal}
+                            />
+
                         ) : (
-                            <Button sx={styles.button} variant={'contained'} onClick={handleButtonClick}>
-                                <ShoppingCartIcon fontSize={'medium'}/>
+                            <Button sx={styles.button} variant="contained" onClick={handleButtonClick}>
+                                <ShoppingCartIcon fontSize="medium"/>
                             </Button>
+
                         )}
                     </div>
                 </div>

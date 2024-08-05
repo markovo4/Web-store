@@ -58,7 +58,7 @@ const CartList = () => {
                         <ArrowBackIcon/>
                     </IconButton>
                     <Typography
-                        variant={'h5'}
+                        variant='h5'
                         component={'p'}
                         className={'pl-7'}
                         sx={styles.titleBack}
@@ -68,7 +68,7 @@ const CartList = () => {
 
                     {orderList.length > 0 && (
                         <Typography
-                            variant={'span'}
+                            variant='span'
                             component={'p'}
                             className={'pl-7'}
                             sx={styles.titleCount}
@@ -83,8 +83,8 @@ const CartList = () => {
                     <List sx={styles.productsList}>
                         <ListItem className={'bg-white'}>
                             <Button
-                                variant={'outlined'}
-                                startIcon={<DeleteForeverIcon color={'disabled'} fontSize={'large'}/>}
+                                variant='outlined'
+                                startIcon={<DeleteForeverIcon color='disabled' fontSize='large'/>}
                                 sx={styles.deleteButton}
                                 onClick={handleDeleteAll}
                             >
@@ -114,8 +114,8 @@ const CartList = () => {
                                 <ModalLogin button={
                                     <Button
                                         sx={styles.loginButton}
-                                        variant={'outlined'}
-                                        endIcon={<ArrowCircleRightIcon color={'success'}/>}
+                                        variant='outlined'
+                                        endIcon={<ArrowCircleRightIcon color='success'/>}
                                     >
                                         Log in
                                     </Button>
@@ -125,7 +125,7 @@ const CartList = () => {
                                 <Link to={routerNames.pageCheckout}>
                                     <Button
                                         sx={styles.buttonPlaceOrder}
-                                        variant={'outlined'}
+                                        variant='outlined'
                                     >
                                         Place order
                                     </Button>
@@ -150,7 +150,7 @@ const CartList = () => {
                                     </ListItem>
                                     <ListItem sx={styles.totalPrice}>
                                         <Typography
-                                            variant={'h6'}
+                                            variant='h6'
                                             component={'span'}
                                         >
                                             Total:
@@ -158,7 +158,7 @@ const CartList = () => {
                                         {orderList.length > 0 && (
                                             <Typography
                                                 sx={styles.totalPriceSub}
-                                                variant={'h6'}
+                                                variant='h6'
                                                 component={'span'}
                                             >
                                                 $ {getTotalPrice(orderList).price}

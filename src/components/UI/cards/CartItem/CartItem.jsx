@@ -87,7 +87,7 @@ const CartItem = ({
                 <div className={'flex gap-5'}>
                     <Button
                         sx={styles.button}
-                        variant={"outlined"}
+                        variant="outlined"
                         startIcon={<FavoriteBorderIcon color={isInFav ? 'error' : 'disabled'}/>}
                         onClick={handleFavClick}
                     >
@@ -95,8 +95,8 @@ const CartItem = ({
                     </Button>
                     <Button
                         sx={styles.button}
-                        variant={"outlined"}
-                        startIcon={<DeleteForeverIcon color={'disabled'}/>}
+                        variant="outlined"
+                        startIcon={<DeleteForeverIcon color='disabled'/>}
                         onClick={handleDelete}
                     >
                         Delete
