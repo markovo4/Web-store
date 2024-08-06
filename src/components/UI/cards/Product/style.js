@@ -42,6 +42,9 @@ export const styles = {
     info: {
         display: 'flex',
         flexDirection: 'column',
+        height: '100%',
+        position: 'sticky',
+        top: '0'
     },
     count: {
         marginTop: '8px',

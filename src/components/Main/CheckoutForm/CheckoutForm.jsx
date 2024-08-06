@@ -1,7 +1,7 @@
 import {Box, Button, Container, List, ListItem, Typography} from "@mui/material";
 import {styles} from "./styles.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import routerNames from "../../../router/routes/routerNames.js";
 import FormCard from "../../UI/cards/FormCard";
 import ProductCheckout from "../../UI/cards/ProductCheckout";
@@ -24,6 +24,8 @@ const initialValues = {
 
 const CheckoutForm = () => {
     const {orderList, checkout} = useSelector((state) => state.localStorage);
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -69,7 +71,8 @@ const CheckoutForm = () => {
                     productToOrder: [...orderList],
                     bonusCard: values.bonusCard,
                     promoCode: values.promoCode,
-                    termConditions: values.termConditions
+                    termConditions: values.termConditions,
+                    totalPrice: getTotalPrice(orderList).price
                 }
                 dispatch(setCheckoutInfo(updatedCheckoutInfo))
                 resetForm();
@@ -77,6 +80,7 @@ const CheckoutForm = () => {
                 console.log("Please fill all the fields");
                 setTouched(true);
             }
+            navigate(routerNames.pageOrderInfo)
         },
     });
 

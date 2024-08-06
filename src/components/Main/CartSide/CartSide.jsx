@@ -2,6 +2,9 @@ import {styles} from "./styles.js";
 import {Box, Button, Modal, Typography} from "@mui/material";
 import CartItem from "../../UI/cards/CartItem/index.js";
 import PropTypes from "prop-types";
+import CloseIcon from "@mui/icons-material";
+import {Link} from "react-router-dom";
+import routerNames from "../../../router/routes/routerNames.js";
 
 const CartSide = ({
                       button,
@@ -12,21 +15,13 @@ const CartSide = ({
                       count,
                       id,
                       title,
-                      open
+                      open,
+                      onClose,
                   }) => {
 
-    // const [openModal, setOpenModal] = useState(false);
-    // const handleOpenCartSide = () => {
-    //     setOpenModal(!openModal)
-    // };
-
     const handleClose = () => {
-        // setOpenModal(false); // Close the modal explicitly
+        onClose();
     };
-
-    // const buttonWithOnClick = cloneElement(button, {
-    //     onClick: handleOpenCartSide,
-    // });
 
     return (
         <div>
@@ -39,28 +34,65 @@ const CartSide = ({
                 aria-describedby={title}
             >
                 <Box sx={styles.container}>
-                    <Typography
-                        id={title}
-                        variant="h6"
-                        component="h2"
-                        sx={styles.modalTitle}
-                    >
-                        {title}
-                    </Typography>
-                    <CartItem
-                        image={image}
-                        onQuantityChange={onQuantityChange}
-                        price={price}
-                        rating={rating}
-                        count={count}
-                        amount={1}
-                        id={id}
-                        title={title}
-                    />
+                    <div className={'flex justify-between items-center'}>
+                        <Typography
+                            id={title}
+                            variant="h6"
+                            component="h2"
+                            sx={styles.modalTitle}
+                        >
+                            Item Has been added to the Cart
+                        </Typography>
+                        <Button
+                            onClick={handleClose}
+                            variant={"contained"}
+                            sx={styles.buttonClose}
+                            aria-label="add to shopping cart">
+                            <CloseIcon color={'disabled'} fontSize={'large'}/>
+                        </Button>
+                    </div>
 
-                    <Button type="submit" variant="contained" onClick={handleClose}>
-                        Log in
-                    </Button>
+                    <div>
+                        <CartItem
+                            image={image}
+                            onQuantityChange={onQuantityChange}
+                            price={price}
+                            rating={rating}
+                            count={count}
+                            amount={1}
+                            id={id}
+                            title={title}
+                        />
+                    </div>
+
+                    <Box className={'flex justify-between items-center pl-12 pr-12'} sx={styles.buttonGroup}>
+
+                        <Button
+                            sx={styles.buttonContinue}
+                            variant="contained"
+                            onClick={handleClose}>
+                            Continue shopping
+                        </Button>
+
+                        <div className={'flex gap-5'}>
+                            <Link to={routerNames.pageCart}>
+                                <Button
+                                    sx={styles.buttonChoice}
+                                    variant="contained">
+                                    Go to cart
+                                </Button>
+                            </Link>
+
+                            <Link to={routerNames.pageCheckout}>
+                                <Button
+                                    sx={styles.buttonChoice}
+                                    variant="outlined">
+                                    Checkout
+                                </Button>
+                            </Link>
+
+                        </div>
+                    </Box>
                 </Box>
             </Modal>
         </div>
@@ -77,6 +109,7 @@ CartSide.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     open: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired
 }
 
 export default CartSide;

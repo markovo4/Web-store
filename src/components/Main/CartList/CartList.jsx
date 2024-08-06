@@ -9,7 +9,7 @@ import ModalLogin from "../../ModalsAuth/ModalLogin/index.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import routerNames from "../../../router/routes/routerNames.js";
-import {getProductList, removeAllProducts, setProductQuantity} from "../../../redux/slices/localStorageSlice.js";
+import {getProductList, removeAllProducts, setProductList} from "../../../redux/slices/localStorageSlice.js";
 
 const CartList = () => {
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
@@ -43,8 +43,23 @@ const CartList = () => {
     }
 
     const handleQuantityCount = (id, newAmount) => {
-        dispatch(setProductQuantity({id, amount: newAmount}));
+        const productIndex = orderList.findIndex(product => product.id === id)
+        if (productIndex !== -1) {
+            const updatedProduct = {
+                ...orderList[productIndex],
+                amount: newAmount
+            }
+
+            const updatedList = [
+                ...orderList.slice(0, productIndex),
+                updatedProduct,
+                ...orderList.slice(productIndex + 1)
+            ]
+            dispatch(setProductList(updatedList))
+
+        }
     }
+
 
     const handleDeleteAll = () => {
         dispatch(removeAllProducts())

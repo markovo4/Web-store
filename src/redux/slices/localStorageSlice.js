@@ -23,7 +23,8 @@ export const localStorageSlice = createSlice({
         favouriteList: [],
         orderList: [],
         currentProduct: {},
-        checkout: checkoutInitialData
+        checkout: checkoutInitialData,
+        productQuantity: 1
     },
     reducers: {
         getProductList: (state) => {
@@ -92,6 +93,7 @@ export const localStorageSlice = createSlice({
 
         setProductQuantity: (state, action) => {
             const {id, amount} = action.payload
+            state.productQuantity = amount
             const targetProduct = state.orderList.find((product) => product.id === id)
             if (targetProduct) {
                 targetProduct.amount = amount;

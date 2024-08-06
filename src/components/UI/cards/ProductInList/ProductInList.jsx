@@ -5,15 +5,15 @@ import {styles} from "./styles.js";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import CommentIcon from '@mui/icons-material/Comment';
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {Rate} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {getProductList, setProductList, setProductQuantity} from "../../../../redux/slices/localStorageSlice.js";
+import {getProductList, setProductList} from "../../../../redux/slices/localStorageSlice.js";
 import CartSide from "../../../Main/CartSide/index.js";
 import routerNames from "../../../../router/routes/routerNames.js";
 
 const ProductInList = ({title, image, price, rate, count, itemId, description}) => {
-    const {orderList} = useSelector(state => state.localStorage);
+    const {orderList, productQuantity} = useSelector(state => state.localStorage);
     const dispatch = useDispatch();
 
     const [openModal, setOpenModal] = useState(false);
@@ -22,11 +22,28 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
         setOpenModal(!openModal)
     };
 
-
     const [isInCart, setIsInCart] = useState(orderList.some(product => product.id === itemId));
 
+    const productIndex = useMemo(() => {
+        return orderList.findIndex(product => product.id === itemId);
+    }, [orderList, itemId]);
+
+
     const handleQuantityCount = (id, newAmount) => {
-        dispatch(setProductQuantity({id, amount: newAmount}));
+        if (productIndex !== -1) {
+            const updatedProduct = {
+                ...orderList[productIndex],
+                amount: newAmount
+            }
+
+            const updatedList = [
+                ...orderList.slice(0, productIndex),
+                updatedProduct,
+                ...orderList.slice(productIndex + 1)
+            ]
+            dispatch(setProductList(updatedList))
+
+        }
     }
 
     useEffect(() => {
@@ -52,7 +69,7 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                     rating: rate,
                     count: count,
                     id: itemId,
-                    amount: 1,
+                    amount: productQuantity,
                 }
             ];
         }
@@ -100,6 +117,7 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                                 id={itemId}
                                 title={title}
                                 open={openModal}
+                                onClose={handleOpenCartSide}
                             />
 
                         ) : (

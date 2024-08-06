@@ -3,14 +3,15 @@ import PageNotFound from "../pages/PageNotFound";
 import PageCart from "../pages/PageCart";
 import PageProduct from "../pages/PageProduct";
 import PageCheckout from "../pages/PageCheckout";
-import PageCategories from "../pages/PageCategories/index.js";
-import PageFavProducts from "../pages/PageFavProducts/PageFavProducts.jsx";
+import PageCategories from "../pages/PageCategories";
+import PageFavProducts from "../pages/PageFavProducts";
+import PageOrderInfo from "../pages/PageOrderInfo";
 
 import routerNames from "./routerNames";
 
 
 const routerConfig = () => {
-    const pageComponents = [PageMain, PageNotFound, PageCart, PageProduct, PageCheckout, PageCategories, PageFavProducts];
+    const pageComponents = [PageMain, PageNotFound, PageCart, PageProduct, PageCheckout, PageCategories, PageFavProducts, PageOrderInfo];
     const routeKeys = Object.keys(routerNames);
 
     if (pageComponents.length !== routeKeys.length) {
