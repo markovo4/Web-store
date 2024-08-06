@@ -45,7 +45,7 @@ const CartSide = ({
                         </Typography>
                         <Button
                             onClick={handleClose}
-                            variant={"contained"}
+                            variant="contained"
                             sx={styles.buttonClose}
                             aria-label="add to shopping cart">
                             <CloseIcon color={'disabled'} fontSize={'large'}/>
