@@ -2,7 +2,7 @@ import {styles} from "./styles.js";
 import {Box, Button, Modal, Typography} from "@mui/material";
 import CartItem from "../../UI/cards/CartItem/index.js";
 import PropTypes from "prop-types";
-import CloseIcon from "@mui/icons-material";
+import CloseIcon from '@mui/icons-material/Close';
 import {Link} from "react-router-dom";
 import routerNames from "../../../router/routes/routerNames.js";
 

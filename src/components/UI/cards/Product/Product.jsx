@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
     getFavProductList,
@@ -18,6 +18,7 @@ import {
 } from "../../../../redux/slices/localStorageSlice.js";
 import {Link} from "react-router-dom";
 import routerNames from "../../../../router/routes/routerNames.js";
+import CartSide from "../../../Main/CartSide/index.js";
 
 const Product = ({
                      id,
@@ -32,16 +33,24 @@ const Product = ({
     const {orderList} = useSelector((state) => state.localStorage);
     const {favouriteList} = useSelector((state) => state.localStorage);
 
+
     const [isInCart, setIsInCart] = useState(orderList.some(product => product.id === id));
 
     const [isInFav, setIsInFav] = useState(
         favouriteList.some((product) => product.id === id)
     );
 
+    const [openModal, setOpenModal] = useState(false);
+
+    const handleOpenCartSide = () => {
+        setOpenModal(!openModal)
+    };
+    console.log(openModal)
+
     useEffect(() => {
         setIsInCart(orderList.some(product => product.id === id));
         setIsInFav(favouriteList.some((product) => product.id === id))
-    }, [orderList, id]);
+    }, [orderList, id, favouriteList]);
 
 
     useEffect(() => {
@@ -66,7 +75,29 @@ const Product = ({
             ];
         }
         dispatch(setProductList(updatedOrderList));
+        handleOpenCartSide();
     };
+
+    const productIndex = useMemo(() => {
+        return orderList.findIndex(product => product.id === id);
+    }, [orderList, id]);
+
+
+    const handleQuantityCount = (id, newAmount) => {
+        if (productIndex !== -1) {
+            const updatedProduct = {
+                ...orderList[productIndex],
+                amount: newAmount
+            }
+
+            const updatedList = [
+                ...orderList.slice(0, productIndex),
+                updatedProduct,
+                ...orderList.slice(productIndex + 1)
+            ]
+            dispatch(setProductList(updatedList))
+        }
+    }
 
     const handleFavClick = () => {
         setIsInFav((prevAddToFav) => !prevAddToFav);
@@ -108,11 +139,10 @@ const Product = ({
                     </Typography>
                     <div style={styles.buttonGroup}>
                         {!isInCart ? (
-
                             <Button
                                 id={id}
                                 sx={styles.button}
-                                variant={"contained"}
+                                variant="contained"
                                 onClick={handleCartClick}
                             >
                                 <ShoppingCartIcon fontSize="medium"/>
@@ -120,15 +150,23 @@ const Product = ({
 
 
                         ) : (
-                            <Link to={routerNames.pageCart}>
-                                <Button
-                                    id={id}
-                                    sx={styles.button}
-                                    variant={"outlined"}
-                                >
-                                    <AddShoppingCartIcon fontSize="medium" color="success"/>
-                                </Button>
-                            </Link>
+                            <CartSide
+                                button={<Link to={routerNames.pageCart}>
+                                    <Button sx={styles.button} variant='outlined'>
+                                        <AddShoppingCartIcon fontSize='medium' color="success"/>
+                                    </Button>
+                                </Link>
+                                }
+                                onQuantityChange={handleQuantityCount}
+                                image={image}
+                                price={price}
+                                rating={rating}
+                                count={count}
+                                id={id}
+                                title={title}
+                                open={openModal}
+                                onClose={handleOpenCartSide}
+                            />
                         )}
 
 
