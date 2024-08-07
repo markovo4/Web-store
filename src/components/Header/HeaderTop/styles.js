@@ -1,6 +1,9 @@
 export const styles = {
     header: {
-        height: '75px'
+        backgroundColor: 'white',
+        height: '75px',
+
+
     },
     container: {
         display: 'flex',
@@ -13,24 +16,25 @@ export const styles = {
     wrapper: {
         display: 'flex',
         alignItems: 'center',
-        gap: '20px',
+        gap: '10px',
         width: '340px'
     },
     button: {
         // Base styles for all button variants
         '&.MuiButton-root': {
             padding: '2px 16px',
+            height: '45px',
             borderRadius: '4px',
             textTransform: 'none',
             fontSize: '16px',
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '64px', // Ensure buttons have a minimum width
+            minWidth: '100px',
         },
         // Styles for contained buttons
         '&.MuiButton-contained': {
-            backgroundColor: '#42af2a',
+            backgroundColor: '#42AF2AFF',
             color: '#fff',
             '&:hover': {
                 backgroundColor: '#fd661f',
@@ -113,5 +117,68 @@ export const styles = {
                 boxShadow: 'none',
             }
         }
-    }
+    },
+    navList: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        width: '100%'
+    },
+    li: {
+        maxWidth: '110px',
+        '&:nth-of-type(3)': {
+            maxWidth: '80px'
+        }
+    },
+    liButton: {
+        maxWidth: '150px',
+        padding: 'unset'
+    },
+    discounts: {
+        width: '100%',
+        padding: '5px 10px',
+        color: 'white',
+        borderRadius: '20px',
+        backgroundColor: '#fd0000'
+    },
+    giftCards: {
+        width: '100%',
+        '&:hover': {
+            color: '#fd661f'
+        }
+    },
+    liMore: {
+        display: 'flex',
+        gap: '20px',
+        maxWidth: '120px',
+        marginLeft: '10px',
+        '&:hover': {
+            color: '#fd661f'
+
+        }
+    },
+    liContact: {
+        display: 'flex',
+        gap: '20px',
+        maxWidth: '160px',
+        marginLeft: '10px',
+        color: '#fd661f',
+        '&:hover': {
+            color: '#fd661f'
+
+        }
+
+    },
+    menuItem: {
+        display: 'flex',
+        gap: '5px',
+        width: '155px',
+        height: '100%',
+        padding: '10px 20px',
+        '&:hover': {
+            backgroundColor: '#f1f1f1',
+            textDecoration: 'underline',
+            color: '#fd661f'
+        },
+    },
+
 }

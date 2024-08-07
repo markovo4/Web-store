@@ -1,7 +1,8 @@
 export const styles = {
     header: {
         height: '56px',
-        backgroundColor: '#42af2a'
+        backgroundColor: '#42af2a',
+
     },
     container: {
         display: 'flex',
@@ -9,18 +10,18 @@ export const styles = {
         height: 'inherit',
         margin: '0 auto',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     wrapper: {
         display: 'flex',
         alignItems: 'center',
         width: '500px',
-        gap: '20px'
+        gap: '20px',
     },
     wrapperButtonGroup: {
         display: 'flex',
         alignItems: 'center',
-        gap: '10px'
+        gap: '10px',
     },
     selector: {
         '& .MuiInputBase-root': {
@@ -40,20 +41,19 @@ export const styles = {
             transform: 'translate(0, 16px) scale(1)',
         },
         '& .MuiInputLabel-shrink': {
-            display: 'none'
+            display: 'none',
         },
         '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
-            display: 'none'
+            display: 'none',
         },
         '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            display: 'none'
+            display: 'none',
         },
     },
     separator: {
-        backgroundColor: 'rgba(255,255,255,0.82)'
+        backgroundColor: 'rgba(255,255,255,0.82)',
     },
     buttonFav: {
-        // Base styles for all button variants
         '&.MuiButton-root': {
             borderRadius: '4px',
             textTransform: 'none',
@@ -61,9 +61,8 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '20px', // Ensure buttons have a minimum width
+            minWidth: '20px',
         },
-        // Styles for contained buttons
         '&.MuiButton-contained': {
             backgroundColor: '#41ae2a',
             color: '#fff',
@@ -78,11 +77,10 @@ export const styles = {
                 backgroundColor: '#bdbdbd',
                 color: '#fff',
                 boxShadow: 'none',
-            }
-        }
+            },
+        },
     },
     buttonCart: {
-        // Base styles for all button variants
         '&.MuiButton-root': {
             display: 'flex',
             justifyContent: 'space-evenly',
@@ -91,9 +89,8 @@ export const styles = {
             textTransform: 'none',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '150px', // Ensure buttons have a minimum width
+            minWidth: '150px',
         },
-        // Styles for contained buttons
         '&.MuiButton-contained': {
             backgroundColor: '#389725',
             color: '#fff',
@@ -108,11 +105,10 @@ export const styles = {
                 backgroundColor: '#bdbdbd',
                 color: '#fff',
                 boxShadow: 'none',
-            }
-        }
+            },
+        },
     },
     buttonLogIn: {
-        // Base styles for all button variants
         '&.MuiButton-root': {
             display: 'flex',
             justifyContent: 'space-between',
@@ -121,9 +117,8 @@ export const styles = {
             textTransform: 'none',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '110px', // Ensure buttons have a minimum width
+            minWidth: '110px',
         },
-        // Styles for contained buttons
         '&.MuiButton-contained': {
             backgroundColor: 'unset',
             color: '#fff',
@@ -138,7 +133,13 @@ export const styles = {
                 backgroundColor: '#bdbdbd',
                 color: '#fff',
                 boxShadow: 'none',
-            }
-        }
+            },
+        },
     },
-}
+    menuItem: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        
+    }
+};

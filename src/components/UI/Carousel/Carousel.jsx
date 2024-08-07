@@ -14,7 +14,7 @@ const Carousel = () => {
     };
 
     return (
-        <section style={{backgroundColor: 'rgba(0,0,0,0.06)', height: '600px', display: 'flex', alignItems: 'center'}}>
+        <section style={{backgroundColor: 'rgba(0,0,0,0.06)', height: '550px', display: 'flex', alignItems: 'center'}}>
             <div style={{
                 width: '1200px',
                 margin: '0 auto',

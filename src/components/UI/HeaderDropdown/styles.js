@@ -22,21 +22,24 @@ export const styles = {
     },
     menu: {
         marginTop: '5px',
-    },
-    menuItem: {
-        width: '250px',
-        height: '100%',
-        padding: '10px 20px',
-        '&:hover': {
-            backgroundColor: '#f1f1f1',
-            textDecoration: 'underline',
-            color: '#389825'
-        },
+
     },
     menuTitle: {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%'
+    },
+    endIcon: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '5px'
+    },
+    startIcon: {
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        letterSpacing: '2px'
     }
 };

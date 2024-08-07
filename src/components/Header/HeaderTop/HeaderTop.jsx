@@ -1,20 +1,25 @@
 import {styles} from "./styles.js";
-import {Avatar, Button, Container, Typography} from "@mui/material";
+import {Button, Container, List, ListItem, MenuItem, Typography} from "@mui/material";
 import CitiesSelect from "../../UI/inputs/CitiesSelect";
 import Logo from "../../../assets/icons/Logo";
-import ModalRegister from "../../ModalsAuth/ModalRegister";
-import ModalLogin from "../../ModalsAuth/ModalLogin";
 import {useDispatch, useSelector} from "react-redux";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import LogoutIcon from '@mui/icons-material/Logout';
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import routerNames from "../../../router/routes/routerNames.js";
 import {Link} from "react-router-dom";
 import {useFormik} from "formik";
-import deliveryOptionsValidation from "../../../utils/validationSchemas/deliveryOptionsValidation.js";
 import {setCity} from "../../../redux/slices/headerCitySlice.js";
 import cities from "../../../assets/cities/cities.js";
+import HeaderDropdown from "../../UI/HeaderDropdown/index.js";
+import {KeyboardArrowDownSharp} from "@mui/icons-material";
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
+import NotListedLocationIcon from '@mui/icons-material/NotListedLocation';
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
+import WifiCalling3OutlinedIcon from '@mui/icons-material/WifiCalling3Outlined';
+import SendIcon from '@mui/icons-material/Send';
+import ModalRegister from "../../ModalsAuth/ModalRegister/index.js";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const HeaderTop = () => {
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
@@ -27,10 +32,6 @@ const HeaderTop = () => {
 
     const formik = useFormik({
         initialValues: {city: defaultCity},
-        validationSchema: deliveryOptionsValidation,
-        onSubmit: (values, {resetForm}) => {
-            resetForm();
-        }
     });
 
 
@@ -63,44 +64,85 @@ const HeaderTop = () => {
                         onChange={formik.setFieldValue}
                         header={true}
                     />
-                    {formik.touched.city && formik.errors.city ? (
-                        <Typography sx={{color: 'red'}}>
-                            {formik.errors.city}
-                        </Typography>
-                    ) : null}
                 </div>
-                {window.location.pathname !== routerNames.pageCart &&
-                    <React.Fragment>
-                        {!isLoggedIn ? (
-                            <div style={styles.wrapper}>
-                                <ModalRegister
-                                    button={<Button sx={styles.button} variant="contained">Sign up</Button>}/>
-                                <div className="w-[1px] h-12 bg-gray-300"/>
-                                <ModalLogin button={<Button sx={styles.button} variant="contained">Log in</Button>}/>
-                            </div>
+                <List sx={styles.navList}>
+                    <ListItem sx={styles.li}>
+                        <Link to={'/#'}>
+                            <Typography sx={styles.discounts}>
+                                Discounts
+                            </Typography>
+                        </Link>
+                    </ListItem>
+
+                    <ListItem sx={styles.li}>
+                        <Typography sx={styles.giftCards}>
+                            Gift Cards
+                        </Typography>
+                    </ListItem>
+
+                    <ListItem sx={styles.li}>
+                        <Link to={'/#'}>
+                            <Typography sx={styles.giftCards}>
+                                Stores
+                            </Typography>
+                        </Link>
+
+                    </ListItem>
+
+                    <ListItem sx={styles.liMore}>
+                        <div className="w-[1px] h-12 bg-gray-300"/>
+                        <HeaderDropdown
+                            title={'More'}
+                            icon={<KeyboardArrowDownSharp/>}
+                        >
+                            <MenuItem sx={styles.menuItem}><Typography variant='span'>Delivery</Typography></MenuItem>
+                            <MenuItem sx={styles.menuItem}><Typography variant='span'>Refund</Typography></MenuItem>
+                            <MenuItem sx={styles.menuItem}><Typography variant='span'>Trade-in</Typography></MenuItem>
+                            <MenuItem sx={styles.menuItem}><Typography variant='span'>Blog</Typography></MenuItem>
+                            <MenuItem sx={styles.menuItem}><Typography variant='span'>COMFY
+                                Help</Typography></MenuItem>
+                        </HeaderDropdown>
+                    </ListItem>
+
+                    <ListItem sx={styles.liContact}>
+                        <div className="w-[1px] h-12 bg-gray-300"/>
+                        <HeaderDropdown
+                            title={'Contact Us'}
+                            icon={<PhoneInTalkIcon/>}
+                        >
+                            <MenuItem sx={styles.menuItem}> <NotListedLocationIcon fontSize='small' color='error'/> |
+                                Help
+                                Center</MenuItem>
+                            <MenuItem sx={styles.menuItem}><ChatOutlinedIcon fontSize='small' color='success'/> | Live
+                                Chat</MenuItem>
+                            <MenuItem sx={styles.menuItem}><SendOutlinedIcon fontSize='small' color='primary'/> |
+                                Messenger</MenuItem>
+                            <MenuItem sx={styles.menuItem}><WifiCalling3OutlinedIcon fontSize='small'
+                                                                                     color='secondary'/> |
+                                Viber</MenuItem>
+                            <MenuItem sx={styles.menuItem}><SendIcon fontSize='small' color='primary'/> |
+                                Telegram</MenuItem>
+                        </HeaderDropdown>
+                    </ListItem>
+                    <ListItem sx={styles.liContact}>
+                        <div className="w-[1px] h-12 bg-gray-300"/>
+                        {isLoggedIn ? (
+                            <Button
+                                onClick={handleLogOut}
+                                sx={styles.button}
+                                variant="contained"
+                                endIcon={<LogoutIcon/>}>
+                                <Typography
+                                    variant='h6'>Logout
+                                </Typography>
+                            </Button>
                         ) : (
-                            <div style={styles.wrapper}>
-                                <Button
-                                    sx={styles.button}
-                                    variant="contained"
-                                    endIcon={<ArrowForwardIcon/>}
-                                >
-                                    Your Cabinet
-                                </Button>
-                                <div className="w-[1px] h-12 bg-gray-300"/>
-                                <Avatar/>
-                                <div className="w-[1px] h-12 bg-gray-300"/>
-                                <Button
-                                    sx={styles.buttonLogOut}
-                                    onClick={handleLogOut}
-                                    variant="contained"
-                                    endIcon={<LogoutIcon/>}
-                                >
-                                    Log Out
-                                </Button>
-                            </div>
+                            <ModalRegister
+                                button={<Button sx={styles.button} variant="contained"><Typography variant='h6'>Sign
+                                    up</Typography></Button>}/>
                         )}
-                    </React.Fragment>}
+                    </ListItem>
+                </List>
             </Container>
         </section>
     );
