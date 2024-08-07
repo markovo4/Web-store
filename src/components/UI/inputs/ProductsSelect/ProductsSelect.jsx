@@ -3,11 +3,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 import PropTypes from "prop-types";
 import {useGetAllProductsQuery} from "../../../../redux/productsApi/productsApi.js";
 import {useNavigate} from 'react-router-dom';
+import {stylesCard} from "./styles.js";
 
 const ProductsSelect = ({styles}) => {
     const {data: products = [], isLoading, isError} = useGetAllProductsQuery();
     const navigate = useNavigate();
-
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error loading products</p>;
 
@@ -31,12 +31,12 @@ const ProductsSelect = ({styles}) => {
                     <li
                         key={key} // Set the `key` directly
                         {...restProps} // Spread the remaining props
-                        style={{display: 'flex', alignItems: 'center'}}
+                        style={stylesCard.li}
                     >
                         <img
                             src={option.image} // Display the product image
                             alt={option.title}
-                            style={{width: '90px', height: '100px', marginRight: '10px'}}
+                            style={stylesCard.img}
                         />
                         {option.title}
                     </li>

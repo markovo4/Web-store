@@ -11,6 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getProductList, setProductList} from "../../../../redux/slices/localStorageSlice.js";
 import CartSide from "../../../Main/CartSide/index.js";
 import routerNames from "../../../../router/routes/routerNames.js";
+import TitlePopOver from "../../popOvers/TitlePopOver/index.js";
 
 const ProductInList = ({title, image, price, rate, count, itemId, description}) => {
     const {orderList, productQuantity} = useSelector(state => state.localStorage);
@@ -21,6 +22,10 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
     const handleOpenCartSide = () => {
         setOpenModal(!openModal)
     };
+
+    const getShortTitle = (string) => {
+        return string.length > 40 ? `${string.slice(0, 41)}...` : string;
+    }
 
     const [isInCart, setIsInCart] = useState(orderList.some(product => product.id === itemId));
 
@@ -80,14 +85,18 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
     return (
         <div style={styles.cardContainer}>
             <Card sx={styles.card}>
-                <Link to={`/products/${itemId}`} style={styles.link}>
-                    <div style={styles.groupedText}>
+                <div style={styles.groupedText}>
+                    <Link to={`/products/${itemId}`} style={styles.link}>
                         <img src={image} alt={title} style={styles.image}/>
-                        <Typography variant="h6" sx={styles.title}>
-                            {title}
-                        </Typography>
-                    </div>
-                </Link>
+                    </Link>
+                    <Typography variant="h6" sx={styles.title}>
+                        <TitlePopOver
+                            entireTitle={title}
+                            title={getShortTitle(title)}
+                        />
+                    </Typography>
+                </div>
+
                 <div style={styles.purchase}>
                     <div style={styles.wrapper}>
                         <Rate allowHalf disabled defaultValue={rate}/>

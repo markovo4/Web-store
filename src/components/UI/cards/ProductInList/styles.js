@@ -19,15 +19,16 @@ export const styles = {
             transition: '0.3s',
             backgroundColor: 'rgb(238,238,238)',
             boxShadow: '0px 1px 10px 1px rgba(0,0,0,0.22)',
-            zIndex: 10000
         }
     },
     image: {
+        size: '10px',
         marginTop: '40px',
         marginBottom: '20px',
-        width: '200px',
-        height: '200px',
-        objectFit: 'cover',
+        objectFit: 'contain',
+        objectPosition: 'center',
+        width: '190px',
+        height: '240px',
         alignSelf: 'center'
     },
     title: {

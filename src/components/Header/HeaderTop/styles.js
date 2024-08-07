@@ -13,7 +13,8 @@ export const styles = {
     wrapper: {
         display: 'flex',
         alignItems: 'center',
-        gap: '20px'
+        gap: '20px',
+        width: '340px'
     },
     button: {
         // Base styles for all button variants
@@ -46,33 +47,41 @@ export const styles = {
         }
     },
     selector: {
+        width: '200px',
         '& .MuiInputBase-root': {
             height: '30px',
             backgroundColor: '#fff',
-            borderColor: '#fff'
+            borderColor: '#fff',
+            width: '200px'
         },
         '& .MuiOutlinedInput-input': {
             height: '30px',
             padding: '0 14px',
             boxSizing: 'border-box',
+            width: '200px'
         },
         '& .MuiInputLabel-root': {
             top: '-12px',
             left: '14px',
             transform: 'translate(0, 16px) scale(1)',
+            width: '200px'
         },
         '& .MuiInputLabel-shrink': {
             transform: 'translate(0, 0px) scale(0.75)',
-            color: '#40ab29'
+            color: '#40ab29',
+            width: '200px'
         },
         '& .MuiOutlinedInput-root.Mui-focused .MuiInputLabel-root': {
             transform: 'translate(0, 0px) scale(0.75)',
+            width: '200px'
         },
         '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
             borderColor: '#c2c2c2', // Set border color to white on hover
+            width: '200px'
         },
         '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: '#40ab29', // Set border color to white on focus
+            width: '200px'
         }
     },
     buttonLogOut: {
