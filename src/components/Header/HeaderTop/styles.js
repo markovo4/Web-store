@@ -180,5 +180,24 @@ export const styles = {
             color: '#fd661f'
         },
     },
+    phoneNumber: {
+        letterSpacing: '2px',
+        color: 'rgba(0,0,0,0.7)',
+        fontSize: '14px'
+    },
+    phoneNumberLast: {
+        paddingLeft: '30px',
+        letterSpacing: '2px',
+        color: 'rgba(0,0,0,0.7)',
+        fontSize: '14px'
+    },
+    liPhone: {
+        width: '330px',
+    },
+    number: {
+        fontWeight: 'bold',
+        color: '#000',
+        textDecoration: 'underline'
+    },
 
 }

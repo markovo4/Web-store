@@ -65,84 +65,108 @@ const HeaderTop = () => {
                         header={true}
                     />
                 </div>
-                <List sx={styles.navList}>
-                    <ListItem sx={styles.li}>
-                        <Link to={'/#'}>
-                            <Typography sx={styles.discounts}>
-                                Discounts
+                {window.location.pathname === routerNames.pageCart || window.location.pathname === routerNames.pageCheckout ? (
+                    <List sx={styles.navList}>
+                        <ListItem sx={styles.liPhone}>
+                            <Typography sx={styles.phoneNumber}>
+                                Free across Ukraine: <a href={'tel:+380-800-303-505'}
+                                                        style={styles.number}>0-800-303-505</a>
                             </Typography>
-                        </Link>
-                    </ListItem>
+                        </ListItem>
 
-                    <ListItem sx={styles.li}>
-                        <Typography sx={styles.giftCards}>
-                            Gift Cards
-                        </Typography>
-                    </ListItem>
-
-                    <ListItem sx={styles.li}>
-                        <Link to={'/#'}>
-                            <Typography sx={styles.giftCards}>
-                                Stores
+                        <ListItem sx={styles.liPhone}>
+                            <div className="w-[1px] h-5 bg-gray-300"/>
+                            <Typography sx={styles.phoneNumberLast}>
+                                Free across Kyiv: <a href={'tel:+38044-39-39-505'}
+                                                     style={styles.number}>044-39-39-505</a>
                             </Typography>
-                        </Link>
+                        </ListItem>
 
-                    </ListItem>
-
-                    <ListItem sx={styles.liMore}>
-                        <div className="w-[1px] h-12 bg-gray-300"/>
-                        <HeaderDropdown
-                            title={'More'}
-                            icon={<KeyboardArrowDownSharp/>}
-                        >
-                            <MenuItem sx={styles.menuItem}><Typography variant='span'>Delivery</Typography></MenuItem>
-                            <MenuItem sx={styles.menuItem}><Typography variant='span'>Refund</Typography></MenuItem>
-                            <MenuItem sx={styles.menuItem}><Typography variant='span'>Trade-in</Typography></MenuItem>
-                            <MenuItem sx={styles.menuItem}><Typography variant='span'>Blog</Typography></MenuItem>
-                            <MenuItem sx={styles.menuItem}><Typography variant='span'>COMFY
-                                Help</Typography></MenuItem>
-                        </HeaderDropdown>
-                    </ListItem>
-
-                    <ListItem sx={styles.liContact}>
-                        <div className="w-[1px] h-12 bg-gray-300"/>
-                        <HeaderDropdown
-                            title={'Contact Us'}
-                            icon={<PhoneInTalkIcon/>}
-                        >
-                            <MenuItem sx={styles.menuItem}> <NotListedLocationIcon fontSize='small' color='error'/> |
-                                Help
-                                Center</MenuItem>
-                            <MenuItem sx={styles.menuItem}><ChatOutlinedIcon fontSize='small' color='success'/> | Live
-                                Chat</MenuItem>
-                            <MenuItem sx={styles.menuItem}><SendOutlinedIcon fontSize='small' color='primary'/> |
-                                Messenger</MenuItem>
-                            <MenuItem sx={styles.menuItem}><WifiCalling3OutlinedIcon fontSize='small'
-                                                                                     color='secondary'/> |
-                                Viber</MenuItem>
-                            <MenuItem sx={styles.menuItem}><SendIcon fontSize='small' color='primary'/> |
-                                Telegram</MenuItem>
-                        </HeaderDropdown>
-                    </ListItem>
-                    <ListItem sx={styles.liContact}>
-                        <div className="w-[1px] h-12 bg-gray-300"/>
-                        {isLoggedIn ? (
-                            <Button
-                                onClick={handleLogOut}
-                                sx={styles.button}
-                                variant="contained"
-                                endIcon={<LogoutIcon/>}>
-                                <Typography
-                                    variant='h6'>Logout
+                    </List>
+                ) : (
+                    <List sx={styles.navList}>
+                        <ListItem sx={styles.li}>
+                            <Link to={'/#'}>
+                                <Typography sx={styles.discounts}>
+                                    Discounts
                                 </Typography>
-                            </Button>
-                        ) : (
-                            <ModalRegister
-                                button={<Button sx={styles.button} variant="contained"><Typography variant='h6'>Sign
-                                    up</Typography></Button>}/>
-                        )}
-                    </ListItem>
-                </List>
+                            </Link>
+                        </ListItem>
+
+                        <ListItem sx={styles.li}>
+                            <Typography sx={styles.giftCards}>
+                                Gift Cards
+                            </Typography>
+                        </ListItem>
+
+                        <ListItem sx={styles.li}>
+                            <Link to={'/#'}>
+                                <Typography sx={styles.giftCards}>
+                                    Stores
+                                </Typography>
+                            </Link>
+
+                        </ListItem>
+
+                        <ListItem sx={styles.liMore}>
+                            <div className="w-[1px] h-12 bg-gray-300"/>
+                            <HeaderDropdown
+                                title={'More'}
+                                icon={<KeyboardArrowDownSharp/>}
+                            >
+                                <MenuItem sx={styles.menuItem}><Typography
+                                    variant='span'>Delivery</Typography></MenuItem>
+                                <MenuItem sx={styles.menuItem}><Typography variant='span'>Refund</Typography></MenuItem>
+                                <MenuItem sx={styles.menuItem}><Typography
+                                    variant='span'>Trade-in</Typography></MenuItem>
+                                <MenuItem sx={styles.menuItem}><Typography variant='span'>Blog</Typography></MenuItem>
+                                <MenuItem sx={styles.menuItem}><Typography variant='span'>COMFY
+                                    Help</Typography></MenuItem>
+                            </HeaderDropdown>
+                        </ListItem>
+
+                        <ListItem sx={styles.liContact}>
+                            <div className="w-[1px] h-12 bg-gray-300"/>
+                            <HeaderDropdown
+                                title={'Contact Us'}
+                                icon={<PhoneInTalkIcon/>}
+                            >
+                                <MenuItem sx={styles.menuItem}> <NotListedLocationIcon fontSize='small'
+                                                                                       color='error'/> |
+                                    Help
+                                    Center</MenuItem>
+                                <MenuItem sx={styles.menuItem}><ChatOutlinedIcon fontSize='small' color='success'/> |
+                                    Live
+                                    Chat</MenuItem>
+                                <MenuItem sx={styles.menuItem}><SendOutlinedIcon fontSize='small' color='primary'/> |
+                                    Messenger</MenuItem>
+                                <MenuItem sx={styles.menuItem}><WifiCalling3OutlinedIcon fontSize='small'
+                                                                                         color='secondary'/> |
+                                    Viber</MenuItem>
+                                <MenuItem sx={styles.menuItem}><SendIcon fontSize='small' color='primary'/> |
+                                    Telegram</MenuItem>
+                            </HeaderDropdown>
+                        </ListItem>
+                        <ListItem sx={styles.liContact}>
+                            <div className="w-[1px] h-12 bg-gray-300"/>
+                            {isLoggedIn ? (
+                                <Button
+                                    onClick={handleLogOut}
+                                    sx={styles.button}
+                                    variant="contained"
+                                    endIcon={<LogoutIcon/>}>
+                                    <Typography
+                                        variant='h6'>Logout
+                                    </Typography>
+                                </Button>
+                            ) : (
+                                <ModalRegister
+                                    button={<Button sx={styles.button} variant="contained"><Typography variant='h6'>Sign
+                                        up</Typography></Button>}/>
+                            )}
+                        </ListItem>
+                    </List>
+                )}
             </Container>
         </section>
     );

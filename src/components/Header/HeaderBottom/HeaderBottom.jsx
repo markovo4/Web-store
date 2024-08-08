@@ -15,10 +15,18 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HeaderDropdown from "../../UI/HeaderDropdown/index.js";
+import Cookies from "js-cookie";
 
 const HeaderBottom = () => {
 
+
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
+
+    const handleLogOut = () => {
+        Cookies.remove('LoggedIn');
+        window.location.reload();
+    };
+
     return (
         <section style={styles.header}>
             <Container sx={styles.container}>
@@ -38,9 +46,11 @@ const HeaderBottom = () => {
                                 Cabinet</MenuItem>
                             <MenuItem sx={styles.menuItem}><LocalMallIcon fontSize='small' color='success'/> My
                                 Orders</MenuItem>
-                            <MenuItem sx={styles.menuItem}><FavoriteIcon fontSize='small'
-                                                                         color='error'/> Favourite</MenuItem>
-                            <MenuItem sx={styles.menuItem}><LogoutIcon fontSize='small' color='error'/>
+                            <MenuItem sx={styles.menuItem}><Link to={routerNames.pageFavProducts}><FavoriteIcon
+                                fontSize='small'
+                                color='error'/> Favourite</Link></MenuItem>
+                            <MenuItem sx={styles.menuItem}><LogoutIcon fontSize='small' onClick={handleLogOut}
+                                                                       color='error'/>
                                 Logout</MenuItem>
                         </HeaderDropdown>
                     ) : (

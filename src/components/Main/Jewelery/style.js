@@ -6,7 +6,7 @@ export const styles = {
     },
     section: {
         backgroundColor: '#eeeeee',
-        height: '900px',
+        height: '700px',
         display: 'flex',
         alignItems: 'center'
     }
