@@ -2,7 +2,8 @@ export const styles = {
     formInput: {
         '&.MuiInput-root': {
             backgroundColor: 'rgba(0,0,0,0.04)',
-            borderRadius: '4px 4px 0 0'
+            borderRadius: '4px 4px 0 0',
+            height: '30px'
         },
         '&.Mui-focused': {
             borderColor: 'black',

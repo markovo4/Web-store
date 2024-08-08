@@ -2,11 +2,12 @@ import {FormControl, Input, InputLabel} from "@mui/material";
 import PropTypes from "prop-types";
 import {styles} from "./styles.js";
 
-const FormInput = ({id, name, type, touched, error, label, onChange, value, disabled}) => {
+const FormInput = ({id, name, type, touched, error, label, onChange, value, disabled, placeHolder}) => {
     return (
         <FormControl>
             <InputLabel htmlFor={id} sx={styles.inputLabel}>{label}</InputLabel>
             <Input
+                placeholder={placeHolder}
                 sx={styles.formInput}
                 id={id}
                 name={name}
@@ -33,6 +34,7 @@ FormInput.propTypes = {
     type: PropTypes.string.isRequired,
     label: PropTypes.string,
     disabled: PropTypes.bool,
+    placeHolder: PropTypes.string
 }
 
 export default FormInput;

@@ -4,6 +4,7 @@ import HeaderTop from "../../components/Header/HeaderTop";
 
 import FooterBottom from "../../components/Footer/FooterBottom";
 import FooterTop from "../../components/Footer/FooterTop/index.js";
+import FooterMiddle from "../../components/Footer/FooterMiddle/index.js";
 
 const TemplateCartPage = ({className = null, children}) => {
     return (
@@ -18,6 +19,7 @@ const TemplateCartPage = ({className = null, children}) => {
 
             <footer>
                 <FooterTop/>
+                <FooterMiddle/>
                 <FooterBottom/>
             </footer>
         </React.Fragment>
