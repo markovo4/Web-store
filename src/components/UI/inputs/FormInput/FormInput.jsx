@@ -4,7 +4,7 @@ import {styles} from "./styles.js";
 
 const FormInput = ({id, name, type, touched, error, label, onChange, value, disabled, placeHolder}) => {
     return (
-        <FormControl>
+        <FormControl sx={styles.formControl}>
             <InputLabel htmlFor={id} sx={styles.inputLabel}>{label}</InputLabel>
             <Input
                 placeholder={placeHolder}

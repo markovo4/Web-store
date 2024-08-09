@@ -2,23 +2,28 @@ export const styles = {
     formInput: {
         '&.MuiInput-root': {
             backgroundColor: 'rgba(0,0,0,0.04)',
-            borderRadius: '4px 4px 0 0',
-            height: '30px'
+            borderRadius: '4px',
+            height: '35px',
+
         },
         '&.Mui-focused': {
             borderColor: 'black',
+
         },
         '&.Mui-disabled': {
             backgroundColor: 'lightgrey', // Background color when disabled
+
         },
         '&.Mui-error': {
             borderColor: 'red', // Border color when in error state
         },
         '&.MuiInput-multiline': {
             padding: '10px', // Padding for multiline inputs
+
         },
         '& .MuiInput-input': {
             padding: '10px', // Padding for the input element
+
         },
         '& .MuiInput-inputTypeSearch': {
             borderRadius: '4px', // Border radius for search inputs
@@ -80,5 +85,27 @@ export const styles = {
         color: 'red',
         fontSize: 'small',
         margin: '0 0 0 5px'
+    },
+    formControl: {
+        '&.MuiFormControl-root': {
+            marginBottom: '16px',
+            minWidth: '120px',
+
+        },
+        '&.Mui-disabled': {
+            opacity: 0.5,
+        },
+        '& .MuiInput-underline:before': {
+            border: '1px solid rgba(0,0,0,0.09)',
+            paddingTop: '10px',
+            borderRadius: '4px',
+        },
+        '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+            border: '1px solid rgba(0,0,0,0.09)',
+            borderRadius: '4px',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottom: 'transparent',
+        },
     }
 }
