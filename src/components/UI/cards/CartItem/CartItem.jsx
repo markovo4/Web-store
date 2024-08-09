@@ -1,7 +1,7 @@
 import {Avatar, Box, Button, ListItem, ListItemAvatar, ListItemText} from "@mui/material";
 import PropTypes from "prop-types";
 import {styles} from "./styles.js";
-import QuantityPicker from "../../inputs/QuantityPicker"; // Ensure correct spelling here
+import QuantityPicker from "../../inputs/QuantityPicker";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {useEffect, useState} from "react";
@@ -12,6 +12,7 @@ import {
     setFavProductList
 } from "../../../../redux/slices/localStorageSlice.js";
 import {useDispatch, useSelector} from "react-redux";
+import {useSnackbar} from "notistack";
 
 const CartItem = ({
                       title,
@@ -24,6 +25,7 @@ const CartItem = ({
                       onQuantityChange,
                       amount
                   }) => {
+    const {enqueueSnackbar} = useSnackbar();
 
     const dispatch = useDispatch();
     const {favouriteList} = useSelector((state) => state.localStorage);
@@ -39,7 +41,8 @@ const CartItem = ({
 
 
     const handleDelete = () => {
-        dispatch(removeProduct(id)); // Pass id directly
+        dispatch(removeProduct(id));
+        enqueueSnackbar('Item was removed from the Cart!', {variant: 'error'});
     }
 
     useEffect(() => {
@@ -49,6 +52,7 @@ const CartItem = ({
     const handleFavClick = () => {
         setIsInFav((prevAddToFav) => !prevAddToFav);
         if (!isInFav) {
+            enqueueSnackbar('Item Added to Favourites!', {variant: 'success'});
             const updatedFavouriteList = [
                 ...favouriteList,
                 {

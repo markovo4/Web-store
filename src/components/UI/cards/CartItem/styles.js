@@ -1,7 +1,10 @@
 export const styles = {
     productImg: {
-        width: '90px',
-        height: '100px'
+        height: '100px',
+        width: 'auto',
+        objectFit: 'contain',
+        objectPosition: 'center',
+        display: 'block',
     },
     productIcon: {
         backgroundColor: 'white',

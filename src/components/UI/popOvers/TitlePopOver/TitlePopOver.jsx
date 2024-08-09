@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
+import PropTypes from "prop-types";
 
 const TitlePopOver = ({entireTitle, title}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -29,6 +30,7 @@ const TitlePopOver = ({entireTitle, title}) => {
                 id="mouse-over-popover"
                 sx={{
                     pointerEvents: 'none',
+                    overflowY: 'auto'
                 }}
                 open={open}
                 anchorEl={anchorEl}
@@ -47,6 +49,11 @@ const TitlePopOver = ({entireTitle, title}) => {
             </Popover>
         </div>
     );
+}
+
+TitlePopOver.propTypes = {
+    entireTitle: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
 }
 
 export default TitlePopOver;

@@ -6,9 +6,9 @@ export const styles = {
     },
     section: {
         backgroundColor: '#eeeeee',
-        maxHeight: '1900px',
+        minHeight: '100vh',
+        maxHeight: '100%',
         padding: '50px 0',
-        marginBottom: '100px',
     },
     productsContainer: {
         display: 'flex',

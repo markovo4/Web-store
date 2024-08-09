@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-const phoneRegExp = /^\+\d{2}\(\d{3}\)\d{7}$/;
+const phoneRegExp = /^(?:\+?(\d{1,3}))?[-.\s]?(\(?\d{1,4}\)?[-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})$/;
 
 const checkoutValidation = (otherReceiver) => Yup.object({
     firstName: Yup.string()

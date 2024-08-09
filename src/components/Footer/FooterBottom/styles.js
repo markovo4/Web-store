@@ -17,5 +17,9 @@ export const styles = {
         justifyContent: 'space-between'
 
     },
-    wrapper: {}
+    rights: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '40px'
+    }
 }

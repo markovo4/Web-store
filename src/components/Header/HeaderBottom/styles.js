@@ -2,7 +2,6 @@ export const styles = {
     header: {
         height: '56px',
         backgroundColor: '#42af2a',
-
     },
     container: {
         display: 'flex',
@@ -82,6 +81,7 @@ export const styles = {
     },
     buttonCart: {
         '&.MuiButton-root': {
+            position: 'relative',
             display: 'flex',
             justifyContent: 'space-evenly',
             height: '56px',
@@ -140,6 +140,17 @@ export const styles = {
         display: 'flex',
         alignItems: 'center',
         gap: '10px',
-        
+    },
+    cartItemCounter: {
+        backgroundColor: 'rgba(253,102,31,0.9)',
+        fontSize: '12px',
+        fontWeight: 'bold',
+        color: 'white',
+        padding: '0 7px',
+        borderRadius: '50px',
+        zIndex: 1,
+        position: 'absolute',
+        top: '8px',
+        right: '80px'
     }
 };

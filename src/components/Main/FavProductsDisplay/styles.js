@@ -5,4 +5,8 @@ export const styles = {
         fontWeight: 'bold',
         color: 'rgba(0,0,0,0.76)'
     },
+    section: {
+        backgroundColor: '#eeeeee',
+        paddingBottom: '40px'
+    }
 }

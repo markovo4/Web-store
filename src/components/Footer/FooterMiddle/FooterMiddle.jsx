@@ -1,5 +1,5 @@
 import {Box, Button, Container, List, ListItem, Typography} from "@mui/material";
-import ComfyQRC from "./comfy_QRC.jsx";
+import ComfyQRC from "../../../assets/icons/comfy_QRC.jsx";
 import FormInput from "../../UI/inputs/FormInput/index.js";
 import {useFormik} from "formik";
 import {styles} from "./styles.js";
@@ -12,6 +12,7 @@ import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import WifiCalling3OutlinedIcon from "@mui/icons-material/WifiCalling3Outlined";
 import SendIcon from "@mui/icons-material/Send";
+import LoveEmoji from "../../../assets/icons/LoveEmoji.jsx";
 
 const FooterMiddle = () => {
 
@@ -40,7 +41,7 @@ const FooterMiddle = () => {
                                     Subscribe for discounts!
                                 </Typography>
                                 <Typography sx={styles.formSubtitle}>
-                                    No worries, we do not spam ;)
+                                    No worries, we do not spam <LoveEmoji/>
                                 </Typography>
                                 <FormInput
                                     placeHolder={'email@email.com'}

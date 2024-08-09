@@ -9,6 +9,8 @@ import {styles} from "./styles.js";
 import {useDispatch, useSelector} from "react-redux";
 import {cloneElement} from "react";
 import {setModalRegOpen} from "../../../redux/slices/modalsAuthSlice.js";
+import {formatPhoneNumber} from "../../../utils/functions/functions.js";
+import {useSnackbar} from "notistack";
 
 const formInitValues = {
     firstName: '',
@@ -20,6 +22,13 @@ const formInitValues = {
 }
 
 const ModalRegister = ({button}) => {
+    const {enqueueSnackbar} = useSnackbar();
+
+    const handlePhoneNumberChange = (event) => {
+        const {value} = event.target;
+        formik.setFieldValue('phoneNumber', formatPhoneNumber(value));
+    };
+
     const {modalRegOpen} = useSelector(state => state.modalsAuth);
     const dispatch = useDispatch();
 
@@ -34,12 +43,19 @@ const ModalRegister = ({button}) => {
         initialValues: {...formInitValues},
         validationSchema: registerFormValidation,
         onSubmit: (values, {resetForm}) => {
+            handleClickVariant('success')();
             Cookies.set('LoggedIn', 'true');
-            resetForm();
-            handleClose();
-            window.location.reload()
-        }
+            setTimeout(() => {
+                resetForm();
+                handleClose();
+                window.location.reload();
+            }, 1000);
+        },
     });
+
+    const handleClickVariant = (variant) => () => {
+        enqueueSnackbar('Successful Registration!', {variant});
+    };
 
     return (
         <ModalTemplate
@@ -71,7 +87,7 @@ const ModalRegister = ({button}) => {
                         type={'text'}
                     />
                     <FormInput
-                        onChange={formik.handleChange}
+                        onChange={handlePhoneNumberChange}
                         value={formik.values.phoneNumber.trim()}
                         touched={formik.touched.phoneNumber}
                         error={formik.errors.phoneNumber}

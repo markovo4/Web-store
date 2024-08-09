@@ -12,8 +12,10 @@ import {getProductList, setProductList} from "../../../../redux/slices/localStor
 import CartSide from "../../../Main/CartSide/index.js";
 import routerNames from "../../../../router/routes/routerNames.js";
 import TitlePopOver from "../../popOvers/TitlePopOver/index.js";
+import {useSnackbar} from "notistack";
 
 const ProductInList = ({title, image, price, rate, count, itemId, description}) => {
+    const {enqueueSnackbar} = useSnackbar();
     const {orderList, productQuantity} = useSelector(state => state.localStorage);
     const dispatch = useDispatch();
 
@@ -21,6 +23,10 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
 
     const handleOpenCartSide = () => {
         setOpenModal(!openModal)
+    };
+
+    const handleClickVariant = (variant) => () => {
+        enqueueSnackbar('Item Added Successfully!', {variant});
     };
 
     const getShortTitle = (string) => {
@@ -80,6 +86,7 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
         }
         dispatch(setProductList(updatedList));
         handleOpenCartSide();
+        handleClickVariant('success')()
     };
 
     return (

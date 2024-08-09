@@ -143,5 +143,5 @@ export const styles = {
     buttonGroup: {
         paddingBottom: '30px',
         borderBottom: '1px solid grey'
-    }
+    },
 }

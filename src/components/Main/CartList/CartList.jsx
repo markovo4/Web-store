@@ -10,8 +10,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import routerNames from "../../../router/routes/routerNames.js";
 import {getProductList, removeAllProducts, setProductList} from "../../../redux/slices/localStorageSlice.js";
+import {useSnackbar} from "notistack";
 
 const CartList = () => {
+    const {enqueueSnackbar} = useSnackbar();
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -63,6 +65,7 @@ const CartList = () => {
 
     const handleDeleteAll = () => {
         dispatch(removeAllProducts())
+        enqueueSnackbar('All products have been removed!', {variant: 'error'});
     }
 
     return (

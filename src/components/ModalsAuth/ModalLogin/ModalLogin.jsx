@@ -1,28 +1,28 @@
-import ModalTemplate from "../../UI/ModalTemplate/index.js";
-import PropTypes from "prop-types";
-import {Button, FormGroup} from "@mui/material";
-import FormInput from "../../UI/inputs/FormInput";
-import {useFormik} from "formik";
-import loginFormValidation from "../../../utils/validationSchemas/loginFormValidation.js";
+import React, {cloneElement} from 'react';
+import PropTypes from 'prop-types';
+import {Button, FormGroup} from '@mui/material';
+import FormInput from '../../UI/inputs/FormInput';
+import {useFormik} from 'formik';
+import loginFormValidation from '../../../utils/validationSchemas/loginFormValidation.js';
 import Cookies from 'js-cookie';
-import {styles} from "./styles.js";
-import {cloneElement} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {setModalLoginOpen} from "../../../redux/slices/modalsAuthSlice.js";
+import {styles} from './styles.js';
+import {useDispatch, useSelector} from 'react-redux';
+import {setModalLoginOpen} from '../../../redux/slices/modalsAuthSlice.js';
+import {useSnackbar} from 'notistack';
+import ModalTemplate from '../../UI/ModalTemplate/index.js';
 
 const formInitValues = {
     login: '',
     password: '',
-}
+};
 
 const ModalLogin = ({button}) => {
-    const {modalLoginOpen} = useSelector(state => state.modalsAuth);
+    const {enqueueSnackbar} = useSnackbar();
+    const {modalLoginOpen} = useSelector((state) => state.modalsAuth);
     const dispatch = useDispatch();
 
-    const handleOpen = () => dispatch(setModalLoginOpen());
-    const handleClose = () => {
-        dispatch(setModalLoginOpen())
-    };
+    const handleOpen = () => dispatch(setModalLoginOpen(true)); // Ensure you set the correct state
+    const handleClose = () => dispatch(setModalLoginOpen(false)); // Ensure you set the correct state
 
     const buttonWithOnClick = cloneElement(button, {
         onClick: handleOpen,
@@ -32,15 +32,28 @@ const ModalLogin = ({button}) => {
         initialValues: {...formInitValues},
         validationSchema: loginFormValidation,
         onSubmit: (values, {resetForm}) => {
+            handleClickVariant('success')();
             Cookies.set('LoggedIn', 'true');
-            resetForm();
-            handleClose();
-            window.location.reload()
-        }
+            setTimeout(() => {
+                resetForm();
+                handleClose();
+                window.location.reload();
+            }, 1000);
+        },
     });
 
+    const handleClickVariant = (variant) => () => {
+        enqueueSnackbar('Successful Login!', {variant});
+        console.log(1);
+    };
+
     return (
-        <ModalTemplate title={'Log in'} button={buttonWithOnClick} open={modalLoginOpen} handleClose={handleClose}>
+        <ModalTemplate
+            title={'Log in'}
+            button={buttonWithOnClick}
+            open={modalLoginOpen}
+            handleClose={handleClose}
+        >
             <form onSubmit={formik.handleSubmit} style={styles.formLogin}>
                 <FormGroup className={'flex gap-5'}>
                     <FormInput
@@ -70,10 +83,10 @@ const ModalLogin = ({button}) => {
             </form>
         </ModalTemplate>
     );
-}
+};
 
 ModalLogin.propTypes = {
-    button: PropTypes.object.isRequired
-}
+    button: PropTypes.object.isRequired,
+};
 
 export default ModalLogin;

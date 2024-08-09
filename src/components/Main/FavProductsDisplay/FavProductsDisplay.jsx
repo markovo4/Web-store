@@ -12,7 +12,7 @@ const FavProductsDisplay = () => {
         dispatch(getFavProductList())
     }, [])
     return (
-        <section style={{backgroundColor: '#eeeeee'}}>
+        <section style={styles.section}>
             <Container>
                 <Typography
                     variant={'h4'}

@@ -8,7 +8,7 @@ import routerNames from "../../../router/routes/routerNames.js";
 import Categories from "../../UI/Categories/index.js";
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import ModalLogin from "../../ModalsAuth/ModalLogin/index.js";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -16,9 +16,17 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HeaderDropdown from "../../UI/HeaderDropdown/index.js";
 import Cookies from "js-cookie";
+import {useEffect} from "react";
+import {getProductList} from "../../../redux/slices/localStorageSlice.js";
 
 const HeaderBottom = () => {
 
+    const {orderList} = useSelector(state => state.localStorage);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getProductList());
+    }, [dispatch]);
 
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
 
@@ -66,9 +74,15 @@ const HeaderBottom = () => {
                     <Link to={routerNames.pageFavProducts}>
                         <Button sx={styles.buttonFav} variant="contained"><FavoriteBorderIcon/></Button></Link>
                     <Link to={routerNames.pageCart}>
-                        <Button sx={styles.buttonCart}
-                                variant="contained"><ShoppingCartOutlinedIcon/>
-                            <Typography variant={'h6'}>Cart</Typography></Button></Link>
+                        <Button
+                            sx={styles.buttonCart}
+                            variant="contained">
+                            <ShoppingCartOutlinedIcon/>
+                            {orderList.length !== 0 && <span style={styles.cartItemCounter}>{orderList.length}</span>}
+
+                            <Typography variant={'h6'}>Cart </Typography>
+                        </Button>
+                    </Link>
 
                 </div>
             </Container>

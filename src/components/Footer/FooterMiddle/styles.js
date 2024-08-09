@@ -41,6 +41,9 @@ export const styles = {
         height: '25px'
     },
     formSubtitle: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '5px',
         color: 'rgba(0,0,0,0.61)',
         fontSize: '16px'
     },

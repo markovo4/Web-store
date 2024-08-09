@@ -9,6 +9,7 @@ import FormCard from "../../UI/cards/FormCard/index.js";
 import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
 import {getCheckoutInfo, setCheckoutInfo} from "../../../redux/slices/localStorageSlice.js";
+import {formatPhoneNumber} from "../../../utils/functions/functions.js";
 
 const formInitValues = {
     firstName: '',
@@ -20,6 +21,15 @@ const formInitValues = {
 }
 
 const ContactInfoForm = ({onValidChange, onTouch}) => {
+
+    const handlePhoneNumberChange = (event) => {
+        const {value, name} = event.target;
+        if (name === 'phoneNumber') {
+            formik.setFieldValue('phoneNumber', formatPhoneNumber(value));
+        } else if (name === 'otherReceiverPhoneNumber') {
+            formik.setFieldValue('otherReceiverPhoneNumber', formatPhoneNumber(value));
+        }
+    };
 
     const dispatch = useDispatch();
     const {checkout} = useSelector(state => state.localStorage)
@@ -81,7 +91,7 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
                     <Typography variant='h6' component={'span'}>1. Contact Information</Typography>
                     <div className={'grid grid-cols-2 gap-10'}>
                         <FormInput
-                            onChange={formik.handleChange}
+                            onChange={handlePhoneNumberChange}
                             value={formik.values.phoneNumber.trim()}
                             touched={formik.touched.phoneNumber || onTouch}
                             error={formik.errors.phoneNumber}
@@ -142,7 +152,7 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
                     {otherReceiver && (
                         <div className={'grid grid-cols-2 gap-10'}>
                             <FormInput
-                                onChange={formik.handleChange}
+                                onChange={handlePhoneNumberChange}
                                 value={formik.values.otherReceiverPhoneNumber.trim()}
                                 touched={formik.touched.otherReceiverPhoneNumber || onTouch}
                                 error={formik.errors.otherReceiverPhoneNumber}

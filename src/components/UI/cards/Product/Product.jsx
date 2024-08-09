@@ -19,6 +19,7 @@ import {
 import {Link} from "react-router-dom";
 import routerNames from "../../../../router/routes/routerNames.js";
 import CartSide from "../../../Main/CartSide/index.js";
+import {useSnackbar} from "notistack";
 
 const Product = ({
                      id,
@@ -29,6 +30,7 @@ const Product = ({
                      rating,
                      count,
                  }) => {
+    const {enqueueSnackbar} = useSnackbar();
     const dispatch = useDispatch();
     const {orderList} = useSelector((state) => state.localStorage);
     const {favouriteList} = useSelector((state) => state.localStorage);
@@ -45,7 +47,6 @@ const Product = ({
     const handleOpenCartSide = () => {
         setOpenModal(!openModal)
     };
-    console.log(openModal)
 
     useEffect(() => {
         setIsInCart(orderList.some(product => product.id === id));
@@ -76,6 +77,7 @@ const Product = ({
         }
         dispatch(setProductList(updatedOrderList));
         handleOpenCartSide();
+        enqueueSnackbar('Item Added Successfully!', {variant: 'success'});
     };
 
     const productIndex = useMemo(() => {
@@ -103,7 +105,7 @@ const Product = ({
         setIsInFav((prevAddToFav) => !prevAddToFav);
 
         if (!isInFav) {
-
+            enqueueSnackbar('Item Added to Favourites!', {variant: 'success'});
             const updatedFavList = [
                 ...favouriteList,
                 {id, title, description, image, price, rating, count},
@@ -113,6 +115,7 @@ const Product = ({
 
             dispatch(removeFavProduct(id));
         }
+
     };
 
     return (

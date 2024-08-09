@@ -2,17 +2,14 @@ export const styles = {
     link: {
         textDecoration: 'none',
     },
-    cardContainer: {
-        display: 'flex',
-        marginBottom: '20px'
-    },
     card: {
         padding: '16px',
-        marginLeft: '2px',
+        marginLeft: '8px',
         display: 'flex',
         flexDirection: 'column',
         width: '280px',
-        height: '570px',
+        height: '530px',
+        marginBottom: '8px',
         justifyContent: 'space-between',
         boxShadow: 'none',
         '&:hover': {

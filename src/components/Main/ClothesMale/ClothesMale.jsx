@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 
 const ClothesMale = () => {
     const clothesMale = useGetAllProductsByCategoryQuery({category: 'men\'s clothing', limit: 4});
+
     return (
         <section style={styles.section}>
             <Container>
