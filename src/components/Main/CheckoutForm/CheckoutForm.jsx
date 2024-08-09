@@ -15,6 +15,7 @@ import {Checkbox} from "antd";
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
 import {getCheckoutInfo, getProductList, setCheckoutInfo} from "../../../redux/slices/localStorageSlice.js";
+import {useSnackbar} from "notistack";
 
 const initialValues = {
     promoCode: "",
@@ -23,6 +24,7 @@ const initialValues = {
 };
 
 const CheckoutForm = () => {
+    const {enqueueSnackbar} = useSnackbar();
     const {orderList, checkout} = useSelector((state) => state.localStorage);
 
     const navigate = useNavigate();
@@ -81,7 +83,9 @@ const CheckoutForm = () => {
                 setTouched(true);
             }
             navigate(routerNames.pageOrderInfo)
+            enqueueSnackbar('Successful checkout!', {variant: 'success'});
         },
+
     });
 
     const isFormValid = () => {
