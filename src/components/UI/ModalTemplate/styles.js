@@ -5,19 +5,18 @@ export const styles = {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         minWidth: '500px',
-        bgcolor: 'rgba(65,174,42,0.91)',
-        borderRadius: '20px',
-        boxShadow: 4,
+        bgcolor: 'rgb(65,174,42)',
+        borderRadius: '8px',
+        boxShadow: 2,
         p: 4,
     },
     modal: {
         backgroundColor: 'rgba(255,255,255,0)'
     },
     modalTitle: {
-        marginBottom: '40px',
+        marginBottom: '10px',
         fontWeight: 'bold',
         fontSize: '25px',
         color: '#ffffff',
-        letterSpacing: '2px'
     }
 }

@@ -1,7 +1,7 @@
 export const styles = {
     formRegister: {
         backgroundColor: 'white',
-        borderRadius: '20px',
+        borderRadius: '4px',
         padding: '20px 25px'
     },
     signUpButton: {

@@ -13,6 +13,7 @@ import {
 } from "../../../../redux/slices/localStorageSlice.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
+import ModalDeleteProduct from "../../../ModalsProduct/ModalDeleteProduct/index.js";
 
 const CartItem = ({
                       title,
@@ -23,9 +24,16 @@ const CartItem = ({
                       count,
                       id,
                       onQuantityChange,
-                      amount
+                      amount,
+
                   }) => {
     const {enqueueSnackbar} = useSnackbar();
+
+    const [openModal, setOpenModal] = useState(false);
+
+    const handleOpenCartSide = () => {
+        setOpenModal(!openModal)
+    };
 
     const dispatch = useDispatch();
     const {favouriteList} = useSelector((state) => state.localStorage);
@@ -43,6 +51,7 @@ const CartItem = ({
     const handleDelete = () => {
         dispatch(removeProduct(id));
         enqueueSnackbar('Item was removed from the Cart!', {variant: 'error'});
+        handleOpenCartSide();
     }
 
     useEffect(() => {
@@ -97,14 +106,27 @@ const CartItem = ({
                     >
                         Favourite
                     </Button>
-                    <Button
-                        sx={styles.button}
-                        variant="outlined"
-                        startIcon={<DeleteForeverIcon color='disabled'/>}
-                        onClick={handleDelete}
-                    >
-                        Delete
-                    </Button>
+                    <ModalDeleteProduct
+                        button={
+                            <Button
+                                sx={styles.button}
+                                variant="outlined"
+                                startIcon={<DeleteForeverIcon color='disabled'/>}
+                            >
+                                Delete
+                            </Button>
+                        }
+                        image={image}
+                        price={price}
+                        rating={rating}
+                        count={count}
+                        id={id}
+                        title={title}
+                        open={openModal}
+                        onClose={handleOpenCartSide}
+                        onDelete={handleDelete}
+                    />
+
                 </div>
             </Box>
 
@@ -114,10 +136,10 @@ const CartItem = ({
                     primaryTypographyProps={{sx: styles.listItemTextPrice.primary}}
                     primary={`$${price}`}
                 />
-                <QuantityPicker
+                {onQuantityChange && <QuantityPicker
                     initialAmount={amount}
                     onChange={handleQuantityChange}
-                />
+                />}
             </Box>
         </ListItem>
     )
@@ -131,7 +153,7 @@ CartItem.propTypes = {
     rating: PropTypes.number.isRequired,
     count: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
-    onQuantityChange: PropTypes.func.isRequired,
+    onQuantityChange: PropTypes.func,
     amount: PropTypes.number
 }
 

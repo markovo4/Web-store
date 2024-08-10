@@ -25,10 +25,6 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
         setOpenModal(!openModal)
     };
 
-    const handleClickVariant = (variant) => () => {
-        enqueueSnackbar('Item Added Successfully!', {variant});
-    };
-
     const getShortTitle = (string) => {
         return string.length > 40 ? `${string.slice(0, 41)}...` : string;
     }
@@ -86,11 +82,11 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
         }
         dispatch(setProductList(updatedList));
         handleOpenCartSide();
-        handleClickVariant('success')()
+        enqueueSnackbar('Item Added Successfully!', {variant: 'success'});
     };
 
     return (
-        <div style={styles.cardContainer}>
+        <div>
             <Card sx={styles.card}>
                 <div style={styles.groupedText}>
                     <Link to={`/products/${itemId}`} style={styles.link}>

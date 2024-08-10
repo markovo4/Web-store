@@ -59,13 +59,13 @@ const ModalRegister = ({button}) => {
 
     return (
         <ModalTemplate
-            title={'Register'}
+            title={'Sign Up'}
             button={buttonWithOnClick}
             open={modalRegOpen}
             handleClose={handleClose}
         >
             <form onSubmit={formik.handleSubmit} style={styles.formRegister}>
-                <FormGroup className={'flex gap-5'}>
+                <FormGroup className={'flex'}>
                     <FormInput
                         onChange={formik.handleChange}
                         value={formik.values.firstName.trim()}

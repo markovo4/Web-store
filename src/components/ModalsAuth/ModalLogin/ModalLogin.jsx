@@ -1,4 +1,4 @@
-import React, {cloneElement} from 'react';
+import {cloneElement} from 'react';
 import PropTypes from 'prop-types';
 import {Button, FormGroup} from '@mui/material';
 import FormInput from '../../UI/inputs/FormInput';
@@ -32,7 +32,7 @@ const ModalLogin = ({button}) => {
         initialValues: {...formInitValues},
         validationSchema: loginFormValidation,
         onSubmit: (values, {resetForm}) => {
-            handleClickVariant('success')();
+            enqueueSnackbar('Successful Login!', {variant: 'success'});
             Cookies.set('LoggedIn', 'true');
             setTimeout(() => {
                 resetForm();
@@ -42,11 +42,6 @@ const ModalLogin = ({button}) => {
         },
     });
 
-    const handleClickVariant = (variant) => () => {
-        enqueueSnackbar('Successful Login!', {variant});
-        console.log(1);
-    };
-
     return (
         <ModalTemplate
             title={'Log in'}
@@ -55,7 +50,7 @@ const ModalLogin = ({button}) => {
             handleClose={handleClose}
         >
             <form onSubmit={formik.handleSubmit} style={styles.formLogin}>
-                <FormGroup className={'flex gap-5'}>
+                <FormGroup className={'flex '}>
                     <FormInput
                         onChange={formik.handleChange}
                         value={formik.values.login}
