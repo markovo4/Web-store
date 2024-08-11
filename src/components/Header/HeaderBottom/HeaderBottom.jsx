@@ -28,6 +28,12 @@ const HeaderBottom = () => {
         dispatch(getProductList());
     }, [dispatch]);
 
+    const getTotalProducts = (products) => {
+        return products.reduce((quantity, product) => {
+            return quantity + product.amount;
+        }, 0)
+    }
+
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
 
     const handleLogOut = () => {
@@ -78,7 +84,8 @@ const HeaderBottom = () => {
                             sx={styles.buttonCart}
                             variant="contained">
                             <ShoppingCartOutlinedIcon/>
-                            {orderList.length !== 0 && <span style={styles.cartItemCounter}>{orderList.length}</span>}
+                            {orderList.length !== 0 &&
+                                <span style={styles.cartItemCounter}>{getTotalProducts(orderList)}</span>}
 
                             <Typography variant={'h6'}>Cart </Typography>
                         </Button>

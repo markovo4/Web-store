@@ -14,7 +14,11 @@ const checkoutInitialData = {
     paymentMethod: '',
     bonusCard: '',
     promoCode: '',
+    otherReceiver: false,
     termConditions: false,
+    giftCard: '',
+    message: '',
+    callBack: false,
 }
 
 export const localStorageSlice = createSlice({

@@ -65,7 +65,6 @@ const CartList = () => {
                 ...orderList.slice(productIndex + 1)
             ]
             dispatch(setProductList(updatedList))
-
         }
     }
 
@@ -122,9 +121,9 @@ const CartList = () => {
                             />
 
                         </ListItem>
-                        {orderList.length > 0 && orderList.map((product, index) => (
+                        {orderList.length > 0 && orderList.map((product) => (
                             <CartItem
-                                key={index}
+                                key={product.id}
                                 title={product.title}
                                 description={product.description}
                                 image={product.image}

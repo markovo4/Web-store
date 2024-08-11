@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useFormik} from "formik";
-import checkoutValidation from "../../../utils/validationSchemas/checkoutValidation.js";
+import contactInfoValidation from "../../../utils/validationSchemas/contactInfoValidation.js";
 import {Box, Button, FormControlLabel, FormGroup, Typography} from "@mui/material";
 import {styles} from "../CheckoutForm/styles.js";
 import FormInput from "../../UI/inputs/FormInput/index.js";
@@ -18,6 +18,7 @@ const formInitValues = {
     phoneNumber: '+38(0',
     otherReceiverPhoneNumber: '+38(0',
     email: '',
+    otherReceiver: false,
 }
 
 const ContactInfoForm = ({onValidChange, onTouch}) => {
@@ -59,7 +60,7 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
 
     const formik = useFormik({
         initialValues: {...formInitValues},
-        validationSchema: checkoutValidation(otherReceiver),
+        validationSchema: contactInfoValidation(otherReceiver),
         onSubmit: (values) => {
 
             const filteredValues = {
@@ -77,6 +78,7 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
                 phoneNumber: filteredValues.phoneNumber,
                 otherReceiverPhoneNumber: filteredValues.otherReceiverPhoneNumber,
                 email: filteredValues.email,
+                otherReceiver,
             }
             dispatch(setCheckoutInfo(updatedCheckoutInfo))
             handleClickContinue();
@@ -86,7 +88,11 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <FormCard formTitle={'1. Contact Information'} open={openForm} openForm={handleClickContinue}>
+            <FormCard
+                contactInfo={!formik.errors.firstName && !formik.errors.email && formik.touched.firstName && formik.touched.email}
+                formTitle={'1. Contact Information'}
+                open={openForm}
+                openForm={handleClickContinue}>
                 <Box sx={styles.contactInfo}>
                     <Typography variant='h6' component={'span'}>1. Contact Information</Typography>
                     <div className={'grid grid-cols-2 gap-10'}>

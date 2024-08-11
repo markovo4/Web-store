@@ -34,10 +34,13 @@ export const styles = {
     listItemTextTitle: {
         primary: {
             width: '400px',
-            marginBottom: '20px',
+            marginBottom: '18px',
             fontSize: '20px',
-            fontWeight: 'bold',
-            color: 'rgba(0,0,0,0.71)',
+            color: 'rgb(0,0,0)',
+            paddingLeft: '6px',
+            '&:hover': {
+                textDecoration: 'underline'
+            }
         }
     },
     listItemTextPrice: {
@@ -86,4 +89,12 @@ export const styles = {
             }
         }
     },
+    availabilityText: {
+        color: '#42af2a',
+        fontSize: '16px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '5px',
+        paddingLeft: '6px'
+    }
 }

@@ -1,31 +1,30 @@
 import * as Yup from 'yup';
 
-const phoneRegExp = /^(?:\+?(\d{1,3}))?[-.\s]?(\(?\d{1,4}\)?[-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})$/;
-
-const checkoutValidation = (otherReceiver) => Yup.object({
-    firstName: Yup.string()
-        .trim()
-        .min(4, 'At least 4 characters')
-        .required('Required'),
-    receiverName: otherReceiver ? Yup.string()
-        .trim()
-        .min(4, 'At least 4 characters')
-        .required('Required') : Yup.string(),
-    lastName: otherReceiver ? Yup.string()
-        .trim()
-        .min(5, 'At least 5 characters')
-        .required('Required') : Yup.string(),
-    phoneNumber: Yup.string()
-        .matches(phoneRegExp, 'Please use the following format: +38(XXX) XXX XX XX')
-        .required('Required'),
-    otherReceiverPhoneNumber: otherReceiver ? Yup.string()
-        .matches(phoneRegExp, 'Please use the following format: +38(XXX) XXX XX XX')
-        .required('Required') : Yup.string(),
-    email: Yup.string()
-        .trim()
-        .min(3, 'Must be at least 3 characters')
-        .matches(/@/, 'You are missing @')
-        .required('Required'),
+// Define a validation schema for the CheckoutForm
+const checkoutValidationSchema = Yup.object({
+    promoCode: Yup.string(), // Add any specific validation if required
+    bonusCard: Yup.string(), // Add any specific validation if required
+    termConditions: Yup.boolean().oneOf([true], "You must accept the terms and conditions"), // Must be true
+    giftCardCheckBox: Yup.boolean(), // Boolean to check if the gift card checkbox is checked
+    giftCard: Yup.array().when('giftCardCheckBox', {
+        is: true,
+        then: (schema) =>
+            schema
+                .of(
+                    Yup.string()
+                        .matches(/^\d{4}$/, "Each section must contain exactly 4 digits")
+                        .required("This field is required")
+                )
+                .min(4, "All gift card sections must be filled out")
+                .max(4, "All gift card sections must be filled out"),
+        otherwise: (schema) =>
+            schema
+                .of(
+                    Yup.string()
+                        .matches(/^\d{4}$/, "Each section must contain exactly 4 digits")
+                )
+                .max(4),
+    }),
 });
 
-export default checkoutValidation;
+export default checkoutValidationSchema;

@@ -1,19 +1,21 @@
-import {Avatar, Box, Button, ListItem, ListItemAvatar, ListItemText} from "@mui/material";
+import {Avatar, Box, Button, ListItem, ListItemAvatar, ListItemText, Typography,} from "@mui/material";
 import PropTypes from "prop-types";
 import {styles} from "./styles.js";
 import QuantityPicker from "../../inputs/QuantityPicker";
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import {useEffect, useState} from "react";
 import {
     getFavProductList,
     removeFavProduct,
     removeProduct,
-    setFavProductList
+    setFavProductList,
 } from "../../../../redux/slices/localStorageSlice.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import ModalDeleteProduct from "../../../ModalsProduct/ModalDeleteProduct/index.js";
+import CheckIcon from '@mui/icons-material/Check';
+import {Link} from "react-router-dom";
 
 const CartItem = ({
                       title,
@@ -25,43 +27,36 @@ const CartItem = ({
                       id,
                       onQuantityChange,
                       amount,
-
                   }) => {
     const {enqueueSnackbar} = useSnackbar();
+    const dispatch = useDispatch();
+    const {favouriteList} = useSelector((state) => state.localStorage);
 
     const [openModal, setOpenModal] = useState(false);
 
     const handleOpenCartSide = () => {
-        setOpenModal(!openModal)
+        setOpenModal(!openModal);
     };
 
-    const dispatch = useDispatch();
-    const {favouriteList} = useSelector((state) => state.localStorage);
-    const {orderList} = useSelector(state => state.localStorage);
-
-    const [isInFav, setIsInFav] = useState(
-        favouriteList.some((product) => product.id === id)
-    );
+    const [isInFav, setIsInFav] = useState(false);
 
     useEffect(() => {
-        setIsInFav(favouriteList.some((product) => product.id === id))
+        setIsInFav(favouriteList.some((product) => product.id === id));
     }, [favouriteList, id]);
-
-
-    const handleDelete = () => {
-        dispatch(removeProduct(id));
-        enqueueSnackbar('Item was removed from the Cart!', {variant: 'error'});
-        handleOpenCartSide();
-    }
 
     useEffect(() => {
         dispatch(getFavProductList());
-    }, [dispatch, orderList]);
+    }, [dispatch]);
+
+    const handleDelete = () => {
+        dispatch(removeProduct(id));
+        enqueueSnackbar("Item was removed from the Cart!", {variant: "error"});
+        handleOpenCartSide();
+    };
 
     const handleFavClick = () => {
-        setIsInFav((prevAddToFav) => !prevAddToFav);
         if (!isInFav) {
-            enqueueSnackbar('Item Added to Favourites!', {variant: 'success'});
+            enqueueSnackbar("Item Added to Favourites!", {variant: "success"});
             const updatedFavouriteList = [
                 ...favouriteList,
                 {
@@ -72,17 +67,19 @@ const CartItem = ({
                     price,
                     rating,
                     count,
-                }
+                },
             ];
             dispatch(setFavProductList(updatedFavouriteList));
         } else {
             dispatch(removeFavProduct(id));
+            enqueueSnackbar("Item removed from Favourites!", {variant: "info"});
         }
+        setIsInFav(!isInFav);
     };
 
     const handleQuantityChange = (newAmount) => {
-        onQuantityChange(id, newAmount); // Pass newAmount instead of newCount
-    }
+        onQuantityChange(id, newAmount);
+    };
 
     return (
         <ListItem sx={styles.card}>
@@ -92,16 +89,24 @@ const CartItem = ({
                 </Avatar>
             </ListItemAvatar>
             <Box>
-                <ListItemText
-                    sx={styles.listItemTextTitle}
-                    primaryTypographyProps={{sx: styles.listItemTextTitle.primary}}
-                    primary={title}
-                />
-                <div className={'flex gap-5'}>
+                <Typography sx={styles.availabilityText}>
+                    <CheckIcon fontSize={'small'}/>Available for the pickup today
+                </Typography>
+                <Link to={`/products/${id}`}>
+                    <ListItemText
+                        sx={styles.listItemTextTitle}
+                        primaryTypographyProps={{sx: styles.listItemTextTitle.primary}}
+                        primary={title}
+                    />
+                </Link>
+
+                <div className={"flex gap-5"}>
                     <Button
                         sx={styles.button}
                         variant="outlined"
-                        startIcon={<FavoriteBorderIcon color={isInFav ? 'error' : 'disabled'}/>}
+                        startIcon={
+                            <FavoriteBorderIcon color={isInFav ? "error" : "disabled"}/>
+                        }
                         onClick={handleFavClick}
                     >
                         Favourite
@@ -111,7 +116,7 @@ const CartItem = ({
                             <Button
                                 sx={styles.button}
                                 variant="outlined"
-                                startIcon={<DeleteForeverIcon color='disabled'/>}
+                                startIcon={<DeleteForeverIcon color="disabled"/>}
                             >
                                 Delete
                             </Button>
@@ -126,7 +131,6 @@ const CartItem = ({
                         onClose={handleOpenCartSide}
                         onDelete={handleDelete}
                     />
-
                 </div>
             </Box>
 
@@ -136,14 +140,13 @@ const CartItem = ({
                     primaryTypographyProps={{sx: styles.listItemTextPrice.primary}}
                     primary={`$${price}`}
                 />
-                {onQuantityChange && <QuantityPicker
-                    initialAmount={amount}
-                    onChange={handleQuantityChange}
-                />}
+                {onQuantityChange && (
+                    <QuantityPicker initialAmount={amount} onChange={handleQuantityChange}/>
+                )}
             </Box>
         </ListItem>
-    )
-}
+    );
+};
 
 CartItem.propTypes = {
     title: PropTypes.string.isRequired,
@@ -154,7 +157,7 @@ CartItem.propTypes = {
     count: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
     onQuantityChange: PropTypes.func,
-    amount: PropTypes.number
-}
+    amount: PropTypes.number,
+};
 
 export default CartItem;

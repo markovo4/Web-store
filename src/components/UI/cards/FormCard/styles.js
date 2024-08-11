@@ -1,6 +1,8 @@
 export const styles = {
     formTitle: {
-        color: '#6b6b6b'
+        color: 'rgba(69,69,69,0.86)',
+        fontSize: '20px',
+        marginBottom: '10px'
     },
     formSubtitle: {
         color: '#6b6b6b',
@@ -18,7 +20,7 @@ export const styles = {
             minWidth: '150px',
             maxHeight: '40px',
         },
-        // Styles for contained buttons
+
         '&.MuiButton-outlined': {
             backgroundColor: 'transparent',
             padding: '5px 20px',
@@ -40,28 +42,19 @@ export const styles = {
             }
         }
     },
-    // summaryForm: {
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //     justifyContent: 'space-between',
-    //     backgroundColor: 'black'
-    // },
     summaryForm: {
-        padding: '20px',
+        padding: '40px',
         border: 'unset',
         display: 'flex',
         alignItems: 'center',
         width: '800px',
-        height: '100px',
+        height: 'auto',
         justifyContent: 'space-between',
         borderRadius: '8px',
         marginBottom: '20px',
         backgroundColor: '#e3e3e3',
         '& .MuiTypography-subtitle1': {
-            fontSize: '18px', // Subtitle within Box
-        },
-        '@media (max-width: 600px)': {
-            padding: '10px', // Media query for responsiveness
+            fontSize: '18px',
         },
     },
     buttonSubmit: {
@@ -107,5 +100,26 @@ export const styles = {
         justifyContent: 'center',
         paddingBottom: '20px',
         borderRadius: '0 0 8px 8px'
+    },
+    imgContainer: {
+        height: '100px',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '10px',
+        gap: '10px',
+        borderRadius: '8px',
+    },
+    img: {
+        height: '90px',
+        width: '90px',
+        borderRadius: '8px',
+        objectFit: 'contain',
+        objectPosition: 'center',
+        padding: '10px',
+        backgroundColor: 'white',
+    },
+    contactInfoTitle: {
+        color: 'rgba(0,0,0,0.58)',
+        fontSize: '14px'
     }
 }

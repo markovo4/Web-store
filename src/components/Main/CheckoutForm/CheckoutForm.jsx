@@ -1,26 +1,30 @@
-import {Box, Button, Container, List, ListItem, Typography} from "@mui/material";
-import {styles} from "./styles.js";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {useEffect, useState} from "react";
+import {Box, Button, Container, List, ListItem, Typography,} from "@mui/material";
+import {Checkbox} from "antd";
 import {Link, useNavigate} from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import EditIcon from "@mui/icons-material/Edit";
+import {useFormik} from "formik";
+import {useDispatch, useSelector} from "react-redux";
+import {useSnackbar} from "notistack";
+import {getCheckoutInfo, getProductList, setCheckoutInfo,} from "../../../redux/slices/localStorageSlice.js";
 import routerNames from "../../../router/routes/routerNames.js";
+import checkoutValidationSchema from "../../../utils/validationSchemas/checkoutValidation.js";
+import {styles} from "./styles.js";
 import FormCard from "../../UI/cards/FormCard";
 import ProductCheckout from "../../UI/cards/ProductCheckout";
-import EditIcon from "@mui/icons-material/Edit";
 import ContactInfoForm from "../ContactInfoForm";
-import {useEffect, useState} from "react";
 import DeliveryOptionsForm from "../DeliveryOptionsForm";
 import PaymentOptionsForm from "../PaymentOptionsForm";
 import InputWithButton from "../../UI/inputs/InputWithButton";
-import {Checkbox} from "antd";
-import {useFormik} from "formik";
-import {useDispatch, useSelector} from "react-redux";
-import {getCheckoutInfo, getProductList, setCheckoutInfo} from "../../../redux/slices/localStorageSlice.js";
-import {useSnackbar} from "notistack";
+import FormInput from "../../UI/inputs/FormInput/index.js";
 
 const initialValues = {
     promoCode: "",
     bonusCard: "",
     termConditions: false,
+    giftCardCheckBox: false,
+    giftCard: new Array(4).fill(""),
 };
 
 const CheckoutForm = () => {
@@ -28,11 +32,9 @@ const CheckoutForm = () => {
     const {orderList, checkout} = useSelector((state) => state.localStorage);
 
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
 
     const [openForm, setOpenForm] = useState(false);
-
     const [isContactInfoValid, setContactInfoValid] = useState(false);
     const [isDeliveryOptionsValid, setDeliveryOptionsValid] = useState(false);
     const [isPaymentOptionsValid, setPaymentOptionsValid] = useState(false);
@@ -44,27 +46,26 @@ const CheckoutForm = () => {
 
     useEffect(() => {
         dispatch(getProductList());
-        dispatch(getCheckoutInfo())
+        dispatch(getCheckoutInfo());
     }, [dispatch]);
 
-    const getTotalPrice = (products) => {
-        const priceTotal = products.reduce(
-            (totalPrice, product) => {
-                return {
-                    price: totalPrice.price + product.price * product.amount,
-                    quantity: totalPrice.quantity + product.amount,
-                };
+    const getTotalPrice = (products) =>
+        products.reduce(
+            (total, product) => {
+                total.price += product.price * product.amount;
+                total.quantity += product.amount;
+                return total;
             },
             {price: 0, quantity: 0}
         );
-        return {price: parseFloat(priceTotal.price.toFixed(2)), quantity: priceTotal.quantity};
-    };
 
     const handlePromoClick = () => {
+        console.log("Promo code or bonus card applied.");
     };
 
     const formik = useFormik({
         initialValues,
+        validationSchema: checkoutValidationSchema,
         onSubmit: (values, {resetForm}) => {
             if (isContactInfoValid && isDeliveryOptionsValid && isPaymentOptionsValid) {
                 console.log("All forms are valid. Proceeding with checkout...", values);
@@ -74,28 +75,37 @@ const CheckoutForm = () => {
                     bonusCard: values.bonusCard,
                     promoCode: values.promoCode,
                     termConditions: values.termConditions,
-                    totalPrice: getTotalPrice(orderList).price
-                }
-                dispatch(setCheckoutInfo(updatedCheckoutInfo))
+                    totalPrice: getTotalPrice(orderList).price,
+                    giftCard: values.giftCard,
+                };
+                dispatch(setCheckoutInfo(updatedCheckoutInfo));
                 resetForm();
+                navigate(routerNames.pageOrderInfo);
+                enqueueSnackbar("Successful checkout!", {variant: "success"});
             } else {
                 console.log("Please fill all the fields");
                 setTouched(true);
             }
-            navigate(routerNames.pageOrderInfo)
-            enqueueSnackbar('Successful checkout!', {variant: 'success'});
         },
-
     });
 
-    const isFormValid = () => {
-        return (
-            formik.values.termConditions &&
-            isContactInfoValid &&
-            isDeliveryOptionsValid &&
-            isPaymentOptionsValid
-        );
+    const handleGiftCardInputChange = (e, index) => {
+        const value = e.target.value;
+        if (value.length <= 4 && /^\d*$/.test(value)) {
+            const newGiftCard = [...formik.values.giftCard];
+            newGiftCard[index] = value;
+            formik.setFieldValue("giftCard", newGiftCard);
+            if (value.length === 4 && index < newGiftCard.length - 1) {
+                document.getElementById(`giftCard-${index + 1}`).focus();
+            }
+        }
     };
+
+    const isFormValid = () =>
+        formik.values.termConditions &&
+        isContactInfoValid &&
+        isDeliveryOptionsValid &&
+        isPaymentOptionsValid;
 
     return (
         <section style={styles.sectionForm}>
@@ -116,7 +126,12 @@ const CheckoutForm = () => {
                 </div>
                 <div style={styles.wrapper}>
                     <div>
-                        <FormCard formTitle={"Your order"} open={openForm} openForm={handleClickContinue}>
+                        <FormCard
+                            products={true}
+                            formTitle={"Your order"}
+                            open={openForm}
+                            openForm={handleClickContinue}
+                        >
                             <List className={"w-[800px]"} sx={styles.checkoutList}>
                                 <ListItem sx={styles.titleList}>
                                     <Typography variant="h6">Your order</Typography>
@@ -131,17 +146,15 @@ const CheckoutForm = () => {
                                     </Link>
                                 </ListItem>
                                 {orderList.length > 0 &&
-                                    orderList.map((product, index) => {
-                                        return (
-                                            <ProductCheckout
-                                                key={index}
-                                                title={product.title}
-                                                image={product.image}
-                                                count={product.amount}
-                                                price={product.price}
-                                            />
-                                        );
-                                    })}
+                                    orderList.map((product, index) => (
+                                        <ProductCheckout
+                                            key={index}
+                                            title={product.title}
+                                            image={product.image}
+                                            count={product.amount}
+                                            price={product.price}
+                                        />
+                                    ))}
                                 <Button
                                     onClick={handleClickContinue}
                                     variant="outlined"
@@ -151,9 +164,68 @@ const CheckoutForm = () => {
                                 </Button>
                             </List>
                         </FormCard>
-                        <ContactInfoForm onValidChange={setContactInfoValid} onTouch={isTouched}/>
-                        <DeliveryOptionsForm onValidChange={setDeliveryOptionsValid} onTouch={isTouched}/>
+                        <ContactInfoForm
+                            onValidChange={setContactInfoValid}
+                            onTouch={isTouched}
+                        />
+                        <DeliveryOptionsForm
+                            onValidChange={setDeliveryOptionsValid}
+                            onTouch={isTouched}
+                        />
                         <PaymentOptionsForm onValidChange={setPaymentOptionsValid}/>
+                        <List>
+                            <ListItem sx={styles.checkBoxGiftCard}>
+                                <Checkbox
+                                    name="giftCardCheckBox"
+                                    checked={formik.values.giftCardCheckBox}
+                                    onChange={(event) =>
+                                        formik.setFieldValue("giftCardCheckBox", event.target.checked)
+                                    }
+                                >
+                                    I have a gift card
+                                </Checkbox>
+
+                                {formik.values.giftCardCheckBox && (
+                                    <>
+                                        <Box sx={styles.container}>
+                                            <Typography variant="h6" sx={styles.giftCardInfoTitle}>
+                                                Please enter your card information
+                                            </Typography>
+                                            <Typography variant="span" sx={styles.giftCardInfoSubtitle}>
+                                                Code
+                                            </Typography>
+                                            <Box sx={styles.inputGiftCardContainer}>
+                                                {formik.values.giftCard.map((data, i) => {
+                                                    const isTouched = formik.touched.giftCard
+                                                        ? formik.touched.giftCard[i]
+                                                        : false;
+                                                    const error = formik.errors.giftCard
+                                                        ? formik.errors.giftCard[i]
+                                                        : undefined;
+                                                    return (
+                                                        <FormInput
+                                                            key={i}
+                                                            id={`giftCard-${i}`}
+                                                            name={`giftCard[${i}]`}
+                                                            onChange={(e) => handleGiftCardInputChange(e, i)}
+                                                            onFocus={(e) => e.target.select()}
+                                                            type={"text"}
+                                                            value={formik.values.giftCard[i]}
+                                                            touched={isTouched}
+                                                            error={error}
+                                                        />
+                                                    );
+                                                })}
+                                            </Box>
+                                        </Box>
+                                        <Typography color={"error"} variant={"span"}>
+                                            When paying with a gift card, bonuses cannot be debited from your bonus
+                                            card.
+                                        </Typography>
+                                    </>
+                                )}
+                            </ListItem>
+                        </List>
                     </div>
                     <div>
                         <Box sx={styles.sidebar}>
@@ -167,6 +239,8 @@ const CheckoutForm = () => {
                                     buttonText={"apply"}
                                     onButtonClick={handlePromoClick}
                                     onChange={formik.handleChange}
+                                    value={formik.values.promoCode}
+                                    name="promoCode"
                                 />
                                 <InputWithButton
                                     placeHolder={"293"}
@@ -174,6 +248,8 @@ const CheckoutForm = () => {
                                     buttonText={"ok"}
                                     onButtonClick={handlePromoClick}
                                     onChange={formik.handleChange}
+                                    value={formik.values.bonusCard}
+                                    name="bonusCard"
                                 />
                                 {orderList.length > 0 && (
                                     <div style={styles.itemsPrice}>
@@ -198,7 +274,11 @@ const CheckoutForm = () => {
                                             Total:
                                         </Typography>
 
-                                        <Typography sx={styles.totalPriceMain} variant="h6" component={"span"}>
+                                        <Typography
+                                            sx={styles.totalPriceMain}
+                                            variant="h6"
+                                            component={"span"}
+                                        >
                                             $ {getTotalPrice(orderList).price}
                                         </Typography>
                                     </div>

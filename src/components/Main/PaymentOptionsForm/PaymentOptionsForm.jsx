@@ -14,7 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getCheckoutInfo, setCheckoutInfo} from "../../../redux/slices/localStorageSlice.js";
 
 const initialValues = {
-    paymentOption: 'getPay',
+    paymentOption: 'Pay when you get the product',
 }
 
 const PaymentOptionsForm = ({onValidChange}) => {
@@ -49,7 +49,11 @@ const PaymentOptionsForm = ({onValidChange}) => {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <FormCard formTitle={'3. Payment options'} open={openForm} openForm={handleClickContinue}>
+            <FormCard
+                payment={true}
+                formTitle={'3. Payment options'}
+                open={openForm}
+                openForm={handleClickContinue}>
                 <Box sx={styles.contactInfo}>
                     <Typography variant='h6' component={'span'}>3. Payment options</Typography>
 
@@ -61,7 +65,7 @@ const PaymentOptionsForm = ({onValidChange}) => {
                     >
                         <div style={styles.radioButton}>
                             <FormControlLabel
-                                value="getPay"
+                                value="Pay when you get the product"
                                 control={<Radio/>}
                                 label="Pay when you get the product"
                             />
@@ -69,7 +73,7 @@ const PaymentOptionsForm = ({onValidChange}) => {
                         </div>
                         <div style={styles.radioButton}>
                             <FormControlLabel
-                                value="partialPay"
+                                value="Pay by parts"
                                 control={<Radio/>}
                                 label="Pay by parts"
                             />
@@ -77,7 +81,7 @@ const PaymentOptionsForm = ({onValidChange}) => {
                         </div>
                         <div style={styles.radioButton}>
                             <FormControlLabel
-                                value="onlinePay"
+                                value="Online payment"
                                 control={<Radio/>}
                                 label="Online payment"
                             />
@@ -85,7 +89,7 @@ const PaymentOptionsForm = ({onValidChange}) => {
                         </div>
                         <div style={styles.radioButton}>
                             <FormControlLabel
-                                value="privatPay"
+                                value="Privat Bank"
                                 control={<Radio/>}
                                 label="Pay with Privat Bank"
                             />
@@ -93,7 +97,7 @@ const PaymentOptionsForm = ({onValidChange}) => {
                         </div>
                         <div style={styles.radioButton}>
                             <FormControlLabel
-                                value="payCheck"
+                                value="Company check Payment"
                                 control={<Radio/>}
                                 label="Company check Payment"
                             />
@@ -101,7 +105,7 @@ const PaymentOptionsForm = ({onValidChange}) => {
                         </div>
                         <div style={styles.radioButton}>
                             <FormControlLabel
-                                value="applePay"
+                                value="Apple Pay"
                                 control={<Radio/>}
                                 label="Apple Pay"
                             />

@@ -19,7 +19,6 @@ export const styles = {
         }
     },
     image: {
-        size: '10px',
         marginTop: '40px',
         marginBottom: '20px',
         objectFit: 'contain',

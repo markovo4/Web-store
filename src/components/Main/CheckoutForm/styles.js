@@ -212,5 +212,39 @@ export const styles = {
                 boxShadow: 'none',
             }
         }
+    },
+    checkBoxGiftCard: {
+        padding: '40px',
+        border: 'unset',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '800px',
+        height: 'auto',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        gap: '20px',
+        borderRadius: '8px',
+        marginBottom: '20px',
+        backgroundColor: '#ffffff',
+    },
+    inputGiftCardContainer: {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        gap: '60px',
+
+    },
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: '#f6f5f5',
+        width: '700px',
+        border: '1px solid rgba(0,0,0,0.1)',
+        borderRadius: '8px',
+        padding: '20px',
+    },
+    giftCardInfoSubtitle: {},
+    giftCardInfoTitle: {
+        marginBottom: '10px'
     }
 }

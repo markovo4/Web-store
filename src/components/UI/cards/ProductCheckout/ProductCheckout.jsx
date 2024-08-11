@@ -6,11 +6,11 @@ const ProductCheckout = ({image, title, count, price}) => {
     return (
         <ListItem className={'flex items-center bg-white gap-x-20'}
                   sx={styles.listStyles}>
-            <img src={image} alt={title} className={'w-[50px] h-[60px]'}/>
-            <Typography variant={'span'} component={'span'} className={'w-[300px]'}>
+            <img src={image} alt={title} style={styles.image}/>
+            <Typography variant='span' component={'span'} className={'w-[300px]'}>
                 {title}
             </Typography>
-            <Typography variant={'span'} component={'span'} className={'w-[80px]'}>
+            <Typography variant='span' component={'span'} className={'w-[80px]'}>
                 {count} Itm.
             </Typography>
             <Typography className={'w-[100px]'} sx={styles.price}>

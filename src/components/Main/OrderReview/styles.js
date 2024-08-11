@@ -47,8 +47,10 @@ export const styles = {
         marginBottom: '8px',
     },
     image: {
-        width: '80px',
-        height: '96px',
+        width: '90px',
+        height: '90px',
+        objectFit: 'contain',
+        objectPosition: 'center',
         borderRadius: '4px',
         marginRight: '16px',
     },

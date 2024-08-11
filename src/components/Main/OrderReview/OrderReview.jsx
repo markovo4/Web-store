@@ -1,7 +1,7 @@
 import {Box, Button, Container, Divider, List, ListItem, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {getCheckoutInfo} from "../../../redux/slices/localStorageSlice.js";
+import {getCheckoutInfo, removeAllProducts, removeCheckoutInfo} from "../../../redux/slices/localStorageSlice.js";
 import {styles} from "./styles.js";
 import {Link} from "react-router-dom";
 import routerNames from "../../../router/routes/routerNames.js";
@@ -16,11 +16,14 @@ const OrderReview = () => {
         setOpen(!showProducts);
     }
 
+    const handleClick = () => {
+        dispatch(removeAllProducts())
+        dispatch(removeCheckoutInfo())
+    }
+
     useEffect(() => {
         dispatch(getCheckoutInfo())
     }, [dispatch]);
-
-    console.log(checkout);
 
     return (
         <Container sx={styles.container}>
@@ -52,9 +55,9 @@ const OrderReview = () => {
                     <Button sx={styles.buttonInfo} variant='contained' onClick={handleShowProducts}>More Info</Button>
                 </ListItem>
                 <ListItem sx={styles.productItem} className={'flex flex-col'}>
-                    {showProducts && checkout.productToOrder.map((product, index) => (
+                    {showProducts && checkout.productToOrder.map((product) => (
 
-                        <Box key={index} className='flex flex-col' sx={styles.productBox}>
+                        <Box key={product.id} className='flex flex-col' sx={styles.productBox}>
                             <Box className='flex items-center justify-evenly' sx={styles.productDetails}>
                                 <img src={product.image} alt={product.title} style={styles.image}/>
                                 <Typography sx={styles.productTitle} variant='h6'>{product.title}</Typography>
@@ -71,7 +74,8 @@ const OrderReview = () => {
                 </ListItem>
                 <ListItem>
                     <Link to={routerNames.pageMain}>
-                        <Button variant='contained' sx={styles.buttonMain}>Go to main page</Button>
+                        <Button variant='contained' sx={styles.buttonMain} onClick={handleClick}>Go to main
+                            page</Button>
                     </Link>
                 </ListItem>
             </List>

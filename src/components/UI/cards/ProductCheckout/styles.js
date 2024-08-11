@@ -8,5 +8,12 @@ export const styles = {
         fontSize: '20px',
         color: '#363636',
         textAlign: 'right'
-    }
+    },
+    image: {
+        height: '90px',
+        width: '90px',
+        borderRadius: '8px',
+        objectFit: 'contain',
+        objectPosition: 'center',
+    },
 }

@@ -13,7 +13,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getCheckoutInfo, setCheckoutInfo} from "../../../redux/slices/localStorageSlice.js";
 
 const initialValues = {
-    deliveryOption: 'store',
+    deliveryOption: 'Pick up at the store',
     city: null,
 };
 
@@ -48,7 +48,11 @@ const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <FormCard formTitle={'2. Delivery options'} open={openForm} openForm={handleClickContinue}>
+            <FormCard
+                delivery={!formik.errors.city && !formik.errors.deliveryOption && formik.touched.city && formik.touched.deliveryOption}
+                formTitle={'2. Delivery options'}
+                open={openForm}
+                openForm={handleClickContinue}>
                 <Box sx={styles.contactInfo}>
                     <Typography variant='h6' component={'span'}>2. Delivery options</Typography>
 
@@ -74,7 +78,7 @@ const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
                     >
                         <div style={styles.radioButton}>
                             <FormControlLabel
-                                value="store"
+                                value="Pick up at the store"
                                 control={<Radio/>}
                                 label="Pick up at the store"
                             />
@@ -83,7 +87,7 @@ const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
 
                         <div style={styles.radioButton}>
                             <FormControlLabel
-                                value="novaPoshta"
+                                value="NOVA Poshta"
                                 control={<Radio/>}
                                 label="Pick up at Nova Poshta delivery post"
                             />
@@ -92,7 +96,7 @@ const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
 
                         <div style={styles.radioButton}>
                             <FormControlLabel
-                                value="ukrPoshta"
+                                value="UKR Poshta"
                                 control={<Radio/>}
                                 label="Pick up at UKR Poshta delivery post"
                             />
