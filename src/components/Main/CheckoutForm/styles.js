@@ -246,5 +246,57 @@ export const styles = {
     giftCardInfoSubtitle: {},
     giftCardInfoTitle: {
         marginBottom: '10px'
-    }
+    },
+    commentButton: {
+        color: 'rgba(0,0,0,0.55)',
+        backgroundColor: 'white',
+        '&:hover': {
+            backgroundColor: 'transparent',
+        },
+        '&:disabled': {
+            color: 'grey.500',
+        },
+        border: 'unset',
+        borderColor: 'transparent',
+        borderRadius: '50%',
+        padding: '0',
+        boxShadow: 0,
+        transition: 'none',
+    },
+    commentIcon: {
+        fontSize: '15px'
+    },
+    commentTitle: {
+        fontSize: '14px',
+        color: 'rgba(0,0,0,0.72)'
+    },
+    textArea: {
+        width: '700px', // Full width of the container
+        height: '100px',
+        padding: '10px', // Padding for internal spacing
+        borderRadius: '4px', // Rounded corners for a smoother look
+        border: '1px solid #ccc', // Light gray border
+        resize: 'none', // Allows vertical resizing
+        fontSize: '16px', // Standard font size for readability
+        color: '#333', // Dark text color
+        outline: 'none', // Remove default browser outline
+        '&:hover': {
+            borderColor: '#888', // Darker border on hover for feedback
+        },
+        '&:focus': {
+            borderColor: '#42af2a', // Antd primary color for focus state
+            boxShadow: '0 0 0 3px #42af2a', // Soft shadow for focus
+        },
+        '&:disabled': {
+            backgroundColor: '#f5f5f5', // Light gray background for disabled state
+            color: '#a0a0a0', // Gray text color for disabled state
+        },
+        '&::placeholder': {
+            color: '#aaa', // Light gray placeholder text
+            opacity: 1, // Ensure visibility of placeholder
+        },
+        '&.error': {
+            borderColor: '#f5222d', // Bright red for error state
+        },
+    },
 }

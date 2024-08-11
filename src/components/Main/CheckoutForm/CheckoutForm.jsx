@@ -1,9 +1,11 @@
 import {useEffect, useState} from "react";
-import {Box, Button, Container, List, ListItem, Typography,} from "@mui/material";
+import {Box, Button, Container, IconButton, List, ListItem, Typography,} from "@mui/material";
 import {Checkbox} from "antd";
 import {Link, useNavigate} from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EditIcon from "@mui/icons-material/Edit";
+import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
+import TextArea from "antd/es/input/TextArea";
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
@@ -18,6 +20,7 @@ import DeliveryOptionsForm from "../DeliveryOptionsForm";
 import PaymentOptionsForm from "../PaymentOptionsForm";
 import InputWithButton from "../../UI/inputs/InputWithButton";
 import FormInput from "../../UI/inputs/FormInput/index.js";
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 const initialValues = {
     promoCode: "",
@@ -25,6 +28,8 @@ const initialValues = {
     termConditions: false,
     giftCardCheckBox: false,
     giftCard: new Array(4).fill(""),
+    noCallback: false,
+    comment: '',
 };
 
 const CheckoutForm = () => {
@@ -33,6 +38,8 @@ const CheckoutForm = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const [addComment, setAddComment] = useState(false);
 
     const [openForm, setOpenForm] = useState(false);
     const [isContactInfoValid, setContactInfoValid] = useState(false);
@@ -49,15 +56,25 @@ const CheckoutForm = () => {
         dispatch(getCheckoutInfo());
     }, [dispatch]);
 
-    const getTotalPrice = (products) =>
-        products.reduce(
-            (total, product) => {
-                total.price += product.price * product.amount;
-                total.quantity += product.amount;
-                return total;
+    const handleAddComment = () => {
+        setAddComment(!addComment);
+    };
+
+    const getTotalPrice = (products) => {
+        const priceTotal = products.reduce(
+            (totalPrice, product) => {
+                return {
+                    price: totalPrice.price + product.price * product.amount,
+                    quantity: totalPrice.quantity + product.amount,
+                };
             },
             {price: 0, quantity: 0}
         );
+        return {
+            price: parseFloat(priceTotal.price.toFixed(2)),
+            quantity: priceTotal.quantity,
+        };
+    };
 
     const handlePromoClick = () => {
         console.log("Promo code or bonus card applied.");
@@ -67,7 +84,11 @@ const CheckoutForm = () => {
         initialValues,
         validationSchema: checkoutValidationSchema,
         onSubmit: (values, {resetForm}) => {
-            if (isContactInfoValid && isDeliveryOptionsValid && isPaymentOptionsValid) {
+            if (
+                isContactInfoValid &&
+                isDeliveryOptionsValid &&
+                isPaymentOptionsValid
+            ) {
                 console.log("All forms are valid. Proceeding with checkout...", values);
                 const updatedCheckoutInfo = {
                     ...checkout,
@@ -77,6 +98,8 @@ const CheckoutForm = () => {
                     termConditions: values.termConditions,
                     totalPrice: getTotalPrice(orderList).price,
                     giftCard: values.giftCard,
+                    noCallback: values.noCallback,
+                    comment: values.comment
                 };
                 dispatch(setCheckoutInfo(updatedCheckoutInfo));
                 resetForm();
@@ -179,7 +202,10 @@ const CheckoutForm = () => {
                                     name="giftCardCheckBox"
                                     checked={formik.values.giftCardCheckBox}
                                     onChange={(event) =>
-                                        formik.setFieldValue("giftCardCheckBox", event.target.checked)
+                                        formik.setFieldValue(
+                                            "giftCardCheckBox",
+                                            event.target.checked
+                                        )
                                     }
                                 >
                                     I have a gift card
@@ -191,7 +217,10 @@ const CheckoutForm = () => {
                                             <Typography variant="h6" sx={styles.giftCardInfoTitle}>
                                                 Please enter your card information
                                             </Typography>
-                                            <Typography variant="span" sx={styles.giftCardInfoSubtitle}>
+                                            <Typography
+                                                variant="span"
+                                                sx={styles.giftCardInfoSubtitle}
+                                            >
                                                 Code
                                             </Typography>
                                             <Box sx={styles.inputGiftCardContainer}>
@@ -219,11 +248,69 @@ const CheckoutForm = () => {
                                             </Box>
                                         </Box>
                                         <Typography color={"error"} variant={"span"}>
-                                            When paying with a gift card, bonuses cannot be debited from your bonus
-                                            card.
+                                            When paying with a gift card, bonuses cannot be debited
+                                            from your bonus card.
                                         </Typography>
                                     </>
                                 )}
+                            </ListItem>
+
+                            <ListItem sx={styles.checkBoxGiftCard}>
+                                {!addComment && <Box className={"flex items-center gap-2"}>
+                                    <IconButton
+                                        onClick={handleAddComment}
+                                        aria-label="comment"
+                                        size="small"
+                                        sx={styles.commentButton}
+                                    >
+                                        <CommentOutlinedIcon
+                                            fontSize="small"
+                                            sx={styles.commentIcon}
+                                        />
+                                    </IconButton>
+                                    <Typography
+                                        variant="span"
+                                        component={"span"}
+                                        sx={styles.commentTitle}
+                                    >
+                                        Add a comment
+                                    </Typography>
+                                </Box>}
+                                {addComment && (
+                                    <Box className={'flex items-start gap-5'}>
+                                        <TextArea
+                                            style={styles.textArea}
+                                            placeholder={"Comment for your parcel"}
+                                            name={'comment'}
+                                            id={'comment'}
+                                            onChange={formik.handleChange}
+                                            autoSize={{minRows: 3, maxRows: 5}}
+                                            allowClear
+                                        />
+
+                                        <IconButton
+                                            onClick={handleAddComment}
+                                            aria-label="comment"
+                                            size="small"
+                                            sx={styles.commentButton}
+                                        >
+                                            <CloseOutlinedIcon
+                                                fontSize="small"
+                                                sx={styles.commentIcon}
+                                            />
+                                        </IconButton>
+                                    </Box>
+
+                                )}
+                                <Checkbox
+                                    name="noCallback"
+                                    checked={formik.values.noCallback}
+                                    onChange={(event) =>
+                                        formik.setFieldValue("noCallback", event.target.checked)
+                                    }
+                                >
+                                    I do not need a callback for order confirmation
+                                </Checkbox>
                             </ListItem>
                         </List>
                     </div>
@@ -255,11 +342,7 @@ const CheckoutForm = () => {
                                     <div style={styles.itemsPrice}>
                                         <Typography sx={styles.itemsCount}>
                                             {`${getTotalPrice(orderList).quantity} ${
-                                                getTotalPrice(orderList).quantity < 2
-                                                    ? getTotalPrice(orderList).quantity === 1
-                                                        ? "item"
-                                                        : "items"
-                                                    : "items"
+                                                getTotalPrice(orderList).quantity === 1 ? "item" : "items"
                                             } `}
                                         </Typography>
                                         <Typography sx={styles.totalPriceSub}>
@@ -296,7 +379,10 @@ const CheckoutForm = () => {
                                         name="termConditions"
                                         checked={formik.values.termConditions}
                                         onChange={(event) =>
-                                            formik.setFieldValue("termConditions", event.target.checked)
+                                            formik.setFieldValue(
+                                                "termConditions",
+                                                event.target.checked
+                                            )
                                         }
                                     >
                                         I Accept terms and conditions
