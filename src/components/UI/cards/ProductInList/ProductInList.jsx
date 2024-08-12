@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import {Button, Card, Typography} from "@mui/material";
+import {Box, Button, Card, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import {styles} from "./styles.js";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -109,9 +109,16 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                     </div>
 
                     <div style={styles.wrapper}>
-                        <Typography variant="h6" sx={styles.price}>
-                            $ {price}
-                        </Typography>
+                        <Box className={'flex flex-col'}>
+                            <Typography variant="h6" sx={styles.priceOriginal}>
+                                $ {price}
+                                <span>-10%</span>
+                            </Typography>
+                            <Typography variant="h6" sx={styles.price}>
+                                $ {(price * 0.9).toFixed(2)}
+                            </Typography>
+                        </Box>
+
                         {isInCart ? (
 
                             <CartSide

@@ -33,8 +33,10 @@ const HeaderDropdown = ({children, title, icon, iconStart}) => {
             <Menu
                 id="categories-menu"
                 anchorEl={anchorEl}
+                keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleMouseLeave}
+                MenuListProps={{onMouseLeave: handleMouseLeave}}
                 sx={styles.menu}
             >
                 {children}

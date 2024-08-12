@@ -1,11 +1,11 @@
 import {styles} from "./styles";
-import {Button, Container, MenuItem, Typography} from "@mui/material";
+import {Box, Button, Container, MenuItem, Typography} from "@mui/material";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ProductsSelect from "../../UI/inputs/ProductsSelect";
 import {Link} from "react-router-dom";
 import routerNames from "../../../router/routes/routerNames.js";
-import Categories from "../../UI/Categories/index.js";
+import CategoriesDropdown from "../../UI/CategoriesDropdown/index.js";
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import ModalLogin from "../../ModalsAuth/ModalLogin/index.js";
 import {useDispatch, useSelector} from "react-redux";
@@ -28,10 +28,14 @@ const HeaderBottom = () => {
         dispatch(getProductList());
     }, [dispatch]);
 
-    const getTotalProducts = (products) => {
-        return products.reduce((quantity, product) => {
-            return quantity + product.amount;
-        }, 0)
+    const getTotalPrice = (products) => {
+        const priceTotal = products.reduce((totalPrice, product) => {
+            return {
+                price: totalPrice.price + product.price * product.amount,
+                quantity: totalPrice.quantity + product.amount
+            }
+        }, {price: 0, quantity: 0});
+        return {price: parseFloat(priceTotal.price.toFixed(2)), quantity: priceTotal.quantity};
     }
 
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
@@ -44,7 +48,7 @@ const HeaderBottom = () => {
     return (
         <section style={styles.header}>
             <Container sx={styles.container}>
-                <Categories/>
+                <CategoriesDropdown/>
                 <div style={styles.wrapper}>
                     <ProductsSelect
                         styles={styles.selector}/>
@@ -71,7 +75,7 @@ const HeaderBottom = () => {
                         <ModalLogin button={
                             <Button sx={styles.buttonLogIn}
                                     variant="contained"><LoginOutlinedIcon/>
-                                <Typography variant={'h6'}>LogIn</Typography></Button>
+                                <Typography variant='h6'>LogIn</Typography></Button>
                         }/>
                     )}
 
@@ -85,9 +89,15 @@ const HeaderBottom = () => {
                             variant="contained">
                             <ShoppingCartOutlinedIcon/>
                             {orderList.length !== 0 &&
-                                <span style={styles.cartItemCounter}>{getTotalProducts(orderList)}</span>}
+                                <span style={styles.cartItemCounter}>{getTotalPrice(orderList).quantity}</span>}
 
-                            <Typography variant={'h6'}>Cart </Typography>
+                            {orderList.length !== 0 ?
+                                (<Box className={'flex flex-col'}>
+                                        <Typography variant='p'>Total </Typography>
+                                        <span>$ {getTotalPrice(orderList).price}</span>
+                                    </Box>
+                                ) : (
+                                    <Typography variant='h6'>Cart </Typography>)}
                         </Button>
                     </Link>
 

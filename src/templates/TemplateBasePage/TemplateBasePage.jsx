@@ -5,7 +5,7 @@ import HeaderBottom from "../../components/Header/HeaderBottom";
 import FooterTop from "../../components/Footer/FooterTop";
 import FooterBottom from "../../components/Footer/FooterBottom";
 import FooterMiddle from "../../components/Footer/FooterMiddle/index.js";
-import BackToTop from "../../components/UI/BckToTop/index.js";
+import BackToTop from "../../components/UI/BackToTop/index.js";
 
 const TemplateBasePage = ({className = null, children}) => {
     return (

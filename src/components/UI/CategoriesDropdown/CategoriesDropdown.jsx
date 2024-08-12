@@ -49,17 +49,18 @@ const CategoriesDropdown = () => {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleMouseLeave}
+                MenuListProps={{onMouseLeave: handleMouseLeave}}
                 sx={styles.menu}
             >
-                {Array.isArray(categories) && categories.map((category, index) => (
+                {categories.map((category, index) => (
                     <MenuItem
                         key={index}
                         onClick={() => handleSelectCategory(category)}
                         sx={styles.menuItem}
                     >
-                        <Typography variant={'h6'} sx={styles.menuTitle}>
+                        <Typography variant='h6' sx={styles.menuTitle}>
                             {category.charAt(0).toUpperCase() + category.slice(1)} <ArrowForwardOutlinedIcon
-                            color={'success'}/>
+                            color='success'/>
                         </Typography>
 
                     </MenuItem>

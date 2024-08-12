@@ -247,7 +247,7 @@ const CheckoutForm = () => {
                                                 })}
                                             </Box>
                                         </Box>
-                                        <Typography color={"error"} variant={"span"}>
+                                        <Typography color={"error"} variant="span">
                                             When paying with a gift card, bonuses cannot be debited
                                             from your bonus card.
                                         </Typography>
