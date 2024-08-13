@@ -29,6 +29,7 @@ export const styles = {
         position: 'relative',
     },
     title: {
+        fontSize: '18px',
         marginTop: '8px',
         textAlign: 'left',
         color: '#000'
@@ -49,8 +50,8 @@ export const styles = {
     },
     count: {
         marginTop: '8px',
-        fontSize: '20px',
-        color: '#000'
+        fontSize: '16px',
+        color: 'rgba(0,0,0,0.6)'
     },
     wrapper: {
         display: 'flex',
@@ -135,6 +136,11 @@ export const styles = {
         right: '10px',
         top: '80px',
         backgroundColor: ' rgba(255,255,255,0.61)',
-
+    },
+    commentIcon: {
+        color: 'rgba(0,0,0,0.4)'
+    },
+    tooltip: {
+        backgroundColor: '#000'
     }
 };

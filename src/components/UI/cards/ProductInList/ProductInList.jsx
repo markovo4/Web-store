@@ -17,7 +17,6 @@ import {
 } from "../../../../redux/slices/localStorageSlice.js";
 import CartSide from "../../../Main/CartSide/index.js";
 import routerNames from "../../../../router/routes/routerNames.js";
-import TitlePopOver from "../../popOvers/TitlePopOver/index.js";
 import {useSnackbar} from "notistack";
 import KrashComfy from "../../../../assets/icons/KrashComfy.jsx";
 import CreditComfy from "../../../../assets/icons/CreditComfy.jsx";
@@ -25,6 +24,7 @@ import PetComfy from "../../../../assets/icons/PetComfy.jsx";
 import AppleComfy from "../../../../assets/icons/AppleComfy.jsx";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import CustomTooltip from "../../PopOvers/CustomTooltip/index.js";
 
 const ProductInList = ({title, image, price, rate, count, itemId, description}) => {
     const {enqueueSnackbar} = useSnackbar();
@@ -131,15 +131,20 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                         sx={styles.favButton}
                         onClick={handleFavClick}
                     >
-                        {isInFav ? <FavoriteOutlinedIcon color='error' fontSize={'large'}/> :
-                            <FavoriteBorderOutlinedIcon fontSize={'large'}/>}
+                        {isInFav ? <FavoriteOutlinedIcon color='error' fontSize='default'/> :
+                            <FavoriteBorderOutlinedIcon fontSize='default'/>}
                     </IconButton>
-                    <Typography variant="h6" sx={styles.title}>
-                        <TitlePopOver
-                            entireTitle={title}
-                            title={getShortTitle(title)}
-                        />
-                    </Typography>
+                    <CustomTooltip title={title}>
+                        <Typography variant="h6" sx={styles.title}>
+                            {getShortTitle(title)}
+                        </Typography>
+                    </CustomTooltip>
+                    {/*<Tooltip title={title} sx={styles.tooltip}>*/}
+                    {/*    <Typography variant="h6" sx={styles.title}>*/}
+                    {/*        {getShortTitle(title)}*/}
+                    {/*    </Typography>*/}
+                    {/*</Tooltip>*/}
+
                 </div>
 
                 <div style={styles.purchase}>
@@ -147,7 +152,7 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                         <div style={styles.wrapper}>
                             <Rate allowHalf disabled defaultValue={rate}/>
                             <Typography variant="h6" sx={styles.count}>
-                                <CommentIcon/> {count}
+                                <CommentIcon sx={styles.commentIcon}/> {count}
                             </Typography>
                         </div>
 
