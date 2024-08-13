@@ -299,4 +299,17 @@ export const styles = {
             borderColor: '#f5222d', // Bright red for error state
         },
     },
+    priceStrike: {
+        fontSize: '18px',
+        color: '#b6b6b6',
+        height: '10px'
+    },
+
+    totalPriceOriginalMain: {
+        fontWeight: 'bold',
+        fontSize: '25px',
+        color: 'rgb(52,52,52)',
+        height: '30px'
+    }
+
 }

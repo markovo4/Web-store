@@ -352,18 +352,31 @@ const CheckoutForm = () => {
                                 )}
 
                                 {orderList.length > 0 && (
-                                    <div className={"flex items-center justify-between mb-3"}>
-                                        <Typography variant="h6" component={"span"}>
+                                    <div className={"flex items-end justify-between mb-3"}>
+                                        <Typography variant="h6" component={"span"} sx={styles.titleTotal}>
                                             Total:
                                         </Typography>
 
-                                        <Typography
-                                            sx={styles.totalPriceMain}
-                                            variant="h6"
-                                            component={"span"}
-                                        >
-                                            $ {getTotalPrice(orderList).price}
-                                        </Typography>
+                                        <Box className={'flex flex-col'}>
+                                            <Typography
+                                                sx={styles.totalPriceOriginalMain}
+                                                variant="h6"
+                                                component={"span"}
+                                            >
+                                                <s style={styles.priceStrike}>$ {getTotalPrice(orderList).price}</s>
+
+                                            </Typography>
+
+                                            <Typography
+                                                sx={styles.totalPriceMain}
+                                                variant="h6"
+                                                component={"span"}
+                                            >
+                                                $ {(getTotalPrice(orderList).price * 0.9).toFixed(2)}
+                                            </Typography>
+                                        </Box>
+
+
                                     </div>
                                 )}
                                 <div className={"flex flex-col gap-5"}>

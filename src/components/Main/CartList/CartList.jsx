@@ -176,7 +176,9 @@ const CartList = () => {
                                     </ListItem>
                                     <ListItem sx={styles.totalPrice}>
                                         <Typography>Discount</Typography>
-                                        <Typography sx={styles.totalPriceSub}>$ 0</Typography>
+                                        {orderList.length > 0 && (
+                                            <Typography sx={styles.totalPriceSub}>- ${(getTotalPrice(orderList).price *
+                                                0.1).toFixed(2)}</Typography>)}
                                     </ListItem>
                                     <ListItem sx={styles.totalPrice}>
                                         <Typography
@@ -191,7 +193,7 @@ const CartList = () => {
                                                 variant='h6'
                                                 component={'span'}
                                             >
-                                                $ {getTotalPrice(orderList).price}
+                                                $ {(getTotalPrice(orderList).price * 0.9).toFixed(2)}
                                             </Typography>
                                         )}
                                     </ListItem>

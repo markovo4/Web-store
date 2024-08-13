@@ -25,11 +25,11 @@ export const styles = {
         marginBottom: '20px'
     },
     price: {
-        fontSize: '20px',
+        fontSize: '24px',
         textAlign: 'center',
         fontWeight: 'bold',
         color: 'rgba(0,0,0,0.77)',
-        width: '20px'
+        width: '100px'
     },
     listItemTextTitle: {
         primary: {
@@ -43,15 +43,7 @@ export const styles = {
             }
         }
     },
-    listItemTextPrice: {
-        primary: {
-            textAlign: 'center',
-            width: '20px',
-            fontSize: '20px',
-            fontWeight: 'bold',
-            color: 'rgba(0,0,0,0.77)',
-        }
-    },
+
     priceCounter: {
         display: 'flex',
         flexDirection: 'column',
@@ -96,5 +88,22 @@ export const styles = {
         alignItems: 'center',
         gap: '5px',
         paddingLeft: '6px'
+    },
+    priceOriginal: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        justifyContent: 'center'
+    },
+    priceStrike: {
+        fontSize: '14px',
+        color: '#b6b6b6'
+    },
+    discount: {
+        fontSize: '12px',
+        color: 'white',
+        padding: '0 2px',
+        borderRadius: '10px',
+        backgroundColor: 'red'
     }
 }

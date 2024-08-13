@@ -135,11 +135,15 @@ const CartItem = ({
             </Box>
 
             <Box sx={styles.priceCounter}>
-                <ListItemText
-                    sx={styles.listItemTextPrice}
-                    primaryTypographyProps={{sx: styles.listItemTextPrice.primary}}
-                    primary={`$${price}`}
-                />
+                <Box className={'flex flex-col'}>
+                    <Typography variant="h6" sx={styles.priceOriginal}>
+                        <s style={styles.priceStrike}>$ {price}</s>
+                        <span style={styles.discount}>-10%</span>
+                    </Typography>
+                    <Typography variant="h6" sx={styles.price}>
+                        $ {(price * 0.9).toFixed(2)}
+                    </Typography>
+                </Box>
                 {onQuantityChange && (
                     <QuantityPicker initialAmount={amount} onChange={handleQuantityChange}/>
                 )}
