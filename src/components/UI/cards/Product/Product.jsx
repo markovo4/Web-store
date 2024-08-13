@@ -1,4 +1,4 @@
-import {Box, Button, Container, Typography} from "@mui/material";
+import {Box, Button, Container, List, ListItem, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 import {styles} from "./style.js";
 import {Rate} from "antd";
@@ -20,6 +20,10 @@ import {Link} from "react-router-dom";
 import routerNames from "../../../../router/routes/routerNames.js";
 import CartSide from "../../../Main/CartSide/index.js";
 import {useSnackbar} from "notistack";
+import KrashComfy from "../../../../assets/icons/KrashComfy.jsx";
+import CreditComfy from "../../../../assets/icons/CreditComfy.jsx";
+import PetComfy from "../../../../assets/icons/PetComfy.jsx";
+import AppleComfy from "../../../../assets/icons/AppleComfy.jsx";
 
 const Product = ({
                      id,
@@ -129,17 +133,53 @@ const Product = ({
                         {title}
                     </Typography>
                     <div style={styles.rating}>
-                        <Rate allowHalf disabled defaultValue={rating}/>
+                        <Rate allowHalf disabled defaultValue={rating} style={styles.ratingColor}/>
                         <Typography variant="h6" sx={styles.count}>
                             <CommentIcon/> {count}
                         </Typography>
                     </div>
+                    <div className={'flex flex-row items-center gap-3'}>
+                        <List className={'flex justify-between gap-3'}>
+                            <ListItem sx={styles.underTitleIconsContainer}>
+                                <KrashComfy/>
+                                <Typography variant='span' sx={styles.underTitleIconsText}>
+                                    Crash
+                                </Typography>
+                            </ListItem>
+                            <ListItem sx={styles.underTitleIconsContainer}>
+                                <CreditComfy/>
+                                <Typography variant='span' sx={styles.underTitleIconsText}>
+                                    PRIVAT-Bank
+                                </Typography>
+                            </ListItem>
+                            <ListItem sx={styles.underTitleIconsContainer}>
+                                <PetComfy/>
+                                <Typography variant='span' sx={styles.underTitleIconsText}>
+                                    MONO-Bank
+                                </Typography>
+
+                            </ListItem>
+                            <ListItem sx={styles.underTitleIconsContainer}>
+                                <AppleComfy/>
+                                <Typography variant='span' sx={styles.underTitleIconsText}>
+                                    ALFA-Bank
+                                </Typography>
+
+                            </ListItem>
+                        </List>
+                    </div>
                 </Box>
 
                 <Box sx={styles.wrapperPurchase}>
-                    <Typography variant="h6" sx={styles.price}>
-                        ${price}
-                    </Typography>
+                    <Box className={'flex flex-col'}>
+                        <Typography variant="h6" sx={styles.priceOriginal}>
+                            <s style={styles.priceStrike}>$ {price}</s>
+                            <span style={styles.discount}>-10%</span>
+                        </Typography>
+                        <Typography variant="h6" sx={styles.price}>
+                            $ {(price * 0.9).toFixed(2)}
+                        </Typography>
+                    </Box>
                     <div style={styles.buttonGroup}>
                         {!isInCart ? (
                             <Button
@@ -147,8 +187,9 @@ const Product = ({
                                 sx={styles.button}
                                 variant="contained"
                                 onClick={handleCartClick}
+                                startIcon={<ShoppingCartIcon fontSize="medium"/>}
                             >
-                                <ShoppingCartIcon fontSize="medium"/>
+                                Buy
                             </Button>
 
 

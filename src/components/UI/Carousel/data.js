@@ -1,42 +1,28 @@
+import banner_1 from '../../../assets/img/banner_1.png'
+import banner_2 from '../../../assets/img/banner_2.png'
+import banner_3 from '../../../assets/img/banner_3.png'
+import banner_4 from '../../../assets/img/banner_4.png'
+import banner_5 from '../../../assets/img/banner_5.png'
+
 export const data = [
     {
         title: 'ProductInList Banner 1',
-        img: 'Banner-Hero.jpeg'
+        img: banner_1
     },
     {
         title: 'ProductInList Banner 2',
-        img: 'Banner-Hero.jpeg'
+        img: banner_2
     },
     {
         title: 'ProductInList Banner 3',
-        img: 'Banner-Hero.jpeg'
+        img: banner_3
     },
     {
         title: 'ProductInList Banner 4',
-        img: 'Banner-Hero.jpeg'
+        img: banner_4
     },
     {
         title: 'ProductInList Banner 5',
-        img: 'Banner-Hero.jpeg'
-    },
-    {
-        title: 'ProductInList Banner 6',
-        img: 'Banner-Hero.jpeg'
-    },
-    {
-        title: 'ProductInList Banner 7',
-        img: './Banner-Hero.jpeg'
-    },
-    {
-        title: 'ProductInList Banner 8',
-        img: './Banner-Hero.jpeg'
-    },
-    {
-        title: 'ProductInList Banner 9',
-        img: './Banner-Hero.jpeg'
-    },
-    {
-        title: 'ProductInList Banner 10',
-        img: './Banner-Hero.jpeg'
+        img: banner_5
     }
 ]

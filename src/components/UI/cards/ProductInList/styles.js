@@ -8,7 +8,7 @@ export const styles = {
         display: 'flex',
         flexDirection: 'column',
         width: '280px',
-        height: '530px',
+        height: '570px',
         marginBottom: '8px',
         justifyContent: 'space-between',
         boxShadow: 'none',
@@ -38,7 +38,7 @@ export const styles = {
     },
     price: {
         marginTop: '8px',
-        fontSize: '30px',
+        fontSize: '24px',
         fontWeight: 'bold',
         color: 'rgba(0,0,0,0.77)'
     },
@@ -65,7 +65,7 @@ export const styles = {
     purchase: {
         display: 'flex',
         flexDirection: 'column',
-        gap: '20px'
+        gap: '20px',
     },
     button: {
         '&.MuiButton-root': {
@@ -112,4 +112,20 @@ export const styles = {
             }
         }
     },
+    priceOriginal: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px'
+    },
+    priceStrike: {
+        fontSize: '14px',
+        color: '#b6b6b6'
+    },
+    discount: {
+        fontSize: '12px',
+        color: 'white',
+        padding: '0 2px',
+        borderRadius: '10px',
+        backgroundColor: 'red'
+    }
 };

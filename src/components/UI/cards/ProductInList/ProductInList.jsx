@@ -13,6 +13,10 @@ import CartSide from "../../../Main/CartSide/index.js";
 import routerNames from "../../../../router/routes/routerNames.js";
 import TitlePopOver from "../../popOvers/TitlePopOver/index.js";
 import {useSnackbar} from "notistack";
+import KrashComfy from "../../../../assets/icons/KrashComfy.jsx";
+import CreditComfy from "../../../../assets/icons/CreditComfy.jsx";
+import PetComfy from "../../../../assets/icons/PetComfy.jsx";
+import AppleComfy from "../../../../assets/icons/AppleComfy.jsx";
 
 const ProductInList = ({title, image, price, rate, count, itemId, description}) => {
     const {enqueueSnackbar} = useSnackbar();
@@ -101,18 +105,27 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                 </div>
 
                 <div style={styles.purchase}>
-                    <div style={styles.wrapper}>
-                        <Rate allowHalf disabled defaultValue={rate}/>
-                        <Typography variant="h6" sx={styles.count}>
-                            <CommentIcon/> {count}
-                        </Typography>
+                    <div className={'mb-3'}>
+                        <div style={styles.wrapper}>
+                            <Rate allowHalf disabled defaultValue={rate}/>
+                            <Typography variant="h6" sx={styles.count}>
+                                <CommentIcon/> {count}
+                            </Typography>
+                        </div>
+
+                        <div className={'flex flex-row items-center gap-3'}>
+                            <KrashComfy/>
+                            <CreditComfy/>
+                            <PetComfy/>
+                            <AppleComfy/>
+                        </div>
                     </div>
 
                     <div style={styles.wrapper}>
                         <Box className={'flex flex-col'}>
                             <Typography variant="h6" sx={styles.priceOriginal}>
-                                $ {price}
-                                <span>-10%</span>
+                                <s style={styles.priceStrike}>$ {price}</s>
+                                <span style={styles.discount}>-10%</span>
                             </Typography>
                             <Typography variant="h6" sx={styles.price}>
                                 $ {(price * 0.9).toFixed(2)}

@@ -17,7 +17,7 @@ export const styles = {
         width: '650px',
         maxHeight: '304px',
         padding: '32px',
-        gap: '40px',
+        gap: '10px',
         margin: '5px 0',
         backgroundColor: 'white'
     },
@@ -52,7 +52,7 @@ export const styles = {
         color: '#000'
     },
     price: {
-        marginTop: '8px',
+        marginTop: '0px',
         fontSize: '30px',
         fontWeight: 'bold',
         color: 'rgba(0,0,0,0.77)'
@@ -60,6 +60,7 @@ export const styles = {
     wrapperPurchase: {
         display: 'flex',
         justifyContent: 'space-between',
+        alignItems: 'center',
         width: '650px',
         maxHeight: '304px',
         padding: '32px',
@@ -76,11 +77,12 @@ export const styles = {
             padding: '13px 15px',
             borderRadius: '10px',
             textTransform: 'none',
-            fontSize: '16px',
+            fontSize: '20px',
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
             minWidth: '50px',
+            height: '55px'
         },
         '&.MuiButton-contained': {
             backgroundColor: '#42af2a',
@@ -111,5 +113,36 @@ export const styles = {
                 boxShadow: 'none',
             }
         }
+    },
+    priceOriginal: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px'
+    },
+    priceStrike: {
+        fontSize: '16px',
+        color: '#b6b6b6'
+    },
+    discount: {
+        fontSize: '14px',
+        color: 'white',
+        padding: '0 2px',
+        borderRadius: '10px',
+        backgroundColor: 'red'
+    },
+    underTitleIconsText: {
+        fontSize: '12px',
+        width: 'auto',
+        flexGrow: 1
+    },
+    underTitleIconsContainer: {
+        display: 'flex',
+        gap: '15px',
+        width: '100%',
+        border: '1px solid rgba(204,204,204,0.56)',
+        borderRadius: '10px'
+    },
+    ratingColor: {
+        color: "#fa8231"
     },
 }

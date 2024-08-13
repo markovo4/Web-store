@@ -1,17 +1,18 @@
 import {data} from './data.js';
-import BannerHero from './Banner-Hero.jpeg'; // Correctly import the image
 import Slider from "react-slick";
-import './Carousel.css'; // Import the CSS file
+import './Carousel.css';
+
 
 const Carousel = () => {
     const settings = {
         dots: true,
         infinite: true,
-        speed: 700,
+        speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
     };
+
 
     return (
         <section style={{backgroundColor: 'rgba(0,0,0,0.06)', height: '550px', display: 'flex', alignItems: 'center'}}>
@@ -26,9 +27,9 @@ const Carousel = () => {
                         <div key={index} style={'slick-slide-custom'}>
                             <div>
                                 <a href={'#'}>
-                                    <img src={BannerHero} alt={banner.title} className='banner-image'/>
+                                    <img src={banner.img} alt={banner.title}
+                                         className='banner-image'/>
                                 </a>
-
                             </div>
                         </div>
                     ))}
