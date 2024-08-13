@@ -72,6 +72,7 @@ const CartList = () => {
     const handleDeleteAll = () => {
         dispatch(removeAllProducts())
         enqueueSnackbar('All products have been removed!', {variant: 'error'});
+        navigate(routerNames.pageMain)
     }
 
     return (

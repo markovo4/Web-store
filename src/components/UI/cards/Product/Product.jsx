@@ -116,10 +116,9 @@ const Product = ({
             ];
             dispatch(setFavProductList(updatedFavList));
         } else {
-
+            enqueueSnackbar('Item removed from Favourites!', {variant: 'info'});
             dispatch(removeFavProduct(id));
         }
-
     };
 
     return (

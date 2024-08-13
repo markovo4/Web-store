@@ -1,10 +1,10 @@
 const routerNames = {
     pageMain: '/',
-    pageNotFound: '*',
+    pageNotFound: '/*',
     pageCart: '/cart',
     pageProduct: '/products/:productId',
     pageCheckout: '/order',
-    pageCategories: '/:categoryName',
+    pageCategories: '/categories/:categoryName',
     pageFavProducts: '/favProducts',
     pageOrderInfo: '/pageOrderInfo'
 };

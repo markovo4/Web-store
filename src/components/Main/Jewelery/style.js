@@ -1,7 +1,8 @@
 export const styles = {
     title: {
-        margin: '0 0 40px 0',
+        margin: '0 0 20px 0',
         fontWeight: 'bold',
+        fontSize: '30px',
         color: 'rgba(0,0,0,0.76)'
     },
     section: {

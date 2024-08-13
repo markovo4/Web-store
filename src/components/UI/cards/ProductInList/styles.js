@@ -25,7 +25,8 @@ export const styles = {
         objectPosition: 'center',
         width: '190px',
         height: '240px',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        position: 'relative',
     },
     title: {
         marginTop: '8px',
@@ -60,7 +61,8 @@ export const styles = {
     groupedText: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        position: 'relative'
     },
     purchase: {
         display: 'flex',
@@ -127,5 +129,12 @@ export const styles = {
         padding: '0 2px',
         borderRadius: '10px',
         backgroundColor: 'red'
+    },
+    favButton: {
+        position: 'absolute',
+        right: '10px',
+        top: '80px',
+        backgroundColor: ' rgba(255,255,255,0.61)',
+
     }
 };

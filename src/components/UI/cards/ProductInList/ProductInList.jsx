@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import {Box, Button, Card, Typography} from "@mui/material";
+import {Box, Button, Card, IconButton, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import {styles} from "./styles.js";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -8,7 +8,13 @@ import CommentIcon from '@mui/icons-material/Comment';
 import {useEffect, useMemo, useState} from "react";
 import {Rate} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {getProductList, setProductList} from "../../../../redux/slices/localStorageSlice.js";
+import {
+    getFavProductList,
+    getProductList,
+    removeFavProduct,
+    setFavProductList,
+    setProductList
+} from "../../../../redux/slices/localStorageSlice.js";
 import CartSide from "../../../Main/CartSide/index.js";
 import routerNames from "../../../../router/routes/routerNames.js";
 import TitlePopOver from "../../popOvers/TitlePopOver/index.js";
@@ -17,13 +23,20 @@ import KrashComfy from "../../../../assets/icons/KrashComfy.jsx";
 import CreditComfy from "../../../../assets/icons/CreditComfy.jsx";
 import PetComfy from "../../../../assets/icons/PetComfy.jsx";
 import AppleComfy from "../../../../assets/icons/AppleComfy.jsx";
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 
 const ProductInList = ({title, image, price, rate, count, itemId, description}) => {
     const {enqueueSnackbar} = useSnackbar();
-    const {orderList, productQuantity} = useSelector(state => state.localStorage);
+    const {orderList, productQuantity, favouriteList} = useSelector(state => state.localStorage);
     const dispatch = useDispatch();
 
+
     const [openModal, setOpenModal] = useState(false);
+
+    const [isInFav, setIsInFav] = useState(
+        favouriteList.some((product) => product.id === itemId)
+    );
 
     const handleOpenCartSide = () => {
         setOpenModal(!openModal)
@@ -53,15 +66,33 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                 ...orderList.slice(productIndex + 1)
             ]
             dispatch(setProductList(updatedList))
-
         }
     }
 
-    useEffect(() => {
-        setIsInCart(orderList.some(product => product.id === itemId));
-    }, [orderList, itemId]);
+    const handleFavClick = () => {
+        setIsInFav((prevAddToFav) => !prevAddToFav);
+
+        if (!isInFav) {
+            enqueueSnackbar('Item Added to Favourites!', {variant: 'success'});
+            const updatedFavList = [
+                ...favouriteList,
+                {id: itemId, title, description, image, price, rating: rate, count},
+            ];
+            dispatch(setFavProductList(updatedFavList));
+        } else {
+            enqueueSnackbar('Item removed from Favourites!', {variant: 'info'});
+            dispatch(removeFavProduct(itemId));
+        }
+    };
 
     useEffect(() => {
+        setIsInCart(orderList.some(product => product.id === itemId));
+        setIsInFav(favouriteList.some((product) => product.id === itemId))
+    }, [orderList, itemId, favouriteList]);
+
+
+    useEffect(() => {
+        dispatch(getFavProductList());
         dispatch(getProductList());
     }, [dispatch]);
 
@@ -96,6 +127,13 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                     <Link to={`/products/${itemId}`} style={styles.link}>
                         <img src={image} alt={title} style={styles.image}/>
                     </Link>
+                    <IconButton
+                        sx={styles.favButton}
+                        onClick={handleFavClick}
+                    >
+                        {isInFav ? <FavoriteOutlinedIcon color='error' fontSize={'large'}/> :
+                            <FavoriteBorderOutlinedIcon fontSize={'large'}/>}
+                    </IconButton>
                     <Typography variant="h6" sx={styles.title}>
                         <TitlePopOver
                             entireTitle={title}

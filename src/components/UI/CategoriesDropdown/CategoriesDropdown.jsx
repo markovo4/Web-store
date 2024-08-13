@@ -21,7 +21,7 @@ const CategoriesDropdown = () => {
     };
 
     const handleSelectCategory = (category) => {
-        navigate(`/${category}`);
+        navigate(`/categories/${category}`);
         handleMouseLeave();
     };
 
