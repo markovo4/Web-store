@@ -15,12 +15,29 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HeaderDropdown from "../../UI/HeaderDropdown/index.js";
 import Cookies from "js-cookie";
-import React, {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getProductList} from "../../../redux/slices/localStorageSlice.js";
 
 const HeaderBottom = () => {
     const {orderList} = useSelector(state => state.localStorage);
     const dispatch = useDispatch();
+
+    const [fixedHeader, setFixedHeader] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 1000) {
+                setFixedHeader(true);
+            } else {
+                setFixedHeader(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     useEffect(() => {
         dispatch(getProductList());
@@ -44,7 +61,7 @@ const HeaderBottom = () => {
     };
 
     return (
-        <section style={styles.header}>
+        <section style={fixedHeader ? styles.fixedHeader : styles.header}>
             <Container sx={styles.container}>
                 <CategoriesDropdown/>
                 <div style={styles.wrapper}>

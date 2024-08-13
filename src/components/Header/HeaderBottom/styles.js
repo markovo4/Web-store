@@ -3,6 +3,14 @@ export const styles = {
         height: '56px',
         backgroundColor: '#42af2a',
     },
+    fixedHeader: {
+        height: '56px',
+        backgroundColor: '#42af2a',
+        position: 'fixed',
+        zIndex: 100,
+        top: '0',
+        width: '100%'
+    },
     container: {
         display: 'flex',
         width: '1400px',

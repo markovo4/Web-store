@@ -139,12 +139,6 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                             {getShortTitle(title)}
                         </Typography>
                     </CustomTooltip>
-                    {/*<Tooltip title={title} sx={styles.tooltip}>*/}
-                    {/*    <Typography variant="h6" sx={styles.title}>*/}
-                    {/*        {getShortTitle(title)}*/}
-                    {/*    </Typography>*/}
-                    {/*</Tooltip>*/}
-
                 </div>
 
                 <div style={styles.purchase}>
