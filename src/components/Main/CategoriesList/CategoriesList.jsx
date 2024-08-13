@@ -7,8 +7,8 @@ import Man3Icon from '@mui/icons-material/Man3';
 import WomanIcon from '@mui/icons-material/Woman';
 
 const styleIcons = {
-    width: '65px',
-    height: '65px'
+    width: '40px',
+    height: '40px'
 };
 
 const CategoriesList = () => {
@@ -23,7 +23,7 @@ const CategoriesList = () => {
     return (
         <section style={{backgroundColor: 'rgba(0,0,0,0.06)', paddingBottom: '40px'}}>
             <Container sx={{backgroundColor: 'white', borderRadius: '10px'}}>
-                <ul className='flex place-items-center justify-between space-x-4 h-[80px] '>
+                <ul className='flex place-items-center justify-evenly space-x-4 h-[60px] '>
                     {categories && categories.map((category, index) => (
                         <Category key={index}>
                             {icons[index % icons.length]}
