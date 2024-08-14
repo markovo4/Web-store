@@ -100,6 +100,10 @@ const CartItem = ({
                     />
                 </Link>
 
+                <Typography variant="span" sx={styles.code}>
+                    Code: {id}
+                </Typography>
+
                 <div className={"flex gap-5"}>
                     <Button
                         sx={styles.button}

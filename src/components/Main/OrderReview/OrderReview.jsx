@@ -62,7 +62,8 @@ const OrderReview = () => {
                                 <img src={product.image} alt={product.title} style={styles.image}/>
                                 <Typography sx={styles.productTitle} variant='h6'>{product.title}</Typography>
                                 <Typography sx={styles.productAmount} variant='h6'>{product.amount} Itm.</Typography>
-                                <Typography sx={styles.productPrice} variant='h6'>$ {product.price}</Typography>
+                                <Typography sx={styles.productPrice}
+                                            variant='h6'>$ {(product.price * 0.9).toFixed(2)}</Typography>
                             </Box>
                         </Box>
 
@@ -70,7 +71,7 @@ const OrderReview = () => {
                 </ListItem>
                 <Divider sx={styles.divider}/>
                 <ListItem sx={styles.totalPriceItem}>
-                    <Typography variant='h5'>Total Price: $ {checkout.totalPrice}</Typography>
+                    <Typography variant='h5'>Total Price: $ {checkout.totalPrice.toFixed(2)}</Typography>
                 </ListItem>
                 <ListItem>
                     <Link to={routerNames.pageMain}>

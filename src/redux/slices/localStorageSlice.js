@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {DATA_KEY, FAV_DATA_KEY, FORM_DATA_KEY} from "../../utils/constants/constants.js";
+import {DATA_KEY, FAV_DATA_KEY, FORM_DATA_KEY, VIEWED_DATA_KEY} from "../../utils/constants/constants.js";
 
 const checkoutInitialData = {
     productToOrder: [],
@@ -19,6 +19,7 @@ const checkoutInitialData = {
     giftCard: '',
     message: '',
     callBack: false,
+    recentlyViewed: []
 }
 
 export const localStorageSlice = createSlice({
@@ -67,6 +68,29 @@ export const localStorageSlice = createSlice({
         getCheckoutInfo: (state) => {
             const storedData = localStorage.getItem(FORM_DATA_KEY);
             state.checkout = storedData ? JSON.parse(storedData) : {};
+        },
+
+        getRecentlyViewed: (state) => {
+            const storedData = localStorage.getItem(VIEWED_DATA_KEY);
+            state.recentlyViewed = storedData ? JSON.parse(storedData) : [];
+        },
+
+        setRecentlyViewed: (state, {payload}) => {
+            try {
+                const storedData = localStorage.getItem(VIEWED_DATA_KEY);
+                const parsedData = storedData ? JSON.parse(storedData) : [];
+
+                const isProductAlreadyViewed = parsedData.some(product => product.id === payload.id);
+
+                if (!isProductAlreadyViewed) {
+                    const filteredData = parsedData.length === 4 ? parsedData.slice(1) : parsedData
+                    const updatedData = [...filteredData, payload];
+                    localStorage.setItem(VIEWED_DATA_KEY, JSON.stringify(updatedData));
+                    state.recentlyViewed = updatedData;
+                }
+            } catch (e) {
+                console.error("Failed to store viewed products in local storage:", e);
+            }
         },
 
         setFavProductList: (state, {payload}) => {
@@ -140,6 +164,8 @@ export const {
     getFavProductList,
     getProductList,
     getCheckoutInfo,
+    getRecentlyViewed,
+    setRecentlyViewed,
     setProductList,
     setProductQuantity,
     setCheckoutInfo,

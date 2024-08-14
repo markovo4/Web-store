@@ -1,10 +1,17 @@
+import {styles} from "./styles.js";
 import {Container, Typography} from "@mui/material";
-import ProductInList from "../../UI/cards/ProductInList";
-import {useGetAllProductsByCategoryQuery} from "../../../redux/productsApi/productsApi.js";
-import {styles} from "./style.js";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getRecentlyViewed} from "../../../redux/slices/localStorageSlice.js";
+import ProductInList from "../../UI/cards/ProductInList/index.js";
 
-const ClothesFemale = () => {
-    const clothesFemale = useGetAllProductsByCategoryQuery({category: 'women\'s clothing', limit: 4});
+const PreviouslyViewed = () => {
+    const {recentlyViewed} = useSelector(state => state.localStorage);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getRecentlyViewed())
+    }, [dispatch])
     return (
         <section style={styles.section}>
             <Container>
@@ -12,10 +19,10 @@ const ClothesFemale = () => {
                     variant='h4'
                     component={'h4'}
                     sx={styles.title}>
-                    For her</Typography>
+                    Recently Viewed</Typography>
 
                 <div style={{display: 'flex'}}>
-                    {clothesFemale.data && clothesFemale.data.map((product, index) => {
+                    {recentlyViewed && recentlyViewed.map((product, index) => {
                         return (
                             <ProductInList
                                 image={product.image}
@@ -23,17 +30,17 @@ const ClothesFemale = () => {
                                 title={product.title}
                                 itemId={product.id}
                                 key={index}
-                                rate={product.rating.rate}
-                                count={product.rating.count}
+                                rate={product.rating}
+                                count={product.count}
                                 description={product.description}
-
                             />
                         )
                     })}
                 </div>
+
             </Container>
         </section>
     )
 }
 
-export default ClothesFemale;
+export default PreviouslyViewed;

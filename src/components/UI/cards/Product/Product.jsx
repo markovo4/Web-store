@@ -15,6 +15,7 @@ import {
     removeFavProduct,
     setFavProductList,
     setProductList,
+    setRecentlyViewed,
 } from "../../../../redux/slices/localStorageSlice.js";
 import {Link} from "react-router-dom";
 import routerNames from "../../../../router/routes/routerNames.js";
@@ -36,9 +37,7 @@ const Product = ({
                  }) => {
     const {enqueueSnackbar} = useSnackbar();
     const dispatch = useDispatch();
-    const {orderList} = useSelector((state) => state.localStorage);
-    const {favouriteList} = useSelector((state) => state.localStorage);
-
+    const {orderList, favouriteList} = useSelector((state) => state.localStorage);
 
     const [isInCart, setIsInCart] = useState(orderList.some(product => product.id === id));
 
@@ -56,6 +55,18 @@ const Product = ({
         setIsInCart(orderList.some(product => product.id === id));
         setIsInFav(favouriteList.some((product) => product.id === id))
     }, [orderList, id, favouriteList]);
+
+    useEffect(() => {
+        dispatch(setRecentlyViewed({
+            id,
+            title,
+            description,
+            image,
+            price,
+            rating,
+            count,
+        }))
+    }, []);
 
 
     useEffect(() => {
@@ -131,13 +142,18 @@ const Product = ({
                     <Typography variant="h3" component="h3" sx={styles.price}>
                         {title}
                     </Typography>
-                    <div style={styles.rating}>
-                        <Rate allowHalf disabled defaultValue={rating} style={styles.ratingColor}/>
-                        <Typography variant="h6" sx={styles.count}>
-                            <CommentIcon/> {count}
+                    <Box className={'flex flex-row items-center justify-between'}>
+                        <Box style={styles.rating}>
+                            <Rate allowHalf disabled defaultValue={rating} style={styles.ratingColor}/>
+                            <Typography variant="h6" sx={styles.count}>
+                                <CommentIcon fontSize='small'/> {count}
+                            </Typography>
+                        </Box>
+                        <Typography variant="span" sx={styles.code}>
+                            Code: {id}
                         </Typography>
-                    </div>
-                    <div className={'flex flex-row items-center gap-3'}>
+                    </Box>
+                    <Box className={'flex flex-row items-center gap-3'}>
                         <List className={'flex justify-between gap-3'}>
                             <ListItem sx={styles.underTitleIconsContainer}>
                                 <KrashComfy/>
@@ -166,7 +182,7 @@ const Product = ({
 
                             </ListItem>
                         </List>
-                    </div>
+                    </Box>
                 </Box>
 
                 <Box sx={styles.wrapperPurchase}>

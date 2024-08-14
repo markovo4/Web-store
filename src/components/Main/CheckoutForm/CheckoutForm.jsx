@@ -77,7 +77,7 @@ const CheckoutForm = () => {
     };
 
     const handlePromoClick = () => {
-        console.log("Promo code or bonus card applied.");
+        enqueueSnackbar("Promo code or bonus card applied!", {variant: "success"});
     };
 
     const formik = useFormik({
@@ -96,7 +96,7 @@ const CheckoutForm = () => {
                     bonusCard: values.bonusCard,
                     promoCode: values.promoCode,
                     termConditions: values.termConditions,
-                    totalPrice: getTotalPrice(orderList).price,
+                    totalPrice: getTotalPrice(orderList).price * 0.9,
                     giftCard: values.giftCard,
                     noCallback: values.noCallback,
                     comment: values.comment
@@ -176,6 +176,7 @@ const CheckoutForm = () => {
                                             image={product.image}
                                             count={product.amount}
                                             price={product.price}
+                                            id={product.id}
                                         />
                                     ))}
                                 <Button

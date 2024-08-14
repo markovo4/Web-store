@@ -34,7 +34,6 @@ export const styles = {
     listItemTextTitle: {
         primary: {
             width: '400px',
-            marginBottom: '18px',
             fontSize: '20px',
             color: 'rgb(0,0,0)',
             paddingLeft: '6px',
@@ -105,5 +104,11 @@ export const styles = {
         padding: '0 2px',
         borderRadius: '10px',
         backgroundColor: 'red'
+    },
+    code: {
+        padding: '6px',
+        fontSize: '14px',
+        width: '100px',
+        color: 'rgba(0,0,0,0.50)'
     }
 }

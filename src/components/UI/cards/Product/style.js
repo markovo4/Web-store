@@ -17,7 +17,7 @@ export const styles = {
         width: '650px',
         maxHeight: '304px',
         padding: '32px',
-        gap: '10px',
+        gap: '20px',
         margin: '5px 0',
         backgroundColor: 'white'
     },
@@ -47,9 +47,11 @@ export const styles = {
         top: '0'
     },
     count: {
-        marginTop: '8px',
-        fontSize: '20px',
-        color: '#000'
+        display: 'flex',
+        alignItems: 'center',
+        gap: '5px',
+        fontSize: '14px',
+        color: 'rgba(0,0,0,0.54)'
     },
     price: {
         marginTop: '0px',
@@ -143,6 +145,12 @@ export const styles = {
         borderRadius: '10px'
     },
     ratingColor: {
-        color: "#fa8231"
+        color: "#fa8231",
+        fontSize: '14px'
     },
+    code: {
+        fontSize: '12px',
+        width: '100px',
+        color: 'rgba(0,0,0,0.50)'
+    }
 }
