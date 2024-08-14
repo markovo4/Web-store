@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
     getFavProductList,
@@ -25,6 +25,7 @@ import KrashComfy from "../../../../assets/icons/KrashComfy.jsx";
 import CreditComfy from "../../../../assets/icons/CreditComfy.jsx";
 import PetComfy from "../../../../assets/icons/PetComfy.jsx";
 import AppleComfy from "../../../../assets/icons/AppleComfy.jsx";
+import SimilarItems from "../../../Main/SimilarItems/index.js";
 
 const Product = ({
                      id,
@@ -34,6 +35,7 @@ const Product = ({
                      price,
                      rating,
                      count,
+                     category,
                  }) => {
     const {enqueueSnackbar} = useSnackbar();
     const dispatch = useDispatch();
@@ -66,7 +68,7 @@ const Product = ({
             rating,
             count,
         }))
-    }, []);
+    }, [count, description, dispatch, id, image, price, rating, title]);
 
 
     useEffect(() => {
@@ -133,122 +135,125 @@ const Product = ({
     };
 
     return (
-        <Container sx={{display: "flex", flexDirection: "row"}}>
-            <Box sx={styles.imageWrapper}>
-                <img alt={title} src={image} style={styles.image}/>
-            </Box>
-            <Box sx={styles.info}>
-                <Box sx={styles.wrapper}>
-                    <Typography variant="h3" component="h3" sx={styles.price}>
-                        {title}
-                    </Typography>
-                    <Box className={'flex flex-row items-center justify-between'}>
-                        <Box style={styles.rating}>
-                            <Rate allowHalf disabled defaultValue={rating} style={styles.ratingColor}/>
-                            <Typography variant="h6" sx={styles.count}>
-                                <CommentIcon fontSize='small'/> {count}
+        <React.Fragment>
+            <Container sx={{display: "flex", flexDirection: "row"}}>
+                <Box sx={styles.imageWrapper}>
+                    <img alt={title} src={image} style={styles.image}/>
+                </Box>
+                <Box sx={styles.info}>
+                    <Box sx={styles.wrapper}>
+                        <Typography variant="h3" component="h3" sx={styles.price}>
+                            {title}
+                        </Typography>
+                        <Box className={'flex flex-row items-center justify-between'}>
+                            <Box style={styles.rating}>
+                                <Rate allowHalf disabled defaultValue={rating} style={styles.ratingColor}/>
+                                <Typography variant="h6" sx={styles.count}>
+                                    <CommentIcon fontSize='small'/> {count}
+                                </Typography>
+                            </Box>
+                            <Typography variant="span" sx={styles.code}>
+                                Code: {id}
                             </Typography>
                         </Box>
-                        <Typography variant="span" sx={styles.code}>
-                            Code: {id}
-                        </Typography>
-                    </Box>
-                    <Box className={'flex flex-row items-center gap-3'}>
-                        <List className={'flex justify-between gap-3'}>
-                            <ListItem sx={styles.underTitleIconsContainer}>
-                                <KrashComfy/>
-                                <Typography variant='span' sx={styles.underTitleIconsText}>
-                                    Crash
-                                </Typography>
-                            </ListItem>
-                            <ListItem sx={styles.underTitleIconsContainer}>
-                                <CreditComfy/>
-                                <Typography variant='span' sx={styles.underTitleIconsText}>
-                                    PRIVAT-Bank
-                                </Typography>
-                            </ListItem>
-                            <ListItem sx={styles.underTitleIconsContainer}>
-                                <PetComfy/>
-                                <Typography variant='span' sx={styles.underTitleIconsText}>
-                                    MONO-Bank
-                                </Typography>
+                        <Box className={'flex flex-row items-center gap-3'}>
+                            <List className={'flex justify-between gap-3'}>
+                                <ListItem sx={styles.underTitleIconsContainer}>
+                                    <KrashComfy/>
+                                    <Typography variant='span' sx={styles.underTitleIconsText}>
+                                        Crash
+                                    </Typography>
+                                </ListItem>
+                                <ListItem sx={styles.underTitleIconsContainer}>
+                                    <CreditComfy/>
+                                    <Typography variant='span' sx={styles.underTitleIconsText}>
+                                        PRIVAT-Bank
+                                    </Typography>
+                                </ListItem>
+                                <ListItem sx={styles.underTitleIconsContainer}>
+                                    <PetComfy/>
+                                    <Typography variant='span' sx={styles.underTitleIconsText}>
+                                        MONO-Bank
+                                    </Typography>
 
-                            </ListItem>
-                            <ListItem sx={styles.underTitleIconsContainer}>
-                                <AppleComfy/>
-                                <Typography variant='span' sx={styles.underTitleIconsText}>
-                                    ALFA-Bank
-                                </Typography>
+                                </ListItem>
+                                <ListItem sx={styles.underTitleIconsContainer}>
+                                    <AppleComfy/>
+                                    <Typography variant='span' sx={styles.underTitleIconsText}>
+                                        ALFA-Bank
+                                    </Typography>
 
-                            </ListItem>
-                        </List>
+                                </ListItem>
+                            </List>
+                        </Box>
                     </Box>
-                </Box>
 
-                <Box sx={styles.wrapperPurchase}>
-                    <Box className={'flex flex-col'}>
-                        <Typography variant="h6" sx={styles.priceOriginal}>
-                            <s style={styles.priceStrike}>$ {price}</s>
-                            <span style={styles.discount}>-10%</span>
-                        </Typography>
-                        <Typography variant="h6" sx={styles.price}>
-                            $ {(price * 0.9).toFixed(2)}
-                        </Typography>
-                    </Box>
-                    <div style={styles.buttonGroup}>
-                        {!isInCart ? (
+                    <Box sx={styles.wrapperPurchase}>
+                        <Box className={'flex flex-col'}>
+                            <Typography variant="h6" sx={styles.priceOriginal}>
+                                <s style={styles.priceStrike}>$ {price}</s>
+                                <span style={styles.discount}>-10%</span>
+                            </Typography>
+                            <Typography variant="h6" sx={styles.price}>
+                                $ {(price * 0.9).toFixed(2)}
+                            </Typography>
+                        </Box>
+                        <div style={styles.buttonGroup}>
+                            {!isInCart ? (
+                                <Button
+                                    id={id}
+                                    sx={styles.button}
+                                    variant="contained"
+                                    onClick={handleCartClick}
+                                    startIcon={<ShoppingCartIcon fontSize="medium"/>}
+                                >
+                                    Buy
+                                </Button>
+
+
+                            ) : (
+                                <CartSide
+                                    button={<Link to={routerNames.pageCart}>
+                                        <Button sx={styles.button} variant='outlined'>
+                                            <AddShoppingCartIcon fontSize='medium' color="success"/>
+                                        </Button>
+                                    </Link>
+                                    }
+                                    onQuantityChange={handleQuantityCount}
+                                    image={image}
+                                    price={price}
+                                    rating={rating}
+                                    count={count}
+                                    id={id}
+                                    title={title}
+                                    open={openModal}
+                                    onClose={handleOpenCartSide}
+                                />
+                            )}
+
+
                             <Button
                                 id={id}
                                 sx={styles.button}
-                                variant="contained"
-                                onClick={handleCartClick}
-                                startIcon={<ShoppingCartIcon fontSize="medium"/>}
+                                variant="outlined"
+                                onClick={handleFavClick}
                             >
-                                Buy
+                                {isInFav ? (
+                                    <FavoriteIcon color="error"/>
+                                ) : (
+                                    <FavoriteBorderIcon color="success"/>
+                                )}
                             </Button>
-
-
-                        ) : (
-                            <CartSide
-                                button={<Link to={routerNames.pageCart}>
-                                    <Button sx={styles.button} variant='outlined'>
-                                        <AddShoppingCartIcon fontSize='medium' color="success"/>
-                                    </Button>
-                                </Link>
-                                }
-                                onQuantityChange={handleQuantityCount}
-                                image={image}
-                                price={price}
-                                rating={rating}
-                                count={count}
-                                id={id}
-                                title={title}
-                                open={openModal}
-                                onClose={handleOpenCartSide}
-                            />
-                        )}
-
-
-                        <Button
-                            id={id}
-                            sx={styles.button}
-                            variant="outlined"
-                            onClick={handleFavClick}
-                        >
-                            {isInFav ? (
-                                <FavoriteIcon color="error"/>
-                            ) : (
-                                <FavoriteBorderIcon color="success"/>
-                            )}
-                        </Button>
-                    </div>
+                        </div>
+                    </Box>
+                    <Box sx={styles.wrapperDescription}>
+                        <Typography variant="h5">Description</Typography>
+                        <Typography variant="h6">{description}</Typography>
+                    </Box>
                 </Box>
-                <Box sx={styles.wrapperDescription}>
-                    <Typography variant="h5">Description</Typography>
-                    <Typography variant="h6">{description}</Typography>
-                </Box>
-            </Box>
-        </Container>
+            </Container>
+            <SimilarItems category={category}/>
+        </React.Fragment>
     );
 };
 
@@ -260,6 +265,7 @@ Product.propTypes = {
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     count: PropTypes.number.isRequired,
+    category: PropTypes.string
 };
 
 export default Product;

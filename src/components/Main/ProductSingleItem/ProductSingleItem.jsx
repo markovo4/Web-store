@@ -11,8 +11,10 @@ const ProductSingleItem = () => {
     return (
         <section style={{
             backgroundColor: '#eeeeee',
-            height: '890px',
+            minHeight: '100vh',
+            maxHeight: '100%',
             display: 'flex',
+            flexDirection: 'column',
             alignItems: "center"
         }}>
             {
@@ -24,6 +26,7 @@ const ProductSingleItem = () => {
                     price={product.data.price}
                     rating={product.data.rating.rate}
                     count={product.data.rating.count}
+                    category={product.data.category}
                 />
             }
         </section>
