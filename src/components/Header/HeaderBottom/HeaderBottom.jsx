@@ -26,7 +26,7 @@ const HeaderBottom = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 1000) {
+            if (window.scrollY > 1000 && window.location.pathname === routerNames.pageMain) {
                 setFixedHeader(true);
             } else {
                 setFixedHeader(false);

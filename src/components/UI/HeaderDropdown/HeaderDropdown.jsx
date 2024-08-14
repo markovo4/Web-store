@@ -1,26 +1,25 @@
 import {useState} from 'react';
 import {Box, Menu, Typography} from '@mui/material';
-import {styles} from './styles';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import {styles} from "./styles.js";
+
 
 const HeaderDropdown = ({children, title, icon, iconStart}) => {
     const [anchorEl, setAnchorEl] = useState(null);
 
-    const handleMouseEnter = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleClick = (event) => {
+        setAnchorEl((prevAnchorEl) => (prevAnchorEl ? null : event.currentTarget));
     };
 
-    const handleMouseLeave = () => {
+    const handleClose = () => {
         setAnchorEl(null);
     };
 
     return (
         <Box
             style={styles.dropdownContainer}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            onClick={handleClick}
         >
-
             {iconStart ? (
                 <Typography variant='h6' sx={styles.startIcon}>
                     {icon} {title}
@@ -34,9 +33,10 @@ const HeaderDropdown = ({children, title, icon, iconStart}) => {
                 id="categories-menu"
                 anchorEl={anchorEl}
                 keepMounted
+                disableScrollLock={true}
                 open={Boolean(anchorEl)}
-                onClose={handleMouseLeave}
-                MenuListProps={{onMouseLeave: handleMouseLeave}}
+                onClose={handleClose}
+                MenuListProps={{onMouseLeave: handleClose}}
                 sx={styles.menu}
             >
                 {children}
@@ -46,11 +46,10 @@ const HeaderDropdown = ({children, title, icon, iconStart}) => {
 };
 
 HeaderDropdown.propTypes = {
-    children: PropTypes.array.isRequired,
+    children: PropTypes.node.isRequired, // Changed from array to node to support various types of children
     title: PropTypes.string.isRequired,
-    icon: PropTypes.object.isRequired,
+    icon: PropTypes.node.isRequired,    // Changed from object to node for flexibility
     iconStart: PropTypes.bool
-
-}
+};
 
 export default HeaderDropdown;

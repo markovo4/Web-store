@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useGetAllCategoriesQuery} from '../../../redux/productsApi/productsApi.js';
 import {Box, Button, CircularProgress, Menu, MenuItem, Typography} from '@mui/material';
-import {KeyboardArrowDownSharp} from "@mui/icons-material";
+import {KeyboardArrowDownSharp} from '@mui/icons-material';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import {styles} from './styles';
@@ -12,31 +12,29 @@ const CategoriesDropdown = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate();
 
-    const handleMouseEnter = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleClick = (event) => {
+        setAnchorEl((prevAnchorEl) => (prevAnchorEl ? null : event.currentTarget));
     };
 
-    const handleMouseLeave = () => {
+    const handleClose = () => {
         setAnchorEl(null);
     };
 
+
     const handleSelectCategory = (category) => {
         navigate(`/categories/${category}`);
-        handleMouseLeave();
+        setAnchorEl(null);
     };
 
     if (isLoading) return <CircularProgress/>;
     if (error) return <p>Error loading categories</p>;
 
     return (
-        <Box
-            style={styles.dropdownContainer}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
+        <Box style={styles.dropdownContainer}>
             <Button
                 aria-controls="categories-menu"
                 aria-haspopup="true"
+                onClick={handleClick}
                 sx={styles.button}
             >
                 <CategoryOutlinedIcon/>
@@ -47,9 +45,10 @@ const CategoriesDropdown = () => {
                 id="categories-menu"
                 anchorEl={anchorEl}
                 keepMounted
+                disableScrollLock={true}
                 open={Boolean(anchorEl)}
-                onClose={handleMouseLeave}
-                MenuListProps={{onMouseLeave: handleMouseLeave}}
+                onClose={handleClose}
+                MenuListProps={{onMouseLeave: handleClose}}
                 sx={styles.menu}
             >
                 {categories.map((category, index) => (
@@ -59,10 +58,9 @@ const CategoriesDropdown = () => {
                         sx={styles.menuItem}
                     >
                         <Typography variant='h6' sx={styles.menuTitle}>
-                            {category.charAt(0).toUpperCase() + category.slice(1)} <ArrowForwardOutlinedIcon
-                            color='success'/>
+                            {category.charAt(0).toUpperCase() + category.slice(1)}
+                            <ArrowForwardOutlinedIcon color='success'/>
                         </Typography>
-
                     </MenuItem>
                 ))}
             </Menu>

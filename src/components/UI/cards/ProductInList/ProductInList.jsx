@@ -26,11 +26,10 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import CustomTooltip from "../../PopOvers/CustomTooltip/index.js";
 
-const ProductInList = ({title, image, price, rate, count, itemId, description}) => {
+const ProductInList = ({title, image, price, rate, count, itemId, description, additionalComponent}) => {
     const {enqueueSnackbar} = useSnackbar();
     const {orderList, productQuantity, favouriteList} = useSelector(state => state.localStorage);
     const dispatch = useDispatch();
-
 
     const [openModal, setOpenModal] = useState(false);
 
@@ -122,18 +121,18 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
 
     return (
         <div>
-            <Card sx={styles.card}>
+            <Card sx={additionalComponent ? styles.cardMin : styles.card}>
                 <div style={styles.groupedText}>
-                    <Link to={`/products/${itemId}`} style={styles.link}>
-                        <img src={image} alt={title} style={styles.image}/>
+                    <Link to={`/products/${itemId}`}>
+                        <img src={image} alt={title} style={additionalComponent ? styles.imageMin : styles.image}/>
                     </Link>
-                    <IconButton
+                    {!additionalComponent && <IconButton
                         sx={styles.favButton}
                         onClick={handleFavClick}
                     >
                         {isInFav ? <FavoriteOutlinedIcon color='error' fontSize='default'/> :
                             <FavoriteBorderOutlinedIcon fontSize='default'/>}
-                    </IconButton>
+                    </IconButton>}
                     <CustomTooltip title={title}>
                         <Typography variant="h6" sx={styles.title}>
                             {getShortTitle(title)}
@@ -141,22 +140,24 @@ const ProductInList = ({title, image, price, rate, count, itemId, description}) 
                     </CustomTooltip>
                 </div>
 
-                <div style={styles.purchase}>
-                    <div className={'mb-3'}>
-                        <div style={styles.wrapper}>
-                            <Rate allowHalf disabled defaultValue={rate}/>
-                            <Typography variant="h6" sx={styles.count}>
-                                <CommentIcon sx={styles.commentIcon}/> {count}
-                            </Typography>
-                        </div>
 
-                        <div className={'flex flex-row items-center gap-3'}>
-                            <KrashComfy/>
-                            <CreditComfy/>
-                            <PetComfy/>
-                            <AppleComfy/>
-                        </div>
-                    </div>
+                <div style={styles.purchase}>
+                    {!additionalComponent &&
+                        <div className={'mb-3'}>
+                            <div style={styles.wrapper}>
+                                <Rate allowHalf disabled defaultValue={rate}/>
+                                <Typography variant="h6" sx={styles.count}>
+                                    <CommentIcon sx={styles.commentIcon}/> {count}
+                                </Typography>
+                            </div>
+
+                            <div className={'flex flex-row items-center gap-3'}>
+                                <KrashComfy/>
+                                <CreditComfy/>
+                                <PetComfy/>
+                                <AppleComfy/>
+                            </div>
+                        </div>}
 
                     <div style={styles.wrapper}>
                         <Box className={'flex flex-col'}>
@@ -210,6 +211,7 @@ ProductInList.propTypes = {
     count: PropTypes.number.isRequired,
     itemId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     description: PropTypes.string.isRequired,
+    additionalComponent: PropTypes.bool
 };
 
 export default ProductInList;

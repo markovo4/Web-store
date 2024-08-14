@@ -1,14 +1,20 @@
 export const styles = {
     title: {
-        margin: '0 0 20px 0',
-        fontWeight: 'bold',
+        margin: '10px',
+        padding: '20px',
         fontSize: '30px',
-        color: 'rgba(0,0,0,0.76)'
+        color: 'rgba(0, 0, 0, 0.79)',
     },
-    section: {
+    sectionViewed: {
         backgroundColor: '#eeeeee',
-        height: '700px',
+        height: '550px',
         display: 'flex',
-        alignItems: 'center'
+        width: '100%',
+        alignItems: 'center',
+    },
+    container: {
+        backgroundColor: '#ffffff',
+        padding: '10px',
+        marginLeft: '5px'
     }
-}
+};

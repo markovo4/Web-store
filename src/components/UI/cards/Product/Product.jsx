@@ -52,6 +52,9 @@ const Product = ({
     const handleOpenCartSide = () => {
         setOpenModal(!openModal)
     };
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [id]);
 
     useEffect(() => {
         setIsInCart(orderList.some(product => product.id === id));

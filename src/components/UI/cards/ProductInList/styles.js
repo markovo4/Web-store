@@ -1,7 +1,4 @@
 export const styles = {
-    link: {
-        textDecoration: 'none',
-    },
     card: {
         padding: '16px',
         marginLeft: '8px',
@@ -18,6 +15,22 @@ export const styles = {
             boxShadow: '0px 1px 10px 1px rgba(0,0,0,0.22)',
         }
     },
+    cardMin: {
+        padding: '16px',
+        marginLeft: '2px',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '220px',
+        height: '420px',
+        marginBottom: '8px',
+        justifyContent: 'space-between',
+        boxShadow: 'none',
+        '&:hover': {
+            transition: '0.3s',
+            backgroundColor: 'rgb(238,238,238)',
+            boxShadow: '0px 1px 10px 1px rgba(0,0,0,0.22)',
+        }
+    },
     image: {
         marginTop: '40px',
         marginBottom: '20px',
@@ -25,6 +38,16 @@ export const styles = {
         objectPosition: 'center',
         width: '190px',
         height: '240px',
+        alignSelf: 'center',
+        position: 'relative',
+    },
+    imageMin: {
+        marginTop: '40px',
+        marginBottom: '20px',
+        objectFit: 'contain',
+        objectPosition: 'center',
+        width: '150px',
+        height: '150px',
         alignSelf: 'center',
         position: 'relative',
     },

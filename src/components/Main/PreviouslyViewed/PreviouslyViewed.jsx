@@ -13,31 +13,33 @@ const PreviouslyViewed = () => {
         dispatch(getRecentlyViewed())
     }, [dispatch])
     return (
-        <section style={styles.section}>
+        <section style={styles.sectionViewed}>
             <Container>
-                <Typography
-                    variant='h4'
-                    component={'h4'}
-                    sx={styles.title}>
-                    Recently Viewed</Typography>
+                <div style={styles.container}>
+                    <Typography
+                        variant='h4'
+                        component={'h4'}
+                        sx={styles.title}>
+                        Recently Viewed</Typography>
 
-                <div style={{display: 'flex'}}>
-                    {recentlyViewed && recentlyViewed.map((product, index) => {
-                        return (
-                            <ProductInList
-                                image={product.image}
-                                price={product.price}
-                                title={product.title}
-                                itemId={product.id}
-                                key={index}
-                                rate={product.rating}
-                                count={product.count}
-                                description={product.description}
-                            />
-                        )
-                    })}
+                    <div className={'flex justify-center'}>
+                        {recentlyViewed && recentlyViewed.map((product, index) => {
+                            return (
+                                <ProductInList
+                                    image={product.image}
+                                    price={product.price}
+                                    title={product.title}
+                                    itemId={product.id}
+                                    key={index}
+                                    rate={product.rating}
+                                    count={product.count}
+                                    description={product.description}
+                                    additionalComponent={true}
+                                />
+                            )
+                        })}
+                    </div>
                 </div>
-
             </Container>
         </section>
     )

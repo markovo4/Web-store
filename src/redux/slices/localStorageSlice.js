@@ -83,7 +83,7 @@ export const localStorageSlice = createSlice({
                 const isProductAlreadyViewed = parsedData.some(product => product.id === payload.id);
 
                 if (!isProductAlreadyViewed) {
-                    const filteredData = parsedData.length === 4 ? parsedData.slice(1) : parsedData
+                    const filteredData = parsedData.length === 5 ? parsedData.slice(1) : parsedData
                     const updatedData = [...filteredData, payload];
                     localStorage.setItem(VIEWED_DATA_KEY, JSON.stringify(updatedData));
                     state.recentlyViewed = updatedData;

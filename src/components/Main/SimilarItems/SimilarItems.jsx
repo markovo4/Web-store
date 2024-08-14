@@ -6,32 +6,35 @@ import PropTypes from "prop-types";
 
 const SimilarItems = ({category}) => {
 
-    const products = useGetAllProductsByCategoryQuery({category: category, limit: 4});
+    const products = useGetAllProductsByCategoryQuery({category: category, limit: 5});
 
     return (
-        <section style={styles.section}>
+        <section style={styles.sectionViewed}>
             <Container>
-                <Typography
-                    variant='h4'
-                    component={'h4'}
-                    sx={styles.title}>
-                    Similar Items</Typography>
+                <div style={styles.container}>
+                    <Typography
+                        variant='h4'
+                        component={'h4'}
+                        sx={styles.title}>
+                        Similar Items</Typography>
 
-                <div style={{display: 'flex'}}>
-                    {products.data && products.data.map((product, index) => {
-                        return (
-                            <ProductInList
-                                image={product.image}
-                                price={product.price}
-                                title={product.title}
-                                itemId={product.id}
-                                key={index}
-                                rate={product.rating.rate}
-                                count={product.rating.count}
-                                description={product.description}
-                            />
-                        )
-                    })}
+                    <div className={'flex justify-center'}>
+                        {products.data && products.data.map((product, index) => {
+                            return (
+                                <ProductInList
+                                    image={product.image}
+                                    price={product.price}
+                                    title={product.title}
+                                    itemId={product.id}
+                                    key={index}
+                                    rate={product.rating.rate}
+                                    count={product.rating.count}
+                                    description={product.description}
+                                    additionalComponent={true}
+                                />
+                            )
+                        })}
+                    </div>
                 </div>
             </Container>
         </section>
