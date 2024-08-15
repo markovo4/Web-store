@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import {Box, Button, Container, List, ListItem, Typography} from "@mui/material";
 import {Rate} from "antd";
@@ -7,10 +7,10 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 
-import {setProductList, setRecentlyViewed} from "../../../../redux/slices/localStorageSlice.js";
+import {setRecentlyViewed} from "../../../../redux/slices/localStorageSlice.js";
 import routerNames from "../../../../router/routes/routerNames.js";
 import CartSide from "../../../Main/CartSide/index.js";
 import KrashComfy from "../../../../assets/icons/KrashComfy.jsx";
@@ -21,6 +21,7 @@ import SimilarItems from "../../../Main/SimilarItems/index.js";
 import useFavourite from "../../../../utils/hooks/useFavourite.js";
 import useCart from "../../../../utils/hooks/useCart.js";
 import {styles} from "./style.js";
+import useQuantity from "../../../../utils/hooks/useQuantity.js";
 
 const Product = ({
                      id,
@@ -33,7 +34,6 @@ const Product = ({
                      category,
                  }) => {
     const dispatch = useDispatch();
-    const {orderList} = useSelector((state) => state.localStorage);
 
     const [openModal, setOpenModal] = useState(false);
 
@@ -82,25 +82,7 @@ const Product = ({
         handleOpenCartSide();
     };
 
-    const productIndex = useMemo(() => {
-        return orderList.findIndex(product => product.id === id);
-    }, [orderList, id]);
-
-    const handleQuantityCount = (id, newAmount) => {
-        if (productIndex !== -1) {
-            const updatedProduct = {
-                ...orderList[productIndex],
-                amount: newAmount,
-            };
-
-            const updatedList = [
-                ...orderList.slice(0, productIndex),
-                updatedProduct,
-                ...orderList.slice(productIndex + 1),
-            ];
-            dispatch(setProductList(updatedList));
-        }
-    };
+    const handleQuantityChange = useQuantity(id, 1);
 
     return (
         <React.Fragment>
@@ -183,7 +165,7 @@ const Product = ({
                                             </Button>
                                         </Link>
                                     }
-                                    onQuantityChange={handleQuantityCount}
+                                    onQuantityChange={handleQuantityChange}
                                     image={image}
                                     price={price}
                                     rating={rating}

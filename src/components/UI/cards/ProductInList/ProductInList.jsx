@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import {Box, Button, Card, IconButton, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
-import {useMemo, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useState} from "react";
 import {Rate} from "antd";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -11,7 +10,6 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 
 import {styles} from "./styles.js";
-import {setProductList} from "../../../../redux/slices/localStorageSlice.js";
 import CartSide from "../../../Main/CartSide/index.js";
 import routerNames from "../../../../router/routes/routerNames.js";
 import KrashComfy from "../../../../assets/icons/KrashComfy.jsx";
@@ -21,6 +19,7 @@ import AppleComfy from "../../../../assets/icons/AppleComfy.jsx";
 import CustomTooltip from "../../PopOvers/CustomTooltip/index.js";
 import useFavourite from "../../../../utils/hooks/useFavourite.js";
 import useCart from "../../../../utils/hooks/useCart.js";
+import useQuantity from "../../../../utils/hooks/useQuantity.js";
 
 const ProductInList = ({
                            title,
@@ -42,8 +41,6 @@ const ProductInList = ({
         id: itemId,
     });
 
-    const {orderList} = useSelector((state) => state.localStorage);
-    const dispatch = useDispatch();
     const {isInCart, handleButtonClick} = useCart({
         title,
         image,
@@ -55,30 +52,10 @@ const ProductInList = ({
     });
 
     const [openModal, setOpenModal] = useState(false);
+    const handleQuantityChange = useQuantity(itemId, 1);
 
     const handleOpenCartSide = () => {
         setOpenModal(!openModal);
-    };
-
-    const productIndex = useMemo(
-        () => orderList.findIndex((product) => product.id === itemId),
-        [orderList, itemId]
-    );
-
-    const handleQuantityCount = (id, newAmount) => {
-        if (productIndex !== -1) {
-            const updatedProduct = {
-                ...orderList[productIndex],
-                amount: newAmount,
-            };
-
-            const updatedList = [
-                ...orderList.slice(0, productIndex),
-                updatedProduct,
-                ...orderList.slice(productIndex + 1),
-            ];
-            dispatch(setProductList(updatedList));
-        }
     };
 
     const getShortTitle = (string) => {
@@ -155,7 +132,7 @@ const ProductInList = ({
                                         </Button>
                                     </Link>
                                 }
-                                onQuantityChange={handleQuantityCount}
+                                onQuantityChange={handleQuantityChange}
                                 image={image}
                                 price={price}
                                 rating={rate}
