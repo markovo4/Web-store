@@ -4,18 +4,14 @@ import {styles} from "./styles.js";
 import QuantityPicker from "../../inputs/QuantityPicker";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import {useEffect, useState} from "react";
-import {
-    getFavProductList,
-    removeFavProduct,
-    removeProduct,
-    setFavProductList,
-} from "../../../../redux/slices/localStorageSlice.js";
-import {useDispatch, useSelector} from "react-redux";
+import {useState} from "react";
+import {removeProduct,} from "../../../../redux/slices/localStorageSlice.js";
+import {useDispatch} from "react-redux";
 import {useSnackbar} from "notistack";
 import ModalDeleteProduct from "../../../ModalsProduct/ModalDeleteProduct/index.js";
 import CheckIcon from '@mui/icons-material/Check';
 import {Link} from "react-router-dom";
+import useFavourite from "../../../../utils/hooks/useFavourite.js";
 
 const CartItem = ({
                       title,
@@ -28,53 +24,28 @@ const CartItem = ({
                       onQuantityChange,
                       amount,
                   }) => {
-    const {enqueueSnackbar} = useSnackbar();
+
     const dispatch = useDispatch();
-    const {favouriteList} = useSelector((state) => state.localStorage);
-
+    const {enqueueSnackbar} = useSnackbar();
     const [openModal, setOpenModal] = useState(false);
+    const {isInFav, handleFavClick} = useFavourite(id, {
+        title,
+        description,
+        image,
+        price,
+        rating,
+        count,
+        id,
+    });
 
-    const handleOpenCartSide = () => {
+    const handleOpenModal = () => {
         setOpenModal(!openModal);
     };
-
-    const [isInFav, setIsInFav] = useState(false);
-
-    useEffect(() => {
-        setIsInFav(favouriteList.some((product) => product.id === id));
-    }, [favouriteList, id]);
-
-    useEffect(() => {
-        dispatch(getFavProductList());
-    }, [dispatch]);
 
     const handleDelete = () => {
         dispatch(removeProduct(id));
         enqueueSnackbar("Item was removed from the Cart!", {variant: "error"});
-        handleOpenCartSide();
-    };
-
-    const handleFavClick = () => {
-        if (!isInFav) {
-            enqueueSnackbar("Item Added to Favourites!", {variant: "success"});
-            const updatedFavouriteList = [
-                ...favouriteList,
-                {
-                    id,
-                    title,
-                    description,
-                    image,
-                    price,
-                    rating,
-                    count,
-                },
-            ];
-            dispatch(setFavProductList(updatedFavouriteList));
-        } else {
-            dispatch(removeFavProduct(id));
-            enqueueSnackbar("Item removed from Favourites!", {variant: "info"});
-        }
-        setIsInFav(!isInFav);
+        handleOpenModal();
     };
 
     const handleQuantityChange = (newAmount) => {
@@ -99,11 +70,9 @@ const CartItem = ({
                         primary={title}
                     />
                 </Link>
-
                 <Typography variant="span" sx={styles.code}>
                     Code: {id}
                 </Typography>
-
                 <div className={"flex gap-5"}>
                     <Button
                         sx={styles.button}
@@ -132,12 +101,11 @@ const CartItem = ({
                         id={id}
                         title={title}
                         open={openModal}
-                        onClose={handleOpenCartSide}
+                        onClose={handleOpenModal}
                         onDelete={handleDelete}
                     />
                 </div>
             </Box>
-
             <Box sx={styles.priceCounter}>
                 <Box className={'flex flex-col'}>
                     <Typography variant="h6" sx={styles.priceOriginal}>

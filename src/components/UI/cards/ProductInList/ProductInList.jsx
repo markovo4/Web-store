@@ -1,122 +1,93 @@
 import PropTypes from "prop-types";
 import {Box, Button, Card, IconButton, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
-import {styles} from "./styles.js";
+import {useMemo, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Rate} from "antd";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import CommentIcon from '@mui/icons-material/Comment';
-import {useEffect, useMemo, useState} from "react";
-import {Rate} from "antd";
-import {useDispatch, useSelector} from "react-redux";
-import {
-    getFavProductList,
-    getProductList,
-    removeFavProduct,
-    setFavProductList,
-    setProductList
-} from "../../../../redux/slices/localStorageSlice.js";
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+
+import {styles} from "./styles.js";
+import {setProductList} from "../../../../redux/slices/localStorageSlice.js";
 import CartSide from "../../../Main/CartSide/index.js";
 import routerNames from "../../../../router/routes/routerNames.js";
-import {useSnackbar} from "notistack";
 import KrashComfy from "../../../../assets/icons/KrashComfy.jsx";
 import CreditComfy from "../../../../assets/icons/CreditComfy.jsx";
 import PetComfy from "../../../../assets/icons/PetComfy.jsx";
 import AppleComfy from "../../../../assets/icons/AppleComfy.jsx";
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import CustomTooltip from "../../PopOvers/CustomTooltip/index.js";
+import useFavourite from "../../../../utils/hooks/useFavourite.js";
+import useCart from "../../../../utils/hooks/useCart.js";
 
-const ProductInList = ({title, image, price, rate, count, itemId, description, additionalComponent}) => {
-    const {enqueueSnackbar} = useSnackbar();
-    const {orderList, productQuantity, favouriteList} = useSelector(state => state.localStorage);
+const ProductInList = ({
+                           title,
+                           image,
+                           price,
+                           rate,
+                           count,
+                           itemId,
+                           description,
+                           additionalComponent
+                       }) => {
+    const {isInFav, handleFavClick} = useFavourite(itemId, {
+        title,
+        description,
+        image,
+        price,
+        rate,
+        count,
+        id: itemId,
+    });
+
+    const {orderList} = useSelector((state) => state.localStorage);
     const dispatch = useDispatch();
+    const {isInCart, handleButtonClick} = useCart({
+        title,
+        image,
+        price,
+        rating: rate,
+        count,
+        id: itemId,
+        description,
+    });
 
     const [openModal, setOpenModal] = useState(false);
 
-    const [isInFav, setIsInFav] = useState(
-        favouriteList.some((product) => product.id === itemId)
-    );
-
     const handleOpenCartSide = () => {
-        setOpenModal(!openModal)
+        setOpenModal(!openModal);
     };
 
-    const getShortTitle = (string) => {
-        return string.length > 40 ? `${string.slice(0, 41)}...` : string;
-    }
-
-    const [isInCart, setIsInCart] = useState(orderList.some(product => product.id === itemId));
-
-    const productIndex = useMemo(() => {
-        return orderList.findIndex(product => product.id === itemId);
-    }, [orderList, itemId]);
-
+    const productIndex = useMemo(
+        () => orderList.findIndex((product) => product.id === itemId),
+        [orderList, itemId]
+    );
 
     const handleQuantityCount = (id, newAmount) => {
         if (productIndex !== -1) {
             const updatedProduct = {
                 ...orderList[productIndex],
-                amount: newAmount
-            }
+                amount: newAmount,
+            };
 
             const updatedList = [
                 ...orderList.slice(0, productIndex),
                 updatedProduct,
-                ...orderList.slice(productIndex + 1)
-            ]
-            dispatch(setProductList(updatedList))
-        }
-    }
-
-    const handleFavClick = () => {
-        setIsInFav((prevAddToFav) => !prevAddToFav);
-
-        if (!isInFav) {
-            enqueueSnackbar('Item Added to Favourites!', {variant: 'success'});
-            const updatedFavList = [
-                ...favouriteList,
-                {id: itemId, title, description, image, price, rating: rate, count},
+                ...orderList.slice(productIndex + 1),
             ];
-            dispatch(setFavProductList(updatedFavList));
-        } else {
-            enqueueSnackbar('Item removed from Favourites!', {variant: 'info'});
-            dispatch(removeFavProduct(itemId));
+            dispatch(setProductList(updatedList));
         }
     };
 
-    useEffect(() => {
-        setIsInCart(orderList.some(product => product.id === itemId));
-        setIsInFav(favouriteList.some((product) => product.id === itemId))
-    }, [orderList, itemId, favouriteList]);
+    const getShortTitle = (string) => {
+        return string.length > 40 ? `${string.slice(0, 41)}...` : string;
+    };
 
-
-    useEffect(() => {
-        dispatch(getFavProductList());
-        dispatch(getProductList());
-    }, [dispatch]);
-
-    const handleButtonClick = (id) => {
-        let updatedList;
-        if (isInCart) {
-            updatedList = orderList.filter(product => product.id !== id);
-        } else {
-            updatedList = [
-                ...orderList,
-                {
-                    title: title,
-                    description: description,
-                    image: image,
-                    price: price,
-                    rating: rate,
-                    count: count,
-                    id: itemId,
-                    amount: productQuantity,
-                }
-            ];
-        }
-        dispatch(setProductList(updatedList));
+    const handleAddProductClick = () => {
+        handleButtonClick();
         handleOpenCartSide();
-        enqueueSnackbar('Item Added Successfully!', {variant: 'success'});
     };
 
     return (
@@ -124,15 +95,21 @@ const ProductInList = ({title, image, price, rate, count, itemId, description, a
             <Card sx={additionalComponent ? styles.cardMin : styles.card}>
                 <div style={styles.groupedText}>
                     <Link to={`/products/${itemId}`}>
-                        <img src={image} alt={title} style={additionalComponent ? styles.imageMin : styles.image}/>
+                        <img
+                            src={image}
+                            alt={title}
+                            style={additionalComponent ? styles.imageMin : styles.image}
+                        />
                     </Link>
-                    {!additionalComponent && <IconButton
-                        sx={styles.favButton}
-                        onClick={handleFavClick}
-                    >
-                        {isInFav ? <FavoriteOutlinedIcon color='error' fontSize='default'/> :
-                            <FavoriteBorderOutlinedIcon fontSize='default'/>}
-                    </IconButton>}
+                    {!additionalComponent && (
+                        <IconButton sx={styles.favButton} onClick={handleFavClick}>
+                            {isInFav ? (
+                                <FavoriteOutlinedIcon color="error" fontSize="default"/>
+                            ) : (
+                                <FavoriteBorderOutlinedIcon fontSize="default"/>
+                            )}
+                        </IconButton>
+                    )}
                     <CustomTooltip title={title}>
                         <Typography variant="h6" sx={styles.title}>
                             {getShortTitle(title)}
@@ -140,27 +117,26 @@ const ProductInList = ({title, image, price, rate, count, itemId, description, a
                     </CustomTooltip>
                 </div>
 
-
                 <div style={styles.purchase}>
-                    {!additionalComponent &&
-                        <div className={'mb-3'}>
+                    {!additionalComponent && (
+                        <div className="mb-3">
                             <div style={styles.wrapper}>
                                 <Rate allowHalf disabled defaultValue={rate}/>
                                 <Typography variant="h6" sx={styles.count}>
                                     <CommentIcon sx={styles.commentIcon}/> {count}
                                 </Typography>
                             </div>
-
-                            <div className={'flex flex-row items-center gap-3'}>
+                            <div className="flex flex-row items-center gap-3">
                                 <KrashComfy/>
                                 <CreditComfy/>
                                 <PetComfy/>
                                 <AppleComfy/>
                             </div>
-                        </div>}
+                        </div>
+                    )}
 
                     <div style={styles.wrapper}>
-                        <Box className={'flex flex-col'}>
+                        <Box className="flex flex-col">
                             <Typography variant="h6" sx={styles.priceOriginal}>
                                 <s style={styles.priceStrike}>$ {price}</s>
                                 <span style={styles.discount}>-10%</span>
@@ -171,13 +147,13 @@ const ProductInList = ({title, image, price, rate, count, itemId, description, a
                         </Box>
 
                         {isInCart ? (
-
                             <CartSide
-                                button={<Link to={routerNames.pageCart}>
-                                    <Button sx={styles.button} variant='outlined'>
-                                        <AddShoppingCartIcon fontSize='medium' color="success"/>
-                                    </Button>
-                                </Link>
+                                button={
+                                    <Link to={routerNames.pageCart}>
+                                        <Button sx={styles.button} variant="outlined">
+                                            <AddShoppingCartIcon fontSize="medium" color="success"/>
+                                        </Button>
+                                    </Link>
                                 }
                                 onQuantityChange={handleQuantityCount}
                                 image={image}
@@ -189,12 +165,14 @@ const ProductInList = ({title, image, price, rate, count, itemId, description, a
                                 open={openModal}
                                 onClose={handleOpenCartSide}
                             />
-
                         ) : (
-                            <Button sx={styles.button} variant="contained" onClick={handleButtonClick}>
+                            <Button
+                                sx={styles.button}
+                                variant="contained"
+                                onClick={handleAddProductClick}
+                            >
                                 <ShoppingCartIcon fontSize="medium"/>
                             </Button>
-
                         )}
                     </div>
                 </div>
@@ -211,7 +189,7 @@ ProductInList.propTypes = {
     count: PropTypes.number.isRequired,
     itemId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     description: PropTypes.string.isRequired,
-    additionalComponent: PropTypes.bool
+    additionalComponent: PropTypes.bool,
 };
 
 export default ProductInList;

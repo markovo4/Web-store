@@ -1,31 +1,26 @@
-import {Box, Button, Container, List, ListItem, Typography} from "@mui/material";
+import React, {useEffect, useMemo, useState} from "react";
 import PropTypes from "prop-types";
-import {styles} from "./style.js";
+import {Box, Button, Container, List, ListItem, Typography} from "@mui/material";
 import {Rate} from "antd";
 import CommentIcon from '@mui/icons-material/Comment';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import React, {useEffect, useMemo, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    getFavProductList,
-    getProductList,
-    removeFavProduct,
-    setFavProductList,
-    setProductList,
-    setRecentlyViewed,
-} from "../../../../redux/slices/localStorageSlice.js";
 import {Link} from "react-router-dom";
+
+import {setProductList, setRecentlyViewed} from "../../../../redux/slices/localStorageSlice.js";
 import routerNames from "../../../../router/routes/routerNames.js";
 import CartSide from "../../../Main/CartSide/index.js";
-import {useSnackbar} from "notistack";
 import KrashComfy from "../../../../assets/icons/KrashComfy.jsx";
 import CreditComfy from "../../../../assets/icons/CreditComfy.jsx";
 import PetComfy from "../../../../assets/icons/PetComfy.jsx";
 import AppleComfy from "../../../../assets/icons/AppleComfy.jsx";
 import SimilarItems from "../../../Main/SimilarItems/index.js";
+import useFavourite from "../../../../utils/hooks/useFavourite.js";
+import useCart from "../../../../utils/hooks/useCart.js";
+import {styles} from "./style.js";
 
 const Product = ({
                      id,
@@ -37,29 +32,34 @@ const Product = ({
                      count,
                      category,
                  }) => {
-    const {enqueueSnackbar} = useSnackbar();
     const dispatch = useDispatch();
-    const {orderList, favouriteList} = useSelector((state) => state.localStorage);
-
-    const [isInCart, setIsInCart] = useState(orderList.some(product => product.id === id));
-
-    const [isInFav, setIsInFav] = useState(
-        favouriteList.some((product) => product.id === id)
-    );
+    const {orderList} = useSelector((state) => state.localStorage);
 
     const [openModal, setOpenModal] = useState(false);
 
-    const handleOpenCartSide = () => {
-        setOpenModal(!openModal)
-    };
+    const {isInFav, handleFavClick} = useFavourite(id, {
+        title,
+        description,
+        image,
+        price,
+        rating,
+        count,
+        id,
+    });
+
+    const {isInCart, handleButtonClick} = useCart({
+        title,
+        image,
+        price,
+        rating,
+        count,
+        id,
+        description,
+    });
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [id]);
-
-    useEffect(() => {
-        setIsInCart(orderList.some(product => product.id === id));
-        setIsInFav(favouriteList.some((product) => product.id === id))
-    }, [orderList, id, favouriteList]);
 
     useEffect(() => {
         dispatch(setRecentlyViewed({
@@ -70,70 +70,35 @@ const Product = ({
             price,
             rating,
             count,
-        }))
-    }, [count, description, dispatch, id, image, price, rating, title]);
+        }));
+    }, [dispatch, id, title, description, image, price, rating, count]);
 
+    const handleOpenCartSide = () => {
+        setOpenModal(!openModal);
+    };
 
-    useEffect(() => {
-        dispatch(getFavProductList());
-        dispatch(getProductList());
-    }, [dispatch]);
-
-    const handleCartClick = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        setIsInCart(!isInCart);
-
-        let updatedOrderList;
-        if (isInCart) {
-
-            updatedOrderList = orderList.filter((product) => product.id !== id);
-        } else {
-
-            updatedOrderList = [
-                ...orderList,
-                {id, title, description, image, price, rating, count, amount: 1},
-            ];
-        }
-        dispatch(setProductList(updatedOrderList));
+    const handleAddProductClick = () => {
+        handleButtonClick();
         handleOpenCartSide();
-        enqueueSnackbar('Item Added Successfully!', {variant: 'success'});
     };
 
     const productIndex = useMemo(() => {
         return orderList.findIndex(product => product.id === id);
     }, [orderList, id]);
 
-
     const handleQuantityCount = (id, newAmount) => {
         if (productIndex !== -1) {
             const updatedProduct = {
                 ...orderList[productIndex],
-                amount: newAmount
-            }
+                amount: newAmount,
+            };
 
             const updatedList = [
                 ...orderList.slice(0, productIndex),
                 updatedProduct,
-                ...orderList.slice(productIndex + 1)
-            ]
-            dispatch(setProductList(updatedList))
-        }
-    }
-
-    const handleFavClick = () => {
-        setIsInFav((prevAddToFav) => !prevAddToFav);
-
-        if (!isInFav) {
-            enqueueSnackbar('Item Added to Favourites!', {variant: 'success'});
-            const updatedFavList = [
-                ...favouriteList,
-                {id, title, description, image, price, rating, count},
+                ...orderList.slice(productIndex + 1),
             ];
-            dispatch(setFavProductList(updatedFavList));
-        } else {
-            enqueueSnackbar('Item removed from Favourites!', {variant: 'info'});
-            dispatch(removeFavProduct(id));
+            dispatch(setProductList(updatedList));
         }
     };
 
@@ -148,51 +113,48 @@ const Product = ({
                         <Typography variant="h3" component="h3" sx={styles.price}>
                             {title}
                         </Typography>
-                        <Box className={'flex flex-row items-center justify-between'}>
+                        <Box className="flex flex-row items-center justify-between">
                             <Box style={styles.rating}>
                                 <Rate allowHalf disabled defaultValue={rating} style={styles.ratingColor}/>
                                 <Typography variant="h6" sx={styles.count}>
-                                    <CommentIcon fontSize='small'/> {count}
+                                    <CommentIcon fontSize="small"/> {count}
                                 </Typography>
                             </Box>
                             <Typography variant="span" sx={styles.code}>
                                 Code: {id}
                             </Typography>
                         </Box>
-                        <Box className={'flex flex-row items-center gap-3'}>
-                            <List className={'flex justify-between gap-3'}>
+                        <Box className="flex flex-row items-center gap-3">
+                            <List className="flex justify-between gap-3">
                                 <ListItem sx={styles.underTitleIconsContainer}>
                                     <KrashComfy/>
-                                    <Typography variant='span' sx={styles.underTitleIconsText}>
+                                    <Typography variant="span" sx={styles.underTitleIconsText}>
                                         Crash
                                     </Typography>
                                 </ListItem>
                                 <ListItem sx={styles.underTitleIconsContainer}>
                                     <CreditComfy/>
-                                    <Typography variant='span' sx={styles.underTitleIconsText}>
+                                    <Typography variant="span" sx={styles.underTitleIconsText}>
                                         PRIVAT-Bank
                                     </Typography>
                                 </ListItem>
                                 <ListItem sx={styles.underTitleIconsContainer}>
                                     <PetComfy/>
-                                    <Typography variant='span' sx={styles.underTitleIconsText}>
+                                    <Typography variant="span" sx={styles.underTitleIconsText}>
                                         MONO-Bank
                                     </Typography>
-
                                 </ListItem>
                                 <ListItem sx={styles.underTitleIconsContainer}>
                                     <AppleComfy/>
-                                    <Typography variant='span' sx={styles.underTitleIconsText}>
+                                    <Typography variant="span" sx={styles.underTitleIconsText}>
                                         ALFA-Bank
                                     </Typography>
-
                                 </ListItem>
                             </List>
                         </Box>
                     </Box>
-
                     <Box sx={styles.wrapperPurchase}>
-                        <Box className={'flex flex-col'}>
+                        <Box className="flex flex-col">
                             <Typography variant="h6" sx={styles.priceOriginal}>
                                 <s style={styles.priceStrike}>$ {price}</s>
                                 <span style={styles.discount}>-10%</span>
@@ -207,20 +169,19 @@ const Product = ({
                                     id={id}
                                     sx={styles.button}
                                     variant="contained"
-                                    onClick={handleCartClick}
+                                    onClick={handleAddProductClick}
                                     startIcon={<ShoppingCartIcon fontSize="medium"/>}
                                 >
                                     Buy
                                 </Button>
-
-
                             ) : (
                                 <CartSide
-                                    button={<Link to={routerNames.pageCart}>
-                                        <Button sx={styles.button} variant='outlined'>
-                                            <AddShoppingCartIcon fontSize='medium' color="success"/>
-                                        </Button>
-                                    </Link>
+                                    button={
+                                        <Link to={routerNames.pageCart}>
+                                            <Button sx={styles.button} variant="outlined">
+                                                <AddShoppingCartIcon fontSize="medium" color="success"/>
+                                            </Button>
+                                        </Link>
                                     }
                                     onQuantityChange={handleQuantityCount}
                                     image={image}
@@ -233,8 +194,6 @@ const Product = ({
                                     onClose={handleOpenCartSide}
                                 />
                             )}
-
-
                             <Button
                                 id={id}
                                 sx={styles.button}
@@ -268,7 +227,7 @@ Product.propTypes = {
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     count: PropTypes.number.isRequired,
-    category: PropTypes.string
+    category: PropTypes.string,
 };
 
 export default Product;
