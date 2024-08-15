@@ -1,15 +1,16 @@
 import {cloneElement} from 'react';
 import PropTypes from 'prop-types';
 import {Button, FormGroup} from '@mui/material';
-import FormInput from '../../UI/inputs/FormInput';
 import {useFormik} from 'formik';
-import loginFormValidation from '../../../utils/validationSchemas/loginFormValidation.js';
-import Cookies from 'js-cookie';
-import {styles} from './styles.js';
 import {useDispatch, useSelector} from 'react-redux';
-import {setModalLoginOpen} from '../../../redux/slices/modalsAuthSlice.js';
 import {useSnackbar} from 'notistack';
-import ModalTemplate from '../../UI/ModalTemplate/index.js';
+import Cookies from 'js-cookie';
+
+import FormInput from '../../UI/inputs/FormInput';
+import ModalTemplate from '../../UI/ModalTemplate';
+import loginFormValidation from '../../../utils/validationSchemas/loginFormValidation';
+import {setModalLoginOpen} from '../../../redux/slices/modalsAuthSlice';
+import {styles} from './styles';
 
 const formInitValues = {
     login: '',
@@ -18,18 +19,19 @@ const formInitValues = {
 
 const ModalLogin = ({button}) => {
     const {enqueueSnackbar} = useSnackbar();
-    const {modalLoginOpen} = useSelector((state) => state.modalsAuth);
+    const {modalLoginOpen} = useSelector(state => state.modalsAuth);
     const dispatch = useDispatch();
 
-    const handleOpen = () => dispatch(setModalLoginOpen(true)); // Ensure you set the correct state
-    const handleClose = () => dispatch(setModalLoginOpen(false)); // Ensure you set the correct state
+    // Handlers for opening and closing the modal
+    const handleOpen = () => dispatch(setModalLoginOpen(true));
+    const handleClose = () => dispatch(setModalLoginOpen(false));
 
-    const buttonWithOnClick = cloneElement(button, {
-        onClick: handleOpen,
-    });
+    // Clone button to attach onClick handler
+    const buttonWithOnClick = cloneElement(button, {onClick: handleOpen});
 
+    // Formik setup
     const formik = useFormik({
-        initialValues: {...formInitValues},
+        initialValues: formInitValues,
         validationSchema: loginFormValidation,
         onSubmit: (values, {resetForm}) => {
             enqueueSnackbar('Successful Login!', {variant: 'success'});
@@ -44,34 +46,34 @@ const ModalLogin = ({button}) => {
 
     return (
         <ModalTemplate
-            title={'Log in'}
+            title="Log in"
             button={buttonWithOnClick}
             open={modalLoginOpen}
             handleClose={handleClose}
         >
             <form onSubmit={formik.handleSubmit} style={styles.formLogin}>
-                <FormGroup className={'flex '}>
+                <FormGroup className="flex">
                     <FormInput
                         onChange={formik.handleChange}
                         value={formik.values.login}
                         touched={formik.touched.login}
                         error={formik.errors.login}
-                        label={'Login:'}
-                        name={'login'}
-                        id={'login'}
-                        type={'text'}
+                        label="Login:"
+                        name="login"
+                        id="login"
+                        type="text"
                     />
                     <FormInput
                         onChange={formik.handleChange}
                         value={formik.values.password}
                         touched={formik.touched.password}
                         error={formik.errors.password}
-                        label={'Password:'}
-                        name={'password'}
-                        id={'password'}
-                        type={'password'}
+                        label="Password:"
+                        name="password"
+                        id="password"
+                        type="password"
                     />
-                    <Button type={'submit'} variant={'contained'} sx={styles.loginButton}>
+                    <Button type="submit" variant="contained" sx={styles.loginButton}>
                         Log in
                     </Button>
                 </FormGroup>
@@ -81,7 +83,7 @@ const ModalLogin = ({button}) => {
 };
 
 ModalLogin.propTypes = {
-    button: PropTypes.object.isRequired,
+    button: PropTypes.element.isRequired,
 };
 
 export default ModalLogin;

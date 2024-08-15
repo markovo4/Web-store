@@ -1,11 +1,11 @@
-import {styles} from "./styles.js";
-import {Box, Button, Modal, Typography} from "@mui/material";
-import CartItem from "../../UI/cards/CartItem";
 import PropTypes from "prop-types";
+import {Box, Button, Modal, Typography} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import {Link} from "react-router-dom";
-import routerNames from "../../../router/routes/routerNames.js";
 
+import CartItem from "../../UI/cards/CartItem";
+import {styles} from "./styles";
+import routerNames from "../../../router/routes/routerNames";
 
 const CartSide = ({
                       button,
@@ -19,7 +19,6 @@ const CartSide = ({
                       open,
                       onClose,
                   }) => {
-
     const handleClose = () => {
         onClose();
     };
@@ -35,21 +34,22 @@ const CartSide = ({
                 aria-describedby={title}
             >
                 <Box sx={styles.container}>
-                    <div className={'flex justify-between items-center'}>
+                    <div className="flex justify-between items-center">
                         <Typography
                             id={title}
                             variant="h6"
                             component="h2"
                             sx={styles.modalTitle}
                         >
-                            Item Has been added to the Cart
+                            Item has been added to the cart
                         </Typography>
                         <Button
                             onClick={handleClose}
                             variant="contained"
                             sx={styles.buttonClose}
-                            aria-label="add to shopping cart">
-                            <CloseIcon color='disabled' fontSize='large'/>
+                            aria-label="close cart modal"
+                        >
+                            <CloseIcon color="disabled" fontSize="large"/>
                         </Button>
                     </div>
 
@@ -66,20 +66,21 @@ const CartSide = ({
                         />
                     </div>
 
-                    <Box className={'flex justify-between items-center pl-12 pr-12'} sx={styles.buttonGroup}>
-
+                    <Box className="flex justify-between items-center pl-12 pr-12" sx={styles.buttonGroup}>
                         <Button
                             sx={styles.buttonContinue}
                             variant="contained"
-                            onClick={handleClose}>
+                            onClick={handleClose}
+                        >
                             Continue shopping
                         </Button>
 
-                        <div className={'flex gap-5'}>
+                        <div className="flex gap-5">
                             <Link to={routerNames.pageCart}>
                                 <Button
                                     sx={styles.buttonChoice}
-                                    variant="contained">
+                                    variant="contained"
+                                >
                                     Go to cart
                                 </Button>
                             </Link>
@@ -87,11 +88,11 @@ const CartSide = ({
                             <Link to={routerNames.pageCheckout}>
                                 <Button
                                     sx={styles.buttonChoice}
-                                    variant="outlined">
+                                    variant="outlined"
+                                >
                                     Checkout
                                 </Button>
                             </Link>
-
                         </div>
                     </Box>
                 </Box>
@@ -101,7 +102,7 @@ const CartSide = ({
 };
 
 CartSide.propTypes = {
-    button: PropTypes.object.isRequired,
+    button: PropTypes.element.isRequired,
     onQuantityChange: PropTypes.func.isRequired,
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -110,7 +111,7 @@ CartSide.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     open: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired
-}
+    onClose: PropTypes.func.isRequired,
+};
 
 export default CartSide;

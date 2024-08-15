@@ -1,33 +1,31 @@
-import {Box, Button, FormControlLabel, Radio, RadioGroup, Typography} from "@mui/material";
-import {styles} from "./styles.js";
 import {useEffect, useState} from "react";
+import {Box, Button, FormControlLabel, Radio, RadioGroup, Typography} from "@mui/material";
 import {useFormik} from "formik";
+import PropTypes from "prop-types";
+import {useDispatch, useSelector} from "react-redux";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import PixIcon from '@mui/icons-material/Pix';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import SecurityIcon from '@mui/icons-material/Security';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import AppleIcon from '@mui/icons-material/Apple';
-import FormCard from "../../UI/cards/FormCard/index.js";
-import PropTypes from "prop-types";
-import {useDispatch, useSelector} from "react-redux";
-import {getCheckoutInfo, setCheckoutInfo} from "../../../redux/slices/localStorageSlice.js";
+import FormCard from "../../UI/cards/FormCard";
+import {getCheckoutInfo, setCheckoutInfo} from "../../../redux/slices/localStorageSlice";
+import {styles} from "./styles";
 
 const initialValues = {
     paymentOption: 'Pay when you get the product',
-}
+};
 
 const PaymentOptionsForm = ({onValidChange}) => {
-
-    const {checkout} = useSelector((state) => state.localStorage);
+    const {checkout} = useSelector(state => state.localStorage);
     const dispatch = useDispatch();
-
     const [openForm, setOpenForm] = useState(false);
 
-    const handleClickContinue = () => {
-        setOpenForm(!openForm);
-    }
+    // Toggle form visibility
+    const handleClickContinue = () => setOpenForm(prev => !prev);
 
+    // Formik setup
     const formik = useFormik({
         initialValues,
         onSubmit: (values, {resetForm}) => {
@@ -35,17 +33,17 @@ const PaymentOptionsForm = ({onValidChange}) => {
             const updatedCheckoutInfo = {
                 ...checkout,
                 paymentMethod: values.paymentOption,
-            }
-            dispatch(setCheckoutInfo(updatedCheckoutInfo))
-
-            onValidChange(!formik.errors.paymentOption && formik.touched.paymentOption)
+            };
+            dispatch(setCheckoutInfo(updatedCheckoutInfo));
+            onValidChange(!formik.errors.paymentOption && formik.touched.paymentOption);
             resetForm();
         }
     });
 
+    // Fetch checkout info on component mount
     useEffect(() => {
-        dispatch(getCheckoutInfo())
-    }, [dispatch])
+        dispatch(getCheckoutInfo());
+    }, [dispatch]);
 
     return (
         <form onSubmit={formik.handleSubmit}>
@@ -53,9 +51,10 @@ const PaymentOptionsForm = ({onValidChange}) => {
                 payment={true}
                 formTitle={'3. Payment options'}
                 open={openForm}
-                openForm={handleClickContinue}>
+                openForm={handleClickContinue}
+            >
                 <Box sx={styles.contactInfo}>
-                    <Typography variant='h6' component={'span'}>3. Payment options</Typography>
+                    <Typography variant='h6' component='span'>3. Payment options</Typography>
 
                     <RadioGroup
                         name="paymentOption"
@@ -63,6 +62,7 @@ const PaymentOptionsForm = ({onValidChange}) => {
                         onChange={formik.handleChange}
                         sx={styles.radioGroup}
                     >
+                        {/* Payment options */}
                         <div style={styles.radioButton}>
                             <FormControlLabel
                                 value="Pay when you get the product"
@@ -120,10 +120,11 @@ const PaymentOptionsForm = ({onValidChange}) => {
             </FormCard>
         </form>
     );
-}
+};
 
+// Prop types validation
 PaymentOptionsForm.propTypes = {
     onValidChange: PropTypes.func.isRequired,
-}
+};
 
 export default PaymentOptionsForm;

@@ -12,7 +12,7 @@ const ClothesFemale = () => {
 
     if (isLoading) {
         return (
-            <Box sx={{display: 'flex', justifyContent: 'center', padding: '20px'}}>
+            <Box sx={styles.progressBar}>
                 <CircularProgress/>
             </Box>
         );
@@ -31,7 +31,7 @@ const ClothesFemale = () => {
                     sx={styles.title}>
                     For her</Typography>
 
-                <Box sx={{display: 'flex'}}>
+                <Box sx={styles.container}>
                     {clothesFemale.map(({id, image, price, title, rating, description}) => (
                         <ProductInList
                             key={id}

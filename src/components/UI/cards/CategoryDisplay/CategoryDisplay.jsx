@@ -14,7 +14,7 @@ const CategoryDisplay = () => {
         <section style={styles.section}>
             <Container>
                 <Typography
-                    variant={'h4'}
+                    variant='h4'
                     component={'h4'}
                     sx={styles.title}>
                     {title}</Typography>

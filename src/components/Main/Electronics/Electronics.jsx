@@ -11,7 +11,7 @@ const Electronics = () => {
 
     if (isLoading) {
         return (
-            <Box sx={{display: 'flex', justifyContent: 'center', padding: '20px'}}>
+            <Box sx={styles.progressBar}>
                 <CircularProgress/>
             </Box>
         );
@@ -24,12 +24,12 @@ const Electronics = () => {
         <section style={styles.section}>
             <Container>
                 <Typography
-                    variant={'h4'}
+                    variant='h4'
                     component={'h4'}
                     sx={styles.title}>
                     Electronics</Typography>
 
-                <Box sx={{display: 'flex'}}>
+                <Box sx={styles.container}>
                     {electronics.map(({id, image, price, title, rating, description}) => (
                         <ProductInList
                             key={id}

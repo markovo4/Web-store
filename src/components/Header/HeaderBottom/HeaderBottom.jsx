@@ -1,59 +1,46 @@
-import {styles} from "./styles";
-import {Box, Button, Container, MenuItem, Tooltip, Typography} from "@mui/material";
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ProductsSelect from "../../UI/inputs/ProductsSelect";
-import {Link} from "react-router-dom";
-import routerNames from "../../../router/routes/routerNames.js";
-import CategoriesDropdown from "../../UI/CategoriesDropdown/index.js";
-import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
-import ModalLogin from "../../ModalsAuth/ModalLogin/index.js";
-import {useDispatch, useSelector} from "react-redux";
-import LocalMallIcon from '@mui/icons-material/LocalMall';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LogoutIcon from '@mui/icons-material/Logout';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import HeaderDropdown from "../../UI/HeaderDropdown/index.js";
-import Cookies from "js-cookie";
 import {useEffect, useState} from "react";
-import {getProductList} from "../../../redux/slices/localStorageSlice.js";
+import {Box, Button, Container, MenuItem, Tooltip, Typography} from "@mui/material";
+import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import Cookies from "js-cookie";
+import {
+    AccountCircle as AccountCircleIcon,
+    Favorite as FavoriteIcon,
+    FavoriteBorder as FavoriteBorderIcon,
+    LocalMall as LocalMallIcon,
+    LoginOutlined as LoginOutlinedIcon,
+    Logout as LogoutIcon,
+    ShoppingCartOutlined as ShoppingCartOutlinedIcon
+} from '@mui/icons-material';
+
+import {styles} from "./styles";
+import ProductsSelect from "../../UI/inputs/ProductsSelect";
+import CategoriesDropdown from "../../UI/CategoriesDropdown";
+import HeaderDropdown from "../../UI/HeaderDropdown";
+import ModalLogin from "../../ModalsAuth/ModalLogin";
+import {getProductList} from "../../../redux/slices/localStorageSlice";
+import {getTotalPrice} from "../../../utils/functions/functions";
+import routerNames from "../../../router/routes/routerNames";
 
 const HeaderBottom = () => {
     const {orderList, favouriteList} = useSelector(state => state.localStorage);
+    const {displayAuthButtons} = useSelector(state => state.modalsAuth);
     const dispatch = useDispatch();
 
     const [fixedHeader, setFixedHeader] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 1000 && window.location.pathname === routerNames.pageMain) {
-                setFixedHeader(true);
-            } else {
-                setFixedHeader(false);
-            }
+            setFixedHeader(window.scrollY > 1000 && window.location.pathname === routerNames.pageMain);
         };
 
         window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     useEffect(() => {
         dispatch(getProductList());
     }, [dispatch]);
-
-    const getTotalPrice = (products) => {
-        const priceTotal = products.reduce((totalPrice, product) => {
-            return {
-                price: totalPrice.price + product.price * product.amount,
-                quantity: totalPrice.quantity + product.amount
-            }
-        }, {price: 0, quantity: 0});
-        return {price: parseFloat(priceTotal.price.toFixed(2)), quantity: priceTotal.quantity};
-    }
-
-    const {displayAuthButtons} = useSelector(state => state.modalsAuth);
 
     const handleLogOut = () => {
         Cookies.remove('LoggedIn');
@@ -70,30 +57,30 @@ const HeaderBottom = () => {
                 <div style={styles.wrapperButtonGroup}>
                     {displayAuthButtons ? (
                         <HeaderDropdown
-                            title={'Profile'}
-                            icon={<AccountCircleIcon fontSize='large'/>}
-                            iconStart={true}
+                            title="Profile"
+                            icon={<AccountCircleIcon fontSize="large"/>}
+                            iconStart
                         >
                             <MenuItem sx={styles.menuItem}>
-                                <AccountCircleIcon fontSize='small' color='primary'/> My Cabinet
+                                <AccountCircleIcon fontSize="small" color="primary"/> My Cabinet
                             </MenuItem>
                             <MenuItem sx={styles.menuItem}>
-                                <LocalMallIcon fontSize='small' color='success'/> My Orders
+                                <LocalMallIcon fontSize="small" color="success"/> My Orders
                             </MenuItem>
                             <MenuItem sx={styles.menuItem}>
                                 <Link to={routerNames.pageFavProducts}>
-                                    <FavoriteIcon fontSize='small' color='error'/> Favourite
+                                    <FavoriteIcon fontSize="small" color="error"/> Favourite
                                 </Link>
                             </MenuItem>
                             <MenuItem sx={styles.menuItem}>
-                                <LogoutIcon fontSize='small' onClick={handleLogOut} color='error'/> Logout
+                                <LogoutIcon fontSize="small" onClick={handleLogOut} color="error"/> Logout
                             </MenuItem>
                         </HeaderDropdown>
                     ) : (
                         <ModalLogin button={
                             <Button sx={styles.buttonLogIn} variant="contained">
                                 <LoginOutlinedIcon/>
-                                <Typography variant='h6'>LogIn</Typography>
+                                <Typography variant='h6'>Log In</Typography>
                             </Button>
                         }/>
                     )}
@@ -132,7 +119,7 @@ const HeaderBottom = () => {
                 </div>
             </Container>
         </section>
-    )
-}
+    );
+};
 
 export default HeaderBottom;

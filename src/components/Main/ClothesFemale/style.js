@@ -10,5 +10,13 @@ export const styles = {
         height: '700px',
         display: 'flex',
         alignItems: 'center'
+    },
+    container: {
+        display: 'flex'
+    },
+    progressBar: {
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '20px'
     }
 }

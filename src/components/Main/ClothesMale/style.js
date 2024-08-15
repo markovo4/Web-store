@@ -28,4 +28,12 @@ export const styles = {
         backgroundRepeat: 'repeat',
         height: '900px',
     },
+    container: {
+        display: 'flex'
+    },
+    progressBar: {
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '20px'
+    }
 };

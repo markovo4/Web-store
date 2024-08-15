@@ -15,21 +15,21 @@ const FooterTop = () => {
                         title={'Delivery'}
                         body={'Pickup from the Comfy store, delivery to the address or to the ' +
                             'Novaya Poshta and Meest branches'}>
-                        <LocalShippingIcon color={"success"}/></Benefit>
+                        <LocalShippingIcon color="success"/></Benefit>
                     <Benefit
                         title={'Warranty'}
                         body={'Certified equipment with an official guarantee from the ' +
                             'manufacturer.'}>
-                        <VerifiedUserIcon color={"success"}/></Benefit>
+                        <VerifiedUserIcon color="success"/></Benefit>
                     <Benefit
                         title={'Payment'}
                         body={'You can pay for your purchase in cash, by card or by bank transfer.'}>
-                        <AccountBalanceIcon color={"success"}/></Benefit>
+                        <AccountBalanceIcon color="success"/></Benefit>
                     <Benefit
                         title={'Refund Policy'}
                         body={'Products can be returned within 14 days of purchase, in accordance ' +
                             'with applicable law.'}>
-                        <UTurnLeftIcon color={"success"}/></Benefit>
+                        <UTurnLeftIcon color="success"/></Benefit>
                 </ul>
             </Container>
 

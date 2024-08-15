@@ -1,74 +1,67 @@
-import ModalTemplate from "../../UI/ModalTemplate/index.js";
-import PropTypes from "prop-types";
-import {Box, Button, Typography} from "@mui/material";
-import {styles} from "./styles.js";
+import PropTypes from 'prop-types';
+import {Box, Button, Typography} from '@mui/material';
+import ModalTemplate from '../../UI/ModalTemplate/index.js';
+import {styles} from './styles.js';
 
 const ModalDeleteProduct = ({
                                 button,
                                 image,
-                                price,
-                                rating,
-                                count,
-                                id,
                                 title,
                                 open,
                                 onClose,
                                 onDelete,
                             }) => {
-
+    // Handler for closing the modal
     const handleClose = (event) => {
         const {name} = event.target;
         if (name === 'delete') {
             onDelete();
-            onClose();
-        } else if (name !== 'delete') {
-            onClose();
         }
+        onClose();
     };
 
     return (
         <ModalTemplate
-            title={'Are you sure you want to remove this Item?'}
+            title="Are you sure you want to remove this Item?"
             button={button}
             open={open}
-            handleClose={handleClose}
+            handleClose={onClose}
         >
             <Box sx={styles.productContainer}>
-                <img src={image} style={styles.img}/>
+                <img src={image} style={styles.img} alt={title}/>
                 <Typography sx={styles.title}>
                     {title}
                 </Typography>
             </Box>
-            <div className={'flex items-center justify-between'}>
+            <div className="flex items-center justify-between">
                 <Button
-                    name={'delete'}
+                    name="delete"
                     onClick={handleClose}
-                    variant='contained'
+                    variant="contained"
                     sx={styles.buttonDelete}
-                >Delete</Button>
+                >
+                    Delete
+                </Button>
                 <Button
-                    name={'cancel'}
+                    name="cancel"
                     onClick={handleClose}
-                    variant='contained'
+                    variant="contained"
                     sx={styles.buttonCancel}
-                >Cancel</Button>
+                >
+                    Cancel
+                </Button>
             </div>
         </ModalTemplate>
     );
 };
 
 ModalDeleteProduct.propTypes = {
-    button: PropTypes.object.isRequired,
+    button: PropTypes.element.isRequired,
     image: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    count: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+    onDelete: PropTypes.func.isRequired,
 };
-
 
 export default ModalDeleteProduct;

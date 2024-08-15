@@ -6,23 +6,24 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EditIcon from "@mui/icons-material/Edit";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import TextArea from "antd/es/input/TextArea";
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
-import {getCheckoutInfo, getProductList, setCheckoutInfo,} from "../../../redux/slices/localStorageSlice.js";
-import routerNames from "../../../router/routes/routerNames.js";
-import checkoutValidationSchema from "../../../utils/validationSchemas/checkoutValidation.js";
-import {styles} from "./styles.js";
+import {getCheckoutInfo, getProductList, setCheckoutInfo} from "../../../redux/slices/localStorageSlice";
+import routerNames from "../../../router/routes/routerNames";
+import checkoutValidationSchema from "../../../utils/validationSchemas/checkoutValidation";
+import {styles} from "./styles";
 import FormCard from "../../UI/cards/FormCard";
 import ProductCheckout from "../../UI/cards/ProductCheckout";
 import ContactInfoForm from "../ContactInfoForm";
 import DeliveryOptionsForm from "../DeliveryOptionsForm";
 import PaymentOptionsForm from "../PaymentOptionsForm";
 import InputWithButton from "../../UI/inputs/InputWithButton";
-import FormInput from "../../UI/inputs/FormInput/index.js";
-import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import {getTotalPrice} from "../../../utils/functions/functions.js";
+import FormInput from "../../UI/inputs/FormInput";
+import {getTotalPrice} from "../../../utils/functions/functions";
 
+// Initial form values
 const initialValues = {
     promoCode: "",
     bonusCard: "",
@@ -34,47 +35,26 @@ const initialValues = {
 };
 
 const CheckoutForm = () => {
+    // State and Redux hooks
     const {enqueueSnackbar} = useSnackbar();
     const {orderList, checkout} = useSelector((state) => state.localStorage);
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    // Local state
     const [addComment, setAddComment] = useState(false);
-
     const [openForm, setOpenForm] = useState(false);
     const [isContactInfoValid, setContactInfoValid] = useState(false);
     const [isDeliveryOptionsValid, setDeliveryOptionsValid] = useState(false);
     const [isPaymentOptionsValid, setPaymentOptionsValid] = useState(false);
     const [isTouched, setTouched] = useState(false);
 
-    const handleClickContinue = () => {
-        setOpenForm(!openForm);
-    };
-
-    useEffect(() => {
-        dispatch(getProductList());
-        dispatch(getCheckoutInfo());
-    }, [dispatch]);
-
-    const handleAddComment = () => {
-        setAddComment(!addComment);
-    };
-
-    const handlePromoClick = () => {
-        enqueueSnackbar("Promo code or bonus card applied!", {variant: "success"});
-    };
-
+    // Formik setup
     const formik = useFormik({
         initialValues,
         validationSchema: checkoutValidationSchema,
         onSubmit: (values, {resetForm}) => {
-            if (
-                isContactInfoValid &&
-                isDeliveryOptionsValid &&
-                isPaymentOptionsValid
-            ) {
-                console.log("All forms are valid. Proceeding with checkout...", values);
+            if (isContactInfoValid && isDeliveryOptionsValid && isPaymentOptionsValid) {
                 const updatedCheckoutInfo = {
                     ...checkout,
                     productToOrder: [...orderList],
@@ -91,11 +71,23 @@ const CheckoutForm = () => {
                 navigate(routerNames.pageOrderInfo);
                 enqueueSnackbar("Successful checkout!", {variant: "success"});
             } else {
-                console.log("Please fill all the fields");
                 setTouched(true);
             }
         },
     });
+
+    // Effect hooks
+    useEffect(() => {
+        dispatch(getProductList());
+        dispatch(getCheckoutInfo());
+    }, [dispatch]);
+
+    // Event handlers
+    const handleClickContinue = () => setOpenForm(!openForm);
+
+    const handleAddComment = () => setAddComment(!addComment);
+
+    const handlePromoClick = () => enqueueSnackbar("Promo code or bonus card applied!", {variant: "success"});
 
     const handleGiftCardInputChange = (e, index) => {
         const value = e.target.value;
@@ -115,11 +107,12 @@ const CheckoutForm = () => {
         isDeliveryOptionsValid &&
         isPaymentOptionsValid;
 
+    // JSX
     return (
         <section style={styles.sectionForm}>
             <Container>
-                <div className={"flex items-center justify-between pt-4 pb-4"}>
-                    <Typography variant="h5" component={"p"} sx={styles.checkoutTitle}>
+                <div className="flex items-center justify-between pt-4 pb-4">
+                    <Typography variant="h5" component="p" sx={styles.checkoutTitle}>
                         Checkout
                     </Typography>
                     <Link to={routerNames.pageMain}>
@@ -135,12 +128,12 @@ const CheckoutForm = () => {
                 <div style={styles.wrapper}>
                     <div>
                         <FormCard
-                            products={true}
-                            formTitle={"Your order"}
+                            products
+                            formTitle="Your order"
                             open={openForm}
                             openForm={handleClickContinue}
                         >
-                            <List className={"w-[800px]"} sx={styles.checkoutList}>
+                            <List className="w-[800px]" sx={styles.checkoutList}>
                                 <ListItem sx={styles.titleList}>
                                     <Typography variant="h6">Your order</Typography>
                                     <Link to={routerNames.pageCart}>
@@ -153,17 +146,16 @@ const CheckoutForm = () => {
                                         </Button>
                                     </Link>
                                 </ListItem>
-                                {orderList.length > 0 &&
-                                    orderList.map((product, index) => (
-                                        <ProductCheckout
-                                            key={index}
-                                            title={product.title}
-                                            image={product.image}
-                                            count={product.amount}
-                                            price={product.price}
-                                            id={product.id}
-                                        />
-                                    ))}
+                                {orderList.length > 0 && orderList.map((product, index) => (
+                                    <ProductCheckout
+                                        key={index}
+                                        title={product.title}
+                                        image={product.image}
+                                        count={product.amount}
+                                        price={product.price}
+                                        id={product.id}
+                                    />
+                                ))}
                                 <Button
                                     onClick={handleClickContinue}
                                     variant="outlined"
@@ -173,127 +165,90 @@ const CheckoutForm = () => {
                                 </Button>
                             </List>
                         </FormCard>
-                        <ContactInfoForm
-                            onValidChange={setContactInfoValid}
-                            onTouch={isTouched}
-                        />
-                        <DeliveryOptionsForm
-                            onValidChange={setDeliveryOptionsValid}
-                            onTouch={isTouched}
-                        />
+                        <ContactInfoForm onValidChange={setContactInfoValid} onTouch={isTouched}/>
+                        <DeliveryOptionsForm onValidChange={setDeliveryOptionsValid} onTouch={isTouched}/>
                         <PaymentOptionsForm onValidChange={setPaymentOptionsValid}/>
                         <List>
                             <ListItem sx={styles.checkBoxGiftCard}>
                                 <Checkbox
                                     name="giftCardCheckBox"
                                     checked={formik.values.giftCardCheckBox}
-                                    onChange={(event) =>
-                                        formik.setFieldValue(
-                                            "giftCardCheckBox",
-                                            event.target.checked
-                                        )
-                                    }
+                                    onChange={(event) => formik.setFieldValue("giftCardCheckBox", event.target.checked)}
                                 >
                                     I have a gift card
                                 </Checkbox>
-
                                 {formik.values.giftCardCheckBox && (
                                     <>
                                         <Box sx={styles.container}>
                                             <Typography variant="h6" sx={styles.giftCardInfoTitle}>
                                                 Please enter your card information
                                             </Typography>
-                                            <Typography
-                                                variant="span"
-                                                sx={styles.giftCardInfoSubtitle}
-                                            >
+                                            <Typography variant="span" sx={styles.giftCardInfoSubtitle}>
                                                 Code
                                             </Typography>
                                             <Box sx={styles.inputGiftCardContainer}>
-                                                {formik.values.giftCard.map((data, i) => {
-                                                    const isTouched = formik.touched.giftCard
-                                                        ? formik.touched.giftCard[i]
-                                                        : false;
-                                                    const error = formik.errors.giftCard
-                                                        ? formik.errors.giftCard[i]
-                                                        : undefined;
-                                                    return (
-                                                        <FormInput
-                                                            key={i}
-                                                            id={`giftCard-${i}`}
-                                                            name={`giftCard[${i}]`}
-                                                            onChange={(e) => handleGiftCardInputChange(e, i)}
-                                                            onFocus={(e) => e.target.select()}
-                                                            type={"text"}
-                                                            value={formik.values.giftCard[i]}
-                                                            touched={isTouched}
-                                                            error={error}
-                                                        />
-                                                    );
-                                                })}
+                                                {formik.values.giftCard.map((data, i) => (
+                                                    <FormInput
+                                                        key={i}
+                                                        id={`giftCard-${i}`}
+                                                        name={`giftCard[${i}]`}
+                                                        onChange={(e) => handleGiftCardInputChange(e, i)}
+                                                        onFocus={(e) => e.target.select()}
+                                                        type="text"
+                                                        value={formik.values.giftCard[i]}
+                                                        touched={formik.touched.giftCard ? formik.touched.giftCard[i] : false}
+                                                        error={formik.errors.giftCard ? formik.errors.giftCard[i] : undefined}
+                                                    />
+                                                ))}
                                             </Box>
                                         </Box>
-                                        <Typography color={"error"} variant="span">
-                                            When paying with a gift card, bonuses cannot be debited
-                                            from your bonus card.
+                                        <Typography color="error" variant="span">
+                                            When paying with a gift card, bonuses cannot be debited from your bonus
+                                            card.
                                         </Typography>
                                     </>
                                 )}
                             </ListItem>
-
                             <ListItem sx={styles.checkBoxGiftCard}>
-                                {!addComment && <Box className={"flex items-center gap-2"}>
-                                    <IconButton
-                                        onClick={handleAddComment}
-                                        aria-label="comment"
-                                        size="small"
-                                        sx={styles.commentButton}
-                                    >
-                                        <CommentOutlinedIcon
-                                            fontSize="small"
-                                            sx={styles.commentIcon}
-                                        />
-                                    </IconButton>
-                                    <Typography
-                                        variant="span"
-                                        component={"span"}
-                                        sx={styles.commentTitle}
-                                    >
-                                        Add a comment
-                                    </Typography>
-                                </Box>}
-                                {addComment && (
-                                    <Box className={'flex items-start gap-5'}>
-                                        <TextArea
-                                            style={styles.textArea}
-                                            placeholder={"Comment for your parcel"}
-                                            name={'comment'}
-                                            id={'comment'}
-                                            onChange={formik.handleChange}
-                                            autoSize={{minRows: 3, maxRows: 5}}
-                                            allowClear
-                                        />
-
+                                {!addComment ? (
+                                    <Box className="flex items-center gap-2">
                                         <IconButton
                                             onClick={handleAddComment}
                                             aria-label="comment"
                                             size="small"
                                             sx={styles.commentButton}
                                         >
-                                            <CloseOutlinedIcon
-                                                fontSize="small"
-                                                sx={styles.commentIcon}
-                                            />
+                                            <CommentOutlinedIcon fontSize="small" sx={styles.commentIcon}/>
+                                        </IconButton>
+                                        <Typography variant="span" component="span" sx={styles.commentTitle}>
+                                            Add a comment
+                                        </Typography>
+                                    </Box>
+                                ) : (
+                                    <Box className="flex items-start gap-5">
+                                        <TextArea
+                                            style={styles.textArea}
+                                            placeholder="Comment for your parcel"
+                                            name="comment"
+                                            id="comment"
+                                            onChange={formik.handleChange}
+                                            autoSize={{minRows: 3, maxRows: 5}}
+                                            allowClear
+                                        />
+                                        <IconButton
+                                            onClick={handleAddComment}
+                                            aria-label="comment"
+                                            size="small"
+                                            sx={styles.commentButton}
+                                        >
+                                            <CloseOutlinedIcon fontSize="small" sx={styles.commentIcon}/>
                                         </IconButton>
                                     </Box>
-
                                 )}
                                 <Checkbox
                                     name="noCallback"
                                     checked={formik.values.noCallback}
-                                    onChange={(event) =>
-                                        formik.setFieldValue("noCallback", event.target.checked)
-                                    }
+                                    onChange={(event) => formik.setFieldValue("noCallback", event.target.checked)}
                                 >
                                     I do not need a callback for order confirmation
                                 </Checkbox>
@@ -302,23 +257,23 @@ const CheckoutForm = () => {
                     </div>
                     <div>
                         <Box sx={styles.sidebar}>
-                            <Typography variant="h6" component={"span"} sx={styles.summary}>
+                            <Typography variant="h6" component="span" sx={styles.summary}>
                                 Summary:
                             </Typography>
                             <form onSubmit={formik.handleSubmit}>
                                 <InputWithButton
-                                    placeHolder={"Discount code"}
-                                    labelInput={"Promo code"}
-                                    buttonText={"apply"}
+                                    placeHolder="Discount code"
+                                    labelInput="Promo code"
+                                    buttonText="apply"
                                     onButtonClick={handlePromoClick}
                                     onChange={formik.handleChange}
                                     value={formik.values.promoCode}
                                     name="promoCode"
                                 />
                                 <InputWithButton
-                                    placeHolder={"293"}
-                                    labelInput={"Your bonus card Number"}
-                                    buttonText={"ok"}
+                                    placeHolder="293"
+                                    labelInput="Your bonus card Number"
+                                    buttonText="ok"
                                     onButtonClick={handlePromoClick}
                                     onChange={formik.handleChange}
                                     value={formik.values.bonusCard}
@@ -327,48 +282,40 @@ const CheckoutForm = () => {
                                 {orderList.length > 0 && (
                                     <div style={styles.itemsPrice}>
                                         <Typography sx={styles.itemsCount}>
-                                            {`${getTotalPrice(orderList).quantity} ${
-                                                getTotalPrice(orderList).quantity === 1 ? "item" : "items"
-                                            } `}
+                                            {`${getTotalPrice(orderList).quantity} ${getTotalPrice(orderList).quantity === 1 ? "item" : "items"}`}
                                         </Typography>
                                         <Typography sx={styles.totalPriceSub}>
                                             $ {getTotalPrice(orderList).price}
                                         </Typography>
                                     </div>
                                 )}
-
                                 {orderList.length > 0 && (
-                                    <div className={"flex items-end justify-between mb-3"}>
-                                        <Typography variant="h6" component={"span"} sx={styles.titleTotal}>
+                                    <div className="flex items-end justify-between mb-3">
+                                        <Typography variant="h6" component="span" sx={styles.titleTotal}>
                                             Total:
                                         </Typography>
-
-                                        <Box className={'flex flex-col'}>
+                                        <Box className="flex flex-col">
                                             <Typography
                                                 sx={styles.totalPriceOriginalMain}
                                                 variant="h6"
-                                                component={"span"}
+                                                component="span"
                                             >
                                                 <s style={styles.priceStrike}>$ {getTotalPrice(orderList).price}</s>
-
                                             </Typography>
-
                                             <Typography
                                                 sx={styles.totalPriceMain}
                                                 variant="h6"
-                                                component={"span"}
+                                                component="span"
                                             >
                                                 $ {(getTotalPrice(orderList).price * 0.9).toFixed(2)}
                                             </Typography>
                                         </Box>
-
-
                                     </div>
                                 )}
-                                <div className={"flex flex-col gap-5"}>
+                                <div className="flex flex-col gap-5">
                                     <Button
                                         variant="contained"
-                                        type={"submit"}
+                                        type="submit"
                                         disabled={!isFormValid()}
                                         sx={styles.checkoutButton}
                                     >
@@ -378,10 +325,7 @@ const CheckoutForm = () => {
                                         name="termConditions"
                                         checked={formik.values.termConditions}
                                         onChange={(event) =>
-                                            formik.setFieldValue(
-                                                "termConditions",
-                                                event.target.checked
-                                            )
+                                            formik.setFieldValue("termConditions", event.target.checked)
                                         }
                                     >
                                         I Accept terms and conditions
