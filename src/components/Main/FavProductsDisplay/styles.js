@@ -3,7 +3,7 @@ export const styles = {
         margin: '0 0 40px 0',
         paddingTop: '40px',
         fontWeight: 'bold',
-        color: 'rgba(0,0,0,0.76)'
+        color: 'rgba(0,0,0,0.88)'
     },
     section: {
         backgroundColor: '#eeeeee',

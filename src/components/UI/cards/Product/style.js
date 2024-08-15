@@ -25,7 +25,7 @@ export const styles = {
         display: 'flex',
         flexDirection: 'column',
         width: '650px',
-        maxHeight: '535px',
+        maxHeight: '475px',
         padding: '32px',
         gap: '40px',
         margin: '5px 0',

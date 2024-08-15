@@ -34,6 +34,16 @@ const CartList = () => {
     }, [dispatch])
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
+        if (orderList.length < 1) {
+            navigate(routerNames.pageMain)
+        }
+    }, [orderList])
+
+    useEffect(() => {
         setIsLoggedIn(!!displayAuthButtons);
     }, [displayAuthButtons]);
 

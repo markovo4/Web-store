@@ -19,7 +19,8 @@ const checkoutInitialData = {
     giftCard: '',
     message: '',
     callBack: false,
-    recentlyViewed: []
+    recentlyViewed: [],
+    favouriteList: []
 }
 
 export const localStorageSlice = createSlice({

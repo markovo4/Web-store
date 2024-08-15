@@ -1,10 +1,25 @@
-import {Container, Typography} from "@mui/material";
+import {Box, CircularProgress, Container, Typography} from "@mui/material";
 import ProductInList from "../../UI/cards/ProductInList";
 import {useGetAllProductsByCategoryQuery} from "../../../redux/productsApi/productsApi.js";
 import {styles} from "./style.js";
 
 const Electronics = () => {
-    const electronics = useGetAllProductsByCategoryQuery({category: 'electronics', limit: 4});
+    const {data: electronics = [], error, isLoading} = useGetAllProductsByCategoryQuery({
+        category: 'electronics',
+        limit: 4
+    });
+
+    if (isLoading) {
+        return (
+            <Box sx={{display: 'flex', justifyContent: 'center', padding: '20px'}}>
+                <CircularProgress/>
+            </Box>
+        );
+    }
+
+    if (error) {
+        return <Typography variant="h6" color="error">Error loading products</Typography>;
+    }
     return (
         <section style={styles.section}>
             <Container>
@@ -14,22 +29,20 @@ const Electronics = () => {
                     sx={styles.title}>
                     Electronics</Typography>
 
-                <div style={{display: 'flex'}}>
-                    {electronics.data && electronics.data.map((product, index) => {
-                        return (
-                            <ProductInList
-                                image={product.image}
-                                price={product.price}
-                                title={product.title}
-                                itemId={product.id}
-                                key={index}
-                                rate={product.rating.rate}
-                                count={product.rating.count}
-                                description={product.description}
-                            />
-                        )
-                    })}
-                </div>
+                <Box sx={{display: 'flex'}}>
+                    {electronics.map(({id, image, price, title, rating, description}) => (
+                        <ProductInList
+                            key={id}
+                            image={image}
+                            price={price}
+                            title={title}
+                            itemId={id}
+                            rate={rating.rate}
+                            count={rating.count}
+                            description={description}
+                        />
+                    ))}
+                </Box>
 
             </Container>
         </section>

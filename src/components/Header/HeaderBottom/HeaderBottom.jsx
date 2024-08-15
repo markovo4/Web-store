@@ -19,7 +19,7 @@ import {useEffect, useState} from "react";
 import {getProductList} from "../../../redux/slices/localStorageSlice.js";
 
 const HeaderBottom = () => {
-    const {orderList} = useSelector(state => state.localStorage);
+    const {orderList, favouriteList} = useSelector(state => state.localStorage);
     const dispatch = useDispatch();
 
     const [fixedHeader, setFixedHeader] = useState(false);
@@ -100,8 +100,9 @@ const HeaderBottom = () => {
 
                     <div className="w-[1px] h-9" style={styles.separator}/>
 
-                    <Tooltip title={'View your favorites'}>
-                        <Link to={routerNames.pageFavProducts}>
+                    <Tooltip
+                        title={favouriteList.length < 1 ? 'Add items to favourites first!' : 'View your favourites!'}>
+                        <Link to={favouriteList.length < 1 ? routerNames.pageMain : routerNames.pageFavProducts}>
                             <Button sx={styles.buttonFav} variant="contained">
                                 <FavoriteBorderIcon/>
                             </Button>

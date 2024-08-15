@@ -1,4 +1,4 @@
-import {Container, Typography} from "@mui/material";
+import {Box, CircularProgress, Container, Typography} from "@mui/material";
 import ProductInList from "../../UI/cards/ProductInList";
 import {useGetAllProductsByCategoryQuery} from "../../../redux/productsApi/productsApi.js";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -6,39 +6,49 @@ import {styles} from "./style.js";
 import {Link} from "react-router-dom";
 
 const ClothesMale = () => {
-    const clothesMale = useGetAllProductsByCategoryQuery({category: 'men\'s clothing', limit: 4});
+    const {data: clothesMale = [], error, isLoading} = useGetAllProductsByCategoryQuery({
+        category: "men's clothing",
+        limit: 4,
+    });
+
+    if (isLoading) {
+        return (
+            <Box sx={{display: 'flex', justifyContent: 'center', padding: '20px'}}>
+                <CircularProgress/>
+            </Box>
+        );
+    }
+
+    if (error) {
+        return <Typography variant="h6" color="error">Error loading products</Typography>;
+    }
 
     return (
         <section style={styles.section}>
             <Container>
-                <Link to={'/men\'s clothing'}>
-                    <Typography
-                        variant={'h4'}
-                        component={'h4'}
-                        sx={styles.title}>
-                        For him <ArrowForwardIcon color={'error'} fontSize={'30px'}/></Typography>
+                <Link to="/categories/men's clothing">
+                    <Typography variant="h4" component="h4" sx={styles.title}>
+                        For him <ArrowForwardIcon color="error" fontSize="large"/>
+                    </Typography>
                 </Link>
 
-                <div style={{display: 'flex'}}>
-                    {clothesMale.data && clothesMale.data.map((product, index) => {
-                        return (
-                            <ProductInList
-                                image={product.image}
-                                price={product.price}
-                                title={product.title}
-                                itemId={product.id}
-                                key={index}
-                                rate={product.rating.rate}
-                                count={product.rating.count}
-                                description={product.description}
-                            />
-                        )
-                    })}
-                </div>
-
+                <Box sx={{display: 'flex'}}>
+                    {clothesMale.map(({id, image, price, title, rating, description}) => (
+                        <ProductInList
+                            key={id}
+                            image={image}
+                            price={price}
+                            title={title}
+                            itemId={id}
+                            rate={rating.rate}
+                            count={rating.count}
+                            description={description}
+                        />
+                    ))}
+                </Box>
             </Container>
         </section>
-    )
-}
+    );
+};
 
 export default ClothesMale;
