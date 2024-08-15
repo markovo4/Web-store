@@ -12,3 +12,13 @@ export const formatPhoneNumber = (value) => {
     }
     return value;
 };
+
+export const getTotalPrice = (products) => {
+    const priceTotal = products.reduce((totalPrice, product) => {
+        return {
+            price: totalPrice.price + product.price * product.amount,
+            quantity: totalPrice.quantity + product.amount
+        }
+    }, {price: 0, quantity: 0});
+    return {price: parseFloat(priceTotal.price.toFixed(2)), quantity: priceTotal.quantity};
+}

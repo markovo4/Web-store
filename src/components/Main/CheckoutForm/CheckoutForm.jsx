@@ -21,6 +21,7 @@ import PaymentOptionsForm from "../PaymentOptionsForm";
 import InputWithButton from "../../UI/inputs/InputWithButton";
 import FormInput from "../../UI/inputs/FormInput/index.js";
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import {getTotalPrice} from "../../../utils/functions/functions.js";
 
 const initialValues = {
     promoCode: "",
@@ -58,22 +59,6 @@ const CheckoutForm = () => {
 
     const handleAddComment = () => {
         setAddComment(!addComment);
-    };
-
-    const getTotalPrice = (products) => {
-        const priceTotal = products.reduce(
-            (totalPrice, product) => {
-                return {
-                    price: totalPrice.price + product.price * product.amount,
-                    quantity: totalPrice.quantity + product.amount,
-                };
-            },
-            {price: 0, quantity: 0}
-        );
-        return {
-            price: parseFloat(priceTotal.price.toFixed(2)),
-            quantity: priceTotal.quantity,
-        };
     };
 
     const handlePromoClick = () => {

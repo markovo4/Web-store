@@ -1,6 +1,6 @@
 import {styles} from "./styles.js";
 import {Box, Button, Modal, Typography} from "@mui/material";
-import CartItem from "../../UI/cards/CartItem/index.js";
+import CartItem from "../../UI/cards/CartItem";
 import PropTypes from "prop-types";
 import CloseIcon from '@mui/icons-material/Close';
 import {Link} from "react-router-dom";
@@ -49,7 +49,7 @@ const CartSide = ({
                             variant="contained"
                             sx={styles.buttonClose}
                             aria-label="add to shopping cart">
-                            <CloseIcon color={'disabled'} fontSize={'large'}/>
+                            <CloseIcon color='disabled' fontSize='large'/>
                         </Button>
                     </div>
 
