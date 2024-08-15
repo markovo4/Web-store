@@ -44,6 +44,7 @@ const HeaderBottom = () => {
 
     const handleLogOut = () => {
         Cookies.remove('LoggedIn');
+        console.log(1)
         window.location.reload();
     };
 
@@ -72,8 +73,8 @@ const HeaderBottom = () => {
                                     <FavoriteIcon fontSize="small" color="error"/> Favourite
                                 </Link>
                             </MenuItem>
-                            <MenuItem sx={styles.menuItem}>
-                                <LogoutIcon fontSize="small" onClick={handleLogOut} color="error"/> Logout
+                            <MenuItem sx={styles.menuItem} onClick={handleLogOut}>
+                                <LogoutIcon fontSize="small" color="error"/> Logout
                             </MenuItem>
                         </HeaderDropdown>
                     ) : (

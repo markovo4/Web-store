@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
 const phoneRegExp = /^(?:\+?(\d{1,3}))?[-.\s]?(\(?\d{1,4}\)?[-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})$/;
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 const registerFormValidation = Yup.object({
     firstName: Yup.string()
@@ -17,7 +18,7 @@ const registerFormValidation = Yup.object({
     email: Yup.string()
         .trim()
         .min(3, 'Must be at least 3 characters')
-        .matches(/@/, 'You are missing @')
+        .matches(emailRegex, 'Invalid email')
         .required('Required'),
     password: Yup.string()
         .trim()

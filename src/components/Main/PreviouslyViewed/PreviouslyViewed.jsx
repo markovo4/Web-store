@@ -23,7 +23,7 @@ const PreviouslyViewed = () => {
                         Recently Viewed</Typography>
 
                     <div className={'flex justify-center'}>
-                        {recentlyViewed && recentlyViewed.map((product, index) => {
+                        {recentlyViewed.map((product, index) => {
                             return (
                                 <ProductInList
                                     image={product.image}

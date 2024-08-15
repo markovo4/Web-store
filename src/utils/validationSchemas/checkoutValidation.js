@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 
-// Define a validation schema for the CheckoutForm
 const checkoutValidationSchema = Yup.object({
     promoCode: Yup.string(), // Add any specific validation if required
     bonusCard: Yup.string(), // Add any specific validation if required

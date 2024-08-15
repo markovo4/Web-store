@@ -165,7 +165,7 @@ ProductInList.propTypes = {
     rate: PropTypes.number.isRequired,
     count: PropTypes.number.isRequired,
     itemId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
     additionalComponent: PropTypes.bool,
 };
 
