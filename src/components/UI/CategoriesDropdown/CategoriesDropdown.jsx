@@ -22,7 +22,7 @@ const CategoriesDropdown = () => {
 
 
     const handleSelectCategory = (category) => {
-        navigate(`/categories/${category}`);
+        navigate(`/Web-store/categories/${category}`);
         setAnchorEl(null);
     };
 

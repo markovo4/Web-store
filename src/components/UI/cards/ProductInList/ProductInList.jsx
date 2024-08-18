@@ -71,7 +71,7 @@ const ProductInList = ({
         <div>
             <Card sx={additionalComponent ? styles.cardMin : styles.card}>
                 <div style={styles.groupedText}>
-                    <Link to={`/products/${itemId}`}>
+                    <Link to={`/Web-store/products/${itemId}`}>
                         <img
                             src={image}
                             alt={title}

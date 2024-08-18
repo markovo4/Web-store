@@ -6,7 +6,7 @@ import {useLocation} from "react-router-dom";
 
 const CategoryDisplay = () => {
     const location = useLocation();
-    const category = decodeURIComponent(location.pathname.slice(12));
+    const category = decodeURIComponent(location.pathname.slice(22));
     const title = category.charAt(0).toUpperCase() + category.slice(1);
     const clothesMale = useGetAllProductsByCategoryQuery({category: category, limit: 10});
 
