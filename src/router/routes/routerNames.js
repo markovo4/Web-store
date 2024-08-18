@@ -1,12 +1,12 @@
 const routerNames = {
-    pageMain: '/Web-store/',
-    pageNotFound: '*',
-    pageCart: '/Web-store/cart',
-    pageProduct: '/Web-store/products/:productId',
-    pageCheckout: '/Web-store/order',
-    pageCategories: '/Web-store/categories/:categoryName',
-    pageFavProducts: '/Web-store/favProducts',
-    pageOrderInfo: '/Web-store/pageOrderInfo'
+    pageMain: '/',
+    pageNotFound: '/*',
+    pageCart: '/cart',
+    pageProduct: '/products/:productId',
+    pageCheckout: '/order',
+    pageCategories: '/categories/:categoryName',
+    pageFavProducts: '/favProducts',
+    pageOrderInfo: '/pageOrderInfo'
 };
 
 Object.freeze(routerNames);
