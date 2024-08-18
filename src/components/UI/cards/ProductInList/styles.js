@@ -11,8 +11,7 @@ export const styles = {
         boxShadow: 'none',
         '&:hover': {
             transition: '0.3s',
-            backgroundColor: 'rgb(238,238,238)',
-            boxShadow: '0px 1px 10px 1px rgba(0,0,0,0.22)',
+            boxShadow: 10
         }
     },
     cardMin: {
