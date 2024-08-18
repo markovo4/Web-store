@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Button, Container, List, ListItem, MenuItem, Typography} from "@mui/material";
+import {Box, Button, Container, List, ListItem, MenuItem, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
@@ -14,6 +14,8 @@ import {
     SendOutlined as SendOutlinedIcon,
     WifiCalling3Outlined as WifiCalling3OutlinedIcon
 } from "@mui/icons-material";
+
+import styleSCSS from './styleSCSS.module.scss'
 
 import {styles} from "./styles";
 import Logo from "../../../assets/icons/Logo";
@@ -52,9 +54,9 @@ const HeaderTop = () => {
     };
 
     return (
-        <section style={styles.header}>
+        <Box sx={styles.header}>
             <Container sx={styles.container}>
-                <div style={styles.wrapper}>
+                <Box style={styles.wrapper}>
                     <Link to={routerNames.pageMain}>
                         <Logo/>
                     </Link>
@@ -65,7 +67,7 @@ const HeaderTop = () => {
                         onChange={formik.setFieldValue}
                         header
                     />
-                </div>
+                </Box>
 
                 {window.location.pathname === routerNames.pageCart || window.location.pathname === routerNames.pageCheckout ? (
                     <List sx={styles.navList}>
@@ -98,7 +100,7 @@ const HeaderTop = () => {
                             </Link>
                         </ListItem>
                         <ListItem sx={styles.liMore}>
-                            <div className="w-[1px] h-12 bg-gray-300"/>
+                            <div className={styleSCSS.separator}/>
                             <HeaderDropdown
                                 title='More'
                                 icon={<KeyboardArrowDownSharp/>}
@@ -114,7 +116,7 @@ const HeaderTop = () => {
                             </HeaderDropdown>
                         </ListItem>
                         <ListItem sx={styles.liContact}>
-                            <div className="w-[1px] h-12 bg-gray-300"/>
+                            <div className={styleSCSS.separator}/>
                             <HeaderDropdown
                                 title='Contact Us'
                                 icon={<PhoneInTalkIcon/>}
@@ -137,7 +139,7 @@ const HeaderTop = () => {
                             </HeaderDropdown>
                         </ListItem>
                         <ListItem sx={styles.liContact}>
-                            <div className="w-[1px] h-12 bg-gray-300"/>
+                            <div className={styleSCSS.separator}/>
                             {isLoggedIn ? (
                                 <Button
                                     onClick={handleLogOut}
@@ -157,7 +159,7 @@ const HeaderTop = () => {
                     </List>
                 )}
             </Container>
-        </section>
+        </Box>
     );
 };
 

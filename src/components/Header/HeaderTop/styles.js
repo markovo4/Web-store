@@ -2,8 +2,6 @@ export const styles = {
     header: {
         backgroundColor: 'white',
         height: '75px',
-
-
     },
     container: {
         display: 'flex',
@@ -20,7 +18,6 @@ export const styles = {
         width: '340px'
     },
     button: {
-        // Base styles for all button variants
         '&.MuiButton-root': {
             padding: '2px 16px',
             height: '45px',
@@ -32,7 +29,6 @@ export const styles = {
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
             minWidth: '100px',
         },
-        // Styles for contained buttons
         '&.MuiButton-contained': {
             backgroundColor: '#42AF2AFF',
             color: '#fff',
@@ -80,16 +76,15 @@ export const styles = {
             width: '200px'
         },
         '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#c2c2c2', // Set border color to white on hover
+            borderColor: '#c2c2c2',
             width: '200px'
         },
         '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#40ab29', // Set border color to white on focus
+            borderColor: '#40ab29',
             width: '200px'
         }
     },
     buttonLogOut: {
-        // Base styles for all button variants
         '&.MuiButton-root': {
             padding: '2px 16px',
             borderRadius: '4px',
@@ -98,9 +93,8 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '64px', // Ensure buttons have a minimum width
+            minWidth: '64px',
         },
-        // Styles for contained buttons
         '&.MuiButton-contained': {
             backgroundColor: '#fd661f',
             color: '#fff',
@@ -164,9 +158,7 @@ export const styles = {
         color: '#fd661f',
         '&:hover': {
             color: '#fd661f'
-
         }
-
     },
     menuItem: {
         display: 'flex',
@@ -199,5 +191,4 @@ export const styles = {
         color: '#000',
         textDecoration: 'underline'
     },
-
 }
