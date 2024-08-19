@@ -20,7 +20,7 @@ export const styles = {
         },
         maxWidth: '1200px',
         margin: '0 auto',
-        padding: '0 24px',
+        padding: '0 50px',
         transition: 'visibility 0s, opacity 0.5s linear',
     },
     slide: {

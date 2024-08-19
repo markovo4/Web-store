@@ -1,4 +1,4 @@
-import {Container} from "@mui/material";
+import {Box, Container, List} from "@mui/material";
 import {useGetAllCategoriesQuery} from "../../../redux/productsApi/productsApi";
 import Category from "../../UI/cards/Category";
 import CableIcon from '@mui/icons-material/Cable';
@@ -19,18 +19,18 @@ const CategoriesList = () => {
     const {data: categories} = useGetAllCategoriesQuery();
 
     return (
-        <section style={styles.section}>
+        <Box style={styles.section}>
             <Container sx={styles.container}>
-                <ul className='flex place-items-center justify-evenly space-x-4 h-[60px]'>
+                <List sx={styles.list}>
                     {categories && categories.map((category, index) => (
                         <Category key={index}>
                             {icons[index % icons.length]}
                             {category.charAt(0).toUpperCase() + category.slice(1)}
                         </Category>
                     ))}
-                </ul>
+                </List>
             </Container>
-        </section>
+        </Box>
     );
 };
 

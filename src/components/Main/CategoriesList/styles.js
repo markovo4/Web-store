@@ -4,11 +4,18 @@ export const styles = {
         paddingBottom: '40px'
     },
     container: {
-        backgroundColor: 'white',
-        borderRadius: '10px'
+        padding: '24px'
     },
     iconStyles: {
         width: '40px',
         height: '40px'
+    },
+    list: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        height: '60px',
+        backgroundColor: 'white',
+        borderRadius: '10px'
     }
 }
