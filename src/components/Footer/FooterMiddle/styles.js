@@ -1,18 +1,33 @@
 export const styles = {
     section: {
-        height: '450px',
-        display: 'flex',
-        alignItems: 'center',
-        border: '2px solid rgba(0,0,0,0.09)'
+        height: {
+            lg: '450px',
+            md: 'auto'
+        },
+
+        border: {
+            lg: '2px solid rgba(0,0,0,0.09)'
+        },
+        borderBottom: {
+            md: '2px solid rgba(0,0,0,0.09)'
+        }
     },
     container: {
-        height: '430px',
-        display: 'flex'
+        height: {
+            lg: '430px',
+            md: 'auto'
+        },
+        display: 'flex',
     },
     qRCodeContainer: {
-        display: 'flex',
+        display: {
+            lg: 'flex',
+            md: 'none'
+        },
         padding: '16px',
-        border: '2px solid rgba(0,0,0,0.09)',
+        border: {
+            lg: '2px solid rgba(0,0,0,0.09)'
+        },
         borderRadius: '12px',
         maxWidth: '295px',
         marginBottom: '8px',
@@ -28,13 +43,10 @@ export const styles = {
         padding: '16px',
         border: '1px solid rgba(0,0,0,0.09)',
         borderRadius: '12px',
-        width: '295px',
-    },
-    form: {
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column'
+        width: {
+            lg: '295px',
+            md: '100%'
+        },
     },
     formTitle: {
         width: '100%',
@@ -80,11 +92,25 @@ export const styles = {
     },
     li: {
         display: 'flex',
+        alignItems: 'flex-start',
         padding: '0',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        maxWidth: '25%'
+    },
+    liForm: {
+        display: 'flex',
+        padding: '0',
+        flexDirection: 'column',
     },
     list: {
         display: 'flex',
+        justifyContent: 'center',
+        width: '100%',
+        flexDirection: 'row',
+        flexFlow: {
+            lg: 'nowrap',
+            md: 'wrap'
+        },
         alignItems: 'start',
     },
     title: {

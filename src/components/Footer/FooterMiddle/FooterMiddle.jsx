@@ -13,6 +13,7 @@ import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import WifiCalling3OutlinedIcon from "@mui/icons-material/WifiCalling3Outlined";
 import SendIcon from "@mui/icons-material/Send";
 import {styles} from "./styles";
+import stylesSCSS from './stylesSCSS.module.scss';
 
 const FooterMiddle = () => {
     const formik = useFormik({
@@ -24,11 +25,11 @@ const FooterMiddle = () => {
     });
 
     return (
-        <section style={styles.section}>
+        <Box sx={styles.section}>
             <Container sx={styles.container}>
                 <List sx={styles.list}>
                     {/* QR Code and Subscription Form */}
-                    <ListItem sx={styles.li}>
+                    <ListItem sx={styles.liForm}>
                         <Box sx={styles.qRCodeContainer}>
                             <ComfyQRC/>
                             <Typography variant='p' component='p' sx={styles.qRCodeText}>
@@ -36,7 +37,7 @@ const FooterMiddle = () => {
                             </Typography>
                         </Box>
                         <Box sx={styles.formContainer}>
-                            <form onSubmit={formik.handleSubmit} style={styles.form}>
+                            <form className={stylesSCSS.form} onSubmit={formik.handleSubmit}>
                                 <Typography variant='h6' component="span" sx={styles.formTitle}>
                                     Subscribe for discounts!
                                 </Typography>
@@ -61,19 +62,19 @@ const FooterMiddle = () => {
                     </ListItem>
 
                     {/* Footer Info Lists */}
-                    <ListItem>
+                    <ListItem sx={styles.li}>
                         <FooterInfoList
                             title='Comfy'
                             content={comfy}
                         />
                     </ListItem>
-                    <ListItem>
+                    <ListItem sx={styles.li}>
                         <FooterInfoList
                             title='Services & Conditions'
                             content={services}
                         />
                     </ListItem>
-                    <ListItem>
+                    <ListItem sx={styles.li}>
                         <FooterInfoList
                             title='Customer Help'
                             content={customerHelp}
@@ -81,7 +82,7 @@ const FooterMiddle = () => {
                     </ListItem>
 
                     {/* Contact and Help Information */}
-                    <ListItem>
+                    <ListItem sx={styles.li}>
                         <List>
                             <ListItem>
                                 <Typography variant='h6' component='span' sx={styles.title}>
@@ -150,7 +151,7 @@ const FooterMiddle = () => {
                     </ListItem>
                 </List>
             </Container>
-        </section>
+        </Box>
     );
 };
 

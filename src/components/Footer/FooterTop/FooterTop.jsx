@@ -1,4 +1,4 @@
-import {Container} from "@mui/material";
+import {Box, Container, List} from "@mui/material";
 import Benefit from "../../UI/cards/Benefit";
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
@@ -8,9 +8,9 @@ import {styles} from "./styles.js";
 
 const FooterTop = () => {
     return (
-        <section style={styles.footerTop}>
-            <Container>
-                <ul style={styles.list}>
+        <Box sx={styles.footerTop}>
+            <Container sx={styles.container}>
+                <List sx={styles.list}>
                     <Benefit
                         title={'Delivery'}
                         body={'Pickup from the Comfy store, delivery to the address or to the ' +
@@ -30,10 +30,10 @@ const FooterTop = () => {
                         body={'Products can be returned within 14 days of purchase, in accordance ' +
                             'with applicable law.'}>
                         <UTurnLeftIcon color="success"/></Benefit>
-                </ul>
+                </List>
             </Container>
 
-        </section>
+        </Box>
     )
 }
 

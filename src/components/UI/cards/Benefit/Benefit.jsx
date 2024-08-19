@@ -1,24 +1,24 @@
-import {Typography} from "@mui/material";
+import {ListItem, Typography} from "@mui/material";
 import {styles} from "./styles.js";
 import PropTypes from "prop-types";
 
 const Benefit = ({title, body, children}) => {
     return (
-        <li style={styles.block}>
+        <ListItem sx={styles.block}>
             <Typography
                 variant="h6"
                 component="h6"
-                style={styles.title}>
+                sx={styles.title}>
                 {children}{title}
             </Typography>
 
             <Typography
                 variant="body"
                 component="p"
-                style={styles.body}>
+                sx={styles.body}>
                 {body}
             </Typography>
-        </li>
+        </ListItem>
     )
 }
 

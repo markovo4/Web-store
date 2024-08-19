@@ -18,7 +18,10 @@ export const styles = {
             md: 'absolute',
             lg: 'unset'
         },
-        maxWidth: '1200px',
+        width: {
+            lg: '1200px',
+            md: '900px'
+        },
         margin: '0 auto',
         padding: '0 50px',
         transition: 'visibility 0s, opacity 0.5s linear',

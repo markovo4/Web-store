@@ -16,7 +16,7 @@ export const styles = {
         position: 'fixed',
         zIndex: 100,
         top: '0',
-        width: '100%'
+        width: '100vw'
     },
     container: {
         display: {
@@ -36,10 +36,10 @@ export const styles = {
         },
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: '100%',
         height: '70px',
         padding: '10px 15px',
         boxSizing: 'border-box',
+        width: '98vw'
     },
 
     selectorMd: {
@@ -54,8 +54,6 @@ export const styles = {
             height: '52px',
             padding: '0',
             boxSizing: 'border-box',
-            width: '80vw',
-            maxWidth: '1000px',
         },
         '& .MuiInputLabel-root': {
             fontSize: '20px',
@@ -63,8 +61,6 @@ export const styles = {
             left: '14px',
             transform: 'translate(0, 16px) scale(1)',
             border: 'none',
-            width: '80vw',
-            maxWidth: '1000px',
         },
         '& .MuiInputLabel-shrink': {
             display: 'none',

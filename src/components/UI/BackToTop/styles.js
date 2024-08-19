@@ -7,11 +7,11 @@ export const styles = {
         transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
         minWidth: '10px',
         position: 'fixed',
-        bottom: '20px', // Changed to a more common value
-        right: '20px',  // Changed to a more common value
+        bottom: '20px',
+        right: '20px',
         zIndex: 99,
-        display: 'none', // Default is hidden
-        opacity: 0,     // Default is fully transparent
+        display: 'none',
+        opacity: 0,
         '&.visible': {
             display: 'block',
             opacity: 1,
