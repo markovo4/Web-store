@@ -1,4 +1,4 @@
-import {Container, Typography} from "@mui/material";
+import {Box, Container, List, ListItem, Typography} from "@mui/material";
 import {styles} from "./styles.js";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
@@ -7,36 +7,48 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import Visa from "../../../assets/icons/Visa.jsx";
 import MasterCard from "../../../assets/icons/MasterCard.jsx";
+import {Link} from "react-router-dom";
 
 const FooterBottom = () => {
     return (
-        <section style={styles.footerBottom}>
-            <Container style={styles.container}>
+        <Box sx={styles.footerBottom}>
+            <Container sx={styles.container}>
 
                 <Typography
                     variant='body1'
                     component={'div'}
                     sx={styles.rights}>
                     © All Rights Reserved 2024
-                    <div className={'flex items-baseline gap-4'}>
+                    <Box>
+                        <List sx={styles.socialsMd}>
+                            <ListItem sx={styles.liItem}><Link to="#"><FacebookIcon sx={styles.icon}/></Link></ListItem>
+                            <ListItem sx={styles.liItem}><Link to="#"><YouTubeIcon sx={styles.icon}/></Link></ListItem>
+                            <ListItem sx={styles.liItem}><Link to="#"><InstagramIcon
+                                sx={styles.icon}/></Link></ListItem>
+                            <ListItem sx={styles.liItem}><Link to="#"><TelegramIcon sx={styles.icon}/></Link></ListItem>
+                            <ListItem sx={styles.liItem}><Link to="#"><PhoneInTalkIcon
+                                sx={styles.icon}/></Link></ListItem>
+                        </List>
+                    </Box>
+                    <Box className={'flex items-baseline gap-4'}>
                         <Visa/>
                         <MasterCard/>
-                    </div>
+                    </Box>
 
                 </Typography>
 
-                <div>
-                    <ul style={styles.socials}>
-                        <li><a href="#"><FacebookIcon style={styles.icon}/></a></li>
-                        <li><a href="#"><YouTubeIcon style={styles.icon}/></a></li>
-                        <li><a href="#"><InstagramIcon style={styles.icon}/></a></li>
-                        <li><a href="#"><TelegramIcon style={styles.icon}/></a></li>
-                        <li><a href="#"><PhoneInTalkIcon style={styles.icon}/></a></li>
-                    </ul>
-                </div>
+                <Box>
+                    <List sx={styles.socials}>
+                        <ListItem sx={styles.liItem}><Link to="#"><FacebookIcon sx={styles.icon}/></Link></ListItem>
+                        <ListItem sx={styles.liItem}><Link to="#"><YouTubeIcon sx={styles.icon}/></Link></ListItem>
+                        <ListItem sx={styles.liItem}><Link to="#"><InstagramIcon sx={styles.icon}/></Link></ListItem>
+                        <ListItem sx={styles.liItem}><Link to="#"><TelegramIcon sx={styles.icon}/></Link></ListItem>
+                        <ListItem sx={styles.liItem}><Link to="#"><PhoneInTalkIcon sx={styles.icon}/></Link></ListItem>
+                    </List>
+                </Box>
 
             </Container>
-        </section>
+        </Box>
     )
 }
 
