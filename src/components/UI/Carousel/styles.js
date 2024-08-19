@@ -3,47 +3,48 @@ export const styles = {
         backgroundColor: 'rgba(0,0,0,0.06)',
         height: '550px',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     container: {
         visibility: {
             md: 'hidden',
-            lg: 'visible'
+            lg: 'visible',
         },
         opacity: {
             md: 0,
-            lg: 1
+            lg: 1,
         },
         position: {
             md: 'absolute',
-            lg: 'unset'
+            lg: 'unset',
         },
-        width: {
-            lg: '1200px',
-            md: '900px'
+        width: '100%',
+        maxWidth: {
+            md: '800px',
+            lg: '1200px'
         },
         margin: '0 auto',
-        padding: '0 50px',
+        padding: '0 24px',
         transition: 'visibility 0s, opacity 0.5s linear',
     },
     slide: {
         margin: '0 -10px',
         padding: '0 12px',
     },
-
     containerMd: {
         display: {
             md: 'flex',
-            lg: 'none'
+            lg: 'none',
         },
-        maxWidth: '900px',
+        width: '100%', // Ensure it doesn't exceed the max-width
+        maxWidth: '900px', // Limit the container to 900px
         margin: '0 auto',
         padding: '0 24px',
     },
     slideList: {
         display: 'flex',
         flexDirection: 'row',
-        width: '100vw',
+        width: '100%',
         overflowX: 'auto',
         overflowY: 'hidden',
         WebkitOverflowScrolling: 'touch',
@@ -53,8 +54,8 @@ export const styles = {
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
         '&::-webkit-scrollbar': {
-            display: 'none'
-        }
+            display: 'none',
+        },
     },
     slideItem: {
         flexShrink: 0,
@@ -62,6 +63,6 @@ export const styles = {
     },
     image: {
         width: '248px',
-        height: 'auto'
-    }
-}
+        height: 'auto',
+    },
+};

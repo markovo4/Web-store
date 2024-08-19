@@ -5,7 +5,8 @@ export const styles = {
             md: '70px'
         },
         backgroundColor: '#42af2a',
-
+        display: 'flex',
+        justifyContent: 'center'
     },
     fixedHeader: {
         height: {
@@ -39,7 +40,7 @@ export const styles = {
         height: '70px',
         padding: '10px 15px',
         boxSizing: 'border-box',
-        width: '98vw'
+        width: '90vw'
     },
 
     selectorMd: {
@@ -48,7 +49,7 @@ export const styles = {
             backgroundColor: '#fff',
             borderColor: '#fff',
             border: 'none',
-            minWidth: '80vw',
+            minWidth: '70vw',
         },
         '& .MuiOutlinedInput-input': {
             height: '52px',
