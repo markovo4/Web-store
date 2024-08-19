@@ -11,12 +11,42 @@ export const styles = {
         display: 'flex',
         alignItems: 'center'
     },
-    container: {
-        display: 'flex'
-    },
     progressBar: {
         display: 'flex',
         justifyContent: 'center',
         padding: '20px'
-    }
+    },
+    container: {
+        display: {
+            lg: 'flex',
+            md: 'none'
+        }
+    },
+    slideList: {
+        display: {
+            lg: 'none',
+            md: 'flex'
+        },
+        flexDirection: 'row',
+        width: {
+            lg: '98vw',
+            md: '92vw'
+        },
+        overflowX: 'auto',
+        overflowY: 'hidden',
+        WebkitOverflowScrolling: 'touch',
+        padding: 0,
+        margin: 0,
+        listStyle: 'none',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        '&::-webkit-scrollbar': {
+            display: 'none'
+        }
+    },
+    slideItem: {
+        flexShrink: 0,
+        width: '400px',
+        padding: '0'
+    },
 }

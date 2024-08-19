@@ -1,4 +1,4 @@
-import {Box, CircularProgress, Container, Typography} from "@mui/material";
+import {Box, CircularProgress, Container, List, ListItem, Typography} from "@mui/material";
 import ProductInList from "../../UI/cards/ProductInList";
 import {useGetAllProductsByCategoryQuery} from "../../../redux/productsApi/productsApi.js";
 import {styles} from "./style.js";
@@ -23,7 +23,7 @@ const ClothesFemale = () => {
     }
 
     return (
-        <section style={styles.section}>
+        <Box sx={styles.section}>
             <Container>
                 <Typography
                     variant='h4'
@@ -45,9 +45,28 @@ const ClothesFemale = () => {
                         />
                     ))}
                 </Box>
+
+                <List sx={styles.slideList}>
+                    {clothesFemale.map(({id, image, price, title, rating, description}) => (
+                        <ListItem key={id} sx={styles.slideItem}>
+                            <ProductInList
+                                key={id}
+                                image={image}
+                                price={price}
+                                title={title}
+                                itemId={id}
+                                rate={rating.rate}
+                                count={rating.count}
+                                description={description}
+                            />
+                        </ListItem>
+                    ))}
+                </List>
             </Container>
-        </section>
+        </Box>
     )
 }
 
 export default ClothesFemale;
+
+

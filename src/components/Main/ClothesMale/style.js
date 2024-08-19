@@ -29,11 +29,44 @@ export const styles = {
         height: '900px',
     },
     container: {
-        display: 'flex'
+        display: {
+            lg: 'flex',
+            md: 'none'
+        }
     },
     progressBar: {
         display: 'flex',
         justifyContent: 'center',
         padding: '20px'
+    },
+    slideList: {
+        display: {
+            lg: 'none',
+            md: 'flex'
+        },
+        flexDirection: 'row',
+        width: {
+            lg: '98vw',
+            md: '92vw'
+        },
+        overflowX: 'auto',
+        overflowY: 'hidden',
+        WebkitOverflowScrolling: 'touch',
+        padding: 0,
+        margin: 0,
+        listStyle: 'none',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        '&::-webkit-scrollbar': {
+            display: 'none'
+        }
+    },
+    slideItem: {
+        flexShrink: 0,
+        width: '400px',
+        padding: '0'
+    },
+    productsContainer: {
+        width: '200px'
     }
 };

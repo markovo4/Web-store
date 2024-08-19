@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import {Box, Button, Card, IconButton, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import {useState} from "react";
-import {Rate} from "antd";
+import {Image, Rate} from "antd";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import CommentIcon from '@mui/icons-material/Comment';
@@ -68,13 +68,14 @@ const ProductInList = ({
     };
 
     return (
-        <div>
+        <Box>
             <Card sx={additionalComponent ? styles.cardMin : styles.card}>
-                <div style={styles.groupedText}>
+                <Box style={styles.groupedText}>
                     <Link to={`/products/${itemId}`}>
-                        <img
+                        <Image
                             src={image}
                             alt={title}
+                            preview={false}
                             style={additionalComponent ? styles.imageMin : styles.image}
                         />
                     </Link>
@@ -92,31 +93,33 @@ const ProductInList = ({
                             {getShortTitle(title)}
                         </Typography>
                     </CustomTooltip>
-                </div>
+                </Box>
 
-                <div style={styles.purchase}>
+                <Box style={styles.purchase}>
                     {!additionalComponent && (
-                        <div className="mb-3">
-                            <div style={styles.wrapper}>
+                        <Box className="mb-3">
+                            <Box style={styles.wrapper}>
                                 <Rate allowHalf disabled defaultValue={rate}/>
                                 <Typography variant="h6" sx={styles.count}>
                                     <CommentIcon sx={styles.commentIcon}/> {count}
                                 </Typography>
-                            </div>
-                            <div className="flex flex-row items-center gap-3">
+                            </Box>
+                            <Box className="flex flex-row items-center gap-3">
                                 <KrashComfy/>
                                 <CreditComfy/>
                                 <PetComfy/>
                                 <AppleComfy/>
-                            </div>
-                        </div>
+                            </Box>
+                        </Box>
                     )}
 
-                    <div style={styles.wrapper}>
+                    <Box style={styles.wrapper}>
                         <Box className="flex flex-col">
                             <Typography variant="h6" sx={styles.priceOriginal}>
                                 <s style={styles.priceStrike}>$ {price}</s>
-                                <span style={styles.discount}>-10%</span>
+                                <Typography variant='span' component='span' sx={styles.discount}>
+                                    -10%
+                                </Typography>
                             </Typography>
                             <Typography variant="h6" sx={styles.price}>
                                 $ {(price * 0.9).toFixed(2)}
@@ -151,10 +154,10 @@ const ProductInList = ({
                                 <ShoppingCartIcon fontSize="medium"/>
                             </Button>
                         )}
-                    </div>
-                </div>
+                    </Box>
+                </Box>
             </Card>
-        </div>
+        </Box>
     );
 };
 

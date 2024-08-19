@@ -4,7 +4,10 @@ export const styles = {
         marginLeft: '8px',
         display: 'flex',
         flexDirection: 'column',
-        width: '280px',
+        width: {
+            lg: '280px',
+            md: '390px'
+        },
         height: '570px',
         marginBottom: '8px',
         justifyContent: 'space-between',
@@ -12,6 +15,10 @@ export const styles = {
         '&:hover': {
             transition: '0.3s',
             boxShadow: 10
+        },
+        borderRadius: {
+            lg: '0',
+            md: '5px'
         }
     },
     cardMin: {

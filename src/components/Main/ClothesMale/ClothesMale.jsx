@@ -1,4 +1,4 @@
-import {Box, CircularProgress, Container, Typography} from "@mui/material";
+import {Box, CircularProgress, Container, List, ListItem, Typography} from "@mui/material";
 import ProductInList from "../../UI/cards/ProductInList";
 import {useGetAllProductsByCategoryQuery} from "../../../redux/productsApi/productsApi.js";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -24,7 +24,7 @@ const ClothesMale = () => {
     }
 
     return (
-        <section style={styles.section}>
+        <Box sx={styles.section}>
             <Container>
                 <Link to="/categories/men's clothing">
                     <Typography variant="h4" component="h4" sx={styles.title}>
@@ -46,8 +46,25 @@ const ClothesMale = () => {
                         />
                     ))}
                 </Box>
+
+                <List sx={styles.slideList}>
+                    {clothesMale.map(({id, image, price, title, rating, description}) => (
+                        <ListItem key={id} sx={styles.slideItem}>
+                            <ProductInList
+                                key={id}
+                                image={image}
+                                price={price}
+                                title={title}
+                                itemId={id}
+                                rate={rating.rate}
+                                count={rating.count}
+                                description={description}
+                            />
+                        </ListItem>
+                    ))}
+                </List>
             </Container>
-        </section>
+        </Box>
     );
 };
 
