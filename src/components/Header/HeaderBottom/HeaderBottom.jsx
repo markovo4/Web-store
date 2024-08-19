@@ -21,6 +21,7 @@ import ModalLogin from "../../ModalsAuth/ModalLogin";
 import {getProductList} from "../../../redux/slices/localStorageSlice";
 import {getTotalPrice} from "../../../utils/functions/functions";
 import routerNames from "../../../router/routes/routerNames";
+import stylesSCSS from './stylesSCSS.module.scss';
 
 const HeaderBottom = () => {
     const {orderList, favouriteList} = useSelector(state => state.localStorage);
@@ -49,13 +50,10 @@ const HeaderBottom = () => {
     };
 
     return (
-        <section style={fixedHeader ? styles.fixedHeader : styles.header}>
-            <Container sx={styles.container}>
-                <CategoriesDropdown/>
-                <div style={styles.wrapper}>
-                    <ProductsSelect styles={styles.selector}/>
-                </div>
-                <div style={styles.wrapperButtonGroup}>
+        <Box sx={fixedHeader ? styles.fixedHeader : styles.header}>
+            <Box sx={styles.containerMd}>
+                <ProductsSelect styles={styles.selectorMd}/>
+                <Box sx={styles.authGroupMd}>
                     {displayAuthButtons ? (
                         <HeaderDropdown
                             title="Profile"
@@ -80,13 +78,49 @@ const HeaderBottom = () => {
                     ) : (
                         <ModalLogin button={
                             <Button sx={styles.buttonLogIn} variant="contained">
-                                <LoginOutlinedIcon/>
-                                <Typography variant='h6'>Log In</Typography>
+                                LogIn <LoginOutlinedIcon fontSize='large'/>
+                            </Button>
+                        }/>
+                    )}
+                </Box>
+            </Box>
+
+            <Container sx={styles.container}>
+                <CategoriesDropdown/>
+                <Box style={styles.wrapper}>
+                    <ProductsSelect styles={styles.selector}/>
+                </Box>
+                <Box style={styles.wrapperButtonGroup}>
+                    {displayAuthButtons ? (
+                        <HeaderDropdown
+                            title="Profile"
+                            icon={<AccountCircleIcon fontSize="large"/>}
+                            iconStart
+                        >
+                            <MenuItem sx={styles.menuItem}>
+                                <AccountCircleIcon fontSize="small" color="primary"/> My Cabinet
+                            </MenuItem>
+                            <MenuItem sx={styles.menuItem}>
+                                <LocalMallIcon fontSize="small" color="success"/> My Orders
+                            </MenuItem>
+                            <MenuItem sx={styles.menuItem}>
+                                <Link to={routerNames.pageFavProducts}>
+                                    <FavoriteIcon fontSize="small" color="error"/> Favourite
+                                </Link>
+                            </MenuItem>
+                            <MenuItem sx={styles.menuItem} onClick={handleLogOut}>
+                                <LogoutIcon fontSize="small" color="error"/> Logout
+                            </MenuItem>
+                        </HeaderDropdown>
+                    ) : (
+                        <ModalLogin button={
+                            <Button sx={styles.buttonLogIn} variant="contained">
+                                LogIn <LoginOutlinedIcon fontSize='large'/>
                             </Button>
                         }/>
                     )}
 
-                    <div className="w-[1px] h-9" style={styles.separator}/>
+                    <div className={stylesSCSS.separator}/>
 
                     <Tooltip
                         title={favouriteList.length < 1 ? 'Add items to favourites first!' : 'View your favourites!'}>
@@ -102,14 +136,15 @@ const HeaderBottom = () => {
                             <Button sx={styles.buttonCart} variant="contained">
                                 <ShoppingCartOutlinedIcon/>
                                 {orderList.length !== 0 && (
-                                    <span style={styles.cartItemCounter}>
+                                    <Typography variant='span' component='span' sx={styles.cartItemCounter}>
                                         {getTotalPrice(orderList).quantity}
-                                    </span>
+                                    </Typography>
                                 )}
                                 {orderList.length !== 0 ? (
                                     <Box className='flex flex-col'>
                                         <Typography variant='p'>Total</Typography>
-                                        <span>${getTotalPrice(orderList).price}</span>
+                                        <Typography variant='span'
+                                                    component='span'>${getTotalPrice(orderList).price}</Typography>
                                     </Box>
                                 ) : (
                                     <Typography variant='h6'>Cart</Typography>
@@ -117,9 +152,9 @@ const HeaderBottom = () => {
                             </Button>
                         </Link>
                     </Tooltip>
-                </div>
+                </Box>
             </Container>
-        </section>
+        </Box>
     );
 };
 

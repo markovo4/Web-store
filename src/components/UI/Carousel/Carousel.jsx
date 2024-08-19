@@ -1,42 +1,50 @@
 import {data} from './data.js';
 import Slider from "react-slick";
-import './Carousel.css';
-
+import {Box, List, ListItem} from "@mui/material";
+import {Link} from "react-router-dom";
+import {styles} from "./styles.js";
+import {Image} from "antd";
+import stylesSCSS from "./stylesSCSS.module.scss";
 
 const Carousel = () => {
+
     const settings = {
         dots: true,
         infinite: true,
         speed: 1500,
         slidesToShow: 4,
         slidesToScroll: 1,
-        autoplaySpeed: 10000,
+        autoplaySpeed: 5000,
         autoplay: true,
     };
 
-
     return (
-        <section style={{backgroundColor: 'rgba(0,0,0,0.06)', height: '550px', display: 'flex', alignItems: 'center'}}>
-            <div style={{
-                width: '1200px',
-                margin: '0 auto',
-                padding: '0 24px',
-
-            }}>
+        <Box sx={styles.carouselContainer}>
+            <Box sx={styles.container}>
                 <Slider {...settings}>
                     {data.map((banner, index) => (
-                        <div key={index} style={'slick-slide-custom'}>
-                            <div>
-                                <a href={'#'}>
-                                    <img src={banner.img} alt={banner.title}
-                                         className='banner-image'/>
-                                </a>
-                            </div>
-                        </div>
+                        <Box key={index} sx={styles.slide}>
+                            <Link to={banner.link || '#'}>
+                                <Image src={banner.img} alt={banner.title} style={styles.image}
+                                       className={stylesSCSS.image}/>
+                            </Link>
+                        </Box>
                     ))}
                 </Slider>
-            </div>
-        </section>
+            </Box>
+
+            <Box sx={styles.containerMd}>
+                <List sx={styles.slideList}>
+                    {data.map((banner, index) => (
+                        <ListItem key={index} sx={styles.slideItem}>
+                            <Link to={banner.link || '#'}>
+                                <Image src={banner.img} alt={banner.title} className={stylesSCSS.image}/>
+                            </Link>
+                        </ListItem>
+                    ))}
+                </List>
+            </Box>
+        </Box>
     );
 };
 

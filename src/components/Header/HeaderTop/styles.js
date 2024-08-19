@@ -1,15 +1,34 @@
 export const styles = {
     header: {
-        backgroundColor: 'white',
-        height: '75px',
+        backgroundColor: {
+            lg: 'white',
+            md: '#42AF2AFF'
+        },
+        height: {
+            lg: '75px',
+            md: '70px'
+        },
     },
     container: {
-        display: 'flex',
+        display: {
+            lg: 'flex',
+            md: 'none'
+        },
         width: '1400px',
         height: 'inherit',
         margin: '0 auto',
         justifyContent: 'space-between',
         alignItems: 'center'
+    },
+
+    logoContainer: {
+        display: {
+            lg: 'none',
+            md: 'flex'
+        },
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '5px',
     },
     wrapper: {
         display: 'flex',

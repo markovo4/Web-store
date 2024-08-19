@@ -1,5 +1,5 @@
 .separator {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgb(255, 255, 255);
   width: 1px;
   height: 40px;
 }
@@ -9,3 +9,5 @@
     display: none;
   }
 }
+
+/*# sourceMappingURL=stylesSCSS.module.css.map */

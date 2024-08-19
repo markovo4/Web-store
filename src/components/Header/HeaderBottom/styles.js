@@ -1,10 +1,17 @@
 export const styles = {
     header: {
-        height: '56px',
+        height: {
+            lg: '56px',
+            md: '70px'
+        },
         backgroundColor: '#42af2a',
+
     },
     fixedHeader: {
-        height: '56px',
+        height: {
+            lg: '56px',
+            md: '70px'
+        },
         backgroundColor: '#42af2a',
         position: 'fixed',
         zIndex: 100,
@@ -12,13 +19,68 @@ export const styles = {
         width: '100%'
     },
     container: {
-        display: 'flex',
+        display: {
+            lg: 'flex',
+            md: 'none'
+        },
         width: '1400px',
         height: 'inherit',
         margin: '0 auto',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
+    containerMd: {
+        display: {
+            lg: 'none',
+            md: 'flex'
+        },
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        height: '70px',
+        padding: '10px 15px',
+        boxSizing: 'border-box',
+    },
+
+    selectorMd: {
+        '& .MuiInputBase-root': {
+            height: '52px',
+            backgroundColor: '#fff',
+            borderColor: '#fff',
+            border: 'none',
+            minWidth: '80vw',
+        },
+        '& .MuiOutlinedInput-input': {
+            height: '52px',
+            padding: '0',
+            boxSizing: 'border-box',
+            width: '80vw',
+            maxWidth: '1000px',
+        },
+        '& .MuiInputLabel-root': {
+            fontSize: '20px',
+            top: '-5px',
+            left: '14px',
+            transform: 'translate(0, 16px) scale(1)',
+            border: 'none',
+            width: '80vw',
+            maxWidth: '1000px',
+        },
+        '& .MuiInputLabel-shrink': {
+            display: 'none',
+        },
+        '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+            display: 'none',
+        },
+        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            display: 'none',
+        },
+    },
+    authGroupMd: {
+        display: 'flex',
+        width: '12vw'
+    },
+
     wrapper: {
         display: 'flex',
         alignItems: 'center',
@@ -31,6 +93,10 @@ export const styles = {
         gap: '10px',
     },
     selector: {
+        display: {
+            md: 'none',
+            lg: 'flex'
+        },
         '& .MuiInputBase-root': {
             height: '40px',
             backgroundColor: '#fff',
@@ -119,16 +185,30 @@ export const styles = {
     buttonLogIn: {
         '&.MuiButton-root': {
             display: 'flex',
+            gap: '10px',
+            fontSize: {
+                lg: '20px',
+                md: '20px'
+            },
             justifyContent: 'space-between',
-            height: '40px',
+            height: {
+                lg: '40px',
+                md: '50px'
+            },
             borderRadius: 1,
             textTransform: 'none',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '110px',
+            minWidth: {
+                lg: '110px',
+                md: '100%'
+            },
         },
         '&.MuiButton-contained': {
-            backgroundColor: 'unset',
+            backgroundColor: {
+                lg: 'unset',
+                md: '#389725',
+            },
             color: '#fff',
             '&:hover': {
                 backgroundColor: '#389725',

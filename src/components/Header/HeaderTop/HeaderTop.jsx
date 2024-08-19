@@ -25,6 +25,7 @@ import ModalRegister from "../../ModalsAuth/ModalRegister";
 import {setCity} from "../../../redux/slices/headerCitySlice";
 import cities from "../../../assets/cities/cities";
 import routerNames from "../../../router/routes/routerNames";
+import LogoTransparent from "../../../assets/icons/LogoTransparent.jsx";
 
 const HeaderTop = () => {
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
@@ -55,6 +56,11 @@ const HeaderTop = () => {
 
     return (
         <Box sx={styles.header}>
+            <Box sx={styles.logoContainer}>
+                <Link to={routerNames.pageMain}>
+                    <LogoTransparent width={'100%'} height={'4rem'}/>
+                </Link>
+            </Box>
             <Container sx={styles.container}>
                 <Box style={styles.wrapper}>
                     <Link to={routerNames.pageMain}>

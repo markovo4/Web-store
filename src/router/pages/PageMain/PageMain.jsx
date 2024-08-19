@@ -7,6 +7,7 @@ import ClothesFemale from "../../../components/Main/ClothesFemale";
 import ClothesMale from "../../../components/Main/ClothesMale/index.js";
 
 const PageMain = () => {
+    
     return (
         <TemplateBasePage>
             <Hero/>
