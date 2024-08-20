@@ -1,17 +1,17 @@
 .form {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-@media (max-width: 1199px) {
-  .form {
     width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
-  }
 }
 
-/*# sourceMappingURL=stylesSCSS.module.css.map */
+@media (max-width: 1199px) {
+    .form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
+
+/*# sourceMappingURL=stylesSCSS.module.scss.module.css.map */

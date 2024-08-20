@@ -2,7 +2,7 @@ export const styles = {
     block: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         width: {
             lg: '300px'
         },
@@ -13,18 +13,25 @@ export const styles = {
         paddingBottom: {
             md: '30px',
             lg: '0'
+        },
+        gap: {
+            lg: '0',
+            md: '20px',
         }
 
     },
     title: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'flex-start',
         fontWeight: 'bold',
+        fontSize: '22px',
         gap: '10px',
         color: '#2d2d2d'
     },
     body: {
-        color: '#696868',
+        color: {
+            lg: '#696868',
+            md: 'rgba(0,0,0,0.75)'
+        },
     }
 }

@@ -24,7 +24,7 @@ const CartSide = ({
     };
 
     return (
-        <div>
+        <Box>
             {button}
             <Modal
                 sx={styles.modal}
@@ -34,7 +34,7 @@ const CartSide = ({
                 aria-describedby={title}
             >
                 <Box sx={styles.container}>
-                    <div className="flex justify-between items-center">
+                    <Box className="flex justify-between items-center">
                         <Typography
                             id={title}
                             variant="h6"
@@ -51,9 +51,9 @@ const CartSide = ({
                         >
                             <CloseIcon color="disabled" fontSize="large"/>
                         </Button>
-                    </div>
+                    </Box>
 
-                    <div>
+                    <Box>
                         <CartItem
                             image={image}
                             onQuantityChange={onQuantityChange}
@@ -64,7 +64,7 @@ const CartSide = ({
                             id={id}
                             title={title}
                         />
-                    </div>
+                    </Box>
 
                     <Box className="flex justify-between items-center pl-12 pr-12" sx={styles.buttonGroup}>
                         <Button
@@ -75,7 +75,7 @@ const CartSide = ({
                             Continue shopping
                         </Button>
 
-                        <div className="flex gap-5">
+                        <Box sx={styles.buttons}>
                             <Link to={routerNames.pageCart}>
                                 <Button
                                     sx={styles.buttonChoice}
@@ -93,11 +93,11 @@ const CartSide = ({
                                     Checkout
                                 </Button>
                             </Link>
-                        </div>
+                        </Box>
                     </Box>
                 </Box>
             </Modal>
-        </div>
+        </Box>
     );
 };
 

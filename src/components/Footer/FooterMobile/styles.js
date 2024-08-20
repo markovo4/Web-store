@@ -34,7 +34,6 @@ export const styles = {
         top: 0,
         right: 0
     },
-
     cartNotifyNot: {
         display: 'none'
     },
@@ -57,6 +56,11 @@ export const styles = {
         padding: '20px 16px',
         borderBottom: '1px solid #0002',
         backgroundColor: '#fff',
+    },
+    categoryItem: {
+        '&:hover': {
+            color: '#41ae2a'
+        }
     },
     listCategoriesNone: {
         display: 'none'

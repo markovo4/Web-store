@@ -10,6 +10,7 @@ import {useEffect, useState} from "react";
 import {useGetAllCategoriesQuery} from "../../../redux/productsApi/productsApi.js";
 import {useDispatch, useSelector} from "react-redux";
 import {getProductList} from "../../../redux/slices/localStorageSlice.js";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const FooterMobile = () => {
 
@@ -35,7 +36,10 @@ const FooterMobile = () => {
                 {categories && categories.map((category, index) => (
                     <ListItem key={index} sx={styles.category}>
                         <Link to={`/categories/${category}`}>
-                            {category.charAt(0).toUpperCase() + category.slice(1)}
+                            <Typography sx={styles.categoryItem}>
+                                {category.charAt(0).toUpperCase() + category.slice(1)} <ArrowForwardIosIcon
+                                fontSize={'20px'}/>
+                            </Typography>
                         </Link>
                     </ListItem>
                 ))}

@@ -5,7 +5,11 @@ export const styles = {
         position: 'absolute',
         top: '0',
         right: '0',
-        width: '45vw',
+        width: {
+            lg: '69%',
+            md: '100vw',
+            xs: '100vw'
+        },
         minHeight: '100vh',
         bgcolor: 'rgb(255,255,255)',
         borderRadius: '5px 0 0 5px',
@@ -33,7 +37,11 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '64px',
+            minWidth: {
+                lg: '64px',
+                md: '90vw',
+                xs: '90vw',
+            },
         },
 
         '&.MuiButton-contained': {
@@ -66,7 +74,11 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '64px',
+            minWidth: {
+                lg: '64px',
+                md: '90vw',
+                xs: '90vw',
+            },
         },
 
         '&.MuiButton-contained': {
@@ -141,7 +153,28 @@ export const styles = {
 
     },
     buttonGroup: {
+        display: 'flex',
+        flexDirection: {
+            lg: 'row',
+            md: 'column',
+            xs: 'column'
+
+        },
+        gap: {
+            lg: '0',
+            md: '30px',
+            xs: '30px'
+        },
         paddingBottom: '30px',
         borderBottom: '1px solid grey'
     },
+    buttons: {
+        display: 'flex',
+        flexDirection: {
+            lg: 'row',
+            md: 'column',
+            xs: 'column'
+        },
+        gap: '30px'
+    }
 }

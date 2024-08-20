@@ -1,11 +1,4 @@
 export const styles = {
-    productImg: {
-        height: '100px',
-        width: 'auto',
-        objectFit: 'contain',
-        objectPosition: 'center',
-        display: 'block',
-    },
     productIcon: {
         backgroundColor: 'white',
         width: '100px',
@@ -13,11 +6,23 @@ export const styles = {
     },
     card: {
         display: 'flex',
+        flexDirection: {
+            lg: 'row',
+            md: 'row',
+            xs: 'column'
+        },
         justifyContent: 'space-between',
-        gap: '50px',
+        gap: {
+            lg: '50px',
+            md: '0'
+        },
         margin: '4px 0',
         padding: '0 50px',
-        height: '214px',
+        height: {
+            lg: '214px',
+            md: '214px',
+            xs: 'auto'
+        },
         backgroundColor: 'white',
     },
     title: {
@@ -33,7 +38,10 @@ export const styles = {
     },
     listItemTextTitle: {
         primary: {
-            width: '400px',
+            width: {
+                lg: '400px',
+                md: '70%'
+            },
             fontSize: '20px',
             color: 'rgb(0,0,0)',
             paddingLeft: '6px',
@@ -51,6 +59,11 @@ export const styles = {
     button: {
         // Base styles for all button variants
         '&.MuiButton-root': {
+            display: {
+                lg: 'flex',
+                md: 'flex',
+                xs: 'none'
+            },
             padding: '5px 10px',
             borderRadius: '8px',
             textTransform: 'none',
@@ -110,5 +123,8 @@ export const styles = {
         fontSize: '14px',
         width: '100px',
         color: 'rgba(0,0,0,0.50)'
+    },
+    infoContainer: {
+        width: '50%'
     }
 }

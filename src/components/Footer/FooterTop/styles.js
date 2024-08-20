@@ -27,6 +27,13 @@ export const styles = {
     container: {
         display: 'flex',
         flexDirection: 'column'
+    },
+    icons: {
+        fontSize: {
+            lg: 'unset',
+            md: '40px'
+        },
+        color: '#40ad2a'
     }
 
 }

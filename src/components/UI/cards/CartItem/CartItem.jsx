@@ -13,6 +13,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import {Link} from "react-router-dom";
 import useFavourite from "../../../../utils/hooks/useFavourite.js";
 
+import stylesSCSS from './stylesSCSS.module.scss';
+
 const CartItem = ({
                       title,
                       description,
@@ -56,10 +58,10 @@ const CartItem = ({
         <ListItem sx={styles.card}>
             <ListItemAvatar>
                 <Avatar variant="square" sx={styles.productIcon}>
-                    <img src={image} alt={title} style={styles.productImg}/>
+                    <img src={image} alt={title} className={stylesSCSS.productImg}/>
                 </Avatar>
             </ListItemAvatar>
-            <Box>
+            <Box sx={styles.infoContainer}>
                 <Typography sx={styles.availabilityText}>
                     <CheckIcon fontSize={'small'}/>Available for the pickup today
                 </Typography>
