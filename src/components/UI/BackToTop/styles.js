@@ -7,7 +7,10 @@ export const styles = {
         transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
         minWidth: '10px',
         position: 'fixed',
-        bottom: '20px',
+        bottom: {
+            lg: '70px',
+            md: '100px'
+        },
         right: '20px',
         zIndex: 99,
         display: 'none',

@@ -70,7 +70,7 @@ export const styles = {
             lg: 'space-between'
         },
         height: {
-            md: '220px',
+            md: '250px',
             lg: 'unset'
         }
     },
