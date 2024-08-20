@@ -1,0 +1,19 @@
+.productImg {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 899px) {
+  .productImg {
+    height: 200px;
+    width: auto;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+}
+
+/*# sourceMappingURL=stylesSCSS.module.css.map */
