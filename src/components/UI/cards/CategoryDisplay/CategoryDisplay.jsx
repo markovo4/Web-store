@@ -1,4 +1,4 @@
-import {Container, Typography} from "@mui/material";
+import {Box, Container, Typography} from "@mui/material";
 import {styles} from "./style.js";
 import ProductInList from "../ProductInList/index.js";
 import {useGetAllProductsByCategoryQuery} from "../../../../redux/productsApi/productsApi.js";
@@ -11,7 +11,7 @@ const CategoryDisplay = () => {
     const clothesMale = useGetAllProductsByCategoryQuery({category: category, limit: 10});
 
     return (
-        <section style={styles.section}>
+        <Box sx={styles.section}>
             <Container>
                 <Typography
                     variant='h4'
@@ -19,7 +19,7 @@ const CategoryDisplay = () => {
                     sx={styles.title}>
                     {title}</Typography>
 
-                <div style={styles.productsContainer}>
+                <Box sx={styles.productsContainer}>
                     {clothesMale.data && clothesMale.data.map((product, index) => {
                         return (
                             <ProductInList
@@ -34,9 +34,9 @@ const CategoryDisplay = () => {
                             />
                         )
                     })}
-                </div>
+                </Box>
             </Container>
-        </section>
+        </Box>
     )
 }
 

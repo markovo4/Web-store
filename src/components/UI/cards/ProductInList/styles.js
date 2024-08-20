@@ -26,14 +26,16 @@ export const styles = {
         marginLeft: '2px',
         display: 'flex',
         flexDirection: 'column',
-        width: '220px',
+        width: {
+            lg: '220px',
+            md: '300px'
+        },
         height: '420px',
         marginBottom: '8px',
         justifyContent: 'space-between',
         boxShadow: 'none',
         '&:hover': {
             transition: '0.3s',
-            backgroundColor: 'rgb(238,238,238)',
             boxShadow: '0px 1px 10px 1px rgba(0,0,0,0.22)',
         }
     },

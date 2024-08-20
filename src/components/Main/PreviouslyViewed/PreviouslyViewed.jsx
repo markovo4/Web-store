@@ -1,5 +1,5 @@
 import {styles} from "./styles.js";
-import {Container, Typography} from "@mui/material";
+import {Box, Container, List, ListItem, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getRecentlyViewed} from "../../../redux/slices/localStorageSlice.js";
@@ -13,16 +13,16 @@ const PreviouslyViewed = () => {
         dispatch(getRecentlyViewed())
     }, [dispatch])
     return (
-        <section style={styles.sectionViewed}>
+        <Box sx={styles.sectionViewed}>
             <Container>
-                <div style={styles.container}>
+                <Box sx={styles.container}>
                     <Typography
                         variant='h4'
                         component={'h4'}
                         sx={styles.title}>
                         Recently Viewed</Typography>
 
-                    <div className={'flex justify-center'}>
+                    <Box sx={styles.list}>
                         {recentlyViewed.map((product, index) => {
                             return (
                                 <ProductInList
@@ -38,10 +38,30 @@ const PreviouslyViewed = () => {
                                 />
                             )
                         })}
-                    </div>
-                </div>
+                    </Box>
+
+                    <List sx={styles.slideList}>
+                        {recentlyViewed.map((product, index) => {
+                            return (
+                                <ListItem key={product.id} sx={styles.slideItem}>
+                                    <ProductInList
+                                        image={product.image}
+                                        price={product.price}
+                                        title={product.title}
+                                        itemId={product.id}
+                                        key={index}
+                                        rate={product.rating}
+                                        count={product.count}
+                                        description={product.description}
+                                        additionalComponent={true}
+                                    />
+                                </ListItem>
+                            )
+                        })}
+                    </List>
+                </Box>
             </Container>
-        </section>
+        </Box>
     )
 }
 

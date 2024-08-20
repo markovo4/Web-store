@@ -11,7 +11,12 @@ export const styles = {
     },
     productsContainer: {
         display: 'flex',
-        flexFlow: 'row wrap'
+        flexFlow: 'row wrap',
+        justifyContent: {
+            lg: 'flex-start',
+            md: 'center',
+            xs: 'center'
+        }
     }
 
 }
