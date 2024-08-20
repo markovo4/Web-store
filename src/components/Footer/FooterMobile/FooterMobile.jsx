@@ -67,7 +67,7 @@ const FooterMobile = () => {
 
                 <ListItem sx={styles.li}>
                     <Box sx={styles.cart}>
-                        <Box sx={orderList.length >= 1 && styles.cartNotify}></Box>
+                        <Box sx={orderList.length >= 1 ? styles.cartNotify : styles.cartNotifyNot}></Box>
                         <ShoppingCartOutlinedIcon/>
                     </Box>
                     <Link to={routerNames.pageCart}>

@@ -34,6 +34,10 @@ export const styles = {
         top: 0,
         right: 0
     },
+
+    cartNotifyNot: {
+        display: 'none'
+    },
     cart: {
         position: 'relative'
     },
