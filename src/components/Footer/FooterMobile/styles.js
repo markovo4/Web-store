@@ -1,10 +1,18 @@
 export const styles = {
     li: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
     },
     list: {
-        display: 'flex'
+        display: 'flex',
+        justifyContent: 'space-around',
+        width: '100%',
+        padding: 0,
+        margin: 0,
+        listStyle: 'none',
     },
     container: {
         display: {
@@ -12,7 +20,10 @@ export const styles = {
         },
         position: 'fixed',
         bottom: '0',
-        backgroundColor: '#fff'
+        width: '100%',
+        backgroundColor: '#fff',
+        borderTop: '1px solid #0002',
+        zIndex: 10,
     },
     cartNotify: {
         width: '10px',
@@ -25,5 +36,25 @@ export const styles = {
     },
     cart: {
         position: 'relative'
+    },
+    listCategories: {
+        position: 'fixed',
+        top: 'auto',
+        bottom: '62px',
+        left: 0,
+        right: 0,
+        backgroundColor: '#fff',
+        height: '50vh',
+        overflowY: 'auto',
+        zIndex: 20,
+        boxShadow: '0px -10px 20px rgba(0, 0, 0, 0.2)',
+    },
+    category: {
+        padding: '20px 16px',
+        borderBottom: '1px solid #0002',
+        backgroundColor: '#fff',
+    },
+    listCategoriesNone: {
+        display: 'none'
     }
 }

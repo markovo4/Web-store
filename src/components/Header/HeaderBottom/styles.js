@@ -9,6 +9,8 @@ export const styles = {
         justifyContent: 'center'
     },
     fixedHeader: {
+        display: 'flex',
+        justifyContent: 'center',
         height: {
             lg: '56px',
             md: '70px'
