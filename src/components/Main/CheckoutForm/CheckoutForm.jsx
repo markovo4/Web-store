@@ -22,6 +22,7 @@ import PaymentOptionsForm from "../PaymentOptionsForm";
 import InputWithButton from "../../UI/inputs/InputWithButton";
 import FormInput from "../../UI/inputs/FormInput";
 import {getTotalPrice} from "../../../utils/functions/functions";
+import stylesSCSS from './stylesSCSS.module.scss';
 
 // Initial form values
 const initialValues = {
@@ -291,7 +292,7 @@ const CheckoutForm = () => {
                                 )}
                                 {orderList.length > 0 && (
                                     <Box className="flex items-end justify-between mb-3">
-                                        <Typography variant="h6" component="span" sx={styles.titleTotal}>
+                                        <Typography variant="h6" component="span">
                                             Total:
                                         </Typography>
                                         <Box className="flex flex-col">
@@ -300,7 +301,7 @@ const CheckoutForm = () => {
                                                 variant="h6"
                                                 component="span"
                                             >
-                                                <s style={styles.priceStrike}>$ {getTotalPrice(orderList).price}</s>
+                                                <s className={stylesSCSS.checkoutStrike}>$ {getTotalPrice(orderList).price}</s>
                                             </Typography>
                                             <Typography
                                                 sx={styles.totalPriceMain}

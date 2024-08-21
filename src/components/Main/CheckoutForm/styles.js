@@ -161,11 +161,15 @@ export const styles = {
     },
     sidebar: {
         backgroundColor: 'white',
-        width: '300px',
+        width: {
+            lg: '300px',
+            md: '100%'
+        },
         borderRadius: '8px',
         display: 'flex',
         flexDirection: 'column',
         padding: '28px',
+        marginBottom: '100px',
         position: 'sticky',
         top: '20px'
     },
@@ -237,11 +241,7 @@ export const styles = {
             xs: '100%'
         },
         height: 'auto',
-        alignItems: {
-            lg: 'flex-start',
-            md: 'center',
-            xs: 'center'
-        },
+        alignItems: 'flex-start',
         justifyContent: 'center',
         gap: '20px',
         borderRadius: '8px',
@@ -251,20 +251,21 @@ export const styles = {
     inputGiftCardContainer: {
         display: 'flex',
         justifyContent: 'space-evenly',
-        alignItems: 'center',
         gap: '60px',
-
     },
     container: {
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: '#f6f5f5',
-        width: '700px',
+        width: {
+            lg: '700px',
+            md: '100%',
+            xs: '100%'
+        },
         border: '1px solid rgba(0,0,0,0.1)',
         borderRadius: '8px',
         padding: '20px',
     },
-    giftCardInfoSubtitle: {},
     giftCardInfoTitle: {
         marginBottom: '10px'
     },
@@ -292,38 +293,33 @@ export const styles = {
         color: 'rgba(0,0,0,0.72)'
     },
     textArea: {
-        width: '700px', // Full width of the container
+        width: '700px',
         height: '100px',
-        padding: '10px', // Padding for internal spacing
-        borderRadius: '4px', // Rounded corners for a smoother look
-        border: '1px solid #ccc', // Light gray border
-        resize: 'none', // Allows vertical resizing
-        fontSize: '16px', // Standard font size for readability
-        color: '#333', // Dark text color
-        outline: 'none', // Remove default browser outline
+        padding: '10px',
+        borderRadius: '4px',
+        border: '1px solid #ccc',
+        resize: 'none',
+        fontSize: '16px',
+        color: '#333',
+        outline: 'none',
         '&:hover': {
-            borderColor: '#888', // Darker border on hover for feedback
+            borderColor: '#888',
         },
         '&:focus': {
-            borderColor: '#42af2a', // Antd primary color for focus state
-            boxShadow: '0 0 0 3px #42af2a', // Soft shadow for focus
+            borderColor: '#42af2a',
+            boxShadow: '0 0 0 3px #42af2a',
         },
         '&:disabled': {
-            backgroundColor: '#f5f5f5', // Light gray background for disabled state
-            color: '#a0a0a0', // Gray text color for disabled state
+            backgroundColor: '#f5f5f5',
+            color: '#a0a0a0',
         },
         '&::placeholder': {
-            color: '#aaa', // Light gray placeholder text
-            opacity: 1, // Ensure visibility of placeholder
+            color: '#aaa',
+            opacity: 1,
         },
         '&.error': {
-            borderColor: '#f5222d', // Bright red for error state
+            borderColor: '#f5222d',
         },
-    },
-    priceStrike: {
-        fontSize: '18px',
-        color: '#b6b6b6',
-        height: '10px'
     },
 
     totalPriceOriginalMain: {

@@ -10,8 +10,8 @@ export const styles = {
         gap: '10px',
         width: {
             lg: '700px',
-            md: '88vw',
-            xs: '88vw'
+            md: '86vw',
+            xs: '86vw'
         },
     },
     contactInfo: {
@@ -78,8 +78,8 @@ export const styles = {
             borderColor: '#fff',
             width: {
                 lg: '700px',
-                md: '88vw',
-                xs: '88vw',
+                md: '86vw',
+                xs: '86vw',
             },
         },
         '& .MuiOutlinedInput-input': {

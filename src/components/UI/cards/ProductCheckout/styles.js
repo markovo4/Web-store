@@ -1,7 +1,9 @@
 export const styles = {
     listStyles: {
         borderBottom: '1px solid rgba(175,175,175,0.31)',
-        padding: '20px 0'
+        padding: '20px 0',
+        display: 'flex',
+        justifyContent: 'space-between'
     },
     price: {
         fontWeight: 'bold',

@@ -4,7 +4,7 @@ import {styles} from "./styles.js";
 
 const ProductCheckout = ({image, title, count, price, id}) => {
     return (
-        <ListItem className={'flex items-center bg-white gap-x-20'}
+        <ListItem className={'flex items-center bg-white'}
                   sx={styles.listStyles}>
             <Box>
                 <img src={image} alt={title} style={styles.image}/>

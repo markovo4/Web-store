@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import {Box, Button, Container, List, ListItem, Typography} from "@mui/material";
-import {Rate} from "antd";
+import {Image, Rate} from "antd";
 import CommentIcon from '@mui/icons-material/Comment';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -86,9 +86,9 @@ const Product = ({
 
     return (
         <React.Fragment>
-            <Container sx={{display: "flex", flexDirection: "row"}}>
+            <Container sx={{display: "flex", padding: '0', flexDirection: "row"}}>
                 <Box sx={styles.imageWrapper}>
-                    <img alt={title} src={image} style={styles.image}/>
+                    <Image alt={title} src={image} style={styles.image}/>
                 </Box>
                 <Box sx={styles.info}>
                     <Box sx={styles.wrapper}>

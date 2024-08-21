@@ -40,7 +40,6 @@ const PaymentOptionsForm = ({onValidChange}) => {
         }
     });
 
-    // Fetch checkout info on component mount
     useEffect(() => {
         dispatch(getCheckoutInfo());
     }, [dispatch]);

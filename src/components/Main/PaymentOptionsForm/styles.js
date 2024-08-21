@@ -10,8 +10,8 @@ export const styles = {
         gap: '10px',
         width: {
             lg: '700px',
-            md: '88vw',
-            xs: '88vw'
+            md: '86vw',
+            xs: '86vw'
         },
     },
     contactInfo: {
@@ -36,8 +36,11 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '250px',
-            maxWidth: '700px',
+            width: {
+                lg: '700px',
+                md: '100%',
+                xs: '100%'
+            },
             maxHeight: '40px',
         },
         // Styles for contained buttons
