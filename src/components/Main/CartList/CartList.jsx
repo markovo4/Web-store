@@ -85,8 +85,8 @@ const CartList = () => {
 
     // Render the cart items and controls
     return (
-        <section style={styles.section}>
-            <Container sx={styles.container}>
+        <Box sx={styles.section}>
+            <Container>
                 <Box className="flex flex-row items-center pt-6 mb-4">
                     <IconButton onClick={handleBackClick}>
                         <ArrowBackIcon/>
@@ -111,8 +111,7 @@ const CartList = () => {
                         </Typography>
                     )}
                 </Box>
-
-                <div style={styles.wrapper}>
+                <Box sx={styles.wrapper}>
                     <List sx={styles.productsList}>
                         <ListItem className="bg-white">
                             <ModalDeleteAllProducts
@@ -205,9 +204,9 @@ const CartList = () => {
                             </ListItem>
                         </List>
                     </Box>
-                </div>
+                </Box>
             </Container>
-        </section>
+        </Box>
     );
 };
 

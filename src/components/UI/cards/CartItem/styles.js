@@ -40,7 +40,7 @@ export const styles = {
         primary: {
             width: {
                 lg: '400px',
-                md: '70%'
+                md: '100%'
             },
             fontSize: '20px',
             color: 'rgb(0,0,0)',

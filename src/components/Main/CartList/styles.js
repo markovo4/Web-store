@@ -4,21 +4,33 @@ export const styles = {
         minHeight: '100vh',
         maxHeight: '100%'
     },
-    container: {},
     wrapper: {
         maxWidth: '1200px',
         display: 'flex',
-        gap: '50px'
+        flexDirection: {
+            lg: 'row',
+            md: 'column'
+        },
+        gap: {
+            lg: '50px',
+            md: '0'
+        }
     },
     placeOrder: {
-        width: '350px',
+        width: {
+            lg: '350px',
+            md: '100%'
+        },
         padding: '0px',
         position: 'sticky',
         height: '300px',
         top: '20px'
     },
     productsList: {
-        width: '800px',
+        width: {
+            lg: '800px',
+            md: '100%'
+        },
     },
     titleBack: {
         fontWeight: 'bold',
@@ -108,7 +120,10 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '300px',
+            minWidth: {
+                lg: '300px',
+                md: '80vw'
+            },
         },
         '&.MuiButton-outlined': {
             backgroundColor: '#41ae2a',
