@@ -33,11 +33,20 @@ export const styles = {
         height: '420px',
         marginBottom: '8px',
         justifyContent: 'space-between',
-        boxShadow: 'none',
+        boxShadow: {
+            lg: 'none',
+            md: '0px 1px 5px 0px rgba(0,0,0,0.16)',
+            xs: '0px 1px 5px 0px rgba(0,0,0,0.16)',
+        },
         '&:hover': {
             transition: '0.3s',
             boxShadow: '0px 1px 10px 1px rgba(0,0,0,0.22)',
-        }
+        },
+        border: {
+            lg: 'none',
+            md: '1px solid #0001',
+            xs: '1px solid #0001'
+        },
     },
     image: {
         marginTop: '40px',

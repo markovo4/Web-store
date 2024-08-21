@@ -1,4 +1,4 @@
-import {Container, Typography} from "@mui/material";
+import {Box, Container, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getFavProductList} from "../../../redux/slices/localStorageSlice.js";
@@ -24,28 +24,31 @@ const FavProductsDisplay = () => {
 
 
     return (
-        <section style={styles.section}>
+        <Box sx={styles.section}>
             <Container>
                 <Typography
                     variant='h4'
                     component={'h4'}
                     sx={styles.title}>
                     Favourite Products</Typography>
-                <ul className='flex place-items-center flex-wrap gap-y-5'>
-                    {favouriteList && favouriteList.map((product, index) => (
-                        <ProductInList
-                            image={product.image}
-                            price={product.price}
-                            title={product.title}
-                            itemId={product.id}
-                            key={index}
-                            rate={product.rating}
-                            count={product.count}
-                        />
-                    ))}
-                </ul>
+                <Box sx={styles.container}>
+                    {favouriteList && favouriteList.map((product, index) => {
+                        return (
+                            <ProductInList
+                                image={product.image}
+                                price={product.price}
+                                title={product.title}
+                                itemId={product.id}
+                                key={index}
+                                rate={product.rating}
+                                count={product.count}
+                            />
+                        )
+
+                    })}
+                </Box>
             </Container>
-        </section>
+        </Box>
     )
 }
 
