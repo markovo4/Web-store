@@ -6,7 +6,16 @@ export const styles = {
     },
     wrapper: {
         display: 'flex',
-        gap: '50px'
+        flexDirection: {
+            lg: 'row',
+            md: 'column',
+            xs: 'column'
+        },
+        gap: {
+            lg: '50px',
+            md: '0',
+            xs: '0'
+        }
     },
     buttonBack: {
         '&.MuiButton-root': {
@@ -97,7 +106,7 @@ export const styles = {
         flexDirection: 'column',
         backgroundColor: 'white',
         padding: '40px',
-        borderRadius: '8px'
+        borderRadius: '8px',
     },
     titleList: {
         display: 'flex',
@@ -106,7 +115,11 @@ export const styles = {
     contactInfo: {
         display: 'flex',
         flexDirection: 'column',
-        width: '800px',
+        width: {
+            lg: '800px',
+            md: '100%',
+            xs: '100%',
+        },
         backgroundColor: 'white',
         padding: '40px',
         gap: '20px',
@@ -218,9 +231,17 @@ export const styles = {
         border: 'unset',
         display: 'flex',
         flexDirection: 'column',
-        width: '800px',
+        width: {
+            lg: '800px',
+            md: '100%',
+            xs: '100%'
+        },
         height: 'auto',
-        alignItems: 'flex-start',
+        alignItems: {
+            lg: 'flex-start',
+            md: 'center',
+            xs: 'center'
+        },
         justifyContent: 'center',
         gap: '20px',
         borderRadius: '8px',

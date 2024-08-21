@@ -47,7 +47,11 @@ export const styles = {
         border: 'unset',
         display: 'flex',
         alignItems: 'center',
-        width: '800px',
+        width: {
+            lg: '800px',
+            md: '100%',
+            xs: '100%',
+        },
         height: 'auto',
         justifyContent: 'space-between',
         borderRadius: '8px',

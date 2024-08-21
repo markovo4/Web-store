@@ -8,12 +8,20 @@ export const styles = {
     radioGroup: {
         display: 'flex',
         gap: '10px',
-        width: '700px',
+        width: {
+            lg: '700px',
+            md: '88vw',
+            xs: '88vw'
+        },
     },
     contactInfo: {
         display: 'flex',
         flexDirection: 'column',
-        width: '800px',
+        width: {
+            lg: '800px',
+            md: '100%',
+            xs: '100%',
+        },
         backgroundColor: 'white',
         padding: '40px',
         gap: '20px',

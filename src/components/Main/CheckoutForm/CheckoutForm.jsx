@@ -109,9 +109,9 @@ const CheckoutForm = () => {
 
     // JSX
     return (
-        <section style={styles.sectionForm}>
+        <Box sx={styles.sectionForm}>
             <Container>
-                <div className="flex items-center justify-between pt-4 pb-4">
+                <Box className="flex items-center justify-between pt-4 pb-4">
                     <Typography variant="h5" component="p" sx={styles.checkoutTitle}>
                         Checkout
                     </Typography>
@@ -124,16 +124,16 @@ const CheckoutForm = () => {
                             Back to products
                         </Button>
                     </Link>
-                </div>
-                <div style={styles.wrapper}>
-                    <div>
+                </Box>
+                <Box sx={styles.wrapper}>
+                    <Box>
                         <FormCard
                             products
                             formTitle="Your order"
                             open={openForm}
                             openForm={handleClickContinue}
                         >
-                            <List className="w-[800px]" sx={styles.checkoutList}>
+                            <List sx={styles.checkoutList}>
                                 <ListItem sx={styles.titleList}>
                                     <Typography variant="h6">Your order</Typography>
                                     <Link to={routerNames.pageCart}>
@@ -254,8 +254,8 @@ const CheckoutForm = () => {
                                 </Checkbox>
                             </ListItem>
                         </List>
-                    </div>
-                    <div>
+                    </Box>
+                    <Box>
                         <Box sx={styles.sidebar}>
                             <Typography variant="h6" component="span" sx={styles.summary}>
                                 Summary:
@@ -280,17 +280,17 @@ const CheckoutForm = () => {
                                     name="bonusCard"
                                 />
                                 {orderList.length > 0 && (
-                                    <div style={styles.itemsPrice}>
+                                    <Box sx={styles.itemsPrice}>
                                         <Typography sx={styles.itemsCount}>
                                             {`${getTotalPrice(orderList).quantity} ${getTotalPrice(orderList).quantity === 1 ? "item" : "items"}`}
                                         </Typography>
                                         <Typography sx={styles.totalPriceSub}>
                                             $ {getTotalPrice(orderList).price}
                                         </Typography>
-                                    </div>
+                                    </Box>
                                 )}
                                 {orderList.length > 0 && (
-                                    <div className="flex items-end justify-between mb-3">
+                                    <Box className="flex items-end justify-between mb-3">
                                         <Typography variant="h6" component="span" sx={styles.titleTotal}>
                                             Total:
                                         </Typography>
@@ -310,9 +310,9 @@ const CheckoutForm = () => {
                                                 $ {(getTotalPrice(orderList).price * 0.9).toFixed(2)}
                                             </Typography>
                                         </Box>
-                                    </div>
+                                    </Box>
                                 )}
-                                <div className="flex flex-col gap-5">
+                                <Box className="flex flex-col gap-5">
                                     <Button
                                         variant="contained"
                                         type="submit"
@@ -330,13 +330,13 @@ const CheckoutForm = () => {
                                     >
                                         I Accept terms and conditions
                                     </Checkbox>
-                                </div>
+                                </Box>
                             </form>
                         </Box>
-                    </div>
-                </div>
+                    </Box>
+                </Box>
             </Container>
-        </section>
+        </Box>
     );
 };
 

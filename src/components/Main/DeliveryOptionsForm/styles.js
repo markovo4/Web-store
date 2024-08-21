@@ -8,17 +8,26 @@ export const styles = {
     radioGroup: {
         display: 'flex',
         gap: '10px',
-        width: '700px',
+        width: {
+            lg: '700px',
+            md: '88vw',
+            xs: '88vw'
+        },
     },
     contactInfo: {
         display: 'flex',
         flexDirection: 'column',
-        width: '800px',
+        width: {
+            lg: '800px',
+            md: '100%',
+            xs: '100%',
+        },
         backgroundColor: 'white',
         padding: '40px',
         gap: '20px',
         borderRadius: '8px'
     },
+
     buttonSubmit: {
         '&.MuiButton-root': {
             padding: '5px 5px',
@@ -28,8 +37,11 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '250px',
-            maxWidth: '700px',
+            width: {
+                lg: '700px',
+                md: '100%',
+                xs: '100%'
+            },
             maxHeight: '40px',
         },
         // Styles for contained buttons
@@ -64,7 +76,11 @@ export const styles = {
             marginBottom: '10px',
             backgroundColor: '#fff',
             borderColor: '#fff',
-            width: '700px',
+            width: {
+                lg: '700px',
+                md: '88vw',
+                xs: '88vw',
+            },
         },
         '& .MuiOutlinedInput-input': {
             height: '30px',

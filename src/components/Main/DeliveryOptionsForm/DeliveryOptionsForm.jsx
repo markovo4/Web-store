@@ -47,6 +47,7 @@ const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
     }, [dispatch])
 
     return (
+        
         <form onSubmit={formik.handleSubmit}>
             <FormCard
                 delivery={!formik.errors.city && !formik.errors.deliveryOption && formik.touched.city && formik.touched.deliveryOption}
@@ -57,7 +58,7 @@ const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
                     <Typography variant='h6' component={'span'}>2. Delivery options</Typography>
 
                     <Typography variant='span' sx={styles.selectorTitle}>Your City</Typography>
-                    <div>
+                    <Box>
                         <CitiesSelect
                             styles={styles.selector}
                             value={formik.values.city}
@@ -68,7 +69,7 @@ const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
                                 {formik.errors.city}
                             </Typography>
                         ) : null}
-                    </div>
+                    </Box>
 
                     <RadioGroup
                         name="deliveryOption"
@@ -76,32 +77,32 @@ const DeliveryOptionsForm = ({onValidChange, onTouch}) => {
                         onChange={formik.handleChange}
                         sx={styles.radioGroup}
                     >
-                        <div style={styles.radioButton}>
+                        <Box sx={styles.radioButton}>
                             <FormControlLabel
                                 value="Pick up at the store"
                                 control={<Radio/>}
                                 label="Pick up at the store"
                             />
                             <ShoppingCartCheckoutIcon/>
-                        </div>
+                        </Box>
 
-                        <div style={styles.radioButton}>
+                        <Box sx={styles.radioButton}>
                             <FormControlLabel
                                 value="NOVA Poshta"
                                 control={<Radio/>}
                                 label="Pick up at Nova Poshta delivery post"
                             />
                             <LocalShippingIcon/>
-                        </div>
+                        </Box>
 
-                        <div style={styles.radioButton}>
+                        <Box sx={styles.radioButton}>
                             <FormControlLabel
                                 value="UKR Poshta"
                                 control={<Radio/>}
                                 label="Pick up at UKR Poshta delivery post"
                             />
                             <MarkunreadMailboxIcon/>
-                        </div>
+                        </Box>
                     </RadioGroup>
 
                     <Button type="submit" variant='outlined' sx={styles.buttonSubmit}>

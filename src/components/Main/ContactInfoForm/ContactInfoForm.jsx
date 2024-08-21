@@ -95,7 +95,7 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
                 openForm={handleClickContinue}>
                 <Box sx={styles.contactInfo}>
                     <Typography variant='h6' component={'span'}>1. Contact Information</Typography>
-                    <div className={'grid grid-cols-2 gap-10'}>
+                    <Box className={'grid grid-cols-2 gap-10'}>
                         <FormInput
                             onChange={handlePhoneNumberChange}
                             value={formik.values.phoneNumber.trim()}
@@ -119,7 +119,7 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
                             type={'text'}
                             required={true}
                         />
-                    </div>
+                    </Box>
 
                     <FormGroup className={'w-[215px] flex gap-5'}>
                         <FormInput
@@ -156,7 +156,7 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
                     </FormGroup>
 
                     {otherReceiver && (
-                        <div className={'grid grid-cols-2 gap-10'}>
+                        <Box className={'grid grid-cols-2 gap-10'}>
                             <FormInput
                                 onChange={handlePhoneNumberChange}
                                 value={formik.values.otherReceiverPhoneNumber.trim()}
@@ -195,7 +195,7 @@ const ContactInfoForm = ({onValidChange, onTouch}) => {
                                 type={'text'}
                                 required={otherReceiver}
                             />
-                        </div>
+                        </Box>
                     )}
                     <Button type="submit" variant='outlined' sx={styles.buttonSubmit}>Continue
                         Checkout</Button>
