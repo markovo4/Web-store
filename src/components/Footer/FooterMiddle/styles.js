@@ -1,5 +1,10 @@
 export const styles = {
     section: {
+        display: {
+            lg: 'flex',
+            md: 'flex',
+            xs: 'none'
+        },
         height: {
             lg: '450px',
             md: 'auto'

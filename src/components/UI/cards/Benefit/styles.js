@@ -8,15 +8,18 @@ export const styles = {
         },
         borderBottom: {
             md: '1px solid rgba(105,104,104,0.2)',
+            xs: '1px solid rgba(105,104,104,0.2)',
             lg: 'unset'
         },
         paddingBottom: {
             md: '30px',
+            xs: '30px',
             lg: '0'
         },
         gap: {
             lg: '0',
             md: '20px',
+            xs: '20px',
         }
 
     },
