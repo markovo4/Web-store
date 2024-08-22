@@ -66,7 +66,10 @@ export const styles = {
     },
     slideItem: {
         flexShrink: 0,
-        width: '400px',
+        width: {
+            md: '400px',
+            xs: '320px'
+        },
         padding: '0'
     },
     productsContainer: {

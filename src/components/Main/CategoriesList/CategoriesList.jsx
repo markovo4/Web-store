@@ -19,7 +19,7 @@ const CategoriesList = () => {
     const {data: categories} = useGetAllCategoriesQuery();
 
     return (
-        <Box style={styles.section}>
+        <Box sx={styles.section}>
             <Container sx={styles.container}>
                 <List sx={styles.list}>
                     {categories && categories.map((category, index) => (

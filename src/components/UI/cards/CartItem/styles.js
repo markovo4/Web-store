@@ -14,7 +14,8 @@ export const styles = {
         justifyContent: 'space-between',
         gap: {
             lg: '50px',
-            md: '0'
+            md: '0',
+            xs: '0',
         },
         margin: '4px 0',
         padding: '0 50px',
