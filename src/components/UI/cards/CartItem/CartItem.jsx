@@ -75,7 +75,7 @@ const CartItem = ({
                 <Typography variant="span" sx={styles.code}>
                     Code: {id}
                 </Typography>
-                <div className={"flex gap-5"}>
+                <Box className={"flex gap-5"}>
                     <Button
                         sx={styles.button}
                         variant="outlined"
@@ -106,13 +106,13 @@ const CartItem = ({
                         onClose={handleOpenModal}
                         onDelete={handleDelete}
                     />
-                </div>
+                </Box>
             </Box>
             <Box sx={styles.priceCounter}>
                 <Box className={'flex flex-col'}>
                     <Typography variant="h6" sx={styles.priceOriginal}>
-                        <s style={styles.priceStrike}>$ {price}</s>
-                        <span style={styles.discount}>-10%</span>
+                        <s className={stylesSCSS.priceStrike}>$ {price}</s>
+                        <Typography sx={styles.discount}>-10%</Typography>
                     </Typography>
                     <Typography variant="h6" sx={styles.price}>
                         $ {(price * 0.9).toFixed(2)}

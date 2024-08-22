@@ -9,7 +9,8 @@ export const styles = {
         position: 'fixed',
         bottom: {
             lg: '70px',
-            md: '100px'
+            md: '75px',
+            xs: '75px'
         },
         right: '20px',
         zIndex: 99,

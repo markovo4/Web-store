@@ -108,10 +108,7 @@ export const styles = {
         gap: '10px',
         justifyContent: 'center'
     },
-    priceStrike: {
-        fontSize: '14px',
-        color: '#b6b6b6'
-    },
+
     discount: {
         fontSize: '12px',
         color: 'white',

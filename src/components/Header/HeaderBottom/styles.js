@@ -87,7 +87,10 @@ export const styles = {
     },
     authGroupMd: {
         display: 'flex',
-        width: '20vw'
+        width: {
+            md: '12vw',
+            xs: '20vw'
+        }
     },
 
     wrapper: {
@@ -200,7 +203,11 @@ export const styles = {
                 md: '20px',
                 xs: '14px',
             },
-            justifyContent: 'space-between',
+            justifyContent: {
+                md: 'space-between',
+                lg: 'space-between',
+                xs: 'center'
+            },
             height: {
                 lg: '40px',
                 md: '50px',
@@ -253,5 +260,15 @@ export const styles = {
         position: 'absolute',
         top: '8px',
         right: '80px'
+    },
+    loginIcon: {
+        fontSize: {
+            md: '30px',
+            lg: '30px'
+        },
+        display: {
+            xs: 'none',
+            md: 'flex'
+        }
     }
 };

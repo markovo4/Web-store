@@ -89,7 +89,7 @@ export const styles = {
     },
     rating: {
         textAlign: 'left',
-        marginTop: '4px'
+        marginTop: '4px',
     },
     count: {
         marginTop: '8px',

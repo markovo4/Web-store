@@ -6,6 +6,11 @@
   display: block;
 }
 
+.priceStrike {
+  font-size: 14px;
+  color: #b6b6b6;
+}
+
 @media (max-width: 899px) {
   .productImg {
     height: 200px;

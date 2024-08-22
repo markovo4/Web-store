@@ -78,7 +78,7 @@ const HeaderBottom = () => {
                     ) : (
                         <ModalLogin button={
                             <Button sx={styles.buttonLogIn} variant="contained">
-                                LogIn <LoginOutlinedIcon fontSize='large'/>
+                                LogIn <LoginOutlinedIcon sx={styles.loginIcon}/>
                             </Button>
                         }/>
                     )}
@@ -115,7 +115,7 @@ const HeaderBottom = () => {
                     ) : (
                         <ModalLogin button={
                             <Button sx={styles.buttonLogIn} variant="contained">
-                                LogIn <LoginOutlinedIcon fontSize='large'/>
+                                LogIn <LoginOutlinedIcon sx={styles.loginIcon}/>
                             </Button>
                         }/>
                     )}
