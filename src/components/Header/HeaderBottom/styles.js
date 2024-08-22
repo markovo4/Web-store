@@ -46,7 +46,10 @@ export const styles = {
         height: '70px',
         padding: '10px 15px',
         boxSizing: 'border-box',
-        width: '90vw'
+        width: {
+            md: '90vw',
+            xs: '95vw',
+        }
     },
 
     selectorMd: {
@@ -55,7 +58,10 @@ export const styles = {
             backgroundColor: '#fff',
             borderColor: '#fff',
             border: 'none',
-            minWidth: '70vw',
+            width: {
+                md: '70vw',
+                xs: '70vw'
+            },
         },
         '& .MuiOutlinedInput-input': {
             height: '52px',
@@ -81,7 +87,7 @@ export const styles = {
     },
     authGroupMd: {
         display: 'flex',
-        width: '12vw'
+        width: '20vw'
     },
 
     wrapper: {
@@ -204,10 +210,10 @@ export const styles = {
             textTransform: 'none',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: {
+            width: {
                 lg: '110px',
                 md: '100%',
-                xs: '100%',
+                xs: '20vw',
             },
         },
         '&.MuiButton-contained': {
