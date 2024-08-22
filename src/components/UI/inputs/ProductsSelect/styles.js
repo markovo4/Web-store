@@ -2,12 +2,7 @@ export const stylesCard = {
     li: {
         display: 'flex',
         alignItems: 'center',
-        height: '120px ',
+        height: '20vh',
+        borderBottom: '1px solid #0002'
     },
-    img: {
-        width: '80px',
-        marginRight: '10px',
-        objectFit: 'contained',
-        objectPosition: 'center'
-    }
 }

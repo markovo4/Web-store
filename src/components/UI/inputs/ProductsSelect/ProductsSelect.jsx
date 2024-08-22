@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import {useGetAllProductsQuery} from "../../../../redux/productsApi/productsApi.js";
 import {useNavigate} from 'react-router-dom';
 import {stylesCard} from "./styles.js";
+import {ListItem} from "@mui/material";
+import stylesSCSS from './stylesSCSS.module.scss';
 
 const ProductsSelect = ({styles}) => {
     const {data: products = [], isLoading, isError} = useGetAllProductsQuery();
@@ -28,18 +30,18 @@ const ProductsSelect = ({styles}) => {
             renderOption={(props, option) => {
                 const {key, ...restProps} = props; // Extract `key` from `props`
                 return (
-                    <li
+                    <ListItem
                         key={key} // Set the `key` directly
                         {...restProps} // Spread the remaining props
-                        style={stylesCard.li}
+                        sx={stylesCard.li}
                     >
                         <img
                             src={option.image} // Display the product image
                             alt={option.title}
-                            style={stylesCard.img}
+                            className={stylesSCSS.img}
                         />
                         {option.title}
-                    </li>
+                    </ListItem>
                 );
             }}
             renderInput={(params) => <TextField {...params} sx={styles} label="Search for Products"/>}
