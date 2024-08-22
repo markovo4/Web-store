@@ -4,7 +4,11 @@ export const styles = {
         paddingBottom: '40px',
     },
     container: {
-        padding: '24px',
+        padding: {
+            lg: '24px',
+            md: '24px',
+            xs: '0'
+        },
     },
     iconStyles: {
         width: '40px',
@@ -34,9 +38,9 @@ export const styles = {
         height: {
             lg: '60px',
             md: '60px',
-            xs: 'auto', // Ensure height auto-adjusts on small screens
+            xs: 'auto',
         },
-        backgroundColor: '#fff', // Changed 'white' to hex for consistency
+        backgroundColor: 'rgba(255,255,255,0.91)',
         borderRadius: '10px',
 
     },

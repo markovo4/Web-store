@@ -7,7 +7,11 @@ export const styles = {
         display: 'flex',
         gap: '5px',
         height: '56px',
-        width: '250px',
+        width: {
+            lg: '250px',
+            md: 'auto',
+            xs: 'auto'
+        },
         borderRadius: '0',
         textTransform: 'none',
         fontSize: '16px',
@@ -33,13 +37,14 @@ export const styles = {
     endIcon: {
         display: 'flex',
         alignItems: 'center',
-        gap: '5px'
+        gap: '5px',
     },
     startIcon: {
         color: 'white',
         display: 'flex',
         alignItems: 'center',
         gap: '10px',
-        letterSpacing: '2px'
+        letterSpacing: '2px',
+
     }
 };

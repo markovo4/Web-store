@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import {stylesCard} from "./styles.js";
 import {ListItem} from "@mui/material";
 import stylesSCSS from './stylesSCSS.module.scss';
+import {v4 as uuidv4} from 'uuid';
 
 const ProductsSelect = ({styles}) => {
     const {data: products = [], isLoading, isError} = useGetAllProductsQuery();
@@ -22,7 +23,7 @@ const ProductsSelect = ({styles}) => {
     return (
         <Autocomplete
             disablePortal
-            id="products-select"
+            id={uuidv4()}
             sx={{width: 600}}
             options={products}
             getOptionLabel={(product) => product.title}

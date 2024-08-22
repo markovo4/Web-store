@@ -87,6 +87,7 @@ export const styles = {
     },
     authGroupMd: {
         display: 'flex',
+        justifyContent: 'center',
         width: {
             md: '12vw',
             xs: '20vw'

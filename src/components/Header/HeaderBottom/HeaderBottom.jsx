@@ -22,6 +22,7 @@ import {getProductList} from "../../../redux/slices/localStorageSlice";
 import {getTotalPrice} from "../../../utils/functions/functions";
 import routerNames from "../../../router/routes/routerNames";
 import stylesSCSS from './stylesSCSS.module.scss';
+import ModalLoginMobile from "../../ModalsAuth/ModalLoginMobile/index.js";
 
 const HeaderBottom = () => {
     const {orderList, favouriteList} = useSelector(state => state.localStorage);
@@ -56,7 +57,7 @@ const HeaderBottom = () => {
                 <Box sx={styles.authGroupMd}>
                     {displayAuthButtons ? (
                         <HeaderDropdown
-                            title="Profile"
+                            title=""
                             icon={<AccountCircleIcon fontSize="large"/>}
                             iconStart
                         >
@@ -76,7 +77,7 @@ const HeaderBottom = () => {
                             </MenuItem>
                         </HeaderDropdown>
                     ) : (
-                        <ModalLogin button={
+                        <ModalLoginMobile button={
                             <Button sx={styles.buttonLogIn} variant="contained">
                                 LogIn <LoginOutlinedIcon sx={styles.loginIcon}/>
                             </Button>

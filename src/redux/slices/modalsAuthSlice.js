@@ -6,6 +6,8 @@ export const modalsAuthSlice = createSlice({
     initialState: {
         modalRegOpen: false,
         modalLoginOpen: false,
+        modalRegMobileOpen: false,
+        modalLoginMobileOpen: false,
         displayAuthButtons: !!Cookies.get('LoggedIn'),
     },
     reducers: {
@@ -14,6 +16,12 @@ export const modalsAuthSlice = createSlice({
         },
         setModalLoginOpen: state => {
             state.modalLoginOpen = !state.modalLoginOpen;
+        },
+        setModalLoginMobileOpen: state => {
+            state.modalLoginMobileOpen = !state.modalLoginMobileOpen;
+        },
+        setModalRegMobileOpen: state => {
+            state.modalRegMobileOpen = !state.modalRegMobileOpen;
         }
     }
 })
@@ -21,6 +29,8 @@ export const modalsAuthSlice = createSlice({
 export const {
     setModalRegOpen,
     setModalLoginOpen,
+    setModalLoginMobileOpen,
+    setModalRegMobileOpen
 } = modalsAuthSlice.actions;
 
 export default modalsAuthSlice.reducer;

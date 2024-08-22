@@ -7,8 +7,8 @@ export const styles = {
         },
         height: {
             lg: '75px',
-            md: '70px',
-            xs: '70px',
+            md: '75px',
+            xs: '75px',
         },
     },
     container: {
@@ -33,6 +33,10 @@ export const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         padding: '5px',
+        borderBottom: {
+            xs: '1px solid #0002',
+            md: '1px solid #0002'
+        }
     },
     wrapper: {
         display: 'flex',
