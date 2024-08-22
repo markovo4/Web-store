@@ -104,7 +104,7 @@ const ProductInList = ({
                                     <CommentIcon sx={styles.commentIcon}/> {count}
                                 </Typography>
                             </Box>
-                            <Box className="flex flex-row items-center gap-3">
+                            <Box sx={styles.additionalIcons}>
                                 <KrashComfy/>
                                 <CreditComfy/>
                                 <PetComfy/>

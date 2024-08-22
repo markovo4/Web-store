@@ -185,5 +185,15 @@ export const styles = {
     },
     tooltip: {
         backgroundColor: '#000'
+    },
+    additionalIcons: {
+        display: {
+            lg: 'flex',
+            md: 'none',
+            xs: 'none',
+        },
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: '10px'
     }
 };

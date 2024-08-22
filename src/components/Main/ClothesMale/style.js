@@ -4,13 +4,30 @@ export const styles = {
     title: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-evenly',
+        justifyContent: {
+            lg: 'space-evenly',
+            md: 'flex-start',
+            xs: 'flex-start',
+        },
+        gap: {
+            lg: '0',
+            md: '20px',
+            xs: '20px',
+        },
         backgroundColor: 'rgb(255,247,244)',
-        padding: '10px 20px',
+        padding: {
+            lg: '10px 20px',
+            md: '5px 20px',
+            xs: '5px 20px',
+        },
         borderRadius: '50px',
         margin: '0 0 40px 0',
         fontWeight: 'bold',
-        maxWidth: '250px',
+        maxWidth: {
+            lg: '250px',
+            md: '100%',
+            xs: '100%'
+        },
         color: 'rgba(0,0,0,0.86)',
         '&:hover': {
             transition: '0.2s',
