@@ -4,7 +4,11 @@ export const styles = {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        minWidth: '500px',
+        width: {
+            lg: '500px',
+            md: '500px',
+            xs: '98vw',
+        },
         bgcolor: 'rgb(65,174,42)',
         borderRadius: '8px',
         boxShadow: 2,
