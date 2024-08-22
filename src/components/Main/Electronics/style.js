@@ -11,26 +11,30 @@ export const styles = {
         display: 'flex',
         alignItems: 'center'
     },
+    container: {
+        display: {
+            lg: 'flex',
+            md: 'none',
+            xs: 'none'
+        }
+    },
     progressBar: {
         display: 'flex',
         justifyContent: 'center',
         padding: '20px'
     },
-    container: {
-        display: {
-            lg: 'flex',
-            md: 'none'
-        }
-    },
     slideList: {
         display: {
             lg: 'none',
-            md: 'flex'
+            md: 'flex',
+            xs: 'flex'
         },
         flexDirection: 'row',
         width: {
             lg: '98vw',
-            md: '92vw'
+            md: '92vw',
+            xs: '92vw',
+
         },
         overflowX: 'auto',
         overflowY: 'hidden',

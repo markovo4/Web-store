@@ -31,7 +31,8 @@ export const styles = {
     container: {
         display: {
             lg: 'flex',
-            md: 'none'
+            md: 'none',
+            xs: 'none',
         }
     },
     progressBar: {
@@ -42,12 +43,14 @@ export const styles = {
     slideList: {
         display: {
             lg: 'none',
-            md: 'flex'
+            md: 'flex',
+            xs: 'flex',
         },
         flexDirection: 'row',
         width: {
             lg: '98vw',
-            md: '92vw'
+            md: '92vw',
+            xs: '92vw',
         },
         overflowX: 'auto',
         overflowY: 'hidden',

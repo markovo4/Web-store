@@ -7,20 +7,24 @@ export const styles = {
     },
     container: {
         visibility: {
+            xs: 'hidden',
             md: 'hidden',
             lg: 'visible',
         },
         opacity: {
+            xs: 0,
             md: 0,
             lg: 1,
         },
         position: {
             md: 'absolute',
+            xs: 'absolute',
             lg: 'unset',
         },
         width: '100%',
         maxWidth: {
             md: '800px',
+            xs: '300px',
             lg: '1200px'
         },
         margin: '0 auto',
@@ -34,6 +38,7 @@ export const styles = {
     containerMd: {
         display: {
             md: 'flex',
+            xs: 'flex',
             lg: 'none',
         },
         width: '100%', // Ensure it doesn't exceed the max-width

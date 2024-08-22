@@ -2,17 +2,20 @@ export const styles = {
     header: {
         backgroundColor: {
             lg: 'white',
-            md: '#42AF2AFF'
+            md: '#42AF2AFF',
+            xs: '#42AF2AFF',
         },
         height: {
             lg: '75px',
-            md: '70px'
+            md: '70px',
+            xs: '70px',
         },
     },
     container: {
         display: {
             lg: 'flex',
-            md: 'none'
+            md: 'none',
+            xs: 'none'
         },
         width: '1400px',
         height: 'inherit',
@@ -24,7 +27,8 @@ export const styles = {
     logoContainer: {
         display: {
             lg: 'none',
-            md: 'flex'
+            md: 'flex',
+            xs: 'flex'
         },
         justifyContent: 'center',
         alignItems: 'center',

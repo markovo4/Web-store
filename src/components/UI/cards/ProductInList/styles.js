@@ -6,7 +6,8 @@ export const styles = {
         flexDirection: 'column',
         width: {
             lg: '280px',
-            md: '390px'
+            md: '390px',
+            xs: '300px',
         },
         height: '570px',
         marginBottom: '8px',
@@ -18,7 +19,8 @@ export const styles = {
         },
         borderRadius: {
             lg: '0',
-            md: '5px'
+            md: '5px',
+            xs: '5px',
         }
     },
     cardMin: {
@@ -28,7 +30,8 @@ export const styles = {
         flexDirection: 'column',
         width: {
             lg: '220px',
-            md: '300px'
+            md: '300px',
+            xs: '300px',
         },
         height: '420px',
         marginBottom: '8px',

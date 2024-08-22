@@ -1,13 +1,13 @@
 .separator {
-    background-color: rgb(255, 255, 255);
-    width: 1px;
-    height: 40px;
+  background-color: rgb(255, 255, 255);
+  width: 1px;
+  height: 40px;
 }
 
-@media (max-width: 1200px) {
-    .separator {
-        display: none;
-    }
+@media (max-width: 1199px) {
+  .separator {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=stylesSCSS.module.css.map */

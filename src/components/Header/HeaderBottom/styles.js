@@ -2,7 +2,8 @@ export const styles = {
     header: {
         height: {
             lg: '56px',
-            md: '70px'
+            md: '70px',
+            xs: '70px',
         },
         backgroundColor: '#42af2a',
         display: 'flex',
@@ -13,7 +14,8 @@ export const styles = {
         justifyContent: 'center',
         height: {
             lg: '56px',
-            md: '70px'
+            md: '70px',
+            xs: '70px',
         },
         backgroundColor: '#42af2a',
         position: 'fixed',
@@ -24,7 +26,8 @@ export const styles = {
     container: {
         display: {
             lg: 'flex',
-            md: 'none'
+            md: 'none',
+            xs: 'none',
         },
         width: '1400px',
         height: 'inherit',
@@ -35,7 +38,8 @@ export const styles = {
     containerMd: {
         display: {
             lg: 'none',
-            md: 'flex'
+            md: 'flex',
+            xs: 'flex',
         },
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -187,12 +191,14 @@ export const styles = {
             gap: '10px',
             fontSize: {
                 lg: '20px',
-                md: '20px'
+                md: '20px',
+                xs: '14px',
             },
             justifyContent: 'space-between',
             height: {
                 lg: '40px',
-                md: '50px'
+                md: '50px',
+                xs: '50px',
             },
             borderRadius: 1,
             textTransform: 'none',
@@ -200,13 +206,15 @@ export const styles = {
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
             minWidth: {
                 lg: '110px',
-                md: '100%'
+                md: '100%',
+                xs: '100%',
             },
         },
         '&.MuiButton-contained': {
             backgroundColor: {
                 lg: 'unset',
                 md: '#389725',
+                xs: '#389725',
             },
             color: '#fff',
             '&:hover': {
