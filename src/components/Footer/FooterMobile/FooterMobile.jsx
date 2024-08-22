@@ -14,20 +14,24 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const FooterMobile = () => {
 
-    const {orderList} = useSelector(state => state.localStorage)
+    const {orderList} = useSelector(state => state.localStorage);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getProductList())
+        dispatch(getProductList());
     }, [dispatch]);
 
-    const {data: categories} = useGetAllCategoriesQuery();
+    // Function to scroll to the top of the page
+    const scrollToTop = () => {
+        window.scrollTo(0, 0);
+    };
 
+    const {data: categories} = useGetAllCategoriesQuery();
     const [catalogOpen, setCatalogOpen] = useState(false);
 
     const handleToggle = () => {
         setCatalogOpen(!catalogOpen);
-    }
+    };
 
     return (
         <Container sx={styles.container}>
@@ -35,15 +39,17 @@ const FooterMobile = () => {
             <List sx={catalogOpen ? styles.listCategories : styles.listCategoriesNone}>
                 {categories && categories.map((category, index) => (
                     <ListItem key={index} sx={styles.category}>
-                        <Link to={`/categories/${category}`}>
+                        <Link to={`/categories/${category}`} onClick={() => {
+                            handleToggle();
+                            scrollToTop();
+                        }}>
                             <Typography sx={styles.categoryItem}>
-                                {category.charAt(0).toUpperCase() + category.slice(1)} <ArrowForwardIosIcon
-                                fontSize={'20px'}/>
+                                {category.charAt(0).toUpperCase() + category.slice(1)}
+                                <ArrowForwardIosIcon fontSize='20px'/>
                             </Typography>
                         </Link>
                     </ListItem>
                 ))}
-
             </List>
 
             <List sx={styles.list}>
@@ -52,12 +58,11 @@ const FooterMobile = () => {
                     <Box>
                         <HomeOutlinedIcon/>
                     </Box>
-                    <Link to={routerNames.pageMain}>
+                    <Link to={routerNames.pageMain} onClick={scrollToTop}>
                         <Typography>
                             Main
                         </Typography>
                     </Link>
-
                 </ListItem>
 
                 <ListItem sx={styles.li} onClick={handleToggle}>
@@ -74,7 +79,7 @@ const FooterMobile = () => {
                         <Box sx={orderList.length >= 1 ? styles.cartNotify : styles.cartNotifyNot}></Box>
                         <ShoppingCartOutlinedIcon/>
                     </Box>
-                    <Link to={routerNames.pageCart}>
+                    <Link to={routerNames.pageCart} onClick={scrollToTop}>
                         <Typography>
                             Cart
                         </Typography>
@@ -85,7 +90,7 @@ const FooterMobile = () => {
                     <Box>
                         <FavoriteBorderOutlinedIcon/>
                     </Box>
-                    <Link to={routerNames.pageFavProducts}>
+                    <Link to={routerNames.pageFavProducts} onClick={scrollToTop}>
                         <Typography>
                             Favourites
                         </Typography>
@@ -94,8 +99,7 @@ const FooterMobile = () => {
 
             </List>
         </Container>
-
-    )
-}
+    );
+};
 
 export default FooterMobile;
