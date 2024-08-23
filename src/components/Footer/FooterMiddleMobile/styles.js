@@ -16,6 +16,11 @@ export const styles = {
         },
         borderBottom: {
             md: '2px solid rgba(0,0,0,0.09)'
+        },
+        backgroundColor: {
+            lg: 'white',
+            md: 'white',
+            xs: '#ececec',
         }
     },
     container: {
@@ -51,9 +56,9 @@ export const styles = {
         padding: '16px',
         border: '1px solid rgba(0,0,0,0.09)',
         borderRadius: '12px',
+        backgroundColor: 'white',
         width: {
-            lg: '295px',
-            md: '100%',
+
             xs: '100%',
         },
     },
@@ -102,9 +107,30 @@ export const styles = {
     li: {
         display: 'flex',
         alignItems: 'flex-start',
-        padding: '0',
+        padding: '15px',
+        borderRadius: '16px',
         flexDirection: 'column',
-        maxWidth: '25%'
+        width: {
+            xs: '100%',
+        },
+        backgroundColor: 'white',
+        '&:hover': {
+            backgroundColor: 'white',
+        },
+        '&:active': {
+            backgroundColor: 'white',
+        },
+        '&:focus': {
+            backgroundColor: 'white',
+        },
+        '&.Mui-focusVisible': {
+            backgroundColor: 'white',
+        },
+    },
+    titleContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '100%'
     },
     liForm: {
         display: 'flex',
@@ -121,11 +147,17 @@ export const styles = {
             md: 'wrap'
         },
         alignItems: 'start',
+        gap: '10px'
     },
     title: {
-        fontSize: '18px',
+        fontSize: '16px',
         fontWeight: 'bold',
-        color: 'rgba(0,0,0,0.72)'
+        color: 'rgba(0,0,0,0.82)'
     },
+
+    collapse: {
+        backgroundColor: 'white',
+        width: '100%'
+    }
 
 };

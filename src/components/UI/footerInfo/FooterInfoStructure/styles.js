@@ -1,8 +1,16 @@
 export const styles = {
     title: {
-        fontSize: '18px',
+        fontSize: {
+            lg: '18px',
+            md: '18px',
+            xs: '16px',
+        },
         fontWeight: 'bold',
-        color: 'rgba(0,0,0,0.72)'
+        color: {
+            lg: 'rgba(0,0,0,0.72)',
+            md: 'rgba(0,0,0,0.72)',
+            xs: 'rgb(46,46,46)'
+        }
     },
     subtitle: {
         fontSize: '15px',
@@ -38,6 +46,16 @@ export const styles = {
         alignItems: 'flex-start',
         padding: '0',
         flexDirection: 'column',
-        maxWidth: '25%'
+        borderRadius: {
+            lg: '0',
+            md: '0',
+            xs: '16px'
+        },
+        maxWidth: {
+            lg: '25%',
+            md: '25%',
+            xs: '100%'
+        },
+        backgroundColor: 'white'
     },
 }

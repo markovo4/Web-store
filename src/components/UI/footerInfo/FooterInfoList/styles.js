@@ -10,11 +10,27 @@ export const styles = {
         '&:hover': {
             textDecoration: 'underline',
             color: 'rgba(0,0,0,0.85)',
+        },
+        backgroundColor: 'white',
+        width: '100%',
+        borderBottom: {
+            lg: 'none',
+            md: 'none',
+            xs: '1px solid #0002',
+        },
+        paddingBottom: {
+            lg: '0',
+            md: '0',
+            xs: '10px',
         }
     },
     li: {
-        maxWidth: '200px',
-        minWidth: '180px'
+        maxWidth: {
+            lg: '200px',
+            md: '200px',
+            xs: '100%'
+        },
+        minWidth: '180px',
     },
     list: {
         display: 'flex',
