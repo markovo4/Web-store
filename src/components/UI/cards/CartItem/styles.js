@@ -1,8 +1,21 @@
 export const styles = {
     productIcon: {
         backgroundColor: 'white',
-        width: '100px',
-        height: '100px'
+        width: {
+            lg: '100px',
+            md: '100px',
+            xs: '70vw'
+        },
+        height: {
+            lg: '100px',
+            md: '100px',
+            xs: 'auto'
+        },
+        marginBottom: {
+            lg: 'unset',
+            md: 'unset',
+            xs: '20px',
+        }
     },
     card: {
         display: 'flex',
@@ -18,7 +31,11 @@ export const styles = {
             xs: '0',
         },
         margin: '4px 0',
-        padding: '0 50px',
+        padding: {
+            lg: '0 50px',
+            md: '0 50px',
+            xs: '15px',
+        },
         height: {
             lg: '214px',
             md: '214px',
@@ -48,15 +65,48 @@ export const styles = {
             paddingLeft: '6px',
             '&:hover': {
                 textDecoration: 'underline'
+            },
+            marginBottom: {
+                lg: '0',
+                md: '0',
+                xs: '50px',
             }
         }
     },
 
     priceCounter: {
         display: 'flex',
-        flexDirection: 'column',
-        gap: '20px'
+        alignItems: 'center',
+        justifyContent: {
+            lg: 'unset',
+            md: 'unset',
+            xs: 'space-between',
+        },
+        flexDirection: {
+            lg: 'column',
+            md: 'column',
+            xs: 'row',
+        },
+        gap: {
+            lg: '20px',
+            md: '20px',
+            xs: '0',
+        },
+        width: {
+            lg: 'auto',
+            md: 'auto',
+            xs: '100%',
+        }
     },
+    priceInfoContainer: {
+        display: 'flex',
+        flexDirection: {
+            lg: 'column',
+            md: 'column',
+            xs: 'column',
+        }
+    },
+
     button: {
         // Base styles for all button variants
         '&.MuiButton-root': {
@@ -123,6 +173,10 @@ export const styles = {
         color: 'rgba(0,0,0,0.50)'
     },
     infoContainer: {
-        width: '50%'
+        width: {
+            lg: '50%',
+            md: '50%',
+            xs: '100%',
+        }
     }
 }

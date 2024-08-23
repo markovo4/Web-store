@@ -14,6 +14,7 @@ import {Link} from "react-router-dom";
 import useFavourite from "../../../../utils/hooks/useFavourite.js";
 
 import stylesSCSS from './stylesSCSS.module.scss';
+import {Image} from "antd";
 
 const CartItem = ({
                       title,
@@ -58,7 +59,7 @@ const CartItem = ({
         <ListItem sx={styles.card}>
             <ListItemAvatar>
                 <Avatar variant="square" sx={styles.productIcon}>
-                    <img src={image} alt={title} className={stylesSCSS.productImg}/>
+                    <Image src={image} alt={title} className={stylesSCSS.productImg}/>
                 </Avatar>
             </ListItemAvatar>
             <Box sx={styles.infoContainer}>
@@ -109,7 +110,7 @@ const CartItem = ({
                 </Box>
             </Box>
             <Box sx={styles.priceCounter}>
-                <Box className={'flex flex-col'}>
+                <Box sx={styles.priceInfoContainer}>
                     <Typography variant="h6" sx={styles.priceOriginal}>
                         <s className={stylesSCSS.priceStrike}>$ {price}</s>
                         <Typography sx={styles.discount}>-10%</Typography>

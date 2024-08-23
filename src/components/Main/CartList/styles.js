@@ -9,7 +9,8 @@ export const styles = {
         display: 'flex',
         flexDirection: {
             lg: 'row',
-            md: 'column'
+            md: 'column',
+            xs: 'column',
         },
         gap: {
             lg: '50px',
@@ -19,7 +20,8 @@ export const styles = {
     placeOrder: {
         width: {
             lg: '350px',
-            md: '100%'
+            md: '100%',
+            xs: '100%',
         },
         padding: '0px',
         position: 'sticky',
@@ -29,7 +31,8 @@ export const styles = {
     productsList: {
         width: {
             lg: '800px',
-            md: '100%'
+            md: '100%',
+            xs: '100%',
         },
     },
     titleBack: {
@@ -71,7 +74,11 @@ export const styles = {
     },
     totalPrice: {
         padding: 'unset',
-        width: '300px',
+        width: {
+            lg: '300px',
+            md: '20vw',
+            xs: '80vw',
+        },
         display: 'flex',
         justifyContent: 'space-between'
     },
@@ -122,7 +129,8 @@ export const styles = {
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
             minWidth: {
                 lg: '300px',
-                md: '80vw'
+                md: '80vw',
+                xs: '80vw',
             },
         },
         '&.MuiButton-outlined': {
