@@ -1,78 +1,137 @@
 export const styles = {
-    imageWrapper: {
-        width: '550px',
-        height: '890px',
+    container: {
         display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'stretch', // Ensure the content takes all the vertical space
+        flexDirection: {
+            lg: 'row',
+            md: 'row',
+            xs: 'unset',
+        },
+        width: '100vw',
+    },
+    imageWrapper: {
+        width: {
+            lg: '60vw',
+            md: '60vw',
+            xs: '100%',
+        },
+        display: {
+            lg: 'flex',
+            md: 'flex',
+            xs: 'none',
+        },
         alignItems: 'center',
         margin: '5px',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        flexGrow: 1, // Allow imageWrapper to take up available space
     },
-    image: {
-        width: '550px',
-        padding: '32px'
+    imageWrapperMobile: {
+        display: {
+            lg: 'none',
+            md: 'none',
+            xs: 'flex',
+        },
+        borderTop: '1px solid #0001',
+        borderBottom: '1px solid #0001',
     },
     wrapper: {
         display: 'flex',
         flexDirection: 'column',
-        width: '650px',
-        maxHeight: '304px',
+        width: {
+            lg: '650px',
+            md: '50vw',
+            xs: '100%',
+        },
         padding: '32px',
         gap: '20px',
         margin: '5px 0',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        flexGrow: 1, // Allow wrapper to take up available space
     },
     wrapperDescription: {
         display: 'flex',
         flexDirection: 'column',
-        width: '650px',
-        maxHeight: '475px',
+        width: {
+            lg: '650px',
+            md: '50vw',
+            xs: '100%',
+        },
         padding: '32px',
         gap: '40px',
         margin: '5px 0',
         backgroundColor: 'white',
-        overflowY: 'auto'
+        overflowY: 'auto',
+        flexGrow: 1, // Allow wrapperDescription to take up available space
     },
     rating: {
         display: 'flex',
         width: '100%',
-        justifyContent: 'flex-start',
-        gap: '50px',
-        alignItems: 'center'
+        justifyContent: {
+            lg: 'flex-start',
+            md: 'flex-start',
+            xs: 'space-between',
+        },
+        gap: {
+            lg: '50px',
+            md: '50px',
+            xs: '0',
+        },
+        alignItems: 'center',
     },
     info: {
         display: 'flex',
         flexDirection: 'column',
-        height: '100%',
+        height: '100%', // Occupy the full height of the container
         position: 'sticky',
-        top: '0'
+        width: '70vw',
+        top: '0',
+        flexGrow: 1, // Allow info to take up available space
     },
     count: {
         display: 'flex',
         alignItems: 'center',
         gap: '5px',
         fontSize: '14px',
-        color: 'rgba(0,0,0,0.54)'
+        color: 'rgba(0,0,0,0.54)',
     },
     price: {
         marginTop: '0px',
-        fontSize: '30px',
+        fontSize: {
+            lg: '30px',
+            md: '30px',
+            xs: '1.2rem',
+        },
         fontWeight: 'bold',
-        color: 'rgba(0,0,0,0.77)'
+        color: 'rgba(0,0,0,0.77)',
+    },
+    productTitle: {
+        marginTop: '0px',
+        fontSize: {
+            lg: '30px',
+            md: '30px',
+            xs: '1.2rem',
+        },
+        fontWeight: 'bold',
+        color: 'rgba(0,0,0,0.77)',
     },
     wrapperPurchase: {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: '650px',
-        maxHeight: '304px',
+        width: {
+            lg: '650px',
+            md: '50vw',
+            xs: '100%',
+        },
         padding: '32px',
         gap: '40px',
         margin: '0',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
     },
     buttonGroup: {
         display: 'flex',
-        gap: '20px'
+        gap: '20px',
     },
     button: {
         '&.MuiButton-root': {
@@ -84,7 +143,7 @@ export const styles = {
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
             minWidth: '50px',
-            height: '55px'
+            height: '55px',
         },
         '&.MuiButton-contained': {
             backgroundColor: '#42af2a',
@@ -96,7 +155,6 @@ export const styles = {
                 boxShadow: 'none',
                 backgroundColor: '#fd661f',
             },
-
         },
         '&.MuiButton-outlined': {
             backgroundColor: '#ebf6e8',
@@ -113,44 +171,83 @@ export const styles = {
                 backgroundColor: '#bdbdbd',
                 color: '#fff',
                 boxShadow: 'none',
-            }
-        }
+            },
+        },
     },
     priceOriginal: {
         display: 'flex',
         alignItems: 'center',
-        gap: '10px'
-    },
-    priceStrike: {
-        fontSize: '16px',
-        color: '#b6b6b6'
+        gap: '10px',
     },
     discount: {
-        fontSize: '14px',
+        fontSize: {
+            lg: '12px',
+            md: '12px',
+            xs: '8px',
+        },
         color: 'white',
         padding: '0 2px',
         borderRadius: '10px',
-        backgroundColor: 'red'
+        backgroundColor: 'red',
     },
     underTitleIconsText: {
         fontSize: '12px',
         width: 'auto',
-        flexGrow: 1
+        flexGrow: 1,
     },
     underTitleIconsContainer: {
         display: 'flex',
         gap: '15px',
         width: '100%',
-        border: '1px solid rgba(204,204,204,0.56)',
-        borderRadius: '10px'
+        border: '1px solid rgba(204,204,204,0.36)',
+        borderRadius: '10px',
+        '&:not(:first-of-type)': {
+            marginLeft: {
+                lg: '10px',
+                md: 'unset',
+                xs: 'unset',
+            },
+        },
+        marginBottom: {
+            lg: 'unset',
+            md: '10px',
+        },
     },
     ratingColor: {
         color: "#fa8231",
-        fontSize: '14px'
+        fontSize: '14px',
     },
     code: {
+        display: {
+            lg: 'flex',
+            md: 'flex',
+            xs: 'none',
+        },
         fontSize: '12px',
         width: '100px',
-        color: 'rgba(0,0,0,0.50)'
-    }
-}
+        color: 'rgba(0,0,0,0.50)',
+    },
+    codeMobile: {
+        display: {
+            lg: 'none',
+            md: 'none',
+            xs: 'flex',
+        },
+        fontSize: '12px',
+        width: '100px',
+        color: 'rgba(0,0,0,0.50)',
+    },
+    additionalIconsContainer: {
+        display: 'flex',
+        flexDirection: {
+            lg: 'row',
+            md: 'column',
+            xs: 'column',
+        },
+        width: {
+            lg: 'auto',
+            md: '100%',
+            xs: '100%',
+        },
+    },
+};

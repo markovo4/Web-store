@@ -21,6 +21,7 @@ import SimilarItems from "../../../Main/SimilarItems/index.js";
 import useFavourite from "../../../../utils/hooks/useFavourite.js";
 import useCart from "../../../../utils/hooks/useCart.js";
 import {styles} from "./style.js";
+import stylesSCSS from './stylesSCSS.module.scss';
 import useQuantity from "../../../../utils/hooks/useQuantity.js";
 
 const Product = ({
@@ -86,28 +87,35 @@ const Product = ({
 
     return (
         <React.Fragment>
-            <Container sx={{display: "flex", padding: '0', flexDirection: "row"}}>
+            <Container sx={styles.container}>
                 <Box sx={styles.imageWrapper}>
-                    <Image alt={title} src={image} style={styles.image}/>
+                    <Image alt={title} src={image} className={stylesSCSS.image}/>
                 </Box>
                 <Box sx={styles.info}>
                     <Box sx={styles.wrapper}>
-                        <Typography variant="h3" component="h3" sx={styles.price}>
+                        <Typography variant="h3" component="h3" sx={styles.productTitle}>
                             {title}
                         </Typography>
-                        <Box className="flex flex-row items-center justify-between">
-                            <Box style={styles.rating}>
+                        <Typography variant="span" sx={styles.codeMobile}>
+                            Code: {id}
+                        </Typography>
+                        <Box sx={styles.imageWrapperMobile}>
+                            <Image alt={title} src={image} className={stylesSCSS.image}/>
+                        </Box>
+                        <Box sx={styles.ratingInfo}>
+                            <Box sx={styles.rating}>
                                 <Rate allowHalf disabled defaultValue={rating} style={styles.ratingColor}/>
                                 <Typography variant="h6" sx={styles.count}>
                                     <CommentIcon fontSize="small"/> {count}
                                 </Typography>
                             </Box>
+
                             <Typography variant="span" sx={styles.code}>
                                 Code: {id}
                             </Typography>
                         </Box>
                         <Box className="flex flex-row items-center gap-3">
-                            <List className="flex justify-between gap-3">
+                            <List sx={styles.additionalIconsContainer}>
                                 <ListItem sx={styles.underTitleIconsContainer}>
                                     <KrashComfy/>
                                     <Typography variant="span" sx={styles.underTitleIconsText}>
@@ -138,14 +146,14 @@ const Product = ({
                     <Box sx={styles.wrapperPurchase}>
                         <Box className="flex flex-col">
                             <Typography variant="h6" sx={styles.priceOriginal}>
-                                <s style={styles.priceStrike}>$ {price}</s>
-                                <span style={styles.discount}>-10%</span>
+                                <s className={stylesSCSS.priceStrike}>$ {price}</s>
+                                <Typography sx={styles.discount}>-10%</Typography>
                             </Typography>
                             <Typography variant="h6" sx={styles.price}>
                                 $ {(price * 0.9).toFixed(2)}
                             </Typography>
                         </Box>
-                        <div style={styles.buttonGroup}>
+                        <Box sx={styles.buttonGroup}>
                             {!isInCart ? (
                                 <Button
                                     id={id}
@@ -188,7 +196,7 @@ const Product = ({
                                     <FavoriteBorderIcon color="success"/>
                                 )}
                             </Button>
-                        </div>
+                        </Box>
                     </Box>
                     <Box sx={styles.wrapperDescription}>
                         <Typography variant="h5">Description</Typography>

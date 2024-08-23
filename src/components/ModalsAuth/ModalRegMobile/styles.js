@@ -47,7 +47,7 @@ export const styles = {
             },
             '&.Mui-disabled': {
                 backgroundColor: '#bdbdbd',
-                color: '#fff',
+                color: '#000',
                 boxShadow: 'none',
             }
         }

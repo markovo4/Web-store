@@ -2,7 +2,11 @@ export const styles = {
     title: {
         margin: '10px',
         padding: '20px',
-        fontSize: '30px',
+        fontSize: {
+            lg: '30px',
+            md: '28px',
+            xs: '25px'
+        },
         color: 'rgba(0, 0, 0, 0.79)',
     },
     sectionViewed: {

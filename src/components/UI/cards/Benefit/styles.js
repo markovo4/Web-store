@@ -6,11 +6,14 @@ export const styles = {
         width: {
             lg: '300px'
         },
-        borderBottom: {
-            md: '1px solid rgba(105,104,104,0.2)',
-            xs: '1px solid rgba(105,104,104,0.2)',
-            lg: 'unset'
+        '&:not(:last-of-type)': {
+            borderBottom: {
+                md: '1px solid rgba(105,104,104,0.2)',
+                xs: '1px solid rgba(105,104,104,0.2)',
+                lg: 'unset'
+            },
         },
+
         paddingBottom: {
             md: '30px',
             xs: '30px',
