@@ -1,4 +1,4 @@
-import {Box, Button, Container, List, ListItem, Typography} from "@mui/material";
+import {Box, Button, Collapse, Container, List, ListItem, ListItemButton, Typography} from "@mui/material";
 import ComfyQRC from "../../../assets/icons/comfy_QRC";
 import FormInput from "../../UI/inputs/FormInput";
 import LoveEmoji from "../../../assets/icons/LoveEmoji";
@@ -10,8 +10,9 @@ import {styles} from "./styles";
 import stylesSCSS from './stylesSCSS.module.scss';
 import FooterInfoStructure from "../../UI/footerInfo/FooterInfoStructure/index.js";
 
-const FooterMiddle = () => {
+const FooterMiddleMobile = () => {
     const formik = useFormik({
+
         initialValues: {email: ''},
         validationSchema: subscribeValidation,
         onSubmit: (values, {resetForm}) => {
@@ -57,24 +58,41 @@ const FooterMiddle = () => {
                     </ListItem>
 
                     {/* Footer Info Lists */}
-                    <ListItem sx={styles.li}>
-                        <FooterInfoList
-                            title='Comfy'
-                            content={comfy}
-                        />
-                    </ListItem>
-                    <ListItem sx={styles.li}>
-                        <FooterInfoList
-                            title='Services & Conditions'
-                            content={services}
-                        />
-                    </ListItem>
-                    <ListItem sx={styles.li}>
-                        <FooterInfoList
-                            title='Customer Help'
-                            content={customerHelp}
-                        />
-                    </ListItem>
+                    <ListItemButton sx={styles.li}>
+                        <Typography sx={styles.title}>
+                            Comfy
+                        </Typography>
+                        <Collapse in={false} timeout="auto" unmountOnExit>
+                            <FooterInfoList
+                                content={comfy}
+                            />
+                        </Collapse>
+
+                    </ListItemButton>
+                    <ListItemButton sx={styles.li}>
+
+                        <Typography sx={styles.title}>
+                            Services & Conditions
+                        </Typography>
+
+                        <Collapse in={false} timeout="auto" unmountOnExit>
+                            <FooterInfoList
+                                title='Services & Conditions'
+                                content={services}
+                            />
+                        </Collapse>
+                    </ListItemButton>
+
+                    <ListItemButton sx={styles.li}>
+                        <Typography sx={styles.title}>
+                            Customer Help
+                        </Typography>
+                        <Collapse in={false} timeout="auto" unmountOnExit>
+                            <FooterInfoList
+                                content={customerHelp}
+                            />
+                        </Collapse>
+                    </ListItemButton>
                     <FooterInfoStructure/>
                 </List>
             </Container>
@@ -82,4 +100,4 @@ const FooterMiddle = () => {
     );
 };
 
-export default FooterMiddle;
+export default FooterMiddleMobile;

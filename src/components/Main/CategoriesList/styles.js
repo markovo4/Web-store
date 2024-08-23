@@ -27,14 +27,7 @@ export const styles = {
             md: 'row',
             xs: 'column',
         },
-        alignItems: {
-            lg: 'center',
-            md: 'center',
-        },
-        justifyContent: {
-            lg: 'space-evenly',
-            md: 'space-evenly',
-        },
+
         height: {
             lg: '60px',
             md: '60px',
@@ -42,6 +35,5 @@ export const styles = {
         },
         backgroundColor: 'rgba(255,255,255,0.91)',
         borderRadius: '10px',
-
     },
 };

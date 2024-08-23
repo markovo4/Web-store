@@ -3,6 +3,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {styles} from "./styles.js";
 import {Link} from "react-router-dom";
 import routerNames from "../../../router/routes/routerNames.js";
@@ -10,7 +11,7 @@ import {useEffect, useState} from "react";
 import {useGetAllCategoriesQuery} from "../../../redux/productsApi/productsApi.js";
 import {useDispatch, useSelector} from "react-redux";
 import {getProductList} from "../../../redux/slices/localStorageSlice.js";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 
 const FooterMobile = () => {
 

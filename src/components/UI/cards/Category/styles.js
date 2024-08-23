@@ -2,8 +2,11 @@ export const styles = {
     li: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-
+        justifyContent: {
+            lg: 'center',
+            md: 'center',
+            xs: 'flex-start',
+        },
         '&:not(:last-of-type)': {
             borderBottom: {
                 lg: 'unset',

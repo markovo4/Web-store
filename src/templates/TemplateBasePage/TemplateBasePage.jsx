@@ -7,6 +7,7 @@ import FooterMiddle from "../../components/Footer/FooterMiddle";
 import BackToTop from "../../components/UI/BackToTop/index.js";
 import HeaderBottom from "../../components/Header/HeaderBottom";
 import FooterMobile from "../../components/Footer/FooterMobile";
+import FooterMiddleMobile from "../../components/Footer/FooterMiddleMobile/index.js";
 
 const TemplateBasePage = ({className = null, children}) => {
     return (
@@ -24,6 +25,7 @@ const TemplateBasePage = ({className = null, children}) => {
             <footer>
                 <FooterTop/>
                 <FooterMiddle/>
+                <FooterMiddleMobile/>
                 <FooterBottom/>
                 <FooterMobile/>
             </footer>

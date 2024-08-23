@@ -23,7 +23,7 @@ const FooterInfoList = ({title, content}) => (
 );
 
 FooterInfoList.propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     content: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
