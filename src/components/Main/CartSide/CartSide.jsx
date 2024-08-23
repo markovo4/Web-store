@@ -41,7 +41,7 @@ const CartSide = ({
                             component="h2"
                             sx={styles.modalTitle}
                         >
-                            Item has been added to the cart
+                            Item was added to the cart
                         </Typography>
                         <Button
                             onClick={handleClose}
@@ -49,7 +49,7 @@ const CartSide = ({
                             sx={styles.buttonClose}
                             aria-label="close cart modal"
                         >
-                            <CloseIcon color="disabled" fontSize="large"/>
+                            <CloseIcon sx={styles.closeIcon}/>
                         </Button>
                     </Box>
 

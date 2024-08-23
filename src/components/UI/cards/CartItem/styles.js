@@ -4,18 +4,14 @@ export const styles = {
         width: {
             lg: '100px',
             md: '100px',
-            xs: '70vw'
+            xs: '25vw'
         },
-        height: {
-            lg: '100px',
-            md: '100px',
-            xs: 'auto'
-        },
+        height: 'auto',
         marginBottom: {
             lg: 'unset',
             md: 'unset',
-            xs: '20px',
-        }
+            xs: '15px',
+        },
     },
     card: {
         display: 'flex',
@@ -43,16 +39,17 @@ export const styles = {
         },
         backgroundColor: 'white',
     },
-    title: {
-        width: '300px',
-        marginBottom: '20px'
-    },
     price: {
-        fontSize: '24px',
+        fontSize: {
+            lg: '24px',
+            md: '24px',
+            xs: '20px',
+        },
         textAlign: 'center',
         fontWeight: 'bold',
         color: 'rgba(0,0,0,0.77)',
-        width: '100px'
+        width: '100px',
+        lineHeight: '20px'
     },
     listItemTextTitle: {
         primary: {
@@ -60,16 +57,25 @@ export const styles = {
                 lg: '400px',
                 md: '100%'
             },
-            fontSize: '20px',
+            fontSize: {
+                lg: '20px',
+                md: '20px',
+                xs: '16px'
+            },
             color: 'rgb(0,0,0)',
-            paddingLeft: '6px',
+            padding: '6px',
             '&:hover': {
                 textDecoration: 'underline'
             },
             marginBottom: {
                 lg: '0',
                 md: '0',
-                xs: '10px',
+                xs: '5px',
+            },
+            borderBottom: {
+                lg: 'unset',
+                md: 'unset',
+                xs: '1px solid #0002',
             }
         }
     },
@@ -104,7 +110,8 @@ export const styles = {
             lg: 'column',
             md: 'column',
             xs: 'column',
-        }
+        },
+
     },
 
     button: {
@@ -118,7 +125,11 @@ export const styles = {
             padding: '5px 10px',
             borderRadius: '8px',
             textTransform: 'none',
-            fontSize: '16px',
+            fontSize: {
+                lg: '16px',
+                md: '16px',
+                xs: '14px',
+            },
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
@@ -150,8 +161,14 @@ export const styles = {
         marginBottom: {
             lg: '0',
             md: '0',
-            xs: '40px',
+            xs: '10px',
         },
+        borderBottom: {
+            lg: 'unset',
+            md: 'unset',
+            xs: '1px solid #0002',
+        },
+        padding: '0 0 10px 0'
     },
     availabilityText: {
         color: '#42af2a',

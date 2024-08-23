@@ -6,14 +6,14 @@
   display: block;
 }
 
-.priceStrike{
+.priceStrike {
   font-size: 14px;
   color: #b6b6b6;
 }
 
 @media(max-width: 899px) {
   .productImg {
-    height: 200px;
+    height: 100px;
     width: auto;
     object-fit: contain;
     object-position: center;

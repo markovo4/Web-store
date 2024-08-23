@@ -14,17 +14,29 @@ export const styles = {
         bgcolor: 'rgb(255,255,255)',
         borderRadius: '5px 0 0 5px',
         boxShadow: 1,
-        p: 4,
+        p: {
+            lg: 4,
+            md: 4,
+            xs: 2
+        },
     },
     modal: {
         backgroundColor: 'rgba(0,0,0,0)'
     },
     modalTitle: {
         fontWeight: 'bold',
-        fontSize: '25px',
+        fontSize: {
+            lg: '25px',
+            md: '25px',
+            xs: '18px'
+        },
         color: '#000000',
         letterSpacing: '2px',
-        paddingLeft: '50px'
+        paddingLeft: {
+            lg: '50px',
+            md: '50px',
+            xs: '0'
+        }
     },
     wrapper: {},
     buttonContinue: {
@@ -163,7 +175,7 @@ export const styles = {
         gap: {
             lg: '0',
             md: '30px',
-            xs: '30px'
+            xs: '10px'
         },
         paddingBottom: '30px',
         borderBottom: '1px solid grey'
@@ -175,6 +187,13 @@ export const styles = {
             md: 'column',
             xs: 'column'
         },
-        gap: '30px'
+        gap: '10px'
+    },
+    closeIcon: {
+        color: '#000',
+        fontSize: {
+            lg: '30px',
+            md: '30px',
+        }
     }
 }

@@ -64,7 +64,7 @@ const CartItem = ({
             </ListItemAvatar>
             <Box sx={styles.infoContainer}>
                 <Typography sx={styles.availabilityText}>
-                    <CheckIcon fontSize={'small'}/>Available for the pickup today
+                    <CheckIcon fontSize='small'/>Available for the pickup today
                 </Typography>
                 <Link to={`/products/${id}`}>
                     <ListItemText
