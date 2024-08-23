@@ -3,11 +3,19 @@ export const styles = {
         // Base styles for all button variants
         '&.MuiButton-root': {
             padding: '2px 16px',
-            height: '40px',
+            height: {
+                lg: '40px',
+                md: '40px',
+                xs: '35px',
+            },
             borderRadius: '4px',
             textTransform: 'none',
-            fontSize: '20px',
             fontWeight: '500',
+            fontSize: {
+                lg: '20px',
+                md: '20px',
+                xs: '16px',
+            },
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
             minWidth: '100px',
@@ -34,11 +42,19 @@ export const styles = {
         // Base styles for all button variants
         '&.MuiButton-root': {
             padding: '2px 16px',
-            height: '40px',
+            height: {
+                lg: '40px',
+                md: '40px',
+                xs: '35px',
+            },
             borderRadius: '4px',
             textTransform: 'none',
             fontWeight: 'bold',
-            fontSize: '20px',
+            fontSize: {
+                lg: '20px',
+                md: '20px',
+                xs: '16px',
+            },
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
             minWidth: '100px',
@@ -63,7 +79,7 @@ export const styles = {
         }
     },
     img: {
-        objectFit: 'contained',
+        objectFit: 'contain',
         objectPosition: 'center',
         height: '100px'
     },
@@ -77,7 +93,11 @@ export const styles = {
         borderRadius: 1
     },
     title: {
-        fontSize: '18px',
+        fontSize: {
+            lg: '18px',
+            md: '18px',
+            xs: '14px',
+        },
         fontWeight: 'bold',
         color: 'rgba(0,0,0,0.86)'
     }

@@ -69,7 +69,7 @@ export const styles = {
             marginBottom: {
                 lg: '0',
                 md: '0',
-                xs: '50px',
+                xs: '10px',
             }
         }
     },
@@ -113,7 +113,7 @@ export const styles = {
             display: {
                 lg: 'flex',
                 md: 'flex',
-                xs: 'none'
+                xs: 'flex'
             },
             padding: '5px 10px',
             borderRadius: '8px',
@@ -143,6 +143,15 @@ export const styles = {
                 boxShadow: 'none',
             }
         }
+    },
+    buttonGroup: {
+        display: 'flex',
+        gap: '20px',
+        marginBottom: {
+            lg: '0',
+            md: '0',
+            xs: '40px',
+        },
     },
     availabilityText: {
         color: '#42af2a',

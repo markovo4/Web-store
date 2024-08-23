@@ -15,7 +15,7 @@ const ModalTemplate = ({title, children, button, open, handleClose}) => {
     }
 
     return (
-        <div>
+        <Box>
             {buttonWithOnClick}
             <Modal
                 sx={styles.modal}
@@ -31,7 +31,7 @@ const ModalTemplate = ({title, children, button, open, handleClose}) => {
                     {children}
                 </Box>
             </Modal>
-        </div>
+        </Box>
     );
 }
 

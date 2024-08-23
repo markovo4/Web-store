@@ -76,7 +76,7 @@ const CartItem = ({
                 <Typography variant="span" sx={styles.code}>
                     Code: {id}
                 </Typography>
-                <Box className={"flex gap-5"}>
+                <Box sx={styles.buttonGroup}>
                     <Button
                         sx={styles.button}
                         variant="outlined"

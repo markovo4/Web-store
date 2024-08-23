@@ -20,7 +20,11 @@ export const styles = {
     modalTitle: {
         marginBottom: '10px',
         fontWeight: 'bold',
-        fontSize: '25px',
+        fontSize: {
+            lg: '25px',
+            md: '25px',
+            xs: '20px',
+        },
         color: '#ffffff',
     }
 }
