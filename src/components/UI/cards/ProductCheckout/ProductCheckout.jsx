@@ -33,7 +33,7 @@ const ProductCheckout = ({image, title, count, price, id}) => {
                         variant="h6"
                         component={"span"}
                     >
-                        <s style={styles.priceStrike}>$ {price}</s>
+                        <s className={stylesSCSS.priceStrike}>$ {price}</s>
 
                     </Typography>
                     <Typography className={'w-[100px]'} sx={styles.price}>

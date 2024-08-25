@@ -44,11 +44,6 @@ export const styles = {
         width: '100px',
         color: 'rgba(0,0,0,0.50)'
     },
-    priceStrike: {
-        fontSize: '12px',
-        color: '#b6b6b6',
-        height: '10px'
-    },
 
     totalPriceOriginalMain: {
         width: '100%',

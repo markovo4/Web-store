@@ -151,7 +151,11 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '250px',
+            minWidth: {
+                lg: '250px',
+                md: '250px',
+                xs: '200px'
+            },
             maxHeight: '40px',
         },
         // Styles for contained buttons
@@ -344,6 +348,21 @@ export const styles = {
         fontSize: '25px',
         color: 'rgb(52,52,52)',
         height: '30px'
+    },
+    formContainer: {
+        display: 'grid',
+        gridTemplateColumns: {
+            lg: '1fr 1fr',
+            md: '1fr 1fr',
+            xs: '1fr'
+        },
+        gap: '20px'
+    },
+    email: {
+        maxWidth: {
+            lg: '300px',
+            md: '49%',
+        },
+        gap: '20px'
     }
-
 }

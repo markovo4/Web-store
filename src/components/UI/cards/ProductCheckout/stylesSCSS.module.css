@@ -5,6 +5,12 @@
   width: 80px;
 }
 
+.priceStrike {
+  font-size: 12px;
+  color: #b6b6b6;
+  height: 10px;
+}
+
 @media (max-width: 899px) {
   .img {
     object-fit: contain;
