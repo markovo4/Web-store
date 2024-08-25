@@ -1,0 +1,18 @@
+.img {
+  object-fit: contain;
+  object-position: center;
+  height: 80px;
+  width: 80px;
+}
+
+@media (max-width: 899px) {
+  .img {
+    object-fit: contain;
+    object-position: center;
+    height: 200px;
+    width: 200px;
+    margin-bottom: 40px;
+  }
+}
+
+/*# sourceMappingURL=stylesSCSS.module.css.map */
