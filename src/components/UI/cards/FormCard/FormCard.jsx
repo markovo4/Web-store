@@ -3,6 +3,7 @@ import {styles} from "./styles.js";
 import React from "react";
 import PropTypes from "prop-types";
 import {useSelector} from "react-redux";
+import {Image} from "antd";
 
 const FormCard = ({
                       formTitle,
@@ -28,7 +29,7 @@ const FormCard = ({
         <React.Fragment>
             {!open ? (
                 <Box sx={styles.summaryForm}>
-                    <div>
+                    <Box>
                         <Typography sx={formTitleStyles}>
                             {formTitle}
                         </Typography>
@@ -36,10 +37,10 @@ const FormCard = ({
                             {formSubtitle}
                         </Typography>
                         {products && <Box sx={styles.imgContainer}>
-                            {orderList.length && orderList.slice(0, 5).map((product) => {
+                            {orderList.length && orderList.slice(0, 4).map((product) => {
                                 return (
                                     <Tooltip key={product.id} title={product.title}>
-                                        <img src={product.image} alt={product.title} style={styles.img}/>
+                                        <Image src={product.image} alt={product.title} style={styles.img}/>
                                     </Tooltip>
                                 )
                             })}
@@ -62,7 +63,7 @@ const FormCard = ({
                                 {checkout.paymentMethod}
                             </Typography>
                         </Box>}
-                    </div>
+                    </Box>
                     <Button variant='outlined' sx={styles.buttonEdit} onClick={handleClick}>
                         Edit
                     </Button>

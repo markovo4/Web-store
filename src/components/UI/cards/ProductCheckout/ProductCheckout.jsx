@@ -1,17 +1,18 @@
 import {Box, ListItem, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 import {styles} from "./styles.js";
+import {Image} from "antd";
 
 const ProductCheckout = ({image, title, count, price, id}) => {
     return (
-        <ListItem className={'flex items-center bg-white'}
-                  sx={styles.listStyles}>
+        <ListItem
+            sx={styles.listStyles}>
             <Box>
-                <img src={image} alt={title} style={styles.image}/>
+                <Image src={image} alt={title} style={styles.image}/>
             </Box>
 
-            <Box className={'flex flex-col items-start gap-3'}>
-                <Typography variant='span' component={'span'} className={'w-[260px]'}>
+            <Box sx={styles.productInfo}>
+                <Typography variant='span' component={'span'} sx={styles.title}>
                     {title}
                 </Typography>
 
@@ -19,22 +20,27 @@ const ProductCheckout = ({image, title, count, price, id}) => {
                     Code: {id}
                 </Typography>
             </Box>
-            <Typography variant='span' component={'span'} className={'w-[80px]'}>
+            <Typography variant='span' component={'span'} sx={styles.itemCount}>
                 {count} Itm.
             </Typography>
             <Box sx={styles.priceContainer}>
-                <Typography
-                    sx={styles.totalPriceOriginalMain}
-                    variant="h6"
-                    component={"span"}
-                >
-                    <s style={styles.priceStrike}>$ {price}</s>
-
+                <Typography variant='span' component={'span'} sx={styles.itemCountMobile}>
+                    {count} Itm.
                 </Typography>
+                <Box sx={styles.priceDiscount}>
+                    <Typography
+                        sx={styles.totalPriceOriginalMain}
+                        variant="h6"
+                        component={"span"}
+                    >
+                        <s style={styles.priceStrike}>$ {price}</s>
 
-                <Typography className={'w-[100px]'} sx={styles.price}>
-                    $ {(price * 0.9).toFixed(2)}
-                </Typography>
+                    </Typography>
+                    <Typography className={'w-[100px]'} sx={styles.price}>
+                        $ {(price * 0.9).toFixed(2)}
+                    </Typography>
+                </Box>
+
             </Box>
 
         </ListItem>

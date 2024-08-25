@@ -22,7 +22,7 @@ export const styles = {
             padding: '5px 5px',
             borderRadius: '8px',
             textTransform: 'none',
-            fontSize: '16px',
+            fontSize: '14px',
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
@@ -50,6 +50,11 @@ export const styles = {
     },
     checkoutTitle: {
         fontWeight: 'bold',
+        fontSize: {
+            lg: '25px',
+            md: '25px',
+            xs: '18px',
+        },
         color: '#606060'
     },
     selector: {
@@ -105,8 +110,20 @@ export const styles = {
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: 'white',
-        padding: '40px',
+        padding: '16px',
         borderRadius: '8px',
+    },
+    orderTitle: {
+        fontSize: {
+            lg: '20px',
+            md: '18px',
+            xs: '16px'
+        },
+        color: {
+            lg: '#0009',
+            md: '#0009',
+            xs: '#0009'
+        }
     },
     titleList: {
         display: 'flex',

@@ -1,15 +1,40 @@
 export const styles = {
     listStyles: {
         borderBottom: '1px solid rgba(175,175,175,0.31)',
-        padding: '20px 0',
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        flexDirection: {
+            lg: 'row',
+            md: 'row',
+            xs: 'column'
+        },
+        gap: {
+            lg: '50px',
+            md: '0',
+            xs: '0',
+        },
+        margin: '4px 0',
+        padding: {
+            lg: '20px 0',
+            md: '20px 0',
+            xs: '15px',
+        },
+        height: {
+            lg: '214px',
+            md: '214px',
+            xs: 'auto'
+        },
     },
     price: {
         fontWeight: 'bold',
-        fontSize: '20px',
+        fontSize: {
+            lg: '24px',
+            md: '24px',
+            xs: '20px',
+        },
         color: '#363636',
         textAlign: 'right'
+
     },
     image: {
         objectFit: 'contain',
@@ -38,6 +63,48 @@ export const styles = {
     },
     priceContainer: {
         display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: {
+            lg: 'unset',
+            md: 'unset',
+            xs: '100%',
+        }
+    },
+    priceDiscount: {
+        display: 'flex',
+        flexDirection: 'column'
+    },
+    productInfo: {
+        display: 'flex',
         flexDirection: 'column',
+        alignItems: 'flex-start',
+        gap: '20px'
+    },
+    title: {
+        width: {
+            lg: '260px',
+            md: '260px',
+        }
+    },
+    itemCount: {
+        width: {
+            lg: '80px',
+            md: '80px',
+        },
+        display: {
+            lg: 'flex',
+            md: 'flex',
+            xs: 'none',
+        }
+    },
+    itemCountMobile: {
+        display: {
+            lg: 'none',
+            md: 'none',
+            xs: 'flex',
+        },
+        fontSize: '18px',
+        fontWeight: '500'
     }
 }

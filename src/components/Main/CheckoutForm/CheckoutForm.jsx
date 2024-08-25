@@ -136,7 +136,8 @@ const CheckoutForm = () => {
                         >
                             <List sx={styles.checkoutList}>
                                 <ListItem sx={styles.titleList}>
-                                    <Typography variant="h6">Your order</Typography>
+                                    <Typography variant='h6' component='span' sx={styles.orderTitle}>Your
+                                        order</Typography>
                                     <Link to={routerNames.pageCart}>
                                         <Button
                                             variant="outlined"

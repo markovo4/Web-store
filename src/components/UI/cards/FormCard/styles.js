@@ -1,7 +1,11 @@
 export const styles = {
     formTitle: {
         color: 'rgba(69,69,69,0.86)',
-        fontSize: '20px',
+        fontSize: {
+            lg: '20px',
+            md: '18px',
+            xs: '16px'
+        },
         marginBottom: '10px'
     },
     formSubtitle: {
@@ -43,14 +47,32 @@ export const styles = {
         }
     },
     summaryForm: {
-        padding: '40px',
+        padding: {
+            lg: '40px',
+            md: '40px',
+            xs: '16px',
+        },
         border: 'unset',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: {
+            lg: 'center',
+            md: 'center',
+            xs: 'space-between',
+        },
+        flexDirection: {
+            lg: 'row',
+            md: 'row',
+            xs: 'column'
+        },
         width: {
             lg: '800px',
             md: '100%',
             xs: '100%',
+        },
+        gap: {
+            lg: '0',
+            md: '0',
+            xs: '20px',
         },
         height: 'auto',
         justifyContent: 'space-between',
@@ -106,16 +128,20 @@ export const styles = {
         borderRadius: '0 0 8px 8px'
     },
     imgContainer: {
-        height: '100px',
         display: 'flex',
+        flexFlow: {
+            lg: 'nowrap',
+            md: 'nowrap',
+            xs: 'wrap'
+        },
         alignItems: 'center',
         padding: '10px',
         gap: '10px',
         borderRadius: '8px',
     },
     img: {
-        height: '90px',
         width: '90px',
+        height: '90px',
         borderRadius: '8px',
         objectFit: 'contain',
         objectPosition: 'center',
