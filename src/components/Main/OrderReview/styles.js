@@ -1,22 +1,47 @@
 export const styles = {
+    orderSummary: {
+        width: '100%',
+        minHeight: '100vh',
+        maxHeight: '100%',
+        backgroundColor: 'rgba(239,238,238,0.55)',
+    },
     container: {
+        display: 'flex',
+        flexDirection: 'column',
         padding: '24px',
-        backgroundColor: '#f8f9fa',
+        backgroundColor: '#ffffff',
         borderRadius: '8px',
         boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
         marginTop: '16px',
     },
-    heading: {
+    title: {
         marginBottom: '16px',
-        color: '#333',
+        color: '#232323',
+        fontWeight: 'bold',
+        width: '100%',
+        textAlign: 'center'
+    },
+
+    subtitle: {
+        marginBottom: '16px',
+        color: 'rgba(51,51,51,0.74)',
+        fontWeight: 'bold',
+        width: '100%',
+        textAlign: 'center'
+    },
+    sectionTitle: {
+        marginBottom: '16px',
+        color: 'rgba(51,51,51,0.74)',
         fontWeight: 'bold',
     },
     list: {
         padding: '0',
     },
     listItem: {
-        padding: '8px 0',
-        borderBottom: '1px solid #ddd',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        padding: '5px 0',
     },
     divider: {
         margin: '16px 0',
@@ -135,5 +160,16 @@ export const styles = {
                 boxShadow: 'none',
             }
         }
-    }
+    },
+    summaryInfoContainer: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        gap: '50px',
+        width: '29vw'
+    },
+    icon: {
+        fontSize: '100px',
+        color: 'rgb(66,175,42)'
+    },
 }

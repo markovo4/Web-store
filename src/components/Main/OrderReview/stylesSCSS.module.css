@@ -1,0 +1,10 @@
+.image {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 4px;
+  margin-right: 16px;
+}
+
+/*# sourceMappingURL=stylesSCSS.module.css.map */

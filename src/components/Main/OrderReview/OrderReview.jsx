@@ -1,10 +1,14 @@
 import {useEffect, useState} from "react";
-import {Box, Button, Container, Divider, List, ListItem, Typography} from "@mui/material";
+import {Box, Button, Container, Divider, List, ListItem, ListItemButton, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {getCheckoutInfo, removeAllProducts, removeCheckoutInfo} from "../../../redux/slices/localStorageSlice";
 import {styles} from "./styles";
 import {Link} from "react-router-dom";
 import routerNames from "../../../router/routes/routerNames";
+import stylesSCSS from './stylesSCSS.module.scss';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import PaymentOutlinedIcon from '@mui/icons-material/PaymentOutlined';
 
 const OrderReview = () => {
     // Redux state and dispatch
@@ -29,103 +33,144 @@ const OrderReview = () => {
     }, [dispatch]);
 
     return (
-        <Container sx={styles.container}>
-            <Typography variant="h4" sx={styles.heading}>
-                Order Review
-            </Typography>
-            <List sx={styles.list}>
+        checkout && (<Box sx={styles.orderSummary}>
+            <Container sx={styles.container}>
+                <Typography variant="h4" sx={styles.title}>
+                    Thank you for your order!
+                </Typography>
+                <Typography variant="h6" sx={styles.subtitle}>
+                    Order Summary
+                </Typography>
+                <List sx={styles.list}>
+                    <ListItem sx={styles.listItem}>
 
-                {checkout.firstName && (
-                    <ListItem sx={styles.listItem}>
-                        <Typography variant='h6'>First Name: {checkout.firstName}</Typography>
-                    </ListItem>
-                )}
-                {checkout.lastName && (
-                    <ListItem sx={styles.listItem}>
-                        <Typography variant='h6'>Last Name: {checkout.lastName}</Typography>
-                    </ListItem>
-                )}
-                {checkout.email && (
-                    <ListItem sx={styles.listItem}>
-                        <Typography variant='h6'>Email: {checkout.email}</Typography>
-                    </ListItem>
-                )}
-                {checkout.phoneNumber && (
-                    <ListItem sx={styles.listItem}>
-                        <Typography variant='h6'>Phone Number: {checkout.phoneNumber}</Typography>
-                    </ListItem>
-                )}
-                {checkout.otherReceiverPhoneNumber && (
-                    <ListItem sx={styles.listItem}>
-                        <Typography variant='h6'>Other Recipient Phone
-                            Number: {checkout.otherReceiverPhoneNumber}</Typography>
-                    </ListItem>
-                )}
-                {checkout.city?.city && (
-                    <ListItem sx={styles.listItem}>
-                        <Typography variant='h6'>Deliver To: {checkout.city.city}</Typography>
-                    </ListItem>
-                )}
-                {checkout.deliveryMethod && (
-                    <ListItem sx={styles.listItem}>
-                        <Typography variant='h6'>Delivery Method: {checkout.deliveryMethod}</Typography>
-                    </ListItem>
-                )}
-                {checkout.paymentMethod && (
-                    <ListItem sx={styles.listItem}>
-                        <Typography variant='h6'>Payment Method: {checkout.paymentMethod}</Typography>
-                    </ListItem>
-                )}
-                {checkout.bonusCard && (
-                    <ListItem sx={styles.listItem}>
-                        <Typography variant='h6'>Bonus Card: {checkout.bonusCard}</Typography>
-                    </ListItem>
-                )}
-                {checkout.promoCode && (
-                    <ListItem sx={styles.listItem}>
-                        <Typography variant='h6'>Promo Code: {checkout.promoCode}</Typography>
-                    </ListItem>
-                )}
+                        <Typography variant="h6" sx={styles.sectionTitle}>
+                            Contact info:
+                        </Typography>
 
-                {/* Products section */}
-                <ListItem sx={styles.listItem} className='flex items-center'>
-                    <Typography variant='h6' sx={styles.productHeader}>Products to Order:</Typography>
-                    <Button sx={styles.buttonInfo} variant='contained' onClick={handleShowProducts}>
-                        {showProducts ? 'Hide Info' : 'More Info'}
-                    </Button>
-                </ListItem>
-                {showProducts && (
-                    <ListItem sx={styles.productItem} className='flex flex-col'>
-                        {checkout.productToOrder.map(product => (
-                            <Box key={product.id} className='flex flex-col' sx={styles.productBox}>
-                                <Box className='flex items-center justify-evenly' sx={styles.productDetails}>
-                                    <img src={product.image} alt={product.title} style={styles.image}/>
-                                    <Typography sx={styles.productTitle} variant='h6'>{product.title}</Typography>
-                                    <Typography sx={styles.productAmount}
-                                                variant='h6'>{product.amount} Itm.</Typography>
-                                    <Typography sx={styles.productPrice} variant='h6'>
-                                        $ {(product.price * 0.9).toFixed(2)}
-                                    </Typography>
-                                </Box>
+                        <Box sx={styles.summaryInfoContainer}>
+                            <ContactMailIcon sx={styles.icon}/>
+                            <Box>
+                                {checkout.firstName && (
+                                    <Box sx={styles.listItem}>
+
+                                        <Typography variant='h6'>{checkout.firstName}</Typography>
+                                    </Box>
+                                )}
+                                {checkout.lastName && (
+                                    <Box sx={styles.listItem}>
+                                        <Typography variant='h6'>{checkout.lastName}</Typography>
+                                    </Box>
+                                )}
+                                {checkout.email && (
+                                    <Box sx={styles.listItem}>
+                                        <Typography variant='h6'>{checkout.email}</Typography>
+                                    </Box>
+                                )}
+                                {checkout.phoneNumber && (
+                                    <Box sx={styles.listItem}>
+                                        <Typography variant='h6'>{checkout.phoneNumber}</Typography>
+                                    </Box>
+                                )}
+                                {checkout.otherReceiverPhoneNumber && (
+                                    <Box sx={styles.listItem}>
+                                        <Typography variant='h6'>Other Recipient Phone
+                                            Number: {checkout.otherReceiverPhoneNumber}</Typography>
+                                    </Box>
+                                )}
                             </Box>
-                        ))}
-                    </ListItem>
-                )}
-                <Divider sx={styles.divider}/>
+                        </Box>
 
-                {/* Total price and navigation */}
-                <ListItem sx={styles.totalPriceItem}>
-                    <Typography variant='h5'>Total Price: $ {checkout.totalPrice.toFixed(2)}</Typography>
-                </ListItem>
-                <ListItem>
-                    <Link to={routerNames.pageMain}>
-                        <Button variant='contained' sx={styles.buttonMain} onClick={handleClick}>
-                            Go to main page
-                        </Button>
-                    </Link>
-                </ListItem>
-            </List>
-        </Container>
+                    </ListItem>
+
+                    <ListItem sx={styles.listItem}>
+
+                        <Typography variant="h6" sx={styles.sectionTitle}>
+                            Delivery:
+                        </Typography>
+
+                        <Box sx={styles.summaryInfoContainer}>
+                            <LocalShippingOutlinedIcon sx={styles.icon}/>
+                            <Box>
+                                {checkout.city?.city && (
+                                    <Box sx={styles.listItem}>
+                                        <Typography variant='h6'> {checkout.city.city}</Typography>
+                                    </Box>
+                                )}
+                                {checkout.deliveryMethod && (
+                                    <Box sx={styles.listItem}>
+                                        <Typography variant='h6'>{checkout.deliveryMethod}</Typography>
+                                    </Box>
+                                )}
+                            </Box>
+                        </Box>
+                    </ListItem>
+
+                    <ListItem sx={styles.listItem}>
+                        <Typography variant="h6" sx={styles.sectionTitle}>
+                            Payment:
+                        </Typography>
+
+                        <Box sx={styles.summaryInfoContainer}>
+                            <PaymentOutlinedIcon sx={styles.icon}/>
+                            <Box>
+                                {checkout.paymentMethod && (
+                                    <Box sx={styles.listItem}>
+                                        <Typography variant='h6'>{checkout.paymentMethod}</Typography>
+                                    </Box>
+                                )}
+                                {checkout.bonusCard && (
+                                    <Box sx={styles.listItem}>
+                                        <Typography variant='h6'>Bonus Card: {checkout.bonusCard}</Typography>
+                                    </Box>
+                                )}
+                                {checkout.promoCode && (
+                                    <Box sx={styles.listItem}>
+                                        <Typography variant='h6'>Promo Code: {checkout.promoCode}</Typography>
+                                    </Box>
+                                )}
+                            </Box>
+                        </Box>
+                    </ListItem>
+
+
+                    {/* Products section */}
+                    <ListItemButton sx={styles.listItem} onClick={handleShowProducts}>
+                        <Typography variant='h6' sx={styles.sectionTitle}> View order List</Typography>
+                    </ListItemButton>
+                    {showProducts && (
+                        <ListItem sx={styles.productItem} className='flex flex-col'>
+                            {checkout.productToOrder.map(product => (
+                                <Box key={product.id} className='flex flex-col' sx={styles.productBox}>
+                                    <Box className='flex items-center justify-evenly' sx={styles.productDetails}>
+                                        <img src={product.image} alt={product.title} className={stylesSCSS.image}/>
+                                        <Typography sx={styles.productTitle} variant='h6'>{product.title}</Typography>
+                                        <Typography sx={styles.productAmount}
+                                                    variant='h6'>{product.amount} Itm.</Typography>
+                                        <Typography sx={styles.productPrice} variant='h6'>
+                                            $ {(product.price * 0.9)}
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            ))}
+                        </ListItem>
+                    )}
+                    <Divider sx={styles.divider}/>
+
+                    {/* Total price and navigation */}
+                    <ListItem sx={styles.totalPriceItem}>
+                        <Typography variant='h5'>Total Price: $ {checkout.totalPrice}</Typography>
+                    </ListItem>
+                    <ListItem>
+                        <Link to={routerNames.pageMain}>
+                            <Button variant='contained' sx={styles.buttonMain} onClick={handleClick}>
+                                Go to main page
+                            </Button>
+                        </Link>
+                    </ListItem>
+                </List>
+            </Container>
+        </Box>)
     );
 };
 
