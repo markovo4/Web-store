@@ -89,8 +89,11 @@ export const styles = {
     formControl: {
         '&.MuiFormControl-root': {
             marginBottom: '16px',
-            minWidth: '120px',
-
+            minWidth: {
+                lg: '120px',
+                md: '120px',
+                xs: '10vw',
+            },
         },
         '&.Mui-disabled': {
             opacity: 0.5,

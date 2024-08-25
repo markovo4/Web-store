@@ -14,7 +14,7 @@ import {getCheckoutInfo, setCheckoutInfo} from "../../../redux/slices/localStora
 import {styles} from "./styles";
 
 const initialValues = {
-    paymentOption: 'Pay when you get the product',
+    paymentOption: 'Pay after delivery',
 };
 
 const PaymentOptionsForm = ({onValidChange}) => {

@@ -183,7 +183,7 @@ const CheckoutForm = () => {
                                     <>
                                         <Box sx={styles.container}>
                                             <Typography variant="h6" sx={styles.giftCardInfoTitle}>
-                                                Please enter your card information
+                                                Please enter your card number
                                             </Typography>
                                             <Typography variant="span" sx={styles.giftCardInfoSubtitle}>
                                                 Code
@@ -204,7 +204,7 @@ const CheckoutForm = () => {
                                                 ))}
                                             </Box>
                                         </Box>
-                                        <Typography color="error" variant="span">
+                                        <Typography color="error" variant="span" sx={styles.warning}>
                                             When paying with a gift card, bonuses cannot be debited from your bonus
                                             card.
                                         </Typography>
@@ -229,7 +229,7 @@ const CheckoutForm = () => {
                                 ) : (
                                     <Box className="flex items-start gap-5">
                                         <TextArea
-                                            style={styles.textArea}
+                                            className={stylesSCSS.textArea}
                                             placeholder="Comment for your parcel"
                                             name="comment"
                                             id="comment"

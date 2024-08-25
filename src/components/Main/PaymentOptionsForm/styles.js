@@ -3,7 +3,7 @@ export const styles = {
         border: '1px solid rgba(0,0,0,0.11)',
         borderRadius: '8px',
         color: 'rgba(0,0,0,0.61)',
-        padding: '10px'
+        padding: '0 10px'
     },
     radioGroup: {
         display: 'flex',

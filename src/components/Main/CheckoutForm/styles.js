@@ -235,7 +235,11 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '250px',
+            minWidth: {
+                lg: '250px',
+                md: '250px',
+                xs: '200px',
+            },
             maxHeight: '40px',
         },
         // Styles for contained buttons
@@ -280,7 +284,16 @@ export const styles = {
     inputGiftCardContainer: {
         display: 'flex',
         justifyContent: 'space-evenly',
-        gap: '60px',
+        flexWrap: {
+            lg: 'nowrap',
+            md: 'nowrap',
+            xs: 'wrap',
+        },
+        gap: {
+            lg: '60px',
+            md: '60px',
+            xs: '10px',
+        },
     },
     container: {
         display: 'flex',
@@ -296,7 +309,27 @@ export const styles = {
         padding: '20px',
     },
     giftCardInfoTitle: {
-        marginBottom: '10px'
+        marginBottom: '10px',
+        fontSize: {
+            lg: '20px',
+            md: '20px',
+            xs: '14px',
+        }
+    },
+
+    giftCardInfoSubtitle: {
+        fontSize: {
+            lg: '16px',
+            md: '16px',
+            xs: '12px',
+        }
+    },
+    warning: {
+        fontSize: {
+            lg: '16px',
+            md: '16px',
+            xs: '12px',
+        }
     },
     commentButton: {
         color: 'rgba(0,0,0,0.55)',
@@ -316,39 +349,11 @@ export const styles = {
     },
     commentIcon: {
         fontSize: '15px'
+
     },
     commentTitle: {
         fontSize: '14px',
         color: 'rgba(0,0,0,0.72)'
-    },
-    textArea: {
-        width: '700px',
-        height: '100px',
-        padding: '10px',
-        borderRadius: '4px',
-        border: '1px solid #ccc',
-        resize: 'none',
-        fontSize: '16px',
-        color: '#333',
-        outline: 'none',
-        '&:hover': {
-            borderColor: '#888',
-        },
-        '&:focus': {
-            borderColor: '#42af2a',
-            boxShadow: '0 0 0 3px #42af2a',
-        },
-        '&:disabled': {
-            backgroundColor: '#f5f5f5',
-            color: '#a0a0a0',
-        },
-        '&::placeholder': {
-            color: '#aaa',
-            opacity: 1,
-        },
-        '&.error': {
-            borderColor: '#f5222d',
-        },
     },
 
     totalPriceOriginalMain: {
