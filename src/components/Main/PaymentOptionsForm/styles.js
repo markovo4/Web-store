@@ -11,7 +11,7 @@ export const styles = {
         width: {
             lg: '700px',
             md: '86vw',
-            xs: '86vw'
+            xs: '100%',
         },
     },
     contactInfo: {
@@ -23,7 +23,11 @@ export const styles = {
             xs: '100%',
         },
         backgroundColor: 'white',
-        padding: '40px',
+        padding: {
+            lg: '40px',
+            md: '40px',
+            xs: '16px',
+        },
         gap: '20px',
         borderRadius: '8px'
     },
@@ -64,5 +68,12 @@ export const styles = {
                 boxShadow: 'none',
             }
         }
-    }
+    },
+    radioLabel: {
+        fontSize: {
+            lg: '20px',
+            md: '18px',
+            xs: '14px',
+        },
+    },
 }

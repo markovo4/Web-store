@@ -62,54 +62,78 @@ const PaymentOptionsForm = ({onValidChange}) => {
                         sx={styles.radioGroup}
                     >
                         {/* Payment options */}
-                        <div style={styles.radioButton}>
+                        <Box sx={styles.radioButton}>
                             <FormControlLabel
-                                value="Pay when you get the product"
+                                value="Pay after delivery"
                                 control={<Radio/>}
-                                label="Pay when you get the product"
+                                label={
+                                    <Typography variant="span" sx={styles.radioLabel}>
+                                        Pay after delivery
+                                    </Typography>
+                                }
                             />
                             <AccountBalanceWalletIcon/>
-                        </div>
-                        <div style={styles.radioButton}>
+                        </Box>
+                        <Box sx={styles.radioButton}>
                             <FormControlLabel
                                 value="Pay by parts"
                                 control={<Radio/>}
-                                label="Pay by parts"
+                                label={
+                                    <Typography variant="span" sx={styles.radioLabel}>
+                                        Pay by parts
+                                    </Typography>
+                                }
                             />
                             <PixIcon/>
-                        </div>
-                        <div style={styles.radioButton}>
+                        </Box>
+                        <Box sx={styles.radioButton}>
                             <FormControlLabel
                                 value="Online payment"
                                 control={<Radio/>}
-                                label="Online payment"
+                                label={
+                                    <Typography variant="span" sx={styles.radioLabel}>
+                                        Online payment
+                                    </Typography>
+                                }
                             />
                             <CreditCardIcon/>
-                        </div>
-                        <div style={styles.radioButton}>
+                        </Box>
+                        <Box sx={styles.radioButton}>
                             <FormControlLabel
                                 value="Privat Bank"
                                 control={<Radio/>}
-                                label="Pay with Privat Bank"
+                                label={
+                                    <Typography variant="span" sx={styles.radioLabel}>
+                                        Pay with Privat Bank
+                                    </Typography>
+                                }
                             />
                             <SecurityIcon/>
-                        </div>
-                        <div style={styles.radioButton}>
+                        </Box>
+                        <Box sx={styles.radioButton}>
                             <FormControlLabel
-                                value="Company check Payment"
+                                value="Pay-check Payment"
                                 control={<Radio/>}
-                                label="Company check Payment"
+                                label={
+                                    <Typography variant="span" sx={styles.radioLabel}>
+                                        Pay-check Payment
+                                    </Typography>
+                                }
                             />
                             <ReceiptLongIcon/>
-                        </div>
-                        <div style={styles.radioButton}>
+                        </Box>
+                        <Box sx={styles.radioButton}>
                             <FormControlLabel
                                 value="Apple Pay"
                                 control={<Radio/>}
-                                label="Apple Pay"
+                                label={
+                                    <Typography variant="span" sx={styles.radioLabel}>
+                                        Apple Pay
+                                    </Typography>
+                                }
                             />
                             <AppleIcon/>
-                        </div>
+                        </Box>
                     </RadioGroup>
 
                     <Button type="submit" variant='outlined' sx={styles.buttonSubmit}>

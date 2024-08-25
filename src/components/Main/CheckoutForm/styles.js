@@ -110,7 +110,11 @@ export const styles = {
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: 'white',
-        padding: '16px',
+        padding: {
+            lg: '40px',
+            md: '40px',
+            xs: '16px',
+        },
         borderRadius: '8px',
     },
     orderTitle: {
@@ -138,7 +142,11 @@ export const styles = {
             xs: '100%',
         },
         backgroundColor: 'white',
-        padding: '40px',
+        padding: {
+            lg: '40px',
+            md: '40px',
+            xs: '16px',
+        },
         gap: '20px',
         borderRadius: '8px'
     },

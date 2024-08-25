@@ -17,7 +17,13 @@ const CitiesSelect = ({styles, onChange, value, defaultValue, header}) => {
         <Autocomplete
             disablePortal
             id="city-select"
-            sx={{width: 600}}
+            sx={{
+                width: {
+                    lg: '700px',
+                    md: '86vw',
+                    xs: '86vw',
+                }
+            }}
             value={value}
             defaultValue={defaultValue}
             onChange={header ? handleChangeCity : handleChangeCityForm}
