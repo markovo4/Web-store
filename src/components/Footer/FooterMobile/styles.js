@@ -44,7 +44,7 @@ export const styles = {
     listCategories: {
         position: 'fixed',
         top: 'auto',
-        bottom: '62px',
+        bottom: '50px',
         left: 0,
         right: 0,
         backgroundColor: '#fff',

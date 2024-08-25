@@ -3,24 +3,27 @@ import {List, ListItem, Typography} from '@mui/material';
 import {Link} from 'react-router-dom';
 import {styles} from './styles.js';
 
-const FooterInfoList = ({title, content}) => (
-    <List sx={styles.list}>
-        <ListItem>
-            <Typography variant="h6" component="span" sx={styles.title}>
-                {title}
-            </Typography>
-        </ListItem>
-        {content.map((info, index) => (
-            <ListItem key={index} sx={styles.li}>
-                <Typography sx={styles.subtitle}>
-                    <Link to="/#">
-                        {info}
-                    </Link>
+const FooterInfoList = ({title, content}) => {
+    return (
+        <List sx={styles.list}>
+            <ListItem>
+                <Typography variant="h6" component="span" sx={styles.title}>
+                    {title}
                 </Typography>
             </ListItem>
-        ))}
-    </List>
-);
+            {content.map((info, index) => {
+                console.log(info)
+                return (<ListItem key={index} sx={styles.li}>
+                    <Typography sx={styles.subtitle}>
+                        <Link to="/#">
+                            {info}
+                        </Link>
+                    </Typography>
+                </ListItem>)
+            })}
+        </List>
+    )
+};
 
 FooterInfoList.propTypes = {
     title: PropTypes.string,

@@ -8,7 +8,7 @@ import FooterInfoList from "../../UI/footerInfo/FooterInfoList";
 import {comfy, customerHelp, services} from '../../../assets/footerContent/footerContent';
 import {styles} from "./styles";
 import stylesSCSS from './stylesSCSS.module.scss';
-import FooterInfoStructure from "../../UI/footerInfo/FooterInfoStructure/index.js";
+import FooterInfoConsul from "../../UI/footerInfo/FooterInfoConsul/index.js";
 
 const FooterMiddle = () => {
     const formik = useFormik({
@@ -75,7 +75,7 @@ const FooterMiddle = () => {
                             content={customerHelp}
                         />
                     </ListItem>
-                    <FooterInfoStructure/>
+                    <FooterInfoConsul/>
                 </List>
             </Container>
         </Box>

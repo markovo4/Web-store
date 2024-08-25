@@ -6,8 +6,6 @@ export const styles = {
             xs: 'flex'
         },
         height: {
-            lg: '450px',
-            md: 'auto',
             xs: 'auto',
         },
 
@@ -18,30 +16,24 @@ export const styles = {
             md: '2px solid rgba(0,0,0,0.09)'
         },
         backgroundColor: {
-            lg: 'white',
-            md: 'white',
             xs: '#ececec',
         }
     },
     container: {
         height: {
-            lg: '430px',
-            md: 'auto',
             xs: 'auto'
         },
         display: 'flex',
     },
     qRCodeContainer: {
         display: {
-            lg: 'flex',
-            md: 'none',
             xs: 'none'
         },
         padding: '16px',
         border: {
             lg: '2px solid rgba(0,0,0,0.09)'
         },
-        borderRadius: '12px',
+        borderRadius: '8px',
         maxWidth: '295px',
         marginBottom: '8px',
         marginTop: '25px'
@@ -55,7 +47,7 @@ export const styles = {
         justifyContent: 'center',
         padding: '16px',
         border: '1px solid rgba(0,0,0,0.09)',
-        borderRadius: '12px',
+        borderRadius: '8px',
         backgroundColor: 'white',
         width: {
 
@@ -108,7 +100,7 @@ export const styles = {
         display: 'flex',
         alignItems: 'flex-start',
         padding: '15px',
-        borderRadius: '16px',
+        borderRadius: '8px',
         flexDirection: 'column',
         width: {
             xs: '100%',
@@ -142,22 +134,23 @@ export const styles = {
         justifyContent: 'center',
         width: '100%',
         flexDirection: 'column',
-        flexFlow: {
-            lg: 'nowrap',
-            md: 'wrap'
-        },
         alignItems: 'start',
-        gap: '10px'
+        gap: '10px',
     },
     title: {
         fontSize: '16px',
         fontWeight: 'bold',
-        color: 'rgba(0,0,0,0.82)'
+        color: 'rgba(0,0,0,0.7)'
     },
 
     collapse: {
         backgroundColor: 'white',
         width: '100%'
+    },
+    arrowIcon: {
+        border: '1px solid #0003',
+        borderRadius: '50%',
+        color: '#0009'
     }
 
 };

@@ -6,7 +6,7 @@ export const styles = {
             xs: 'none'
         },
         height: {
-            lg: '450px',
+            lg: 'auto',
             md: 'auto'
         },
 
@@ -19,7 +19,7 @@ export const styles = {
     },
     container: {
         height: {
-            lg: '430px',
+            lg: 'auto',
             md: 'auto'
         },
         display: 'flex',

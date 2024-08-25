@@ -11,7 +11,7 @@ import FooterInfoList from "../../UI/footerInfo/FooterInfoList";
 import {comfy, customerHelp, services} from '../../../assets/footerContent/footerContent';
 import {styles} from "./styles";
 import stylesSCSS from './stylesSCSS.module.scss';
-import FooterInfoStructure from "../../UI/footerInfo/FooterInfoStructure";
+import FooterInfoConsul from "../../UI/footerInfo/FooterInfoConsul";
 
 const FooterMiddleMobile = () => {
     const [expanded, setExpanded] = useState({
@@ -78,7 +78,8 @@ const FooterMiddleMobile = () => {
                             <Typography sx={styles.title}>
                                 Comfy
                             </Typography>
-                            {expanded.comfy ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                            {expanded.comfy ? <KeyboardArrowUpIcon sx={styles.arrowIcon}/> :
+                                <KeyboardArrowDownIcon sx={styles.arrowIcon}/>}
                         </Box>
 
                         <Collapse in={expanded.comfy} timeout="auto" unmountOnExit sx={styles.collapse}>
@@ -93,7 +94,8 @@ const FooterMiddleMobile = () => {
                             <Typography sx={styles.title}>
                                 Services & Conditions
                             </Typography>
-                            {expanded.services ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                            {expanded.services ? <KeyboardArrowUpIcon sx={styles.arrowIcon}/> :
+                                <KeyboardArrowDownIcon sx={styles.arrowIcon}/>}
                         </Box>
 
                         <Collapse in={expanded.services} timeout="auto" unmountOnExit sx={styles.collapse}>
@@ -108,7 +110,8 @@ const FooterMiddleMobile = () => {
                             <Typography sx={styles.title}>
                                 Customer Help
                             </Typography>
-                            {expanded.customerHelp ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                            {expanded.customerHelp ? <KeyboardArrowUpIcon sx={styles.arrowIcon}/> :
+                                <KeyboardArrowDownIcon sx={styles.arrowIcon}/>}
                         </Box>
 
                         <Collapse in={expanded.customerHelp} timeout="auto" unmountOnExit sx={styles.collapse}>
@@ -119,7 +122,7 @@ const FooterMiddleMobile = () => {
                     </ListItemButton>
 
 
-                    <FooterInfoStructure/>
+                    <FooterInfoConsul padding={true}/>
                 </List>
             </Container>
         </Box>
