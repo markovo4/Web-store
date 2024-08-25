@@ -139,15 +139,6 @@ export const styles = {
         gap: '10px',
         borderRadius: '8px',
     },
-    img: {
-        width: '90px',
-        height: '90px',
-        borderRadius: '8px',
-        objectFit: 'contain',
-        objectPosition: 'center',
-        padding: '10px',
-        backgroundColor: 'white',
-    },
     contactInfoTitle: {
         color: 'rgba(0,0,0,0.58)',
         fontSize: '14px'

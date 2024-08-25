@@ -1,14 +1,14 @@
 import {Box, ListItem, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 import {styles} from "./styles.js";
-import {Image} from "antd";
+import stylesSCSS from './stylesSCSS.module.scss';
 
 const ProductCheckout = ({image, title, count, price, id}) => {
     return (
         <ListItem
             sx={styles.listStyles}>
             <Box>
-                <Image src={image} alt={title} style={styles.image}/>
+                <img src={image} alt={title} className={stylesSCSS.img}/>
             </Box>
 
             <Box sx={styles.productInfo}>

@@ -3,7 +3,7 @@ import {styles} from "./styles.js";
 import React from "react";
 import PropTypes from "prop-types";
 import {useSelector} from "react-redux";
-import {Image} from "antd";
+import stylesSCSS from './stylesSCSS.module.scss';
 
 const FormCard = ({
                       formTitle,
@@ -24,7 +24,6 @@ const FormCard = ({
 
     const {orderList, checkout} = useSelector(state => state.localStorage);
 
-
     return (
         <React.Fragment>
             {!open ? (
@@ -37,10 +36,10 @@ const FormCard = ({
                             {formSubtitle}
                         </Typography>
                         {products && <Box sx={styles.imgContainer}>
-                            {orderList.length && orderList.slice(0, 4).map((product) => {
+                            {orderList.length && orderList.slice(0, 5).map((product) => {
                                 return (
                                     <Tooltip key={product.id} title={product.title}>
-                                        <Image src={product.image} alt={product.title} style={styles.img}/>
+                                        <img src={product.image} alt={product.title} className={stylesSCSS.img}/>
                                     </Tooltip>
                                 )
                             })}

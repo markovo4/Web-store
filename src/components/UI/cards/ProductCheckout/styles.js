@@ -1,6 +1,5 @@
 export const styles = {
     listStyles: {
-        borderBottom: '1px solid rgba(175,175,175,0.31)',
         display: 'flex',
         justifyContent: 'space-between',
         flexDirection: {
@@ -15,8 +14,8 @@ export const styles = {
         },
         margin: '4px 0',
         padding: {
-            lg: '20px 0',
-            md: '20px 0',
+            lg: '0 50px',
+            md: '0 50px',
             xs: '15px',
         },
         height: {
@@ -24,6 +23,10 @@ export const styles = {
             md: '214px',
             xs: 'auto'
         },
+
+        '&:not(:last-of-type)': {
+            borderBottom: '1px solid rgba(175,175,175,0.31)',
+        }
     },
     price: {
         fontWeight: 'bold',
@@ -35,12 +38,6 @@ export const styles = {
         color: '#363636',
         textAlign: 'right'
 
-    },
-    image: {
-        objectFit: 'contain',
-        objectPosition: 'center',
-        height: '80px',
-        width: '80px',
     },
     code: {
         fontSize: '12px',
