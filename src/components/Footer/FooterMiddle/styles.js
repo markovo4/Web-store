@@ -100,7 +100,7 @@ export const styles = {
         alignItems: 'flex-start',
         padding: '0',
         flexDirection: 'column',
-        maxWidth: '25%'
+        maxWidth: '20%'
     },
     liForm: {
         display: 'flex',
@@ -117,6 +117,7 @@ export const styles = {
             md: 'wrap'
         },
         alignItems: 'start',
+        gap: '25px'
     },
     title: {
         fontSize: '18px',

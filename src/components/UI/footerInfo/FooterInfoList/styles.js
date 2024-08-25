@@ -18,10 +18,10 @@ export const styles = {
             md: 'none',
             xs: '1px solid #0002',
         },
-        paddingBottom: {
-            lg: '0',
-            md: '0',
-            xs: '10px',
+        padding: {
+            lg: '10px 0',
+            md: '10px 0',
+            xs: '10px 0',
         }
     },
     li: {
