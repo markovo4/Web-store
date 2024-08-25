@@ -12,7 +12,6 @@ const FooterInfoList = ({title, content}) => {
                 </Typography>
             </ListItem>
             {content.map((info, index) => {
-                console.log(info)
                 return (<ListItem key={index} sx={styles.li} disablePadding={true}>
                     <Typography sx={styles.subtitle}>
                         <Link to="/#">
