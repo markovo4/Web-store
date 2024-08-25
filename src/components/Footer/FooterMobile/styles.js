@@ -5,6 +5,7 @@ export const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
+        padding: '0'
     },
     list: {
         display: 'flex',

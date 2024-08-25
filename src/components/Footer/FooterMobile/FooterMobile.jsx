@@ -56,13 +56,17 @@ const FooterMobile = () => {
             <List sx={styles.list}>
 
                 <ListItem sx={styles.li}>
-                    <Box>
-                        <HomeOutlinedIcon/>
-                    </Box>
+
                     <Link to={routerNames.pageMain} onClick={scrollToTop}>
-                        <Typography>
-                            Main
-                        </Typography>
+                        <Box sx={styles.li}>
+                            <Box>
+                                <HomeOutlinedIcon/>
+                            </Box>
+                            <Typography>
+                                Main
+                            </Typography>
+                        </Box>
+
                     </Link>
                 </ListItem>
 
@@ -76,25 +80,32 @@ const FooterMobile = () => {
                 </ListItem>
 
                 <ListItem sx={styles.li}>
-                    <Box sx={styles.cart}>
-                        <Box sx={orderList.length >= 1 ? styles.cartNotify : styles.cartNotifyNot}></Box>
-                        <ShoppingCartOutlinedIcon/>
-                    </Box>
                     <Link to={routerNames.pageCart} onClick={scrollToTop}>
-                        <Typography>
-                            Cart
-                        </Typography>
+                        <Box sx={styles.li}>
+                            <Box sx={styles.cart}>
+                                <Box sx={orderList.length >= 1 ? styles.cartNotify : styles.cartNotifyNot}></Box>
+                                <ShoppingCartOutlinedIcon/>
+                            </Box>
+
+                            <Typography>
+                                Cart
+                            </Typography>
+                        </Box>
+
                     </Link>
                 </ListItem>
 
                 <ListItem sx={styles.li}>
-                    <Box>
-                        <FavoriteBorderOutlinedIcon/>
-                    </Box>
                     <Link to={routerNames.pageFavProducts} onClick={scrollToTop}>
-                        <Typography>
-                            Favourites
-                        </Typography>
+                        <Box sx={styles.li}>
+                            <Box>
+                                <FavoriteBorderOutlinedIcon/>
+                            </Box>
+                            <Typography>
+                                Favourites
+                            </Typography>
+                        </Box>
+
                     </Link>
                 </ListItem>
 
