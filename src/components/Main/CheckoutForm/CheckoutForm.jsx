@@ -24,25 +24,22 @@ import FormInput from "../../UI/inputs/FormInput";
 import {getTotalPrice} from "../../../utils/functions/functions";
 import stylesSCSS from './stylesSCSS.module.scss';
 
-// Initial form values
 const initialValues = {
-    promoCode: "",
-    bonusCard: "",
+    promoCode: '',
+    bonusCard: '',
     termConditions: false,
     giftCardCheckBox: false,
-    giftCard: new Array(4).fill(""),
+    giftCard: new Array(4).fill(''),
     noCallback: false,
     comment: '',
 };
 
 const CheckoutForm = () => {
-    // State and Redux hooks
     const {enqueueSnackbar} = useSnackbar();
     const {orderList, checkout} = useSelector((state) => state.localStorage);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // Local state
     const [addComment, setAddComment] = useState(false);
     const [openForm, setOpenForm] = useState(false);
     const [isContactInfoValid, setContactInfoValid] = useState(false);
@@ -50,7 +47,6 @@ const CheckoutForm = () => {
     const [isPaymentOptionsValid, setPaymentOptionsValid] = useState(false);
     const [isTouched, setTouched] = useState(false);
 
-    // Formik setup
     const formik = useFormik({
         initialValues,
         validationSchema: checkoutValidationSchema,
@@ -67,7 +63,10 @@ const CheckoutForm = () => {
                     noCallback: values.noCallback,
                     comment: values.comment
                 };
+
                 dispatch(setCheckoutInfo(updatedCheckoutInfo));
+
+                // Reset form only after dispatching the action
                 resetForm();
                 navigate(routerNames.pageOrderInfo);
                 enqueueSnackbar("Successful checkout!", {variant: "success"});
@@ -77,17 +76,13 @@ const CheckoutForm = () => {
         },
     });
 
-    // Effect hooks
     useEffect(() => {
         dispatch(getProductList());
         dispatch(getCheckoutInfo());
     }, [dispatch]);
 
-    // Event handlers
     const handleClickContinue = () => setOpenForm(!openForm);
-
     const handleAddComment = () => setAddComment(!addComment);
-
     const handlePromoClick = () => enqueueSnackbar("Promo code or bonus card applied!", {variant: "success"});
 
     const handleGiftCardInputChange = (e, index) => {
@@ -108,7 +103,6 @@ const CheckoutForm = () => {
         isDeliveryOptionsValid &&
         isPaymentOptionsValid;
 
-    // JSX
     return (
         <Box sx={styles.sectionForm}>
             <Container>
@@ -264,22 +258,25 @@ const CheckoutForm = () => {
                             </Typography>
                             <form onSubmit={formik.handleSubmit}>
                                 <InputWithButton
-                                    placeHolder="Discount code"
-                                    labelInput="Promo code"
-                                    buttonText="apply"
+                                    placeHolder='Discount code'
+                                    labelInput='Promo code'
+                                    buttonText='apply'
                                     onButtonClick={handlePromoClick}
                                     onChange={formik.handleChange}
                                     value={formik.values.promoCode}
-                                    name="promoCode"
+                                    name='promoCode'
+                                    id='promoCode'
+
                                 />
                                 <InputWithButton
-                                    placeHolder="293"
-                                    labelInput="Your bonus card Number"
-                                    buttonText="ok"
+                                    placeHolder='293'
+                                    labelInput='Your bonus card Number'
+                                    buttonText='ok'
                                     onButtonClick={handlePromoClick}
                                     onChange={formik.handleChange}
                                     value={formik.values.bonusCard}
-                                    name="bonusCard"
+                                    name='bonusCard'
+                                    id='bonusCard'
                                 />
                                 {orderList.length > 0 && (
                                     <Box sx={styles.itemsPrice}>
