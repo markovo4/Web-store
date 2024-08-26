@@ -91,6 +91,7 @@ export const styles = {
         alignItems: 'center',
         justifyContent: 'space-between',
         marginBottom: '8px',
+        gap: '20px',
         padding: '20px',
     },
     image: {
@@ -117,11 +118,7 @@ export const styles = {
         fontWeight: 'bold',
         textAlign: 'center',
         maxWidth: '100px',
-        fontSize: {
-            lg: '20px',
-            md: '20px',
-            xs: '18px',
-        }
+        fontSize: '24px'
     },
     totalPriceItem: {
         paddingTop: '16px',
@@ -134,11 +131,13 @@ export const styles = {
         }
     },
     productAmount: {
+        textAlign: 'center',
+
         width: '100px',
         fontSize: {
             lg: '26px',
             md: '24px',
-            xs: '20px',
+            xs: '24px',
         }
     },
     buttonInfo: {
@@ -252,5 +251,21 @@ export const styles = {
         borderRadius: '8px',
         color: 'white',
     },
-    priceAmountWrapper: {}
+    priceAmountWrapper: {
+        display: 'flex',
+        flexDirection: {
+            lg: 'column',
+            md: 'column',
+            row: 'column',
+        },
+        justifyContent: {
+            xs: 'space-between'
+        },
+        width: {
+            lg: '100px',
+            md: '100px',
+            xs: '100%',
+        },
+        alignItems: 'center'
+    }
 }
