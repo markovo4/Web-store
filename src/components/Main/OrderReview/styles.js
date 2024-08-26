@@ -4,6 +4,7 @@ export const styles = {
         minHeight: '100vh',
         maxHeight: '100%',
         backgroundColor: 'rgba(239,238,238,0.55)',
+        marginBottom: '50px'
     },
     container: {
         display: 'flex',
@@ -17,6 +18,11 @@ export const styles = {
     title: {
         marginBottom: '16px',
         color: '#232323',
+        fontSize: {
+            lg: '26px',
+            md: '24px',
+            xs: '20px'
+        },
         fontWeight: 'bold',
         width: '100%',
         textAlign: 'center'
@@ -24,24 +30,33 @@ export const styles = {
 
     subtitle: {
         marginBottom: '16px',
-        color: 'rgba(51,51,51,0.74)',
+        color: 'rgb(49,129,33)',
         fontWeight: 'bold',
         width: '100%',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: {
+            lg: '20px',
+            md: '18px',
+            xs: '16px'
+        },
     },
     sectionTitle: {
         marginBottom: '16px',
-        color: 'rgba(51,51,51,0.74)',
-        fontWeight: 'bold',
+        color: 'rgb(0,0,0)',
+        fontSize: {
+            lg: '20px',
+            md: '18px',
+            xs: '18px'
+        },
     },
-    list: {
-        padding: '0',
-    },
+    list: {},
     listItem: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        padding: '5px 0',
+        paddingBottom: '20px',
+        borderBottom: '1px solid #0002',
+        marginBottom: '20px'
     },
     divider: {
         margin: '16px 0',
@@ -53,11 +68,12 @@ export const styles = {
         fontWeight: 'bold',
     },
     productItem: {
-        padding: '16px 0',
-        maxHeight: '300px',
+        padding: '16px',
+        maxHeight: '400px',
         overflow: 'auto',
     },
     productBox: {
+        marginTop: '20px',
         padding: '8px',
         borderRadius: '4px',
         backgroundColor: '#fff',
@@ -67,9 +83,15 @@ export const styles = {
     },
     productDetails: {
         display: 'flex',
+        flexDirection: {
+            lg: 'row',
+            md: 'row',
+            xs: 'column',
+        },
         alignItems: 'center',
         justifyContent: 'space-between',
         marginBottom: '8px',
+        padding: '20px',
     },
     image: {
         width: '90px',
@@ -83,19 +105,41 @@ export const styles = {
         flexGrow: 1,
         color: '#333',
         fontWeight: '500',
-        maxWidth: '500px'
+        maxWidth: '500px',
+        fontSize: {
+            lg: '20px',
+            md: '18px',
+            xs: '24px',
+        }
     },
     productPrice: {
         color: '#41ae2a',
         fontWeight: 'bold',
-        maxWidth: '100px'
+        textAlign: 'center',
+        maxWidth: '100px',
+        fontSize: {
+            lg: '20px',
+            md: '20px',
+            xs: '18px',
+        }
     },
     totalPriceItem: {
         paddingTop: '16px',
     },
+    totalPrice: {
+        fontSize: {
+            lg: '26px',
+            md: '24px',
+            xs: '20px',
+        }
+    },
     productAmount: {
-        fontWeight: 'bold',
-        maxWidth: '100px',
+        width: '100px',
+        fontSize: {
+            lg: '26px',
+            md: '24px',
+            xs: '20px',
+        }
     },
     buttonInfo: {
         '&.MuiButton-root': {
@@ -165,11 +209,48 @@ export const styles = {
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        gap: '50px',
-        width: '29vw'
+        gap: '30px',
+        width: '100%',
     },
     icon: {
         fontSize: '100px',
         color: 'rgb(66,175,42)'
     },
+    infoText: {
+        fontSize: {
+            lg: '20px',
+            md: '20px',
+            xs: '15px',
+        },
+
+        color: 'rgba(0,0,0,0.61)'
+    },
+    infoContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '15px'
+    },
+    viewProducts: {
+        height: '50px',
+        marginBottom: '20px'
+    },
+    titleButton: {
+        fontSize: {
+            lg: '20px',
+            md: '20px',
+            xs: '18px',
+        },
+        fontWeight: 'bold',
+        backgroundColor: '#fb651f',
+        width: '100%',
+        textAlign: 'center',
+        padding: {
+            lg: '5px 0',
+            md: '10px 0',
+            xs: '10px 0',
+        },
+        borderRadius: '8px',
+        color: 'white',
+    },
+    priceAmountWrapper: {}
 }

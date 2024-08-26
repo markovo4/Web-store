@@ -41,8 +41,8 @@ const OrderReview = () => {
                 <Typography variant="h6" sx={styles.subtitle}>
                     Order Summary
                 </Typography>
-                <List sx={styles.list}>
-                    <ListItem sx={styles.listItem}>
+                <List sx={styles.list} disablePadding>
+                    <ListItem sx={styles.listItem} disablePadding>
 
                         <Typography variant="h6" sx={styles.sectionTitle}>
                             Contact info:
@@ -50,32 +50,38 @@ const OrderReview = () => {
 
                         <Box sx={styles.summaryInfoContainer}>
                             <ContactMailIcon sx={styles.icon}/>
-                            <Box>
+                            <Box sx={styles.infoContainer}>
                                 {checkout.firstName && (
-                                    <Box sx={styles.listItem}>
-
-                                        <Typography variant='h6'>{checkout.firstName}</Typography>
+                                    <Box>
+                                        <Typography variant='h6'
+                                                    sx={styles.infoText}> <b>Name:</b> <br/>{checkout.firstName}
+                                        </Typography>
                                     </Box>
                                 )}
                                 {checkout.lastName && (
-                                    <Box sx={styles.listItem}>
-                                        <Typography variant='h6'>{checkout.lastName}</Typography>
+                                    <Box>
+                                        <Typography variant='h6' sx={styles.infoText}><b>Last
+                                            Name:</b><br/> {checkout.lastName}</Typography>
                                     </Box>
                                 )}
                                 {checkout.email && (
-                                    <Box sx={styles.listItem}>
-                                        <Typography variant='h6'>{checkout.email}</Typography>
+                                    <Box>
+                                        <Typography variant='h6'
+                                                    sx={styles.infoText}> <b>Email:</b><br/> {checkout.email}
+                                        </Typography>
                                     </Box>
                                 )}
                                 {checkout.phoneNumber && (
-                                    <Box sx={styles.listItem}>
-                                        <Typography variant='h6'>{checkout.phoneNumber}</Typography>
+                                    <Box>
+                                        <Typography variant='h6'
+                                                    sx={styles.infoText}><b>Phone
+                                            number:</b><br/> {checkout.phoneNumber}</Typography>
                                     </Box>
                                 )}
                                 {checkout.otherReceiverPhoneNumber && (
-                                    <Box sx={styles.listItem}>
-                                        <Typography variant='h6'>Other Recipient Phone
-                                            Number: {checkout.otherReceiverPhoneNumber}</Typography>
+                                    <Box>
+                                        <Typography variant='h6' sx={styles.infoText}> <b>Other recipient phone
+                                            number:</b><br/> {checkout.otherReceiverPhoneNumber}</Typography>
                                     </Box>
                                 )}
                             </Box>
@@ -83,7 +89,7 @@ const OrderReview = () => {
 
                     </ListItem>
 
-                    <ListItem sx={styles.listItem}>
+                    <ListItem sx={styles.listItem} disablePadding>
 
                         <Typography variant="h6" sx={styles.sectionTitle}>
                             Delivery:
@@ -91,42 +97,50 @@ const OrderReview = () => {
 
                         <Box sx={styles.summaryInfoContainer}>
                             <LocalShippingOutlinedIcon sx={styles.icon}/>
-                            <Box>
+                            <Box sx={styles.infoContainer}>
                                 {checkout.city?.city && (
-                                    <Box sx={styles.listItem}>
-                                        <Typography variant='h6'> {checkout.city.city}</Typography>
+                                    <Box>
+                                        <Typography variant='h6'
+                                                    sx={styles.infoText}><b>To:</b><br/> {checkout.city.city}
+                                        </Typography>
                                     </Box>
                                 )}
                                 {checkout.deliveryMethod && (
-                                    <Box sx={styles.listItem}>
-                                        <Typography variant='h6'>{checkout.deliveryMethod}</Typography>
+                                    <Box>
+                                        <Typography variant='h6'
+                                                    sx={styles.infoText}><b>How:</b><br/> {checkout.deliveryMethod}
+                                        </Typography>
                                     </Box>
                                 )}
                             </Box>
                         </Box>
                     </ListItem>
 
-                    <ListItem sx={styles.listItem}>
+                    <ListItem sx={styles.listItem} disablePadding>
                         <Typography variant="h6" sx={styles.sectionTitle}>
                             Payment:
                         </Typography>
 
                         <Box sx={styles.summaryInfoContainer}>
                             <PaymentOutlinedIcon sx={styles.icon}/>
-                            <Box>
+                            <Box sx={styles.infoContainer}>
                                 {checkout.paymentMethod && (
-                                    <Box sx={styles.listItem}>
-                                        <Typography variant='h6'>{checkout.paymentMethod}</Typography>
+                                    <Box>
+                                        <Typography variant='h6'
+                                                    sx={styles.infoText}><b>How:</b> {checkout.paymentMethod}
+                                        </Typography>
                                     </Box>
                                 )}
                                 {checkout.bonusCard && (
-                                    <Box sx={styles.listItem}>
-                                        <Typography variant='h6'>Bonus Card: {checkout.bonusCard}</Typography>
+                                    <Box>
+                                        <Typography variant='h6' sx={styles.infoText}><b>Bonus
+                                            Card:</b> {checkout.bonusCard}</Typography>
                                     </Box>
                                 )}
                                 {checkout.promoCode && (
-                                    <Box sx={styles.listItem}>
-                                        <Typography variant='h6'>Promo Code: {checkout.promoCode}</Typography>
+                                    <Box>
+                                        <Typography variant='h6' sx={styles.infoText}><b>Promo
+                                            Code:</b> {checkout.promoCode}</Typography>
                                     </Box>
                                 )}
                             </Box>
@@ -135,21 +149,24 @@ const OrderReview = () => {
 
 
                     {/* Products section */}
-                    <ListItemButton sx={styles.listItem} onClick={handleShowProducts}>
-                        <Typography variant='h6' sx={styles.sectionTitle}> View order List</Typography>
+                    <ListItemButton onClick={handleShowProducts} sx={styles.viewProducts}>
+                        <Typography variant='h6' sx={styles.titleButton}> View order List</Typography>
                     </ListItemButton>
                     {showProducts && (
                         <ListItem sx={styles.productItem} className='flex flex-col'>
                             {checkout.productToOrder.map(product => (
-                                <Box key={product.id} className='flex flex-col' sx={styles.productBox}>
-                                    <Box className='flex items-center justify-evenly' sx={styles.productDetails}>
+                                <Box key={product.id} sx={styles.productBox}>
+                                    <Box sx={styles.productDetails}>
                                         <img src={product.image} alt={product.title} className={stylesSCSS.image}/>
                                         <Typography sx={styles.productTitle} variant='h6'>{product.title}</Typography>
-                                        <Typography sx={styles.productAmount}
-                                                    variant='h6'>{product.amount} Itm.</Typography>
-                                        <Typography sx={styles.productPrice} variant='h6'>
-                                            $ {(product.price * 0.9)}
-                                        </Typography>
+                                        <Box sx={styles.priceAmountWrapper}>
+                                            <Typography sx={styles.productAmount}
+                                                        variant='h6'>{product.amount} Itm.</Typography>
+                                            <Typography sx={styles.productPrice} variant='h6'>
+                                                $ {product.price && (product.price * 0.9).toFixed(2)}
+                                            </Typography>
+                                        </Box>
+
                                     </Box>
                                 </Box>
                             ))}
@@ -159,7 +176,8 @@ const OrderReview = () => {
 
                     {/* Total price and navigation */}
                     <ListItem sx={styles.totalPriceItem}>
-                        <Typography variant='h5'>Total Price: $ {checkout.totalPrice}</Typography>
+                        <Typography variant='h5' sx={styles.totalPrice}>Total Price:
+                            $ {checkout.totalPrice && (checkout.totalPrice).toFixed(2)}</Typography>
                     </ListItem>
                     <ListItem>
                         <Link to={routerNames.pageMain}>
