@@ -21,7 +21,7 @@ export const styles = {
         fontSize: {
             lg: '26px',
             md: '24px',
-            xs: '20px'
+            xs: '24px'
         },
         fontWeight: 'bold',
         width: '100%',
