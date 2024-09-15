@@ -6,7 +6,8 @@ const routerNames = {
     pageCheckout: '/order',
     pageCategories: '/categories/:categoryName',
     pageFavProducts: '/favProducts',
-    pageOrderInfo: '/pageOrderInfo'
+    pageOrderInfo: '/orderInfo',
+    pagePersonalCabinet: '/personalCabinet'
 };
 
 Object.freeze(routerNames);

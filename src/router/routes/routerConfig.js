@@ -6,12 +6,23 @@ import PageCheckout from "../pages/PageCheckout";
 import PageCategories from "../pages/PageCategories";
 import PageFavProducts from "../pages/PageFavProducts";
 import PageOrderInfo from "../pages/PageOrderInfo";
+import PagePersonalCabinet from "../pages/PagePersonalCabinet";
 
 import routerNames from "./routerNames";
 
 
 const routerConfig = () => {
-    const pageComponents = [PageMain, PageNotFound, PageCart, PageProduct, PageCheckout, PageCategories, PageFavProducts, PageOrderInfo];
+    const pageComponents = [
+        PageMain,
+        PageNotFound,
+        PageCart,
+        PageProduct,
+        PageCheckout,
+        PageCategories,
+        PageFavProducts,
+        PageOrderInfo,
+        PagePersonalCabinet
+    ];
     const routeKeys = Object.keys(routerNames);
 
     if (pageComponents.length !== routeKeys.length) {
