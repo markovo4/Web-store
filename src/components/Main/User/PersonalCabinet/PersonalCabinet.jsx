@@ -26,7 +26,7 @@ const PersonalCabinet = () => {
 
     return (
         <Box sx={styles.section}>
-            <Container>
+            <Container sx={styles.container}>
                 <Box sx={styles.wrapper}>
                     <List sx={styles.optionsList} disablePadding={true}>
 
@@ -36,7 +36,7 @@ const PersonalCabinet = () => {
                             sx={activeSection === 'profile' ? styles.optionActive : styles.optionsListItem}
                         >
                             <Typography variant="h6" component="span" sx={styles.option}>
-                                My Profile
+                                Profile
                             </Typography>
                         </ListItem>
 

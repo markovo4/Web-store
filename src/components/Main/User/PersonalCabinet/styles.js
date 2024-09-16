@@ -1,14 +1,23 @@
 export const styles = {
+    container: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
     section: {
+        display: 'flex',
+        minHeight: '100vh',
+        maxHeight: '100%',
         backgroundColor: '#ececec',
         width: '100%'
     },
     wrapper: {
-        width: '25%',
+        width: '21.7%',
         backgroundColor: '#ffffff',
     },
     optionsList: {
-        width: '100%'
+        width: '100%',
+        height: '100vh'
     },
     optionsListItem: {
         transition: '0.2s ease-out',
