@@ -62,7 +62,9 @@ const HeaderBottom = () => {
                             iconStart
                         >
                             <MenuItem sx={styles.menuItem}>
-                                <AccountCircleIcon fontSize="small" color="primary"/> My Cabinet
+                                <Link to={routerNames.pagePersonalCabinet}>
+                                    <AccountCircleIcon fontSize="small" color="primary"/> My Cabinet
+                                </Link>
                             </MenuItem>
                             <MenuItem sx={styles.menuItem}>
                                 <LocalMallIcon fontSize="small" color="success"/> My Orders
@@ -99,7 +101,9 @@ const HeaderBottom = () => {
                             iconStart
                         >
                             <MenuItem sx={styles.menuItem}>
-                                <AccountCircleIcon fontSize="small" color="primary"/> My Cabinet
+                                <Link to={routerNames.pagePersonalCabinet}>
+                                    <AccountCircleIcon fontSize="small" color="primary"/> My Cabinet
+                                </Link>
                             </MenuItem>
                             <MenuItem sx={styles.menuItem}>
                                 <LocalMallIcon fontSize="small" color="success"/> My Orders
