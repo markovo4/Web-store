@@ -90,6 +90,12 @@ export const localStorageSlice = createSlice({
             state.currentUser = allUsers.filter((user) => user.id === payload);
         },
 
+        getAllUsers: (state) => {
+            const storedData = localStorage.getItem(USERS_DATA_KEY)
+            state.users = JSON.parse(storedData);
+
+        },
+
         setRecentlyViewed: (state, {payload}) => {
             try {
                 const storedData = localStorage.getItem(VIEWED_DATA_KEY);
@@ -195,6 +201,7 @@ export const {
     getCheckoutInfo,
     getRecentlyViewed,
     getUserById,
+    getAllUsers,
     setRecentlyViewed,
     setProductList,
     setProductQuantity,
