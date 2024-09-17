@@ -1,7 +1,7 @@
 export const styles = {
     wrapper: {
         backgroundColor: 'white',
-        width: '700px',
+        width: '895px',
         height: '100vh',
         paddingTop: '50px'
     },

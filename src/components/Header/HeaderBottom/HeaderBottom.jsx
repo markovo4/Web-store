@@ -46,7 +46,6 @@ const HeaderBottom = () => {
 
     const handleLogOut = () => {
         Cookies.remove('LoggedIn');
-        console.log(1)
         window.location.reload();
     };
 

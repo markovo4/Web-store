@@ -3,16 +3,23 @@ export const styles = {
         backgroundColor: 'white',
         width: '895px',
         height: '100vh',
-        paddingTop: '50px'
+        paddingTop: '50px',
     },
     infoGroup: {
         display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
         gap: '10px',
         borderBottom: '1px solid #0002'
     },
     infoText: {
         color: 'rgba(0,0,0,0.62)'
-    }
+    },
+    container: {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        flexFlow: 'row wrap',
+        maxHeight: '90vh',
+        overflow: 'auto'
+    },
 }

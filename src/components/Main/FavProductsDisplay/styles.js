@@ -9,14 +9,6 @@ export const styles = {
         maxHeight: '100%',
         padding: '50px 0',
     },
-    container: {
-        display: 'flex',
-        flexFlow: 'row wrap',
-        justifyContent: {
-            lg: 'flex-start',
-            md: 'center',
-            xs: 'center'
-        }
-    }
+
 
 }

@@ -1,5 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {DATA_KEY, FAV_DATA_KEY, FORM_DATA_KEY, VIEWED_DATA_KEY} from "../../utils/constants/constants.js";
+import {
+    DATA_KEY,
+    FAV_DATA_KEY,
+    FORM_DATA_KEY,
+    USERS_DATA_KEY,
+    VIEWED_DATA_KEY
+} from "../../utils/constants/constants.js";
 
 const checkoutInitialData = {
     productToOrder: [],
@@ -20,7 +26,9 @@ const checkoutInitialData = {
     message: '',
     callBack: false,
     recentlyViewed: [],
-    favouriteList: []
+    favouriteList: [],
+    users: [],
+    currentUser: {}
 }
 
 export const localStorageSlice = createSlice({
@@ -74,6 +82,12 @@ export const localStorageSlice = createSlice({
         getRecentlyViewed: (state) => {
             const storedData = localStorage.getItem(VIEWED_DATA_KEY);
             state.recentlyViewed = storedData ? JSON.parse(storedData) : [];
+        },
+
+        getUserById: (state, {payload}) => {
+            const storedData = localStorage.getItem(USERS_DATA_KEY)
+            const allUsers = JSON.parse(storedData);
+            state.currentUser = allUsers.filter((user) => user.id === payload);
         },
 
         setRecentlyViewed: (state, {payload}) => {
@@ -133,6 +147,12 @@ export const localStorageSlice = createSlice({
             localStorage.setItem(FORM_DATA_KEY, JSON.stringify(payload));
         },
 
+        setUser: (state, {payload}) => {
+            const updatedUsersList = [...state.users, payload];
+            localStorage.setItem(USERS_DATA_KEY, JSON.stringify(updatedUsersList));
+            state.users = updatedUsersList;
+        },
+
         removeProduct: (state, {payload}) => {
             const updatedOrderList = state.orderList.filter(product => product.id !== parseInt(payload));
             localStorage.setItem(DATA_KEY, JSON.stringify(updatedOrderList));
@@ -156,6 +176,14 @@ export const localStorageSlice = createSlice({
             localStorage.removeItem(FORM_DATA_KEY)
             state.checkout = checkoutInitialData;
         },
+
+        removeUserById: (state, {payload}) => {
+            const storedData = localStorage.getItem(USERS_DATA_KEY)
+            const allUsers = JSON.parse(storedData);
+            const updatedUsers = allUsers.filter((user) => user.id !== payload);
+            localStorage.setItem(USERS_DATA_KEY, JSON.stringify(updatedUsers));
+            state.users = updatedUsers;
+        },
     }
 });
 
@@ -166,13 +194,16 @@ export const {
     getProductList,
     getCheckoutInfo,
     getRecentlyViewed,
+    getUserById,
     setRecentlyViewed,
     setProductList,
     setProductQuantity,
     setCheckoutInfo,
+    setUser,
     removeAllProducts,
     removeFavProduct,
-    removeCheckoutInfo
+    removeCheckoutInfo,
+    removeUserById
 } = localStorageSlice.actions;
 
 export default localStorageSlice.reducer;

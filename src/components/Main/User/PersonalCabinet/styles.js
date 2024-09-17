@@ -45,6 +45,22 @@ export const styles = {
             borderBottom: '1px solid #0002',
         },
     },
+
+    optionsListItemLast: {
+        transition: '0.2s ease-out',
+        padding: '20px',
+        '&:not(:last-of-type)': {
+            borderBottom: '1px solid #0002',
+        },
+        '&:hover': {
+            backgroundColor: '#e56920',
+            transition: '0.2s ease-out',
+            color: 'white',
+            borderRight: '20px solid #cc0303 ',
+            padding: '20px',
+            paddingRight: '0'
+        }
+    },
     option: {
         fontSize: '18px',
     }

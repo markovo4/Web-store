@@ -1,11 +1,16 @@
 import {Box, Container, List, ListItem, Typography} from "@mui/material";
 import {styles} from './styles.js';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Profile from "../Profile";
 import Orders from "../Orders";
-import Bonuses from "../Bonuses";
+import Favourites from "../Favourites";
+import Cookies from "js-cookie";
+import {useNavigate} from "react-router-dom";
+import routerNames from "../../../../router/routes/routerNames.js";
 
 const PersonalCabinet = () => {
+    const navigate = useNavigate();
+
     const [activeSection, setActiveSection] = useState('profile');
 
     const handleClick = (e) => {
@@ -13,14 +18,27 @@ const PersonalCabinet = () => {
         setActiveSection(section);
     };
 
+    const handleLogOut = () => {
+        Cookies.remove('LoggedIn');
+        window.location.reload();
+        navigate(routerNames.pageMain)
+    }
+
+    useEffect(() => {
+        if (!Cookies.get('LoggedIn')) {
+            navigate(routerNames.pageMain)
+        }
+    }, [window.location])
+
+    
     const sectionDisplay = () => {
         switch (activeSection) {
             case 'profile':
                 return <Profile/>
             case 'orders':
                 return <Orders/>;
-            case 'bonuses':
-                return <Bonuses/>;
+            case 'favourites':
+                return <Favourites/>;
         }
     }
 
@@ -52,11 +70,21 @@ const PersonalCabinet = () => {
 
                         <ListItem
                             onClick={handleClick}
-                            data-section="bonuses"
-                            sx={activeSection === 'bonuses' ? styles.optionActive : styles.optionsListItem}
+                            data-section="favourites"
+                            sx={activeSection === 'favourites' ? styles.optionActive : styles.optionsListItem}
                         >
                             <Typography variant="h6" component="span" sx={styles.option}>
-                                Bonuses
+                                Favourites
+                            </Typography>
+                        </ListItem>
+
+                        <ListItem
+                            onClick={handleLogOut}
+                            data-section="favourites"
+                            sx={styles.optionsListItemLast}
+                        >
+                            <Typography variant="h6" component="span" sx={styles.option}>
+                                Log out
                             </Typography>
                         </ListItem>
 

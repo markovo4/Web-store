@@ -195,5 +195,6 @@ export const styles = {
         flexDirection: 'row',
         alignItems: 'center',
         gap: '10px'
-    }
+    },
+
 };
