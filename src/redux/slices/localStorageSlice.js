@@ -92,7 +92,7 @@ export const localStorageSlice = createSlice({
 
         getAllUsers: (state) => {
             const storedData = localStorage.getItem(USERS_DATA_KEY)
-            state.users = JSON.parse(storedData);
+            state.users = JSON.parse(storedData) || [];
 
         },
 

@@ -27,7 +27,7 @@ const formInitValues = {
 const ModalRegister = ({button}) => {
     const {enqueueSnackbar} = useSnackbar();
     const dispatch = useDispatch();
-    const {users = []} = useSelector((state) => state.localStorage); // Default users to an array
+    const {users = []} = useSelector((state) => state.localStorage);
 
     useEffect(() => {
         dispatch(getAllUsers());
@@ -51,24 +51,36 @@ const ModalRegister = ({button}) => {
         initialValues: {...formInitValues},
         validationSchema: registerFormValidation,
         onSubmit: (values, {resetForm}) => {
-            const newUser = {
-                id: uuidv4(), // Generate unique ID here
-                firstName: values.firstName.trim(),
-                lastName: values.lastName.trim(),
-                phoneNumber: values.phoneNumber.trim(),
-                email: values.email.trim(),
-                password: values.password.trim(),
-            };
+            try{
+                const userEmail = users.find((user) => user.email === values.email);
+                if(!userEmail){ // If userEmail is NOT found, proceed with registration
+                    const newUser = {
+                        id: uuidv4(),
+                        firstName: values.firstName.trim(),
+                        lastName: values.lastName.trim(),
+                        phoneNumber: values.phoneNumber.trim(),
+                        email: values.email.trim(),
+                        password: values.password.trim(),
+                    };
 
-            dispatch(setUser(newUser)); // Add new user to Redux store
-            enqueueSnackbar('Successful Registration!', {variant: 'success'});
-            Cookies.set('LoggedIn', 'true');
+                    dispatch(setUser(newUser)); // Add new user to Redux store
+                    enqueueSnackbar('Successful Registration!', {variant: 'success'});
+                    Cookies.set('LoggedIn', 'true');
 
-            setTimeout(() => {
-                resetForm();
-                handleClose();
-                window.location.reload(); // Optionally reload the page
-            }, 1000);
+                    setTimeout(() => {
+                        resetForm();
+                        handleClose();
+                        window.location.reload(); // Optionally reload the page
+                    }, 1000);
+                } else {
+                    // If userEmail is found, show a message that the email already exists
+                    enqueueSnackbar('Account with such email already exists!', {variant: 'info'});
+                }
+
+            } catch (e){
+                console.log(e);
+            }
+
         },
     });
 

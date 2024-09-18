@@ -1,4 +1,4 @@
-import {cloneElement, useMemo} from 'react';
+import {cloneElement, useEffect, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import {Box, Button, FormGroup} from '@mui/material';
 import {useFormik} from 'formik';
@@ -12,6 +12,7 @@ import loginFormValidation from '../../../utils/validationSchemas/loginFormValid
 import {setModalLoginMobileOpen} from '../../../redux/slices/modalsAuthSlice';
 import {styles} from './styles';
 import ModalRegMobile from "../ModalRegMobile";
+import {getAllUsers} from "../../../redux/slices/localStorageSlice.js";
 
 const formInitValues = {
     login: '',
@@ -21,7 +22,12 @@ const formInitValues = {
 const ModalLoginMobile = ({button}) => {
     const {enqueueSnackbar} = useSnackbar();
     const modalLoginMobileOpen = useSelector(state => state.modalsAuth.modalLoginMobileOpen);
+    const {users = []} = useSelector((state) => state.localStorage);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllUsers());
+    }, [dispatch]); // Only run once, when the component mounts
 
     const handleOpen = () => dispatch(setModalLoginMobileOpen(true));
     const handleClose = () => dispatch(setModalLoginMobileOpen(false));
@@ -33,13 +39,28 @@ const ModalLoginMobile = ({button}) => {
         initialValues: formInitValues,
         validationSchema: loginFormValidation,
         onSubmit: (values, {resetForm}) => {
-            enqueueSnackbar('Successful Login!', {variant: 'success'});
-            Cookies.set('LoggedIn', 'true');
-            setTimeout(() => {
-                resetForm();
-                handleClose();
-                window.location.reload();
-            }, 1000);
+            try{
+                const userEmail = users.find((user) =>{
+                    if(user.email === values.login){
+                        return user.password === values.password
+                    } else{
+                        return false;
+                    }
+                });
+                if(userEmail) { // If userEmail is NOT found, proceed with registration
+                    enqueueSnackbar('Successful Login!', {variant: 'success'});
+                    Cookies.set('LoggedIn', 'true');
+                    setTimeout(() => {
+                        resetForm();
+                        handleClose();
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    enqueueSnackbar('E-mail or password is wrong!', {variant: 'error'});
+                }
+            } catch (e){
+                console.log(e)
+            }
         },
     });
 
