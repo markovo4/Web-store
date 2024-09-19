@@ -4,7 +4,8 @@ import {
     FAV_DATA_KEY,
     FORM_DATA_KEY,
     USERS_DATA_KEY,
-    VIEWED_DATA_KEY
+    VIEWED_DATA_KEY,
+    CURRENT_USER_DATA_KEY,
 } from "../../utils/constants/constants.js";
 
 const checkoutInitialData = {
@@ -93,7 +94,10 @@ export const localStorageSlice = createSlice({
         getAllUsers: (state) => {
             const storedData = localStorage.getItem(USERS_DATA_KEY)
             state.users = JSON.parse(storedData) || [];
-
+        },
+        getCurrentUser: (state) => {
+            const storedData = localStorage.getItem(CURRENT_USER_DATA_KEY);
+            state.currentUser = JSON.parse(storedData) || {};
         },
 
         setRecentlyViewed: (state, {payload}) => {
@@ -158,6 +162,10 @@ export const localStorageSlice = createSlice({
             localStorage.setItem(USERS_DATA_KEY, JSON.stringify(updatedUsersList));
             state.users = updatedUsersList;
         },
+        setCurrentUser: (state, {payload}) => {
+            localStorage.setItem(CURRENT_USER_DATA_KEY, JSON.stringify(payload))
+            state.currentUser = payload || {};
+        },
 
         removeProduct: (state, {payload}) => {
             const updatedOrderList = state.orderList.filter(product => product.id !== parseInt(payload));
@@ -202,11 +210,13 @@ export const {
     getRecentlyViewed,
     getUserById,
     getAllUsers,
+    getCurrentUser,
     setRecentlyViewed,
     setProductList,
     setProductQuantity,
     setCheckoutInfo,
     setUser,
+    setCurrentUser,
     removeAllProducts,
     removeFavProduct,
     removeCheckoutInfo,

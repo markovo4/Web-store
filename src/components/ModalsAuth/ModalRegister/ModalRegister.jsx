@@ -11,7 +11,7 @@ import {cloneElement, useEffect} from "react";
 import {setModalRegOpen} from "../../../redux/slices/modalsAuthSlice.js";
 import {formatPhoneNumber} from "../../../utils/functions/functions.js";
 import {useSnackbar} from "notistack";
-import {getAllUsers, setUser} from "../../../redux/slices/localStorageSlice.js";
+import {getAllUsers, getCurrentUser, setCurrentUser, setUser} from "../../../redux/slices/localStorageSlice.js";
 import {v4 as uuidv4} from 'uuid';
 
 const formInitValues = {
@@ -27,10 +27,11 @@ const formInitValues = {
 const ModalRegister = ({button}) => {
     const {enqueueSnackbar} = useSnackbar();
     const dispatch = useDispatch();
-    const {users = []} = useSelector((state) => state.localStorage);
+    const {users = [], currentUser} = useSelector((state) => state.localStorage);
 
     useEffect(() => {
         dispatch(getAllUsers());
+        dispatch(getCurrentUser());
     }, [dispatch]); // Only run once, when the component mounts
 
     const handlePhoneNumberChange = (event) => {
@@ -64,6 +65,7 @@ const ModalRegister = ({button}) => {
                     };
 
                     dispatch(setUser(newUser)); // Add new user to Redux store
+                    dispatch(setCurrentUser(newUser));
                     enqueueSnackbar('Successful Registration!', {variant: 'success'});
                     Cookies.set('LoggedIn', 'true');
 
@@ -83,6 +85,8 @@ const ModalRegister = ({button}) => {
 
         },
     });
+
+    console.log(currentUser)
 
     return (
         <ModalTemplate
