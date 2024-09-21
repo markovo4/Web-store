@@ -3,14 +3,15 @@ import {styles} from "./styles.js";
 import ProductsList from "../ListItemInfo/ProductsList.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {getListOfOrders} from "../../../../redux/slices/localStorageSlice.js";
+import {getCurrentUser, getListOfOrders} from "../../../../redux/slices/localStorageSlice.js";
 
 const Orders = () => {
-    const {listOfOrders} = useSelector(state => state.localStorage);
+    const {listOfOrders, currentUser} = useSelector(state => state.localStorage);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getListOfOrders())
+        dispatch(getListOfOrders());
+        dispatch(getCurrentUser());
     }, [dispatch])
 
     return (
@@ -29,7 +30,10 @@ const Orders = () => {
                         </Typography>
                     </ListItem>
                     {listOfOrders && listOfOrders.map((order, index) => {
-                        return (<ProductsList key={index} id={order.orderId} date={order.date} order={order.order}/>)
+                        if (order.email === currentUser.email) {
+                            return (
+                                <ProductsList key={index} id={order.orderId} date={order.date} order={order.order}/>)
+                        }
                     })}
 
                 </List>

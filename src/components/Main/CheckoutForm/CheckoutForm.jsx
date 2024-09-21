@@ -12,6 +12,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
 import {
     getCheckoutInfo,
+    getCurrentUser,
     getListOfOrders,
     getProductList,
     setCheckoutInfo,
@@ -44,7 +45,7 @@ const initialValues = {
 const CheckoutForm = () => {
     const orderId = uuidv4();
     const {enqueueSnackbar} = useSnackbar();
-    const {orderList, checkout, listOfOrders} = useSelector((state) => state.localStorage);
+    const {orderList, checkout, listOfOrders, currentUser} = useSelector((state) => state.localStorage);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -75,7 +76,12 @@ const CheckoutForm = () => {
 
                 dispatch(setCheckoutInfo(updatedCheckoutInfo));
                 if (Cookies.get('LoggedIn')) {
-                    const personalOrder = [...listOfOrders, {orderId, date, order: orderList}];
+                    const personalOrder = [...listOfOrders, {
+                        email: currentUser.email,
+                        orderId,
+                        date,
+                        order: orderList
+                    }];
                     dispatch(setListOfOrders(personalOrder));
                 }
 
@@ -92,6 +98,7 @@ const CheckoutForm = () => {
         dispatch(getProductList());
         dispatch(getCheckoutInfo());
         dispatch(getListOfOrders());
+        dispatch(getCurrentUser());
     }, [dispatch]);
 
     const handleClickContinue = () => setOpenForm(!openForm);
