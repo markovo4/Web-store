@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Box, Button, Container, IconButton, List, ListItem, Typography,} from "@mui/material";
+import {Box, Button, Container, IconButton, List, ListItem, Typography} from "@mui/material";
 import {Checkbox} from "antd";
 import {Link, useNavigate} from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -10,7 +10,13 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
 import {useSnackbar} from "notistack";
-import {getCheckoutInfo, getProductList, setCheckoutInfo} from "../../../redux/slices/localStorageSlice";
+import {
+    getCheckoutInfo,
+    getListOfOrders,
+    getProductList,
+    setCheckoutInfo,
+    setListOfOrders,
+} from "../../../redux/slices/localStorageSlice";
 import routerNames from "../../../router/routes/routerNames";
 import checkoutValidationSchema from "../../../utils/validationSchemas/checkoutValidation";
 import {styles} from "./styles";
@@ -19,10 +25,11 @@ import ProductCheckout from "../../UI/cards/ProductCheckout";
 import ContactInfoForm from "../ContactInfoForm";
 import DeliveryOptionsForm from "../DeliveryOptionsForm";
 import PaymentOptionsForm from "../PaymentOptionsForm";
-import InputWithButton from "../../UI/inputs/InputWithButton";
 import FormInput from "../../UI/inputs/FormInput";
 import {getTotalPrice} from "../../../utils/functions/functions";
 import stylesSCSS from './stylesSCSS.module.scss';
+import Cookies from "js-cookie";
+import {v4 as uuidv4} from 'uuid';
 
 const initialValues = {
     promoCode: '',
@@ -35,8 +42,9 @@ const initialValues = {
 };
 
 const CheckoutForm = () => {
+    const orderId = uuidv4();
     const {enqueueSnackbar} = useSnackbar();
-    const {orderList, checkout} = useSelector((state) => state.localStorage);
+    const {orderList, checkout, listOfOrders} = useSelector((state) => state.localStorage);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -46,6 +54,7 @@ const CheckoutForm = () => {
     const [isDeliveryOptionsValid, setDeliveryOptionsValid] = useState(false);
     const [isPaymentOptionsValid, setPaymentOptionsValid] = useState(false);
     const [isTouched, setTouched] = useState(false);
+    const date = new Date().toLocaleDateString();
 
     const formik = useFormik({
         initialValues,
@@ -61,12 +70,15 @@ const CheckoutForm = () => {
                     totalPrice: getTotalPrice(orderList).price * 0.9,
                     giftCard: values.giftCard,
                     noCallback: values.noCallback,
-                    comment: values.comment
+                    comment: values.comment,
                 };
 
                 dispatch(setCheckoutInfo(updatedCheckoutInfo));
+                if (Cookies.get('LoggedIn')) {
+                    const personalOrder = [...listOfOrders, {orderId, date, order: orderList}];
+                    dispatch(setListOfOrders(personalOrder));
+                }
 
-                // Reset form only after dispatching the action
                 resetForm();
                 navigate(routerNames.pageOrderInfo);
                 enqueueSnackbar("Successful checkout!", {variant: "success"});
@@ -79,11 +91,11 @@ const CheckoutForm = () => {
     useEffect(() => {
         dispatch(getProductList());
         dispatch(getCheckoutInfo());
+        dispatch(getListOfOrders());
     }, [dispatch]);
 
     const handleClickContinue = () => setOpenForm(!openForm);
     const handleAddComment = () => setAddComment(!addComment);
-    const handlePromoClick = () => enqueueSnackbar("Promo code or bonus card applied!", {variant: "success"});
 
     const handleGiftCardInputChange = (e, index) => {
         const value = e.target.value;
@@ -130,8 +142,9 @@ const CheckoutForm = () => {
                         >
                             <List sx={styles.checkoutList}>
                                 <ListItem sx={styles.titleList}>
-                                    <Typography variant='h6' component='span' sx={styles.orderTitle}>Your
-                                        order</Typography>
+                                    <Typography variant='h6' component='span' sx={styles.orderTitle}>
+                                        Your order
+                                    </Typography>
                                     <Link to={routerNames.pageCart}>
                                         <Button
                                             variant="outlined"
@@ -142,9 +155,9 @@ const CheckoutForm = () => {
                                         </Button>
                                     </Link>
                                 </ListItem>
-                                {orderList.length > 0 && orderList.map((product, index) => (
+                                {orderList.map((product) => (
                                     <ProductCheckout
-                                        key={index}
+                                        key={product.id}
                                         title={product.title}
                                         image={product.image}
                                         count={product.amount}
@@ -228,111 +241,51 @@ const CheckoutForm = () => {
                                             name="comment"
                                             id="comment"
                                             onChange={formik.handleChange}
-                                            autoSize={{minRows: 3, maxRows: 5}}
-                                            allowClear
+                                            autoSize={{minRows: 3, maxRows: 4}}
+                                            value={formik.values.comment}
                                         />
-                                        <IconButton
-                                            onClick={handleAddComment}
-                                            aria-label="comment"
-                                            size="small"
-                                            sx={styles.commentButton}
-                                        >
-                                            <CloseOutlinedIcon fontSize="small" sx={styles.commentIcon}/>
+                                        <IconButton onClick={handleAddComment}>
+                                            <CloseOutlinedIcon/>
                                         </IconButton>
                                     </Box>
                                 )}
+                            </ListItem>
+                            <ListItem sx={styles.checkBoxGiftCard}>
                                 <Checkbox
                                     name="noCallback"
                                     checked={formik.values.noCallback}
                                     onChange={(event) => formik.setFieldValue("noCallback", event.target.checked)}
                                 >
-                                    I do not need a callback for order confirmation
+                                    {`I don't need a callback`}
                                 </Checkbox>
                             </ListItem>
+                            <ListItem>
+                                <Checkbox
+                                    name="termConditions"
+                                    checked={formik.values.termConditions}
+                                    onChange={(event) => formik.setFieldValue("termConditions", event.target.checked)}
+                                >
+                                    I accept the terms and conditions
+                                </Checkbox>
+                                {formik.touched.termConditions && formik.errors.termConditions && (
+                                    <Typography color="error">{formik.errors.termConditions}</Typography>
+                                )}
+                            </ListItem>
                         </List>
-                    </Box>
-                    <Box>
-                        <Box sx={styles.sidebar}>
-                            <Typography variant="h6" component="span" sx={styles.summary}>
-                                Summary:
-                            </Typography>
-                            <form onSubmit={formik.handleSubmit}>
-                                <InputWithButton
-                                    placeHolder='Discount code'
-                                    labelInput='Promo code'
-                                    buttonText='apply'
-                                    onButtonClick={handlePromoClick}
-                                    onChange={formik.handleChange}
-                                    value={formik.values.promoCode}
-                                    name='promoCode'
-                                    id='promoCode'
-
-                                />
-                                <InputWithButton
-                                    placeHolder='293'
-                                    labelInput='Your bonus card Number'
-                                    buttonText='ok'
-                                    onButtonClick={handlePromoClick}
-                                    onChange={formik.handleChange}
-                                    value={formik.values.bonusCard}
-                                    name='bonusCard'
-                                    id='bonusCard'
-                                />
-                                {orderList.length > 0 && (
-                                    <Box sx={styles.itemsPrice}>
-                                        <Typography sx={styles.itemsCount}>
-                                            {`${getTotalPrice(orderList).quantity} ${getTotalPrice(orderList).quantity === 1 ? "item" : "items"}`}
-                                        </Typography>
-                                        <Typography sx={styles.totalPriceSub}>
-                                            $ {getTotalPrice(orderList).price}
-                                        </Typography>
-                                    </Box>
-                                )}
-                                {orderList.length > 0 && (
-                                    <Box className="flex items-end justify-between mb-3">
-                                        <Typography variant="h6" component="span">
-                                            Total:
-                                        </Typography>
-                                        <Box className="flex flex-col">
-                                            <Typography
-                                                sx={styles.totalPriceOriginalMain}
-                                                variant="h6"
-                                                component="span"
-                                            >
-                                                <s className={stylesSCSS.checkoutStrike}>$ {getTotalPrice(orderList).price}</s>
-                                            </Typography>
-                                            <Typography
-                                                sx={styles.totalPriceMain}
-                                                variant="h6"
-                                                component="span"
-                                            >
-                                                $ {(getTotalPrice(orderList).price * 0.9).toFixed(2)}
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                )}
-                                <Box className="flex flex-col gap-5">
-                                    <Button
-                                        variant="contained"
-                                        type="submit"
-                                        disabled={!isFormValid()}
-                                        sx={styles.checkoutButton}
-                                    >
-                                        Checkout
-                                    </Button>
-                                    <Checkbox
-                                        name="termConditions"
-                                        checked={formik.values.termConditions}
-                                        onChange={(event) =>
-                                            formik.setFieldValue("termConditions", event.target.checked)
-                                        }
-                                    >
-                                        I Accept terms and conditions
-                                    </Checkbox>
-                                </Box>
-                            </form>
+                        <Box className="flex justify-end pt-8 pb-4">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                type="submit"
+                                sx={styles.buttonSubmit}
+                                onClick={formik.handleSubmit}
+                                disabled={!isFormValid()}
+                            >
+                                Place an order
+                            </Button>
                         </Box>
                     </Box>
+                    <Box sx={styles.productCardOrder}></Box>
                 </Box>
             </Container>
         </Box>

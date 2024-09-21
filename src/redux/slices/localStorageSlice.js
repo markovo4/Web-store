@@ -1,11 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
+    CURRENT_USER_DATA_KEY,
     DATA_KEY,
     FAV_DATA_KEY,
     FORM_DATA_KEY,
+    LIST_OF_ORDERS_DATA_KEY,
     USERS_DATA_KEY,
     VIEWED_DATA_KEY,
-    CURRENT_USER_DATA_KEY,
 } from "../../utils/constants/constants.js";
 
 const checkoutInitialData = {
@@ -29,7 +30,8 @@ const checkoutInitialData = {
     recentlyViewed: [],
     favouriteList: [],
     users: [],
-    currentUser: {}
+    currentUser: {},
+    listOfOrders: [],
 }
 
 export const localStorageSlice = createSlice({
@@ -99,6 +101,10 @@ export const localStorageSlice = createSlice({
             const storedData = localStorage.getItem(CURRENT_USER_DATA_KEY);
             state.currentUser = JSON.parse(storedData) || {};
         },
+        getListOfOrders: (state) => {
+            const storedData = localStorage.getItem(LIST_OF_ORDERS_DATA_KEY);
+            state.listOfOrders = JSON.parse(storedData) || []
+        },
 
         setRecentlyViewed: (state, {payload}) => {
             try {
@@ -167,6 +173,11 @@ export const localStorageSlice = createSlice({
             state.currentUser = payload || {};
         },
 
+        setListOfOrders: (state, {payload}) => {
+            localStorage.setItem(LIST_OF_ORDERS_DATA_KEY, JSON.stringify(payload || []));
+            state.listOfOrders = payload || [];
+        },
+
         removeProduct: (state, {payload}) => {
             const updatedOrderList = state.orderList.filter(product => product.id !== parseInt(payload));
             localStorage.setItem(DATA_KEY, JSON.stringify(updatedOrderList));
@@ -211,12 +222,14 @@ export const {
     getUserById,
     getAllUsers,
     getCurrentUser,
+    getListOfOrders,
     setRecentlyViewed,
     setProductList,
     setProductQuantity,
     setCheckoutInfo,
     setUser,
     setCurrentUser,
+    setListOfOrders,
     removeAllProducts,
     removeFavProduct,
     removeCheckoutInfo,

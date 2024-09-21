@@ -1,0 +1,17 @@
+.image {
+  height: 200px;
+  width: 200px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+@media(max-width: 899px) {
+  .image {
+    height: 300px;
+    width: auto;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+}

@@ -17,11 +17,12 @@ export const styles = {
     },
     optionsList: {
         width: '100%',
-        height: '100vh'
+        height: '100vh',
     },
     optionsListItem: {
         transition: '0.2s ease-out',
-        padding: '20px',
+        padding: '10px',
+        color: 'rgba(0,0,0,0.69)',
         '&:not(:last-of-type)': {
             borderBottom: '1px solid #0002',
         },
@@ -30,7 +31,7 @@ export const styles = {
             transition: '0.2s ease-out',
             color: 'white',
             borderRight: '20px solid #e76a20',
-            padding: '20px',
+            padding: '10px',
             paddingRight: '0'
         }
     },
@@ -39,7 +40,7 @@ export const styles = {
         transition: '0.2s ease-out',
         color: 'white',
         borderRight: '20px solid #e76a20',
-        padding: '20px',
+        padding: '10px',
         paddingRight: '0',
         '&:not(:last-of-type)': {
             borderBottom: '1px solid #0002',
@@ -48,7 +49,7 @@ export const styles = {
 
     optionsListItemLast: {
         transition: '0.2s ease-out',
-        padding: '20px',
+        padding: '10px',
         '&:not(:last-of-type)': {
             borderBottom: '1px solid #0002',
         },
@@ -57,11 +58,16 @@ export const styles = {
             transition: '0.2s ease-out',
             color: 'white',
             borderRight: '20px solid #cc0303 ',
-            padding: '20px',
+            padding: '15px',
             paddingRight: '0'
         }
     },
     option: {
+        display: 'flex',
+        gap: '10px',
+        alignItems: 'center',
         fontSize: '18px',
+
+
     }
 }

@@ -165,7 +165,7 @@ ProductInList.propTypes = {
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    rate: PropTypes.number.isRequired,
+    rate: PropTypes.number,
     count: PropTypes.number.isRequired,
     itemId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     description: PropTypes.string,

@@ -1,9 +1,17 @@
 import {Box, Container, List, ListItem, Typography} from "@mui/material";
 import {styles} from "./styles.js";
 import ProductsList from "../ListItemInfo/ProductsList.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getListOfOrders} from "../../../../redux/slices/localStorageSlice.js";
 
 const Orders = () => {
-    const date = new Date().toLocaleDateString(); // Format date to display properly
+    const {listOfOrders} = useSelector(state => state.localStorage);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getListOfOrders())
+    }, [dispatch])
 
     return (
         <Box sx={styles.wrapper}>
@@ -20,8 +28,10 @@ const Orders = () => {
                             Action
                         </Typography>
                     </ListItem>
-                    {/* Example of a product item */}
-                    <ProductsList id="uoyfyfYTF^RD7575" date={date}/>
+                    {listOfOrders && listOfOrders.map((order, index) => {
+                        return (<ProductsList key={index} id={order.orderId} date={order.date} order={order.order}/>)
+                    })}
+
                 </List>
             </Container>
         </Box>

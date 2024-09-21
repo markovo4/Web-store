@@ -27,7 +27,7 @@ const formInitValues = {
 const ModalRegister = ({button}) => {
     const {enqueueSnackbar} = useSnackbar();
     const dispatch = useDispatch();
-    const {users = [], currentUser} = useSelector((state) => state.localStorage);
+    const {users = []} = useSelector((state) => state.localStorage);
 
     useEffect(() => {
         dispatch(getAllUsers());
@@ -52,9 +52,9 @@ const ModalRegister = ({button}) => {
         initialValues: {...formInitValues},
         validationSchema: registerFormValidation,
         onSubmit: (values, {resetForm}) => {
-            try{
+            try {
                 const userEmail = users.find((user) => user.email === values.email);
-                if(!userEmail){ // If userEmail is NOT found, proceed with registration
+                if (!userEmail) { // If userEmail is NOT found, proceed with registration
                     const newUser = {
                         id: uuidv4(),
                         firstName: values.firstName.trim(),
@@ -79,14 +79,12 @@ const ModalRegister = ({button}) => {
                     enqueueSnackbar('Account with such email already exists!', {variant: 'info'});
                 }
 
-            } catch (e){
+            } catch (e) {
                 console.log(e);
             }
 
         },
     });
-
-    console.log(currentUser)
 
     return (
         <ModalTemplate

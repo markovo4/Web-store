@@ -7,6 +7,10 @@ import Favourites from "../Favourites";
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
 import routerNames from "../../../../router/routes/routerNames.js";
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const PersonalCabinet = () => {
     const navigate = useNavigate();
@@ -54,7 +58,7 @@ const PersonalCabinet = () => {
                             sx={activeSection === 'profile' ? styles.optionActive : styles.optionsListItem}
                         >
                             <Typography variant="h6" component="span" sx={styles.option}>
-                                Profile
+                                <AccountBoxIcon/> Profile
                             </Typography>
                         </ListItem>
 
@@ -64,7 +68,7 @@ const PersonalCabinet = () => {
                             sx={activeSection === 'orders' ? styles.optionActive : styles.optionsListItem}
                         >
                             <Typography variant="h6" component="span" sx={styles.option}>
-                                My Orders
+                                <ReceiptLongIcon/> My Orders
                             </Typography>
                         </ListItem>
 
@@ -74,7 +78,7 @@ const PersonalCabinet = () => {
                             sx={activeSection === 'favourites' ? styles.optionActive : styles.optionsListItem}
                         >
                             <Typography variant="h6" component="span" sx={styles.option}>
-                                Favourites
+                                <FavoriteBorderIcon/> Favourites
                             </Typography>
                         </ListItem>
 
@@ -83,7 +87,7 @@ const PersonalCabinet = () => {
                             sx={styles.optionsListItemLast}
                         >
                             <Typography variant="h6" component="span" sx={styles.option}>
-                                Log out
+                                <LogoutIcon/> Log out
                             </Typography>
                         </ListItem>
 
