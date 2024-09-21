@@ -30,7 +30,7 @@ const PersonalCabinet = () => {
         }
     }, [window.location])
 
-    
+
     const sectionDisplay = () => {
         switch (activeSection) {
             case 'profile':
@@ -80,7 +80,6 @@ const PersonalCabinet = () => {
 
                         <ListItem
                             onClick={handleLogOut}
-                            data-section="favourites"
                             sx={styles.optionsListItemLast}
                         >
                             <Typography variant="h6" component="span" sx={styles.option}>
