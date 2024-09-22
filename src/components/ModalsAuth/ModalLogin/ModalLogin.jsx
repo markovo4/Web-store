@@ -11,7 +11,7 @@ import ModalTemplate from '../../UI/ModalTemplate';
 import loginFormValidation from '../../../utils/validationSchemas/loginFormValidation';
 import {setModalLoginOpen} from '../../../redux/slices/modalsAuthSlice';
 import {styles} from './styles';
-import {getAllUsers} from "../../../redux/slices/localStorageSlice.js";
+import {getAllUsers, getCurrentUser, setCurrentUser} from '../../../redux/slices/localStorageSlice.js';
 
 const formInitValues = {
     login: '',
@@ -21,12 +21,13 @@ const formInitValues = {
 const ModalLogin = ({button}) => {
     const {enqueueSnackbar} = useSnackbar();
     const {modalLoginOpen} = useSelector(state => state.modalsAuth);
-    const {users = []} = useSelector((state) => state.localStorage);
+    const {users = []} = useSelector(state => state.localStorage);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getAllUsers());
-    }, [dispatch]); // Only run once, when the component mounts
+        dispatch(getCurrentUser())
+    }, [dispatch]); // Fetch all users on mount
 
     // Handlers for opening and closing the modal
     const handleOpen = () => dispatch(setModalLoginOpen(true));
@@ -40,27 +41,29 @@ const ModalLogin = ({button}) => {
         initialValues: formInitValues,
         validationSchema: loginFormValidation,
         onSubmit: (values, {resetForm}) => {
-            try{
-                const userEmail = users.find((user) =>{
-                    if(user.email === values.login){
-                        return user.password === values.password
-                    } else{
-                        return false;
-                    }
-                });
-                if(userEmail) { // If userEmail is NOT found, proceed with registration
+            try {
+                // Find the user with matching login (email) and password
+                const user = users.find(
+                    user => user.email === values.login && user.password === values.password
+                );
+
+                if (user) {
+
                     enqueueSnackbar('Successful Login!', {variant: 'success'});
                     Cookies.set('LoggedIn', 'true');
+                    dispatch(setCurrentUser(user)); // Set the logged-in user
                     setTimeout(() => {
-                        resetForm();
-                        handleClose();
+                        resetForm(); // Reset form after successful login
+                        handleClose(); // Close modal
                         window.location.reload();
                     }, 1000);
                 } else {
+                    // Show error if login details are incorrect
                     enqueueSnackbar('E-mail or password is wrong!', {variant: 'error'});
                 }
-            } catch (e){
-                console.log(e)
+            } catch (error) {
+                console.error('Login error:', error);
+                enqueueSnackbar('An error occurred during login.', {variant: 'error'});
             }
         },
     });

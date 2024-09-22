@@ -87,20 +87,22 @@ export const localStorageSlice = createSlice({
             state.recentlyViewed = storedData ? JSON.parse(storedData) : [];
         },
 
-        getUserById: (state, {payload}) => {
+        getUserByEmail: (state, {payload}) => {
             const storedData = localStorage.getItem(USERS_DATA_KEY)
             const allUsers = JSON.parse(storedData);
-            state.currentUser = allUsers.filter((user) => user.id === payload);
+            state.currentUser = allUsers.filter((user) => user.email === payload);
         },
 
         getAllUsers: (state) => {
             const storedData = localStorage.getItem(USERS_DATA_KEY)
             state.users = JSON.parse(storedData) || [];
         },
+
         getCurrentUser: (state) => {
             const storedData = localStorage.getItem(CURRENT_USER_DATA_KEY);
             state.currentUser = JSON.parse(storedData) || {};
         },
+
         getListOfOrders: (state) => {
             const storedData = localStorage.getItem(LIST_OF_ORDERS_DATA_KEY);
             state.listOfOrders = JSON.parse(storedData) || []
@@ -164,7 +166,15 @@ export const localStorageSlice = createSlice({
         },
 
         setUser: (state, {payload}) => {
-            const updatedUsersList = [...state.users, payload];
+            const userIndex = state.users.findIndex((user) => user.id === payload.id);
+            let updatedUsersList;
+            if (userIndex !== -1) {
+                updatedUsersList = state.users.map((user, index) =>
+                    index === userIndex ? payload : user
+                )
+            } else {
+                updatedUsersList = [...state.users, payload]
+            }
             localStorage.setItem(USERS_DATA_KEY, JSON.stringify(updatedUsersList));
             state.users = updatedUsersList;
         },
@@ -219,7 +229,7 @@ export const {
     getProductList,
     getCheckoutInfo,
     getRecentlyViewed,
-    getUserById,
+    getUserByEmail,
     getAllUsers,
     getCurrentUser,
     getListOfOrders,

@@ -13,7 +13,7 @@ import registerFormValidation from "../../../utils/validationSchemas/registerFor
 import {formatPhoneNumber} from "../../../utils/functions/functions";
 import {styles} from "./styles";
 import {v4 as uuidv4} from "uuid";
-import {getAllUsers, setUser} from "../../../redux/slices/localStorageSlice.js";
+import {getAllUsers, setCurrentUser, setUser} from "../../../redux/slices/localStorageSlice.js";
 
 const formInitValues = {
     firstName: '',
@@ -60,6 +60,7 @@ const ModalRegMobile = ({button}) => {
                     };
 
                     dispatch(setUser(newUser)); // Add new user to Redux store
+                    dispatch(setCurrentUser(newUser));
                     enqueueSnackbar('Successful Registration!', {variant: 'success'});
                     Cookies.set('LoggedIn', 'true');
 
