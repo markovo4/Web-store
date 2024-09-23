@@ -6,6 +6,7 @@ import {
     FORM_DATA_KEY,
     LIST_OF_ORDERS_DATA_KEY,
     USERS_DATA_KEY,
+    USERS_FAV_DATA_KEY,
     VIEWED_DATA_KEY,
 } from "../../utils/constants/constants.js";
 
@@ -29,6 +30,7 @@ const checkoutInitialData = {
     callBack: false,
     recentlyViewed: [],
     favouriteList: [],
+    favouriteUserList: [],
     users: [],
     currentUser: {},
     listOfOrders: [],
@@ -74,6 +76,23 @@ export const localStorageSlice = createSlice({
             } catch (e) {
                 console.error("Failed to parse local storage data:", e);
                 state.favouriteList = [];
+            }
+        },
+
+        getFavUserProductList: (state) => {
+            try {
+                const storedData = localStorage.getItem(USERS_FAV_DATA_KEY);
+                const parsedData = storedData ? JSON.parse(storedData) : [];
+
+                if (Array.isArray(parsedData)) {
+                    state.favouriteUserList = parsedData;
+                } else {
+                    console.warn("Data retrieved is not an array, resetting orderList.");
+                    state.favouriteUserList = [];
+                }
+            } catch (e) {
+                console.error("Failed to parse local storage data:", e);
+                state.favouriteUserList = [];
             }
         },
 
@@ -131,6 +150,19 @@ export const localStorageSlice = createSlice({
                 if (Array.isArray(payload)) {
                     localStorage.setItem(FAV_DATA_KEY, JSON.stringify(payload));
                     state.favouriteList = payload;
+                } else {
+                    console.error("Payload is not an array, ignoring setProductList action.");
+                }
+            } catch (e) {
+                console.error("Failed to store product list in local storage:", e);
+            }
+        },
+
+        setFavUserProductList: (state, {payload}) => {
+            try {
+                if (Array.isArray(payload)) {
+                    localStorage.setItem(USERS_FAV_DATA_KEY, JSON.stringify(payload));
+                    state.favouriteUserList = payload;
                 } else {
                     console.error("Payload is not an array, ignoring setProductList action.");
                 }
@@ -233,6 +265,7 @@ export const {
     getAllUsers,
     getCurrentUser,
     getListOfOrders,
+    getFavUserProductList,
     setRecentlyViewed,
     setProductList,
     setProductQuantity,
@@ -240,6 +273,7 @@ export const {
     setUser,
     setCurrentUser,
     setListOfOrders,
+    setFavUserProductList,
     removeAllProducts,
     removeFavProduct,
     removeCheckoutInfo,
