@@ -62,10 +62,9 @@ const ModalRegister = ({button}) => {
                         phoneNumber: values.phoneNumber.trim(),
                         email: values.email.trim(),
                         password: values.password.trim(),
-                        favProducts: []
                     };
 
-                    dispatch(setUser(newUser)); // Add new user to Redux store
+                    dispatch(setUser(newUser));
                     dispatch(setCurrentUser(newUser));
                     enqueueSnackbar('Successful Registration!', {variant: 'success'});
                     Cookies.set('LoggedIn', 'true');
