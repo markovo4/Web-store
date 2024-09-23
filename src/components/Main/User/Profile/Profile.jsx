@@ -32,6 +32,7 @@ const Profile = () => {
             lastName: currentUser?.lastName || '',
             phoneNumber: currentUser?.phoneNumber || '',
             email: currentUser?.email || '',
+            favProducts: currentUser?.favProducts || [],
         },
         enableReinitialize: true,
         validationSchema: profileInfoEditValidation,
