@@ -75,8 +75,9 @@ const useFavourite = (id, product) => {
 
     // Determine which handler to return based on whether the user is logged in
     return {
-        isInFav,
-        handleFavClick: Cookies.get('LoggedIn') ? handleFavUserClick : handleFavClick
+        isInFav: Cookies.get('LoggedIn') ? isInUserFav : isInFav,
+        handleFavClick: Cookies.get('LoggedIn') ? handleFavUserClick : handleFavClick,
+        favouriteUserProducts
     };
 };
 

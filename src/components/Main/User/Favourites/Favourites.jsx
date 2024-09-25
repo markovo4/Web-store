@@ -7,16 +7,21 @@ import ProductInList from "../../../UI/cards/ProductInList/index.js";
 
 const Favourites = () => {
     const dispatch = useDispatch();
-    const {favouriteList} = useSelector(state => state.localStorage);
+    const {favouriteList = [], favouriteUserList = [], currentUser = {}} = useSelector(state => state.localStorage);
 
     useEffect(() => {
         dispatch(getFavProductList())
     }, [dispatch])
+
+    const favouriteUserProducts = favouriteUserList
+        .filter(user => user.email === currentUser.email)
+        .flatMap(user => user.productsList || []);
+
     return (
         <Box sx={styles.wrapper}>
             <Container>
                 <Box sx={styles.container}>
-                    {favouriteList && favouriteList.map((product, index) => {
+                    {favouriteUserProducts && favouriteUserProducts.map((product, index) => {
                         return (
                             <ProductInList
                                 image={product.image}
@@ -30,7 +35,7 @@ const Favourites = () => {
                         )
                     })}
                 </Box>
-                {favouriteList.length === 0 && <Box sx={styles.container}>
+                {favouriteUserProducts.length === 0 && <Box sx={styles.container}>
                     <Typography variant='h4' component='span' sx={styles.infoText}>
                         No Favorites!
                     </Typography>
