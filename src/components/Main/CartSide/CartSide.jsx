@@ -106,7 +106,7 @@ CartSide.propTypes = {
     onQuantityChange: PropTypes.func.isRequired,
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
+    rating: PropTypes.number,
     count: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,

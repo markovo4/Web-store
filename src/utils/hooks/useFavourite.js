@@ -17,22 +17,21 @@ const useFavourite = (id, product) => {
     const {enqueueSnackbar} = useSnackbar();
     const {favouriteList = [], favouriteUserList = [], currentUser = {}} = useSelector((state) => state.localStorage);
 
-    // Check if the product is in the general favorite list
-    const [isInFav, setIsInFav] = useState(
-        favouriteList.some(p => p.id === id)
-    );
+    const [isInFav, setIsInFav] = useState(false);
+    const [isInUserFav, setIsInUserFav] = useState(false);
 
-    // Get the user's favorite product list
+    useEffect(() => {
+        setIsInFav(favouriteList.some(p => p.id === id));
+    }, [favouriteList, id]);
+
     const favouriteUserProducts = favouriteUserList
         .filter(user => user.email === currentUser.email)
         .flatMap(user => user.productsList || []);
 
-    // Check if the product is in the user's specific favorite list
-    const [isInUserFav, setIsInUserFav] = useState(
-        favouriteUserProducts.some(p => p.id === id)
-    );
+    useEffect(() => {
+        setIsInUserFav(favouriteUserProducts.some(p => p.id === id));
+    }, [favouriteUserProducts, id]);
 
-    // Fetch user and favorites on initial render
     useEffect(() => {
         if (Cookies.get('LoggedIn')) {
             dispatch(getCurrentUser());
@@ -41,39 +40,38 @@ const useFavourite = (id, product) => {
         dispatch(getFavProductList());
     }, [dispatch]);
 
-    // Handle favorite for non-logged-in users (general favorite list)
     const handleFavClick = () => {
         if (!isInFav) {
             enqueueSnackbar("Item Added to Favourites!", {variant: "success"});
             const updatedFavouriteList = [...favouriteList, product];
-            dispatch(setFavProductList(updatedFavouriteList)); // Update general favorite list
+            dispatch(setFavProductList(updatedFavouriteList));
         } else {
-            dispatch(removeFavProduct(id)); // Remove from general favorite list
+            dispatch(removeFavProduct(id));
             enqueueSnackbar("Item removed from Favourites!", {variant: "info"});
         }
+        // Optionally, call the effect to update the local state
         setIsInFav(!isInFav); // Toggle local state
     };
 
-    // Handle favorite for logged-in users (user-specific favorite list)
     const handleFavUserClick = () => {
         if (!isInUserFav) {
             enqueueSnackbar("Item Added to Favourites!", {variant: "success"});
             const updatedFavouriteList = [...favouriteUserProducts, product];
             dispatch(setFavUserProductList({
                 email: currentUser.email,
-                productsList: updatedFavouriteList // Update user-specific favorite list
+                productsList: updatedFavouriteList
             }));
         } else {
             dispatch(removeFavUserProduct({
                 email: currentUser.email,
-                productId: id // Remove from user-specific favorite list
+                productId: id
             }));
             enqueueSnackbar("Item removed from Favourites!", {variant: "info"});
         }
-        setIsInUserFav(!isInUserFav); // Toggle local state
+        // Optionally, call the effect to update the local state
+        setIsInUserFav(!isInUserFav);
     };
 
-    // Determine which handler to return based on whether the user is logged in
     return {
         isInFav: Cookies.get('LoggedIn') ? isInUserFav : isInFav,
         handleFavClick: Cookies.get('LoggedIn') ? handleFavUserClick : handleFavClick,

@@ -51,12 +51,7 @@ export const localStorageSlice = createSlice({
                 const storedData = localStorage.getItem(DATA_KEY);
                 const parsedData = storedData ? JSON.parse(storedData) : [];
 
-                if (Array.isArray(parsedData)) {
-                    state.orderList = parsedData;
-                } else {
-                    console.warn("Data retrieved is not an array, resetting orderList.");
-                    state.orderList = [];
-                }
+                state.orderList = Array.isArray(parsedData) ? parsedData : [];
             } catch (e) {
                 console.error("Failed to parse local storage data:", e);
                 state.orderList = [];
@@ -67,12 +62,7 @@ export const localStorageSlice = createSlice({
                 const storedData = localStorage.getItem(FAV_DATA_KEY);
                 const parsedData = storedData ? JSON.parse(storedData) : [];
 
-                if (Array.isArray(parsedData)) {
-                    state.favouriteList = parsedData;
-                } else {
-                    console.warn("Data retrieved is not an array, resetting orderList.");
-                    state.favouriteList = [];
-                }
+                state.favouriteList = Array.isArray(parsedData) ? parsedData : [];
             } catch (e) {
                 console.error("Failed to parse local storage data:", e);
                 state.favouriteList = [];
@@ -90,45 +80,74 @@ export const localStorageSlice = createSlice({
         },
 
         getCheckoutInfo: (state) => {
-            const storedData = localStorage.getItem(FORM_DATA_KEY);
-            state.checkout = storedData ? JSON.parse(storedData) : {};
+            try {
+                const storedData = localStorage.getItem(FORM_DATA_KEY);
+                state.checkout = storedData ? JSON.parse(storedData) : checkoutInitialData;
+            } catch (e) {
+                console.error("Failed to parse checkout info:", e);
+                state.checkout = checkoutInitialData;
+            }
         },
 
         getRecentlyViewed: (state) => {
-            const storedData = localStorage.getItem(VIEWED_DATA_KEY);
-            state.recentlyViewed = storedData ? JSON.parse(storedData) : [];
+            try {
+                const storedData = localStorage.getItem(VIEWED_DATA_KEY);
+                state.recentlyViewed = storedData ? JSON.parse(storedData) : [];
+            } catch (e) {
+                console.error("Failed to parse recently viewed data:", e);
+                state.recentlyViewed = [];
+            }
         },
 
         getUserByEmail: (state, {payload}) => {
-            const storedData = localStorage.getItem(USERS_DATA_KEY)
-            const allUsers = JSON.parse(storedData);
-            state.currentUser = allUsers.filter((user) => user.email === payload);
+            try {
+                const storedData = localStorage.getItem(USERS_DATA_KEY);
+                const allUsers = JSON.parse(storedData) || [];
+                state.currentUser = allUsers.find(user => user.email === payload) || {};
+            } catch (e) {
+                console.error("Failed to get user by email:", e);
+                state.currentUser = {};
+            }
         },
 
         getAllUsers: (state) => {
-            const storedData = localStorage.getItem(USERS_DATA_KEY)
-            state.users = JSON.parse(storedData) || [];
+            try {
+                const storedData = localStorage.getItem(USERS_DATA_KEY);
+                state.users = JSON.parse(storedData) || [];
+            } catch (e) {
+                console.error("Failed to retrieve users data:", e);
+                state.users = [];
+            }
         },
 
         getCurrentUser: (state) => {
-            const storedData = localStorage.getItem(CURRENT_USER_DATA_KEY);
-            state.currentUser = JSON.parse(storedData) || {};
+            try {
+                const storedData = localStorage.getItem(CURRENT_USER_DATA_KEY);
+                state.currentUser = JSON.parse(storedData) || {};
+            } catch (e) {
+                console.error("Failed to retrieve current user data:", e);
+                state.currentUser = {};
+            }
         },
 
         getListOfOrders: (state) => {
-            const storedData = localStorage.getItem(LIST_OF_ORDERS_DATA_KEY);
-            state.listOfOrders = JSON.parse(storedData) || []
+            try {
+                const storedData = localStorage.getItem(LIST_OF_ORDERS_DATA_KEY);
+                state.listOfOrders = JSON.parse(storedData) || [];
+            } catch (e) {
+                console.error("Failed to retrieve order list:", e);
+                state.listOfOrders = [];
+            }
         },
 
         setRecentlyViewed: (state, {payload}) => {
             try {
                 const storedData = localStorage.getItem(VIEWED_DATA_KEY);
                 const parsedData = storedData ? JSON.parse(storedData) : [];
-
                 const isProductAlreadyViewed = parsedData.some(product => product.id === payload.id);
 
                 if (!isProductAlreadyViewed) {
-                    const filteredData = parsedData.length === 5 ? parsedData.slice(1) : parsedData
+                    const filteredData = parsedData.length === 5 ? parsedData.slice(1) : parsedData;
                     const updatedData = [...filteredData, payload];
                     localStorage.setItem(VIEWED_DATA_KEY, JSON.stringify(updatedData));
                     state.recentlyViewed = updatedData;
@@ -144,39 +163,35 @@ export const localStorageSlice = createSlice({
                     localStorage.setItem(FAV_DATA_KEY, JSON.stringify(payload));
                     state.favouriteList = payload;
                 } else {
-                    console.error("Payload is not an array, ignoring setProductList action.");
+                    console.error("Payload is not an array, ignoring setFavProductList action.");
                 }
             } catch (e) {
-                console.error("Failed to store product list in local storage:", e);
+                console.error("Failed to store favorite product list in local storage:", e);
             }
         },
 
-        setFavUserProductList: (state, { payload }) => {
+        setFavUserProductList: (state, {payload}) => {
             try {
-                const { email, productsList } = payload;
+                const {email, productsList} = payload;
                 const existingFavUserList = JSON.parse(localStorage.getItem(USERS_FAV_DATA_KEY)) || [];
 
-                // Find the user by email
                 const updatedFavUserList = existingFavUserList.map(user => {
                     if (user.email === email) {
-                        return { ...user, productsList };
+                        return {...user, productsList};
                     }
                     return user;
                 });
 
-                // If user does not exist, add them to the list
                 if (!updatedFavUserList.some(user => user.email === email)) {
-                    updatedFavUserList.push({ email, productsList });
+                    updatedFavUserList.push({email, productsList});
                 }
 
-                // Update localStorage and state
                 localStorage.setItem(USERS_FAV_DATA_KEY, JSON.stringify(updatedFavUserList));
                 state.favouriteUserList = updatedFavUserList;
             } catch (e) {
-                console.error("Failed to store user product list in local storage:", e);
+                console.error("Failed to store user favorite product list in local storage:", e);
             }
         },
-
 
         setProductList: (state, {payload}) => {
             try {
@@ -191,34 +206,38 @@ export const localStorageSlice = createSlice({
             }
         },
 
-        setProductQuantity: (state, action) => {
-            const {id, amount} = action.payload
-            state.productQuantity = amount
-            const targetProduct = state.orderList.find((product) => product.id === id)
+        setProductQuantity: (state, {payload}) => {
+            const {id, amount} = payload;
+            state.productQuantity = amount;
+            const targetProduct = state.orderList.find(product => product.id === id);
             if (targetProduct) {
                 targetProduct.amount = amount;
             }
         },
+
         setCheckoutInfo: (state, {payload}) => {
             state.checkout = payload;
             localStorage.setItem(FORM_DATA_KEY, JSON.stringify(payload));
         },
 
         setUser: (state, {payload}) => {
-            const userIndex = state.users.findIndex((user) => user.id === payload.id);
+            const userIndex = state.users.findIndex(user => user.id === payload.id);
             let updatedUsersList;
+
             if (userIndex !== -1) {
                 updatedUsersList = state.users.map((user, index) =>
                     index === userIndex ? payload : user
-                )
+                );
             } else {
-                updatedUsersList = [...state.users, payload]
+                updatedUsersList = [...state.users, payload];
             }
+
             localStorage.setItem(USERS_DATA_KEY, JSON.stringify(updatedUsersList));
             state.users = updatedUsersList;
         },
+
         setCurrentUser: (state, {payload}) => {
-            localStorage.setItem(CURRENT_USER_DATA_KEY, JSON.stringify(payload))
+            localStorage.setItem(CURRENT_USER_DATA_KEY, JSON.stringify(payload));
             state.currentUser = payload || {};
         },
 
@@ -234,37 +253,37 @@ export const localStorageSlice = createSlice({
         },
 
         removeFavProduct: (state, {payload}) => {
-            const updatedOrderList = state.favouriteList.filter(product => product.id !== payload);
-
-            localStorage.setItem(FAV_DATA_KEY, JSON.stringify(updatedOrderList));
-
-            state.favouriteList = updatedOrderList;
+            const updatedFavouriteList = state.favouriteList.filter(product => product.id !== payload);
+            state.favouriteList = updatedFavouriteList;
+            localStorage.setItem(FAV_DATA_KEY, JSON.stringify(updatedFavouriteList));
         },
 
-        removeFavUserProduct: (state, { payload }) => {
+        removeFavUserProduct: (state, {payload}) => {
             const user = state.favouriteUserList.find(u => u.email === payload.email);
             if (user) {
                 user.productsList = user.productsList.filter(product => product.id !== payload.productId);
+                localStorage.setItem(USERS_FAV_DATA_KEY, JSON.stringify(state.favouriteUserList));
             }
-            localStorage.setItem(USERS_FAV_DATA_KEY, JSON.stringify(state.favouriteUserList));
         },
 
         removeAllProducts: (state) => {
-            localStorage.removeItem(DATA_KEY)
-            state.orderList = []
+            localStorage.removeItem(DATA_KEY);
+            state.orderList = [];
         },
 
         removeCheckoutInfo: (state) => {
-            localStorage.removeItem(FORM_DATA_KEY)
+            localStorage.removeItem(FORM_DATA_KEY);
             state.checkout = checkoutInitialData;
         },
 
         removeUserById: (state, {payload}) => {
-            const storedData = localStorage.getItem(USERS_DATA_KEY)
-            const allUsers = JSON.parse(storedData);
-            const updatedUsers = allUsers.filter((user) => user.id !== payload);
-            localStorage.setItem(USERS_DATA_KEY, JSON.stringify(updatedUsers));
-            state.users = updatedUsers;
+            const storedData = localStorage.getItem(USERS_DATA_KEY);
+            if (storedData) {
+                const allUsers = JSON.parse(storedData);
+                const updatedUsers = allUsers.filter(user => user.id !== payload);
+                localStorage.setItem(USERS_DATA_KEY, JSON.stringify(updatedUsers));
+                state.users = updatedUsers;
+            }
         },
     }
 });

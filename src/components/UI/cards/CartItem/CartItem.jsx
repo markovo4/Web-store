@@ -132,7 +132,7 @@ CartItem.propTypes = {
     description: PropTypes.string,
     image: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
+    rating: PropTypes.number,
     count: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
     onQuantityChange: PropTypes.func,
