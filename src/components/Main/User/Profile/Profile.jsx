@@ -2,7 +2,12 @@ import {Box, Button, Container, List, ListItem, Typography} from "@mui/material"
 import {styles} from './styles.js';
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {getCurrentUser, setCurrentUser, setUser} from "../../../../redux/slices/localStorageSlice.js";
+import {
+    getCurrentUser,
+    setCurrentUser,
+    setUser,
+    updateFavUserProductList
+} from "../../../../redux/slices/localStorageSlice.js";
 import {useFormik} from "formik";
 import FormInput from "../../../UI/inputs/FormInput/index.js";
 import {formatPhoneNumber} from "../../../../utils/functions/functions.js";
@@ -10,8 +15,12 @@ import profileInfoEditValidation from "../../../../utils/validationSchemas/profi
 
 const Profile = () => {
     const dispatch = useDispatch();
-    const {currentUser} = useSelector(state => state.localStorage);
+    const {currentUser, favouriteUserList = []} = useSelector(state => state.localStorage);
     const [isEdit, setIsEdit] = useState(false);
+
+    const favouriteUserProducts = favouriteUserList
+        .filter(user => user.email === currentUser.email)
+        .flatMap(user => user.productsList || []);
 
     const handleClick = () => setIsEdit(prev => !prev);
 
@@ -45,6 +54,11 @@ const Profile = () => {
             };
             dispatch(setCurrentUser({...currentUser, ...newUserInfo}));
             dispatch(setUser({...currentUser, ...newUserInfo}))
+            dispatch(updateFavUserProductList({
+                newEmail: values.email.trim(),
+                oldEmail: currentUser.email,
+                productsList: favouriteUserProducts
+            }))
             setIsEdit(false);
         }
     });

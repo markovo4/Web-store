@@ -193,6 +193,25 @@ export const localStorageSlice = createSlice({
             }
         },
 
+        updateFavUserProductList: (state, {payload}) => {
+            try {
+                const {newEmail, oldEmail, productsList} = payload;
+                const existingFavUserList = JSON.parse(localStorage.getItem(USERS_FAV_DATA_KEY)) || [];
+
+                const updatedFavUserList = existingFavUserList.map(user => {
+                    if (user.email === oldEmail) {
+                        return {email: newEmail, productsList};
+                    }
+                    return user;
+                });
+
+                localStorage.setItem(USERS_FAV_DATA_KEY, JSON.stringify(updatedFavUserList));
+                state.favouriteUserList = updatedFavUserList;
+            } catch (e) {
+                console.error("Failed to store user favorite product list in local storage:", e);
+            }
+        },
+
         setProductList: (state, {payload}) => {
             try {
                 if (Array.isArray(payload)) {
@@ -308,6 +327,7 @@ export const {
     setCurrentUser,
     setListOfOrders,
     setFavUserProductList,
+    updateFavUserProductList,
     removeAllProducts,
     removeFavProduct,
     removeCheckoutInfo,
