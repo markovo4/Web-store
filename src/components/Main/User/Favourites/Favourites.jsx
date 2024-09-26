@@ -2,15 +2,15 @@ import {Box, Container, Typography} from "@mui/material";
 import {styles} from "./styles.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {getFavProductList} from "../../../../redux/slices/localStorageSlice.js";
+import {getFavUserProductList} from "../../../../redux/slices/localStorageSlice.js";
 import ProductInList from "../../../UI/cards/ProductInList/index.js";
 
 const Favourites = () => {
     const dispatch = useDispatch();
-    const {favouriteList = [], favouriteUserList = [], currentUser = {}} = useSelector(state => state.localStorage);
+    const {favouriteUserList = [], currentUser = {}} = useSelector(state => state.localStorage);
 
     useEffect(() => {
-        dispatch(getFavProductList())
+        dispatch(getFavUserProductList())
     }, [dispatch])
 
     const favouriteUserProducts = favouriteUserList

@@ -1,12 +1,11 @@
 import {Box, Container, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {getFavProductList} from "../../../redux/slices/localStorageSlice.js";
+import {getFavProductList, getFavUserProductList} from "../../../redux/slices/localStorageSlice.js";
 import ProductInList from "../../UI/cards/ProductInList/index.js";
 import {styles} from "./styles.js";
 import {useNavigate} from "react-router-dom";
 import routerNames from "../../../router/routes/routerNames.js";
-import useFavourite from "../../../utils/hooks/useFavourite.js";
 import Cookies from "js-cookie";
 
 const FavProductsDisplay = () => {
@@ -20,19 +19,26 @@ const FavProductsDisplay = () => {
 
     useEffect(() => {
         dispatch(getFavProductList())
-        setFavList(Cookies.get('LoggedIn') ? favouriteUserProducts : favouriteList)
+        dispatch(getFavUserProductList())
     }, [dispatch])
 
     const [favList, setFavList] = useState(Cookies.get('LoggedIn') ? favouriteUserProducts : favouriteList)
 
-
     useEffect(() => {
+        const updatedFavList = Cookies.get('LoggedIn') ? favouriteUserProducts : favouriteList;
+
+        setFavList((prev) => {
+            if (prev !== updatedFavList) {
+                return updatedFavList;
+            }
+            return prev;
+        });
+
         if (favList < 1) {
             navigate(routerNames.pageMain)
         }
-    }, [favList]);
 
-
+    }, [Cookies.get('LoggedIn'), favouriteUserList, currentUser.email, favouriteList]);
 
     return (
         <Box sx={styles.section}>

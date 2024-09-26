@@ -18,19 +18,25 @@ import ProductsSelect from "../../UI/inputs/ProductsSelect";
 import CategoriesDropdown from "../../UI/CategoriesDropdown";
 import HeaderDropdown from "../../UI/HeaderDropdown";
 import ModalLogin from "../../ModalsAuth/ModalLogin";
-import {getProductList} from "../../../redux/slices/localStorageSlice";
+import {getFavUserProductList, getProductList} from "../../../redux/slices/localStorageSlice";
 import {getTotalPrice} from "../../../utils/functions/functions";
 import routerNames from "../../../router/routes/routerNames";
 import stylesSCSS from './stylesSCSS.module.scss';
 import ModalLoginMobile from "../../ModalsAuth/ModalLoginMobile/index.js";
 
 const HeaderBottom = () => {
-    const {orderList, favouriteList} = useSelector(state => state.localStorage);
+    const {
+        orderList,
+        favouriteList,
+        favouriteUserList = [],
+        currentUser = {}
+    } = useSelector(state => state.localStorage);
     const {displayAuthButtons} = useSelector(state => state.modalsAuth);
     const dispatch = useDispatch();
 
     const [fixedHeader, setFixedHeader] = useState(false);
 
+    // Update the state for fixed header on scroll
     useEffect(() => {
         const handleScroll = () => {
             setFixedHeader(window.scrollY > 1000 && window.location.pathname === routerNames.pageMain);
@@ -40,14 +46,40 @@ const HeaderBottom = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Fetch the favorite products for the logged-in user
+    const favouriteUserProducts = favouriteUserList
+        .filter(user => user.email === currentUser.email)
+        .flatMap(user => user.productsList || []);
+
+    // Define the `favList` based on the logged-in status
+    const [favList, setFavList] = useState([]);
+
+    // Update favList whenever the relevant lists or login status change
     useEffect(() => {
         dispatch(getProductList());
+        dispatch(getFavUserProductList());
     }, [dispatch]);
 
+    useEffect(() => {
+        const updatedFavList = Cookies.get('LoggedIn') ? favouriteUserProducts : favouriteList;
+
+        // Only update state if the value actually changed
+        setFavList((prev) => {
+            if (prev !== updatedFavList) {
+                return updatedFavList;
+            }
+            return prev;
+        });
+    }, [Cookies.get('LoggedIn'), favouriteUserList, currentUser.email, favouriteList]);
+
+
+    // Logout handler
     const handleLogOut = () => {
         Cookies.remove('LoggedIn');
         window.location.reload();
     };
+
+    console.log(favList)
 
     return (
         <Box sx={fixedHeader ? styles.fixedHeader : styles.header}>
@@ -127,8 +159,9 @@ const HeaderBottom = () => {
                     <div className={stylesSCSS.separator}/>
 
                     <Tooltip
-                        title={favouriteList.length < 1 ? 'Add items to favourites first!' : 'View your favourites!'}>
-                        <Link to={favouriteList.length < 1 ? routerNames.pageMain : routerNames.pageFavProducts}>
+                        title={favList.length < 1 ? 'Add items to favourites first!' : 'View your favourites!'}
+                    >
+                        <Link to={favList.length < 1 ? routerNames.pageMain : routerNames.pageFavProducts}>
                             <Button sx={styles.buttonFav} variant="contained">
                                 <FavoriteBorderIcon/>
                             </Button>
@@ -147,8 +180,9 @@ const HeaderBottom = () => {
                                 {orderList.length !== 0 ? (
                                     <Box className='flex flex-col'>
                                         <Typography variant='p'>Total</Typography>
-                                        <Typography variant='span'
-                                                    component='span'>${getTotalPrice(orderList).price}</Typography>
+                                        <Typography variant='span' component='span'>
+                                            ${getTotalPrice(orderList).price}
+                                        </Typography>
                                     </Box>
                                 ) : (
                                     <Typography variant='h6'>Cart</Typography>
