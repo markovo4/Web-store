@@ -17,19 +17,20 @@ const useFavourite = (id, product) => {
     const {enqueueSnackbar} = useSnackbar();
     const {favouriteList = [], favouriteUserList = [], currentUser = {}} = useSelector((state) => state.localStorage);
 
+
     const [isInFav, setIsInFav] = useState(false);
     const [isInUserFav, setIsInUserFav] = useState(false);
-
-    useEffect(() => {
-        setIsInFav(favouriteList.some(p => p.id === id));
-    }, [favouriteList, id]);
 
     const favouriteUserProducts = favouriteUserList
         .filter(user => user.email === currentUser.email)
         .flatMap(user => user.productsList || []);
 
     useEffect(() => {
-        setIsInUserFav(favouriteUserProducts.some(p => p.id === id));
+        setIsInFav(favouriteList.some(p => p.id === id))
+    }, [favouriteList, id]);
+
+    useEffect(() => {
+        setIsInUserFav(favouriteUserProducts.some(p => p.id === id))
     }, [favouriteUserProducts, id]);
 
     useEffect(() => {
@@ -40,35 +41,42 @@ const useFavourite = (id, product) => {
         dispatch(getFavProductList());
     }, [dispatch]);
 
+
     const handleFavClick = () => {
         if (!isInFav) {
-            enqueueSnackbar("Item Added to Favourites!", {variant: "success"});
             const updatedFavouriteList = [...favouriteList, product];
             dispatch(setFavProductList(updatedFavouriteList));
+
+            enqueueSnackbar("Item Added to Favourites!", {variant: "success"});
         } else {
+
             dispatch(removeFavProduct(id));
             enqueueSnackbar("Item removed from Favourites!", {variant: "info"});
         }
-        // Optionally, call the effect to update the local state
-        setIsInFav(!isInFav); // Toggle local state
+
+        setIsInFav(!isInFav);
     };
 
     const handleFavUserClick = () => {
         if (!isInUserFav) {
-            enqueueSnackbar("Item Added to Favourites!", {variant: "success"});
             const updatedFavouriteList = [...favouriteUserProducts, product];
+
             dispatch(setFavUserProductList({
                 email: currentUser.email,
                 productsList: updatedFavouriteList
             }));
+
+            enqueueSnackbar("Item Added to Favourites!", {variant: "success"});
         } else {
+
             dispatch(removeFavUserProduct({
                 email: currentUser.email,
                 productId: id
             }));
+
             enqueueSnackbar("Item removed from Favourites!", {variant: "info"});
         }
-        // Optionally, call the effect to update the local state
+
         setIsInUserFav(!isInUserFav);
     };
 
