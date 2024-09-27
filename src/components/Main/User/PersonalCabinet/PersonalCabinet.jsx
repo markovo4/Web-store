@@ -11,6 +11,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import LogoutIcon from '@mui/icons-material/Logout';
+import UserInfo from "../UserInfo/index.js";
 
 const PersonalCabinet = () => {
     const navigate = useNavigate();
@@ -48,6 +49,7 @@ const PersonalCabinet = () => {
 
     return (
         <Box sx={styles.section}>
+            <UserInfo/>
             <Container sx={styles.container}>
                 <Box sx={styles.wrapper}>
                     <List sx={styles.optionsList} disablePadding={true}>

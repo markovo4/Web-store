@@ -6,6 +6,7 @@ export const styles = {
     },
     section: {
         display: 'flex',
+        flexDirection: 'column',
         minHeight: '100vh',
         maxHeight: '100%',
         backgroundColor: '#ececec',

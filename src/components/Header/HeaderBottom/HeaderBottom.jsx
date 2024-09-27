@@ -79,8 +79,6 @@ const HeaderBottom = () => {
         window.location.reload();
     };
 
-    console.log(favList)
-
     return (
         <Box sx={fixedHeader ? styles.fixedHeader : styles.header}>
             <Box sx={styles.containerMd}>
