@@ -20,6 +20,9 @@ const Favourites = () => {
     return (
         <Box sx={styles.wrapper}>
             <Container>
+                <Typography variant="h5" component="span" sx={styles.infoTextTitle}>
+                    Favourite Items
+                </Typography>
                 <Box sx={styles.container}>
                     {favouriteUserProducts && favouriteUserProducts.map((product, index) => {
                         return (

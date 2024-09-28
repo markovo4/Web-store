@@ -15,5 +15,11 @@ export const styles = {
     },
     infoText: {
         color: 'rgba(0,0,0,0.62)'
+    },
+    infoTextTitle: {
+        color: 'rgba(0,0,0,0.75)',
+        fontSize: '30px',
+        fontWeight: 'bold',
+        paddingBottom: '50px'
     }
 }

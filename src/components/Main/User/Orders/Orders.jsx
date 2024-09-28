@@ -17,8 +17,12 @@ const Orders = () => {
     return (
         <Box sx={styles.wrapper}>
             <Container>
+                <Typography variant="h5" component="span" sx={styles.infoTextTitle}>
+                    Order History
+                </Typography>
                 <List>
                     <ListItem sx={styles.infoGroup}>
+
                         <Typography variant="h5" component="span" sx={styles.infoText}>
                             ID
                         </Typography>

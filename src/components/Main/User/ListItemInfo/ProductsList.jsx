@@ -5,7 +5,7 @@ import {useState} from "react";
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import stylesSCSS from "../../OrderReview/stylesSCSS.module.scss";
+import stylesSCSS from "./stylesSCSS.module.scss";
 
 const ProductsList = ({id, date, order}) => {
     const [showMore, setShowMore] = useState(false);
@@ -32,11 +32,11 @@ const ProductsList = ({id, date, order}) => {
                 <Typography variant="h6" component="span" sx={styles.infoText}>
                     {date}
                 </Typography>
-                <Typography variant="h6" component="span" sx={styles.infoText}>
+                <Typography variant="h6" component="span" sx={styles.infoTextAction}>
                     {showMore ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
                 </Typography>
             </ListItemButton>
-            
+
             {showMore && (
                 <ListItem sx={styles.productItem} className="flex flex-col">
                     {order && order.map((product) => (

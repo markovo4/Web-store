@@ -20,7 +20,7 @@ export const styles = {
     },
     infoEditGroup: {
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         gap: '20px'
     },
     infoText: {
@@ -29,8 +29,8 @@ export const styles = {
     },
     infoTextTitle: {
         fontWeight: 'bold',
-        color: 'rgba(0,0,0,0.62)',
-        fontSize: '25px'
+        color: 'rgba(0,0,0,0.7)',
+        fontSize: '30px'
     },
     signUpButton: {
         '&.MuiButton-root': {

@@ -235,7 +235,18 @@ export const styles = {
             md: '20px',
             xs: '15px',
         },
+        color: 'rgba(0,0,0,0.61)'
+    },
 
+    infoTextAction: {
+        fontSize: {
+            lg: '20px',
+            md: '20px',
+            xs: '15px',
+        },
+        display: 'flex',
+        justifyContent: 'center',
+        width: '80px',
         color: 'rgba(0,0,0,0.61)'
     },
     infoContainer: {

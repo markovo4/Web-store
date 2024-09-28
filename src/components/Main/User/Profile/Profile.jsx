@@ -1,7 +1,7 @@
+import React, {useEffect, useState} from "react";
 import {Box, Button, Container, List, ListItem, Typography} from "@mui/material";
 import {styles} from './styles.js';
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
 import {
     getCurrentUser,
     setCurrentUser,
@@ -70,32 +70,36 @@ const Profile = () => {
                 {currentUser && (
                     <>
                         {!isEdit ? (
-                            <List>
-                                <ListItem sx={styles.infoEditGroup}>
-                                    <Button variant={'contained'} sx={styles.editButton}
-                                            onClick={handleClick}>Edit Profile<EditIcon fontSize={'medium'}/></Button>
-                                </ListItem>
-                                <ListItem>
-                                    <Typography variant='h5' component='span' sx={styles.infoTextTitle}>
-                                        Your Contact Information
-                                    </Typography>
-                                </ListItem>
-                                <ListItem sx={styles.infoGroup}>
-                                    <Typography variant='h6' component='span' sx={styles.infoText}>
-                                        {`${currentUser.firstName} ${currentUser.lastName}`}
-                                    </Typography>
-                                </ListItem>
-                                <ListItem sx={styles.infoGroup}>
-                                    <Typography variant='h6' component='span' sx={styles.infoText}>
-                                        {currentUser.phoneNumber}
-                                    </Typography>
-                                </ListItem>
-                                <ListItem sx={styles.infoGroup}>
-                                    <Typography variant='h6' component='span' sx={styles.infoText}>
-                                        {currentUser.email}
-                                    </Typography>
-                                </ListItem>
-                            </List>
+                            <React.Fragment>
+
+                                <List>
+                                    <ListItem sx={styles.infoEditGroup}>
+                                        <Typography variant='h5' component='span' sx={styles.infoTextTitle}>
+                                            Your Contact Information
+                                        </Typography>
+
+                                        <Button variant={'contained'} sx={styles.editButton}
+                                                onClick={handleClick}>Edit Profile<EditIcon
+                                            fontSize={'medium'}/></Button>
+                                    </ListItem>
+                                    <ListItem sx={styles.infoGroup}>
+                                        <Typography variant='h6' component='span' sx={styles.infoText}>
+                                            {`${currentUser.firstName} ${currentUser.lastName}`}
+                                        </Typography>
+                                    </ListItem>
+                                    <ListItem sx={styles.infoGroup}>
+                                        <Typography variant='h6' component='span' sx={styles.infoText}>
+                                            {currentUser.phoneNumber}
+                                        </Typography>
+                                    </ListItem>
+                                    <ListItem sx={styles.infoGroup}>
+                                        <Typography variant='h6' component='span' sx={styles.infoText}>
+                                            {currentUser.email}
+                                        </Typography>
+                                    </ListItem>
+                                </List>
+                            </React.Fragment>
+
                         ) : (
                             <form onSubmit={formik.handleSubmit}>
                                 <Box sx={styles.formContainer}>

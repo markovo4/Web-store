@@ -13,7 +13,7 @@ export const styles = {
         width: '100%'
     },
     wrapper: {
-        width: '21.7%',
+        width: '21.9%',
         backgroundColor: '#ffffff',
         borderRadius: '10px 10px 0 0'
     },
@@ -24,7 +24,7 @@ export const styles = {
     optionsListItem: {
         transition: '0.2s ease-out',
         padding: '10px',
-        color: 'rgba(0,0,0,0.69)',
+        color: 'rgba(0,0,0,0.49)',
         '&:not(:last-of-type)': {
             borderBottom: '1px solid #0002',
         },
@@ -58,6 +58,7 @@ export const styles = {
     optionsListItemLast: {
         transition: '0.2s ease-out',
         padding: '10px',
+        color: '#0007',
         '&:not(:last-of-type)': {
             borderBottom: '1px solid #0002',
         },
@@ -66,8 +67,7 @@ export const styles = {
             transition: '0.2s ease-out',
             color: 'white',
             borderRight: '20px solid #cc0303 ',
-            padding: '15px',
-            paddingRight: '0'
+            padding: '10px',
         }
     },
     option: {

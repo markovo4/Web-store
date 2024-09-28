@@ -23,4 +23,9 @@ export const styles = {
         maxHeight: '90vh',
         overflow: 'auto'
     },
+    infoTextTitle: {
+        color: 'rgba(0,0,0,0.75)',
+        fontSize: '30px',
+        fontWeight: 'bold'
+    }
 }
