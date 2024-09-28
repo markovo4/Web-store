@@ -1,4 +1,4 @@
-import {Box, ListItem, ListItemButton, Typography} from "@mui/material";
+import {Box, ListItem, ListItemButton, Tooltip, Typography} from "@mui/material";
 import {styles} from "./styles.js";
 import PropTypes from "prop-types";
 import {useState} from "react";
@@ -13,12 +13,22 @@ const ProductsList = ({id, date, order}) => {
         setShowMore(!showMore);
     };
 
+    const shortId = () => {
+        const newId = id;
+        const beginningId = newId.slice(0, 4)
+        const endingId = newId.slice(-4)
+        return `${beginningId}...${endingId}`;
+    }
+
     return (
         <Box>
             <ListItemButton sx={styles.infoGroup} onClick={handleClick}>
-                <Typography variant="h5" component="span" sx={styles.infoText}>
-                    {id}
-                </Typography>
+                <Tooltip title={id}>
+                    <Typography variant="h5" component="span" sx={styles.infoText}>
+                        {shortId()}
+                    </Typography>
+                </Tooltip>
+
                 <Typography variant="h6" component="span" sx={styles.infoText}>
                     {date}
                 </Typography>
@@ -26,7 +36,7 @@ const ProductsList = ({id, date, order}) => {
                     {showMore ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
                 </Typography>
             </ListItemButton>
-
+            
             {showMore && (
                 <ListItem sx={styles.productItem} className="flex flex-col">
                     {order && order.map((product) => (

@@ -19,7 +19,7 @@ const Orders = () => {
             <Container>
                 <List>
                     <ListItem sx={styles.infoGroup}>
-                        <Typography variant="h5" component="span">
+                        <Typography variant="h5" component="span" sx={styles.infoText}>
                             ID
                         </Typography>
                         <Typography variant="h6" component="span" sx={styles.infoText}>
