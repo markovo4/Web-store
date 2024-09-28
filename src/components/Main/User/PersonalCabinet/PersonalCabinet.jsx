@@ -95,7 +95,7 @@ const PersonalCabinet = () => {
 
                     </List>
                 </Box>
-                <Box>
+                <Box sx={styles.contentContainer}>
                     {sectionDisplay()}
                 </Box>
             </Container>

@@ -3,7 +3,8 @@ export const styles = {
         backgroundColor: 'white',
         width: '895px',
         height: '100vh',
-        paddingTop: '50px'
+        paddingTop: '50px',
+        borderRadius: '10px 10px 0 0',
     },
     infoGroup: {
         display: 'flex',

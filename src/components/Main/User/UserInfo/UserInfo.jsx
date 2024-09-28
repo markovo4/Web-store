@@ -31,31 +31,33 @@ const UserInfo = () => {
     console.log(currentUser)
 
     return (
-        currentUser && <Container sx={styles.container}>
-            <Box sx={styles.containerUser}>
-                <Avatar
-                    sx={{
-                        width: '100px',
-                        height: '100px',
-                        background: `${colorPicker()}`
-                    }}>
-                    <Typography variant='h3' component='span' sx={styles.avatar}>
-                        {`${currentUser.firstName.at(0).toUpperCase()}${currentUser.lastName.at(0).toUpperCase()}`}
+        currentUser && <Container sx={styles.containerOuter}>
+            <Box sx={styles.containerInner}>
+
+                <Box sx={styles.containerUser}>
+                    <Avatar
+                        sx={{
+                            width: '100px',
+                            height: '100px',
+                            background: `${colorPicker()}`
+                        }}>
+                        <Typography variant='h3' component='span' sx={styles.avatar}>
+                            {`${currentUser.firstName.at(0).toUpperCase()}${currentUser.lastName.at(0).toUpperCase()}`}
+                        </Typography>
+                    </Avatar>
+                    <Typography variant='h6' component='span' sx={styles.userFullName}>
+                        {currentUser.firstName} {currentUser.lastName}
                     </Typography>
-                </Avatar>
-                <Typography variant='h6' component='span' sx={styles.userFullName}>
-                    {currentUser.firstName} {currentUser.lastName}
-                </Typography>
-            </Box>
+                </Box>
 
-
-            <Box sx={styles.personalStatsContainer}>
-                <Typography variant='h6' component='span' sx={styles.userFullName}>
-                    <ReceiptLongIcon/> My Orders {listOfOrders.length}
-                </Typography>
-                <Typography variant='h6' component='span' sx={styles.userFullName}>
-                    <FavoriteBorderIcon/> My Favourites {favouriteUserProducts.length}
-                </Typography>
+                <Box sx={styles.personalStatsContainer}>
+                    <Typography variant='h6' component='span' sx={styles.userFullName}>
+                        <ReceiptLongIcon/> My Orders {listOfOrders.length}
+                    </Typography>
+                    <Typography variant='h6' component='span' sx={styles.userFullName}>
+                        <FavoriteBorderIcon/> My Favourites {favouriteUserProducts.length}
+                    </Typography>
+                </Box>
             </Box>
         </Container>
     )

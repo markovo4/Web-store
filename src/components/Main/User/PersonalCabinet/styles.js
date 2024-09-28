@@ -15,6 +15,7 @@ export const styles = {
     wrapper: {
         width: '21.7%',
         backgroundColor: '#ffffff',
+        borderRadius: '10px 10px 0 0'
     },
     optionsList: {
         width: '100%',
@@ -33,7 +34,10 @@ export const styles = {
             color: 'white',
             borderRight: '20px solid #e76a20',
             padding: '10px',
-            paddingRight: '0'
+            paddingRight: '0',
+            '&:first-of-type': {
+                borderRadius: '10px 10px 0 0'
+            },
         }
     },
     optionActive: {
@@ -45,6 +49,9 @@ export const styles = {
         paddingRight: '0',
         '&:not(:last-of-type)': {
             borderBottom: '1px solid #0002',
+        },
+        '&:first-of-type': {
+            borderRadius: '10px 10px 0 0'
         },
     },
 
@@ -68,7 +75,5 @@ export const styles = {
         gap: '10px',
         alignItems: 'center',
         fontSize: '18px',
-
-
     }
 }

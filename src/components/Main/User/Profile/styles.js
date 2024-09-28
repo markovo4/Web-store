@@ -3,7 +3,8 @@ export const styles = {
         backgroundColor: 'white',
         width: '895px',
         height: '100vh',
-        paddingTop: '50px'
+        paddingTop: '50px',
+        borderRadius: '10px 10px 0 0',
     },
     infoGroup: {
         display: 'flex',
@@ -16,7 +17,6 @@ export const styles = {
         color: 'rgba(0,0,0,0.62)'
     },
     signUpButton: {
-        // Base styles for all button variants
         '&.MuiButton-root': {
             padding: '2px 16px',
             borderRadius: '4px',
@@ -27,7 +27,6 @@ export const styles = {
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
             minWidth: '64px',
         },
-        // Styles for contained buttons
         '&.MuiButton-contained': {
             backgroundColor: 'rgba(255,83,0,0.46)',
             color: '#fff',
