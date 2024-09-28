@@ -52,7 +52,6 @@ export const styles = {
         },
     },
     signUpButton: {
-        // Base styles for all button variants
         '&.MuiButton-root': {
             padding: '2px 16px',
             borderRadius: '4px',
@@ -61,9 +60,8 @@ export const styles = {
             fontWeight: '500',
             boxShadow: 'none',
             transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
-            minWidth: '64px', // Ensure buttons have a minimum width
+            minWidth: '64px',
         },
-        // Styles for contained buttons
         '&.MuiButton-contained': {
             backgroundColor: 'rgba(255,83,0,0.46)',
             color: '#fff',

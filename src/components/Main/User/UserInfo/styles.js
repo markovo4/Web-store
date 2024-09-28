@@ -9,7 +9,7 @@ export const styles = {
 
     },
     containerOuter: {
-        paddingBottom: '10px',
+        paddingBottom: '5px',
     },
     userFullName: {
         fontSize: '25px',

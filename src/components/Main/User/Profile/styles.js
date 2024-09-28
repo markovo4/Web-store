@@ -3,18 +3,34 @@ export const styles = {
         backgroundColor: 'white',
         width: '895px',
         height: '100vh',
-        paddingTop: '50px',
+        paddingTop: '20px',
         borderRadius: '10px 10px 0 0',
     },
     infoGroup: {
         display: 'flex',
-        flexDirection: 'column',
         alignItems: 'flex-start',
         gap: '10px',
-        borderBottom: '1px solid #0002'
+        color: '#090',
+        transition: '0.3s',
+        borderBottom: '1px solid #0001',
+        '&:hover': {
+            transition: '0.3s',
+            borderBottom: '1px solid #090',
+        }
+    },
+    infoEditGroup: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        gap: '20px'
     },
     infoText: {
+        fontSize: '25px',
         color: 'rgba(0,0,0,0.62)'
+    },
+    infoTextTitle: {
+        fontWeight: 'bold',
+        color: 'rgba(0,0,0,0.62)',
+        fontSize: '25px'
     },
     signUpButton: {
         '&.MuiButton-root': {
@@ -48,5 +64,36 @@ export const styles = {
     formContainer: {
         display: 'grid',
         gridTemplateColumns: '1fr'
+    },
+    editButton: {
+        '&.MuiButton-root': {
+            display: 'flex',
+            gap: '10px',
+            alignItems: 'center',
+            borderRadius: '4px',
+            textTransform: 'none',
+            fontSize: '16px',
+            fontWeight: '500',
+            boxShadow: 'none',
+            transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
+            minWidth: '20px',
+        },
+        '&.MuiButton-contained': {
+            fontSize: '25px',
+            backgroundColor: 'transparent',
+            color: '#41ae2a',
+            '&:hover': {
+                backgroundColor: 'unset',
+            },
+            '&:active': {
+                boxShadow: 'none',
+                backgroundColor: 'transparent',
+            },
+            '&.Mui-disabled': {
+                backgroundColor: '#bdbdbd',
+                color: '#fff',
+                boxShadow: 'none',
+            },
+        },
     }
 }

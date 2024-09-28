@@ -12,6 +12,7 @@ import {useFormik} from "formik";
 import FormInput from "../../../UI/inputs/FormInput/index.js";
 import {formatPhoneNumber} from "../../../../utils/functions/functions.js";
 import profileInfoEditValidation from "../../../../utils/validationSchemas/profileInfoEditValidation.js";
+import EditIcon from '@mui/icons-material/Edit';
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -70,30 +71,32 @@ const Profile = () => {
                     <>
                         {!isEdit ? (
                             <List>
+                                <ListItem sx={styles.infoEditGroup}>
+                                    <Button variant={'contained'} sx={styles.editButton}
+                                            onClick={handleClick}>Edit Profile<EditIcon fontSize={'medium'}/></Button>
+                                </ListItem>
+                                <ListItem>
+                                    <Typography variant='h5' component='span' sx={styles.infoTextTitle}>
+                                        Your Contact Information
+                                    </Typography>
+                                </ListItem>
                                 <ListItem sx={styles.infoGroup}>
-                                    <Typography variant='h5' component='span'>Full Name:</Typography>
                                     <Typography variant='h6' component='span' sx={styles.infoText}>
                                         {`${currentUser.firstName} ${currentUser.lastName}`}
                                     </Typography>
                                 </ListItem>
                                 <ListItem sx={styles.infoGroup}>
-                                    <Typography variant='h5' component='span'>Phone number:</Typography>
                                     <Typography variant='h6' component='span' sx={styles.infoText}>
                                         {currentUser.phoneNumber}
                                     </Typography>
                                 </ListItem>
                                 <ListItem sx={styles.infoGroup}>
-                                    <Typography variant='h5' component='span'>E-mail:</Typography>
                                     <Typography variant='h6' component='span' sx={styles.infoText}>
                                         {currentUser.email}
                                     </Typography>
                                 </ListItem>
-                                <ListItem sx={styles.infoGroup}>
-                                    <Button onClick={handleClick}>Edit</Button>
-                                </ListItem>
                             </List>
                         ) : (
-                            // Form wrapper for editing profile information
                             <form onSubmit={formik.handleSubmit}>
                                 <Box sx={styles.formContainer}>
                                     <FormInput
