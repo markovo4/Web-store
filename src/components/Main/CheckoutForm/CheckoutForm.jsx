@@ -284,7 +284,7 @@ const CheckoutForm = () => {
                                 variant="contained"
                                 color="primary"
                                 type="submit"
-                                sx={styles.buttonSubmit}
+                                sx={styles.checkoutButton}
                                 onClick={formik.handleSubmit}
                                 disabled={!isFormValid()}
                             >

@@ -28,7 +28,6 @@ const UserInfo = () => {
         .filter(user => user.email === currentUser.email)
         .flatMap(user => user.productsList || []);
 
-    console.log(currentUser)
 
     return (
         currentUser && <Container sx={styles.containerOuter}>
@@ -39,7 +38,8 @@ const UserInfo = () => {
                         sx={{
                             width: '100px',
                             height: '100px',
-                            background: `${colorPicker()}`
+                            background: `${colorPicker()}`,
+                            border: '1px solid #0003'
                         }}>
                         <Typography variant='h3' component='span' sx={styles.avatar}>
                             {`${currentUser.firstName.at(0).toUpperCase()}${currentUser.lastName.at(0).toUpperCase()}`}

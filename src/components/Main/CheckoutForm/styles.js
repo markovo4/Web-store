@@ -242,7 +242,6 @@ export const styles = {
             },
             maxHeight: '40px',
         },
-        // Styles for contained buttons
         '&.MuiButton-contained': {
             backgroundColor: 'rgb(65,174,42)',
             padding: '5px 20px',
