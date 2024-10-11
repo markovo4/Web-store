@@ -23,7 +23,7 @@ function App() {
         document.head.appendChild(link);
     }
 
-    setInterval(setFavicon, 1000);
+    setFavicon();
 
 
     return (
