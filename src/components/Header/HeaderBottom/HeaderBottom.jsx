@@ -7,7 +7,6 @@ import {
     AccountCircle as AccountCircleIcon,
     Favorite as FavoriteIcon,
     FavoriteBorder as FavoriteBorderIcon,
-    LocalMall as LocalMallIcon,
     LoginOutlined as LoginOutlinedIcon,
     Logout as LogoutIcon,
     ShoppingCartOutlined as ShoppingCartOutlinedIcon
@@ -96,9 +95,6 @@ const HeaderBottom = () => {
                                 </Link>
                             </MenuItem>
                             <MenuItem sx={styles.menuItem}>
-                                <LocalMallIcon fontSize="small" color="success"/> My Orders
-                            </MenuItem>
-                            <MenuItem sx={styles.menuItem}>
                                 <Link to={routerNames.pageFavProducts}>
                                     <FavoriteIcon fontSize="small" color="error"/> Favourite
                                 </Link>
@@ -133,9 +129,6 @@ const HeaderBottom = () => {
                                 <Link to={routerNames.pagePersonalCabinet}>
                                     <AccountCircleIcon fontSize="small" color="primary"/> My Cabinet
                                 </Link>
-                            </MenuItem>
-                            <MenuItem sx={styles.menuItem}>
-                                <LocalMallIcon fontSize="small" color="success"/> My Orders
                             </MenuItem>
                             <MenuItem sx={styles.menuItem}>
                                 <Link to={routerNames.pageFavProducts}>
